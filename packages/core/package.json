@@ -1,5 +1,5 @@
 {
-  "name": "fab4m",
+  "name": "@fab4m/fab4m",
   "version": "1.0.0-beta1",
   "description": "",
   "main": "dist/index.cjs.js",
@@ -41,6 +41,5 @@
   "dependencies": {
     "tslib": "^2.2.0"
   },
-  "devDependencies": {
-  }
+  "gitHead": "76782bcfbaf36aeacecca0ee4103e9468b6563ce"
 }

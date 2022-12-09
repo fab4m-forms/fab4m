@@ -23,7 +23,7 @@ using the browser url.
 
 ```jsx
 import * as React from "react";
-import { createForm, textField, pageBreak } from "fab4m";
+import { createForm, textField, pageBreak } from "@fab4m/fab4m";
 import { FormRoute } from "@fab4m/routerforms";
 
 const form = createForm({
@@ -61,7 +61,7 @@ Fab4m router forms have support for react router actions, you can use a
 fab4m form as you would with any React router `<Form>`.
 
 ```jsx
-import { createForm, textField, pageBreak } from "fab4m";
+import { createForm, textField, pageBreak } from "@fab4m/fab4m";
 import { RouteObject } from "react-router-dom";
 import { StatefulFormRoute } from "@fab4m/routerforms";
 

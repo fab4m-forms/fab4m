@@ -8,7 +8,7 @@ import {
   emailField,
   exists,
   booleanField,
-} from "fab4m";
+} from "@fab4m/fab4m";
 
 const template = `newsletter: booleanField({
     label: "Sign up for our newsletter",

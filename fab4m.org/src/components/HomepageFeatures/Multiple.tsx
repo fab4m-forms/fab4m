@@ -12,7 +12,7 @@ import {
   min,
   FormView,
   StatefulFormView,
-} from "fab4m";
+} from "@fab4m/fab4m";
 
 interface MultipleOptions {
   widget: string;

@@ -11,7 +11,7 @@ import {
   generateSchema,
   booleanField,
   group,
-} from "fab4m";
+} from "@fab4m/fab4m";
 
 const form = createForm({
   username: textField({ required: true, validators: [minLength(5)] }),

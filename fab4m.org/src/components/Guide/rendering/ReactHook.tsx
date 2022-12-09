@@ -1,5 +1,5 @@
 import * as React from "react";
-import { textField, StatefulFormView, useForm, createForm } from "fab4m";
+import { textField, StatefulFormView, useForm, createForm } from "@fab4m/fab4m";
 
 export default function HookExample() {
   const form = useForm(() =>

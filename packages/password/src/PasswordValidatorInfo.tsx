@@ -2,7 +2,7 @@ import * as React from "react";
 import { ValidationSettings } from "./validators";
 import CheckIcon from "./CheckIcon";
 import { PasswordVerifyData } from ".";
-import { Theme, ValidatorInfoProps } from "fab4m";
+import { Theme, ValidatorInfoProps } from "@fab4m/fab4m";
 
 /**
  * The password validator info component renders information

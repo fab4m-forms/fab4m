@@ -24,7 +24,7 @@ The following example shows all of the fields in action:
 
 ```jsx
 import * as React from "react";
-import { createForm, StatefulFormView, content } from "fab4m";
+import { createForm, StatefulFormView, content } from "@fab4m/fab4m";
 import {
   passwordField,
   passwordVerifyField,
@@ -76,7 +76,7 @@ The valid@fab4m/password validator allows you to set several constraints on the 
 
 ```jsx
 import * as React from "react";
-import { createForm, StatefulFormView } from "fab4m";
+import { createForm, StatefulFormView } from "@fab4m/fab4m";
 import { passwordField, valid@fab4m/password } from "@fab4m/password";
 
 const form = createForm({
@@ -107,7 +107,7 @@ function that can call your backend to validate it.
 
 ```jsx
 import * as React from "react";
-import { createForm, StatefulFormView } from "fab4m";
+import { createForm, StatefulFormView } from "@fab4m/fab4m";
 import { passwordValidateOldField, validOld@fab4m/password } from "@fab4m/password";
 
 const form = createForm({

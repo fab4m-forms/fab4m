@@ -12,17 +12,18 @@
     "lib": "dist",
     "test": "test"
   },
-    "files": [
+  "files": [
     "dist"
   ],
   "scripts": {
-      "test": "vitest",
-      "test:unit": "vitest --run",
+    "test": "vitest",
+    "test:unit": "vitest --run",
     "build-browser": "esbuild --external:react --external:react-dom --external:react-router-dom  --external:fab4m  --bundle src/index.ts --format=esm --outfile=dist/index.es.js",
     "build-node": "esbuild --external:react-router-dom --platform=node --external:react --external:react-dom --external:fab4m --minify --bundle src/index.ts --outfile=dist/index.cjs.js",
-      "build": "npm run build-browser && npm run build-node && tsc -d"
+    "build": "npm run build-browser && npm run build-node && tsc -d"
   },
-    "peerDependencies": {
-        "react-router-dom": "^6"
-  }
+  "peerDependencies": {
+    "react-router-dom": "^6"
+  },
+  "gitHead": "76782bcfbaf36aeacecca0ee4103e9468b6563ce"
 }

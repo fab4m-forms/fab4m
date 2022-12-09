@@ -10,13 +10,13 @@ If you have a working environment with react or preact, you can install
 fab4m through npm:
 
 ```bash
-npm install --save fab4m
+npm install --save @fab4m/fab4m
 ```
 
 ## Create your first form
 
 ```javascript
-import { createForm, textField, StatefulFormView } from fab4m;
+import { createForm, textField, StatefulFormView } from "@fab4m/fab4m";
 
 const form = createForm({
     name: textField({

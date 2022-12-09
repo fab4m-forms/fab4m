@@ -17,7 +17,7 @@ import {
   checkValidators,
   StatefulFormView,
   basic,
-} from "fab4m";
+} from "@fab4m/fab4m";
 import { inputElementOk } from "../../core/test/util";
 import { validate } from "../../core/src/schemaValidator";
 

@@ -39,7 +39,7 @@ to, we can generate a schema for it and use that schema for validation instead.
 Fab4m provides the `generateSchema`function to generate a schema for any form:
 
 ```jsx
-import { generateSchema } from "fab4m";
+import { generateSchema } from "@fab4m/fab4m";
 generateSchema(form);
 ```
 
@@ -58,7 +58,7 @@ If you have forms with multiple parts you might need to validate each part in
 isolation.
 
 ```jsx
-import { generatePartSchemas } from "fab4m";
+import { generatePartSchemas } from "@fab4m/fab4m";
 const schemas = generatePartSchemas(form);
 ```
 

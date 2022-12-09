@@ -7,7 +7,7 @@ import {
   content,
   booleanField,
   allowedValues,
-} from "fab4m";
+} from "@fab4m/fab4m";
 import { FormRoute } from "../../src";
 import * as React from "react";
 import {

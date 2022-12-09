@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import "cross-fetch/polyfill";
-import { createForm, textField, pageBreak } from "fab4m";
+import { createForm, textField, pageBreak } from "@fab4m/fab4m";
 import { act, fireEvent, render, waitFor } from "@testing-library/react";
 import { FormRouteProps, FormRoute, StatefulFormRoute } from "../src";
 import { vi } from "vitest";

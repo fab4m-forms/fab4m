@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useForm, textField, basic } from "fab4m";
+import { useForm, textField, basic } from "@fab4m/fab4m";
 import { definitions } from "./form";
 import clsx from "clsx";
 import Structure from "./Structure";

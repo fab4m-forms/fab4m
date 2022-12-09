@@ -1,4 +1,4 @@
-import { createForm, textField, pageBreak } from "fab4m";
+import { createForm, textField, pageBreak } from "@fab4m/fab4m";
 import { StatefulFormRoute } from "../../src";
 import { Link, Outlet, RouteObject } from "react-router-dom";
 

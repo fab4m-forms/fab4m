@@ -1,6 +1,6 @@
 import * as React from "react";
 import { render, fireEvent, waitFor } from "@testing-library/react";
-import { basic, FormComponentView } from "fab4m";
+import { basic, FormComponentView } from "@fab4m/fab4m";
 import { DateRange, dateRangeField } from "../src";
 import { format, addDays } from "date-fns";
 

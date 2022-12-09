@@ -10,7 +10,7 @@ import {
   FormView,
   createForm,
   StatefulFormView,
-} from "fab4m";
+} from "@fab4m/fab4m";
 const locationOptions = ["Gothenburg", "Stockholm"];
 const widgetTemplates = {
   select: `selectWidget(["Gothenburg", "Stockholm"])`,

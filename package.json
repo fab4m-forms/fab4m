@@ -43,11 +43,11 @@
     "@fab4m/date": "file:packages/date",
       "@fab4m/password": "file:packages/password",
       "@fab4m/routerforms": "file:packages/routerforms",
-    "fab4m": "file:packages/core"
+    "@fab4m/fab4m": "file:packages/core"
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
-    "test": "lerna run test"
+    "test": "lerna run test:unit"
   }
 }

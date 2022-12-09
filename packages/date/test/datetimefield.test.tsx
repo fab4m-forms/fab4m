@@ -6,7 +6,7 @@ import {
   FormComponentView,
   generateSchema,
   serialize,
-} from "fab4m";
+} from "@fab4m/fab4m";
 import { dateTimeField, dateTimePickerWidget } from "../src";
 import { format } from "date-fns";
 import { enUS, sv } from "date-fns/locale";

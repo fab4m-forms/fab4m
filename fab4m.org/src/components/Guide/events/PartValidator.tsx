@@ -7,7 +7,7 @@ import {
   textAreaWidget,
   StatefulFormView,
   pageBreak,
-} from "fab4m";
+} from "@fab4m/fab4m";
 
 const partValidateForm = createForm({
   name: textField({ label: "Name" }),

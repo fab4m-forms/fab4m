@@ -1,5 +1,10 @@
 import React from "react";
-import { createForm, textField, StatefulFormView, tagsWidget } from "fab4m";
+import {
+  createForm,
+  textField,
+  StatefulFormView,
+  tagsWidget,
+} from "@fab4m/fab4m";
 
 const form = createForm({
   tags: textField({

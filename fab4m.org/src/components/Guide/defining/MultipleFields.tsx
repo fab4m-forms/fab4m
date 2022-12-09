@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createForm, textField, StatefulFormView } from "fab4m";
+import { createForm, textField, StatefulFormView } from "@fab4m/fab4m";
 
 const form = createForm({
   foods: textField({

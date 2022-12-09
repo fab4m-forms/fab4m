@@ -1,4 +1,4 @@
-import { createForm, integerField, StatefulFormView } from "fab4m";
+import { createForm, integerField, StatefulFormView } from "@fab4m/fab4m";
 import React, { useState } from "react";
 
 const ageForm = createForm({

@@ -1,5 +1,10 @@
 import React from "react";
-import { createForm, textField, selectWidget, StatefulFormView } from "fab4m";
+import {
+  createForm,
+  textField,
+  selectWidget,
+  StatefulFormView,
+} from "@fab4m/fab4m";
 
 const form = createForm({
   textSelect: textField({

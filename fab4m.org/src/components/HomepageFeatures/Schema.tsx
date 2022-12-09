@@ -9,7 +9,7 @@ import {
   min,
   integerField,
   generateSchema,
-} from "fab4m";
+} from "@fab4m/fab4m";
 
 const template = `email: emailField({
   label: "Your email",

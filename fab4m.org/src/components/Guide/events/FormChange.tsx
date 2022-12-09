@@ -4,7 +4,7 @@ import {
   integerField,
   FormView,
   textAreaWidget,
-} from "fab4m";
+} from "@fab4m/fab4m";
 import React, { useState } from "react";
 
 const form = createForm({

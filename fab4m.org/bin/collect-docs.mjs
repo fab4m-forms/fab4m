@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync, existsSync } from "fs";
 
 const data = readFileSync("../packages/core/docs.json");
 const docs = JSON.parse(data);
-import * as fab4m from "fab4m";
+import * as fab4m from "@fab4m/fab4m";
 
 const ExampleImport = (info) =>
       info.example ? `import Example from "@site/src/components/Example";

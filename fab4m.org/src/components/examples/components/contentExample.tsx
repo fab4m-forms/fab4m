@@ -1,5 +1,5 @@
 import React from "react";
-import { createForm, StatefulFormView, textField, content } from "fab4m";
+import { createForm, StatefulFormView, textField, content } from "@fab4m/fab4m";
 import "fab4m/css/basic/basic.css";
 
 const form = createForm({

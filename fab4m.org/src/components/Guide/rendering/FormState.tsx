@@ -1,5 +1,5 @@
 import * as React from "react";
-import { textField, createForm, FormView } from "fab4m";
+import { textField, createForm, FormView } from "@fab4m/fab4m";
 
 const form = createForm({
   text: textField({ label: "Text field" }),

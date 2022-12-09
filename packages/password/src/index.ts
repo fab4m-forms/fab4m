@@ -3,9 +3,11 @@ import {
   FormComponentType,
   CreateFormComponentType,
   FormComponent,
-    formComponent,
-Widget, widget, WidgetType
-} from "fab4m";
+  formComponent,
+  Widget,
+  widget,
+  WidgetType,
+} from "@fab4m/fab4m";
 import PasswordValidateOld from "./PasswordValidateOld";
 import Password from "./Password";
 

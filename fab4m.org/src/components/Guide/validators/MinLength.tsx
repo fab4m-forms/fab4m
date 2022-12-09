@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { createForm, textField, minLength, StatefulFormView } from "fab4m";
+import {
+  createForm,
+  textField,
+  minLength,
+  StatefulFormView,
+} from "@fab4m/fab4m";
 
 const form = createForm({
   longtext: textField({

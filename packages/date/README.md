@@ -20,7 +20,7 @@ The following example shows them in action:
 ```jsx
 import * as React from "react";
 import { dateField, dateTimeField, dateRangeField } from "@fab4m/date";
-import { StatefulFormView, createForm } from "fab4m";
+import { StatefulFormView, createForm } from "@fab4m/fab4m";
 import "react-datepicker/dist/react-datepicker.css";
 
 const form = createForm({
@@ -78,7 +78,7 @@ The formatting options are provided by the [date-fns](https://date-fns.org/v2.29
 ```jsx
 import * as React from "react";
 import { dateField, datePickerWidget } from "@fab4m/date";
-import { StatefulFormView, createForm } from "fab4m";
+import { StatefulFormView, createForm } from "@fab4m/fab4m";
 import "react-datepicker/dist/react-datepicker.css";
 
 const form = createForm({
@@ -109,7 +109,7 @@ locale, no matter what locale the browser has:
 import * as React from "react";
 import { dateField, datePickerWidget } from "@fab4m/date";
 import { sv } from "date-fns/locale";
-import { StatefulFormView, createForm } from "fab4m";
+import { StatefulFormView, createForm } from "@fab4m/fab4m";
 import "react-datepicker/dist/react-datepicker.css";
 
 const form = createForm({
@@ -142,7 +142,7 @@ The first locale in the list will be used as a default.
 import * as React from "react";
 import { dateField, datePickerWidget } from "@fab4m/date";
 import { sv, de, fi } from "date-fns/locale";
-import { StatefulFormView, createForm } from "fab4m";
+import { StatefulFormView, createForm } from "@fab4m/fab4m";
 import "react-datepicker/dist/react-datepicker.css";
 
 const form = createForm({

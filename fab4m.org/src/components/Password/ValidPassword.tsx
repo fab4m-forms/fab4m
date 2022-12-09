@@ -1,5 +1,5 @@
 import * as React from "react";
-import { createForm, StatefulFormView } from "fab4m";
+import { createForm, StatefulFormView } from "@fab4m/fab4m";
 import { passwordField, validPassword } from "@fab4m/password";
 
 const form = createForm({

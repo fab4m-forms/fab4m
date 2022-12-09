@@ -9,7 +9,7 @@ import {
   getPrevPart,
   ValidationError,
   FormViewProps,
-} from "fab4m";
+} from "@fab4m/fab4m";
 
 export interface FormRouteProps extends FormViewProps {
   basename?: string;

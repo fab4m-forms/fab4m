@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Input, WidgetProps } from "fab4m";
+import { Input, WidgetProps } from "@fab4m/fab4m";
 
 /**
  * The password widget component renders a password input element.

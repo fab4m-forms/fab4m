@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useEffect, useMemo, useState } from "react";
-import { WidgetProps, FormComponentWrapper } from "fab4m";
+import { WidgetProps, FormComponentWrapper } from "@fab4m/fab4m";
 import {
   DateFieldWidgetSettings,
   DateRange,

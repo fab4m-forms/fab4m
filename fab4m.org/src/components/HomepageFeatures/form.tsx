@@ -1,4 +1,4 @@
-import { emailField, FormComponent, textField } from "fab4m";
+import { emailField, FormComponent, textField } from "@fab4m/fab4m";
 
 export interface ComponentInfo {
   code: string;

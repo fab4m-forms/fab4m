@@ -5,7 +5,7 @@ import {
   minLength,
   allowedValues,
   StatefulFormView,
-} from "fab4m";
+} from "@fab4m/fab4m";
 
 const form = createForm({
   longtext: textField({

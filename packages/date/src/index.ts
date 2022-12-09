@@ -8,7 +8,7 @@ import {
   WidgetType,
   Widget,
   WidgetSerializer,
-} from "fab4m";
+} from "@fab4m/fab4m";
 
 export type LocaleLoader = (code: string) => Promise<Locale | undefined>;
 let localeLoader: LocaleLoader;

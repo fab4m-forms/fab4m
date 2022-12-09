@@ -1,5 +1,5 @@
 import * as React from "react";
-import { createForm, textField, pageBreak } from "fab4m";
+import { createForm, textField, pageBreak } from "@fab4m/fab4m";
 import { StatefulFormRoute } from "../../src";
 
 const form = createForm({

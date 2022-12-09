@@ -9,7 +9,7 @@ import {
   selectWidget,
   setDefaultTheme,
   useForm,
-} from "fab4m";
+} from "@fab4m/fab4m";
 import {
   passwordField,
   passwordVerifyField,

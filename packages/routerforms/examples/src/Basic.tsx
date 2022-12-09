@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import { textField, pageBreak, createForm } from "fab4m";
+import { textField, pageBreak, createForm } from "@fab4m/fab4m";
 import { RouterFormView } from "../../src";
 import "../../../core/css/basic/basic.css";
 

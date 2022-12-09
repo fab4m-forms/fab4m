@@ -1,5 +1,5 @@
 import * as React from "react";
-import { createForm, StatefulFormView, content } from "fab4m";
+import { createForm, StatefulFormView, content } from "@fab4m/fab4m";
 import {
   passwordField,
   passwordVerifyField,

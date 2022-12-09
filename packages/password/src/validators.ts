@@ -1,4 +1,4 @@
-import { Validator, ValidatorType } from "fab4m";
+import { Validator, ValidatorType } from "@fab4m/fab4m";
 import PasswordValidatorInfo from "./PasswordValidatorInfo";
 import { PasswordVerifyData, PasswordValidateOldData } from ".";
 /**

@@ -4,7 +4,7 @@ import {
   booleanField,
   checkboxWidget,
   StatefulFormView,
-} from "fab4m";
+} from "@fab4m/fab4m";
 
 const form = createForm({
   agree: booleanField({
