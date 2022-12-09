@@ -41,7 +41,8 @@
   },
   "dependencies": {
     "@fab4m/date": "file:packages/date",
-    "@fab4m/password": "file:packages/password",
+      "@fab4m/password": "file:packages/password",
+      "@fab4m/routerforms": "file:packages/routerforms",
     "fab4m": "file:packages/core"
   },
   "scripts": {

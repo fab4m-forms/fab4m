@@ -1,5 +1,5 @@
 {
-  "name": "fab4m-routerforms",
+  "name": "@fab4m/routerforms",
   "version": "1.0.0-beta1",
   "description": "Forms using react router with fab4m",
   "author": "Fabian Sorqvist <fabian@sorqvist.nu>",
