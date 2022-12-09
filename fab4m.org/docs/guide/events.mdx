@@ -1,0 +1,104 @@
+---
+sidebar_position: 4
+---
+import Example from "@site/src/components/Example";
+// On change
+import { OnChangeExample } from "@site/src/components/Guide/events/FormChange";
+import OnChangeExampleSource from "!!raw-loader!@site/src/components/Guide/events/FormChange";
+// On component change
+import { OnComponentChangeExample } from "@site/src/components/Guide/events/ComponentChange";
+import OnComponentChangeSource from '!!raw-loader!@site/src/components/Guide/events/ComponentChange';
+// Submit
+import { OnSubmitExample } from "@site/src/components/Guide/events/SubmitEvent";
+import SubmitExampleSource from '!!raw-loader!@site/src/components/Guide/events/SubmitEvent';
+// Part validate
+import { OnPartValidateForm } from "@site/src/components/Guide/events/PartValidator";
+import OnPartValidateSource from '!!raw-loader!@site/src/components/Guide/events/PartValidator';
+
+# Form events
+
+Each form created by fab4m provides several events that can be used
+to be notified about the form lifecycle. We provide events for when data changes,
+When data is submitted, and when data is being validated.
+
+## Listen for all data changes
+
+Each time any component in the form changes the `onDataChange` event is fired.
+All of the form data is passed to the form as an object.
+
+<Example source={OnChangeExampleSource} example={<OnChangeExample />} />
+
+## Listen for changes in one specific component
+
+You might not want to handle the whole state, and instead only
+listen for changes in certain components. This can be done
+using the `onComponentChange` event.
+
+### Example
+
+<Example source={OnComponentChangeSource} example={<OnComponentChangeExample />} />
+
+## Handling form submits
+
+Use the `onSubmit` function to handle form submissions. This function is called
+whenever the form is submitted and it's only called if the form data is valid,
+so you can rely on your data being complete at this point.
+
+### Example
+
+<Example source={SubmitExampleSource} example={<OnSubmitExample />} />
+
+## Using events for custom validation
+
+Sometimes you need to add custom validation for your form, for instance,
+if you need to verify that an email doesn't exist, or any other
+validation that requires data. You can use the `onPartValidate` event for this.
+the `onPartValidate` function is called each timea form part is submitted.
+
+the listener is asynchronous, so any required server validation
+can occur within.
+
+Errors encountered should be returned as an array with the following structure:
+
+```jsx
+[{
+    path: "/component" // <--- This is a JSON pointer,
+    message: "This is the message that will be shown in the form"
+}];
+```
+
+See the validator documentation for more information about validating your data.
+
+:::tip
+
+You can also define custom component validators. This works well when you only need
+the data from one specific component, but if you require the data from the full form
+you're probably better off using this event instead.
+See the documentation on how to create your own component validators.
+
+:::
+
+### Example
+
+The example below performs validation on each of the form parts:
+* On part 1, we ensure that the provided age is over 18 and that the name doesn't contain "sam"
+* On part 2, We encourage the user to switch profession, if the name provided in part 1 contains "Fabian" and the text "Computer science" is part of the bio.
+
+<Example source={OnPartValidateSource} example={<OnPartValidateForm />} />
+
+
+## Adding multiple form listeners to the same event
+
+Fab4m forms support multiple event listeners for the same event. By default we override
+the registered events when we add any event listener, because you normally add these events
+inside of a React component, and we want to provide the current event handler function to avoid weird scope errors.
+
+If you want to use multiple events you can do that by telling the form to append the event:
+
+```jsx
+form.onChange(() => {
+  // Listener one.
+}, true).onChange(() => {
+  // Listener two.
+}, true)
+```

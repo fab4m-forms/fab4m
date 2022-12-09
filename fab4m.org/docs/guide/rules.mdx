@@ -1,0 +1,45 @@
+---
+sidebar_position: 7
+---
+import Example from "@site/src/components/Example";
+import BasicRules from '@site/src/components/Guide/rules/BasicRules';
+import BasicRulesSource from '!!raw-loader!@site/src/components/Guide/rules/BasicRules';
+import RuleGroups from '@site/src/components/Guide/rules/RuleGroups';
+import RuleGroupsSource from '!!raw-loader!@site/src/components/Guide/rules/RuleGroups';
+
+# Component Rules
+
+There might be situations where you want to optionally show or hide some components
+depending on the input in other components. This is what component rules are for.
+
+## Adding rules to a component
+
+When defining your components you can add a list of rules that needs to be fulfilled
+in order for the component to be visible:
+
+<Example source={BasicRulesSource} example={<BasicRules />} />
+
+## Rule groups
+
+By default, rules are logically ANDed together.
+
+You can use logical groups to override this.
+
+<Example source={RuleGroupsSource} example={<RuleGroups />} />
+
+Rule functions can also be nested:
+
+```jsx
+expensive: booleanField({
+  title: "Do you think public transport is too expensive?",
+  rules: [or([equals("city", "Gothenburg"), and([greaterThan("usage", 5), lessThan(10)]))],
+}),
+```
+
+## Custom rules
+
+You can use the callback rule to provide any logic you want for your form.
+
+## Check out the widget library
+
+Fab4m comes with several rules, check them out in the *Rule reference*. Also, check the *extension guide* on how to create your own widgets.

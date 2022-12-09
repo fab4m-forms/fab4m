@@ -1,0 +1,55 @@
+{
+  "title": "Form submission",
+  "description": "A form submission",
+  "type": "object",
+  "properties": {
+    "username": {
+      "type": "string",
+      "minLength": 5
+    },
+    "age": {
+      "type": "integer",
+      "title": "Username"
+    },
+    "city": {
+      "type": "string",
+      "minLength": 1,
+      "enum": [
+        "Gothenburg",
+        "Stockholm"
+      ]
+    },
+    "vegetarian": {
+      "type": "boolean",
+      "title": "Vegetarian"
+    },
+    "interests": {
+      "type": "array",
+      "title": "Interests",
+      "items": {
+        "type": "string",
+        "title": "Interests"
+      },
+      "minItems": 0
+    },
+    "profession": {
+      "type": "object",
+      "title": "Profession",
+      "properties": {
+        "workplace": {
+          "type": "string",
+          "title": "Workplace"
+        },
+        "title": {
+          "type": "string",
+          "title": "Title"
+        }
+      },
+      "required": []
+    }
+  },
+  "required": [
+    "username",
+    "city"
+  ]
+}

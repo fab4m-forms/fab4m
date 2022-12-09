@@ -1,0 +1,75 @@
+---
+sidebar_position: 8
+---
+
+import Schema from '@site/src/components/Guide/validation/Schema';
+
+# Validation with JSON Schema
+
+All fab4m forms can generate a JSON Schema from their definition.
+This is very useful when you want to validate your form data on the server side.
+
+## Generating a JSON Schema
+
+Consider the following form:
+
+```jsx
+const form = createForm({
+  username: textField({ required: true, validators: [minLength(5)] }),
+  age: integerField({ label: "Username" }),
+  city: textField({
+    required: true,
+    validators: [allowedValues(["Gothenburg", "Stockholm"])],
+  }),
+  vegetarian: booleanField({ label: "Vegetarian" }),
+  interests: textField({ label: "Interests", multiple: true, minItems: 2 }),
+  profession: group(
+    { label: "Profession" },
+    {
+      workplace: textField({ label: "Workplace" }),
+      label: textField({ label: "Label" }),
+    }
+  ),
+});
+```
+
+This data behind this form is quite complex to validate manually, luckily we don't have
+to, we can generate a schema for it and use that schema for validation instead.
+
+Fab4m provides the `generateSchema`function to generate a schema for any form:
+
+```jsx
+import { generateSchema } from "fab4m";
+generateSchema(form);
+```
+
+This generates a schema that can be used by a JSON schema validator:
+
+<Schema />
+
+Notice that:
+* The validators we defined above (minLength and allowedValues) on our components are part of the schema.
+* The interests multiple field is interpreted as an array.
+* Our group component is properly translated to an object inside of the schema.
+
+## Generating a schema for each form part
+
+If you have forms with multiple parts you might need to validate each part in
+isolation.
+
+```jsx
+import { generatePartSchemas } from "fab4m";
+const schemas = generatePartSchemas(form);
+```
+
+This will give you an array of schemas, one for each form part in your form.
+
+## Using your schema
+
+Fab4m doesn't provide a JSON Schema validator of it's own, you are free to choose
+any validator you like. The [AJV validator](https://ajv.js.org/) for javascript is an
+excellent choice in js environments.
+
+## When is this useful?
+
+Having a JSON schema readily available for any form means that you can always validate the input from any form on any backend with a JSON validator available.

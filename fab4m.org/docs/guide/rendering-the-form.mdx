@@ -1,0 +1,48 @@
+---
+sidebar_position: 2
+---
+import Example from "@site/src/components/Example";
+import Basic from '@site/src/components/Guide/rendering/Basic';
+import BasicSource from '!!raw-loader!@site/src/components/Guide/rendering/Basic';
+import FormState from '@site/src/components/Guide/rendering/FormState';
+import FormStateSource from '!!raw-loader!@site/src/components/Guide/rendering/FormState';
+import StatefulView from '@site/src/components/Guide/rendering/StatefulView';
+import StatefulViewSource from '!!raw-loader!@site/src/components/Guide/rendering/StatefulView';
+import ReactHook from '@site/src/components/Guide/rendering/ReactHook';
+import ReactHookSource from '!!raw-loader!@site/src/components/Guide/rendering/ReactHook';
+
+# Rendering forms
+
+Forms are rendered using derivatives of the `FormView` component. This section describes how to work with that component and it's cousin, `StatefulFormView`.
+
+## Basic rendering
+
+The most common way to render a form is through the `<FormView>` component.
+
+The FormView component takes your form definition and the form data and renders it:
+
+<Example source={BasicSource} example={<Basic />} />
+
+## Managing the form state
+
+The FormView component only renders the form with the data provided,
+and doesn't manage the form state. When using the FormView component you have to do that yourself:
+
+<Example source={FormStateSource} example={<FormState />} />
+
+## Handling the state automatically
+
+If you don't want to manage the state of the form yourself you can use our
+provided `<StatefulFormView>` component:
+
+<Example source={StatefulViewSource} example={<StatefulView />} />
+
+## Defining forms inside React components
+
+Creating the form definition is resource heavy, so if you need to define your form definition within your react component you should use the `useForm()` hook:
+
+<Example source={ReactHookSource} example={<ReactHook />} />
+
+The useForm hook optionally takes an array of dependencies as it's second argument that will be checked, and the form will be rebuilt if any changes are detected.
+
+Internally, the useForm hook is just a wrapper around a [useMemo](https://reactjs.org/docs/hooks-reference.html#usememo) hook.

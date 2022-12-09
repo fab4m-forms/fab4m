@@ -1,0 +1,74 @@
+---
+sidebar_position: 3
+---
+
+# Theming
+
+Fab4m provides a basic look and feel called basic, which is used as the default
+form theme. This works for basic use cases, but if you want to tightly integrate
+fab4m into your solution, you probably want to change the theme of your forms to fit your use case.
+
+## Provided themes
+
+Fab4m provides two themes out of the box. `basic` and `bulma`. The basic form is designed to blend in with other design, and the bulma theme uses classes from the `bulma` css framework, which means the forms conform to the style used there.
+
+## Select your theme
+
+You get to select your desired form theme for each form you create:
+
+```jsx
+createForm(theme_name, name);
+```
+
+## Using the basic basic theme
+
+In order for your forms to be styled, you need to include the basic css, for example byimporting it (if you're build pipeline supports that):
+
+```jsx
+import "fab4m/css/basic/basic.css";
+```
+
+## Using the bulma theme
+
+If you want to use the bulma theme, you need to include the bulma css. See the
+[bulma documentation](https://bulma.io/) on how to include the CSS.
+
+## Creating your own theme
+
+If you have existing CSS you probably want to define your own theme.
+Fab4m provides an object with the defined classes for all elements.
+
+```jsx
+import { defaultThemeClasses } from "fab4m"
+const yourTheme = {
+  name: "your theme",
+  module: "yourmodule",
+  classes: {
+    ...defaultThemeClasses
+  }
+}
+```
+
+This is all you need to define your theme. You can now override any default classes
+with your own:
+
+```jsx
+import { defaultThemeClasses } from "fab4m"
+const yourTheme = {
+  name: "your theme",
+  module: "yourmodule",
+  classes: {
+    ...defaultThemeClasses,
+    componentWrapper: "my-component-class"
+    input: "my-input-class"
+  }
+}
+```
+
+## Using your own theme
+
+Once your theme is defined, it can be used as any of the core themes:
+
+```jsx
+const form = createForm(yourTheme, {});
+```

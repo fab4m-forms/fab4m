@@ -1,0 +1,30 @@
+---
+sidebar_position: 6
+---
+
+import Example from "@site/src/components/Example";
+import MinLength from '@site/src/components/Guide/validators/MinLength';
+import MinLengthSource from '!!raw-loader!@site/src/components/Guide/validators/MinLength';
+import MultipleValidators from '@site/src/components/Guide/validators/MultipleValidators';
+import MultipleValidatorsSource from '!!raw-loader!@site/src/components/Guide/validators/MultipleValidators';
+
+# Component Validators
+
+Each component can have a list of validators attached to it, to ensure that user input
+is valid when the form is submitted.
+
+## Adding a validator to a component
+
+Validators are added as an array on the component when it's defined:
+
+<Example source={MinLengthSource} example={<MinLength />} />
+
+## Multiple validators
+
+You can combine multiple validators, as an array:
+
+<Example source={MultipleValidatorsSource} example={<MultipleValidators />} />
+
+## Check the validator library
+
+Fab4m comes with several validators, check them out in the *Validator reference*. Also, check the *extension guide* on how to create your own validators.

@@ -1,0 +1,37 @@
+---
+sidebar_position: 9
+---
+
+# Serializing forms
+
+The data structure of a form contains complex objects that can't
+be readily serialized. This means it can be complicated to store
+a form definition in a JSON storage. In order to remedy that,
+fab4m provides a mechanism for serializing and unserializing forms.
+
+## Serializing a form from a definition
+
+Let's say you have the following form definition:
+
+```jsx
+const form = createForm({
+  name: textField({ label: "Name" }),
+  age: integerField({ label: "Age" }),
+});
+```
+
+You can then serialize your form with the serialize function:
+
+```jsx
+const serializedForm = serialize(form);
+```
+
+You get an object back that can be safely serialized to a JSON object.
+
+## Unserializing the form
+
+A serialized form can be turned back into a working form definition by unserializing it:
+
+```jsx
+const form = unserialize(form);
+```

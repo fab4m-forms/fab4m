@@ -1,0 +1,25 @@
+#!/bin/bash
+set -e
+pushd ../packages/core
+npm run build
+npm pack
+npm run docs-json
+popd
+
+pushd ../packages/date
+npm run build
+npm pack
+popd
+
+pushd ../packages/password
+npm run build
+npm pack
+popd
+
+
+npm install ../packages/core/fab4m-0.0.1.tgz
+npm install ../packages/date/fab4m-date-1.0.0.tgz
+npm install ../packages/password/fab4m-password-1.0.0.tgz
+rm ../packages/core/fab4m-0.0.1.tgz
+rm ../packages/date/fab4m-date-1.0.0.tgz
+rm ../packages/password/fab4m-password-1.0.0.tgz

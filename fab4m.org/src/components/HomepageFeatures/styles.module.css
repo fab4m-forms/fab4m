@@ -1,0 +1,14 @@
+.features {
+  padding: 2rem 0;
+  width: 100%;
+}
+
+.centered {
+    max-width: var(--ifm-container-width-xl);
+    margin: 0 auto;
+}
+
+.featureSvg {
+  height: 200px;
+  width: 200px;
+}

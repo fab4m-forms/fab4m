@@ -1,0 +1,48 @@
+---
+sidebar_position: 1
+---
+import Example from "@site/src/components/Example";
+import FormFields from '@site/src/components/Guide/defining/FormFields';
+import FormFieldsSource from '!!raw-loader!@site/src/components/Guide/defining/FormFields';
+import MultipleFields from '@site/src/components/Guide/defining/MultipleFields';
+import MultipleFieldsSource from '!!raw-loader!@site/src/components/Guide/defining/MultipleFields';
+import GroupedComponents from "@site/src/components/Guide/defining/GroupedComponents";
+import GroupedComponentsSource from "!!raw-loader!@site/src/components/Guide/defining/GroupedComponents";
+import PageBreaks from "@site/src/components/Guide/defining/PageBreaks";
+import PageBreaksSource from "!!raw-loader!@site/src/components/Guide/defining/PageBreaks";
+
+# Creating forms
+
+A form consists of *Components*. A component can be anything, but usually it's
+a form field like a text field, but it can also be just a block of text.
+
+Each component have a few common properties, like the name, label and the description.
+See the [component reference](/guide/component-reference) for details.
+
+## Forms for data input
+
+Fabform provides components for most kinds of data input. The following example demonstrates a form
+with text, email, url and boolean data.
+
+<Example source={FormFieldsSource} example={<FormFields />} />
+
+## Handling multiple data
+
+Any component can be defined as a multiple compnent, which means that instead of just collecting one result, an array with results will be collected.
+
+<Example source={MultipleFieldsSource} example={<MultipleFields />} />
+
+## Grouping data together
+
+If you have a complex form you might need to group several fields together in a group. Fab4m makes this possible through the `group` component. When you define your group component you also add all the child components to the group.
+
+Each group component you add will be represented as an object in your submitted data. As with all other components, group components can have multiple values.
+
+<Example source={GroupedComponentsSource} example={<GroupedComponents />} />
+
+## Page breaks
+
+Large forms can be split up into multiple parts. This is done using the `pageBreak`
+component. All data will be validated before each page break.
+
+<Example source={PageBreaksSource} example={<PageBreaks />} />
