@@ -140,13 +140,16 @@ describe("Tags", () => {
       ]),
       multipleWidget: tagsWidget(),
     });
+    const noOp = () => {
+      // No-op
+    };
     const { queryByText, queryByLabelText } = render(
       <FormComponentView
         theme={basic}
         name="options"
         value={["text", "text2", "text3"]}
         component={disabled}
-        onChange={() => {}}
+        onChange={noOp}
       />
     );
     expect(queryByLabelText("Options")).toBe(null);

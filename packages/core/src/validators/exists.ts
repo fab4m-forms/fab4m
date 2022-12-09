@@ -25,7 +25,7 @@ export const existsValidator: ExistsType = {
     required: true,
   }),
   forceRequired: true,
-  valid: (value, settings) => !!value,
+  valid: (value) => !!value,
 };
 
 /**

@@ -1,16 +1,6 @@
 import * as React from "react";
-import { fireEvent, render, waitFor } from "@testing-library/react";
-import {
-  textField,
-  createForm,
-  equals,
-  pageBreak,
-  FormView,
-  allowedValues,
-  StatefulFormView,
-  or,
-} from "../src";
-import { getFormElement } from "./util";
+import { render } from "@testing-library/react";
+import { textField, createForm, equals, pageBreak, FormView, or } from "../src";
 
 describe("Multi page", () => {
   const form = createForm(

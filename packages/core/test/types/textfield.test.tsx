@@ -87,9 +87,12 @@ describe("text field", () => {
   });
   test("textarea field", async () => {
     const textarea = textAreaField({ label: "textarea" });
+    const noOp = () => {
+      // No-op.
+    };
     const { container } = render(
       <FormComponentView
-        onChange={() => {}}
+        onChange={noOp}
         name="textarea"
         component={textarea}
         theme={basic}

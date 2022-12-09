@@ -181,7 +181,7 @@ export async function checkValidators(
   data: unknown,
   component: FormComponent
 ): Promise<ValidationError[]> {
-  let errors: ValidationError[] = [];
+  const errors: ValidationError[] = [];
   for (const validator of component.validators) {
     if (validator.type.validate) {
       const validatorErrors = await validator.type.validate(

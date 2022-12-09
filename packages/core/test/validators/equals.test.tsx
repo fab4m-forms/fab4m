@@ -7,7 +7,6 @@ import {
   FormView,
   generateComponentSchema,
   StatefulFormView,
-  generateSchema,
 } from "../../src";
 import { validate } from "../../src/schemaValidator";
 import { getFormElement } from "../util";
@@ -77,5 +76,4 @@ describe("Equals", () => {
     expect(invalidResult.valid).toBe(false);
     expect(conditionallyInvalidResult.valid).toBe(false);
   });
-  test("Equals JSON schema rule", () => {});
 });
