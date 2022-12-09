@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://fab4m.org/blog</id>
+    <title>Fab4m Blog</title>
+    <updated>2022-12-09T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://fab4m.org/blog"/>
+    <subtitle>Fab4m Blog</subtitle>
+    <icon>https://fab4m.org/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Hello]]></title>
+        <id>/2022/12/09/hello-world</id>
+        <link href="https://fab4m.org/blog/2022/12/09/hello-world"/>
+        <updated>2022-12-09T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[This is the first post, more info here soon!]]></summary>
+        <content type="html"><![CDATA[<p>This is the first post, more info here soon!</p>]]></content>
+    </entry>
+</feed>
