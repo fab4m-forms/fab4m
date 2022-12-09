@@ -1,0 +1,204 @@
+:root {
+  --fab4m-input-border: #aaa;
+  --fab4m-submit-bg: #333;
+  --fab4m-submit-color: #fff;
+  --fab4m-submit-bg-hover: #555;
+  --fab4m-fieldset-border: #aaa;
+  --fab4m-remove-item-bg: #E14444;
+  --fab4m-remove-item-color: #fff;
+  --fab4m-remove-item-bg-hover: #E12B2B;
+  --fab4m-add-item-bg: #13902D;
+  --fab4m-add-item-color: #FFF;
+  --fab4m-add-item-bg-hover: #2C6638;
+  --fab4m-error-text: #AB1C1C;
+  --fab4m-pager-previous-bg: #eee;
+  --fab4m-pager-previous-color: #333;
+  --fab4m-pager-previous-bg-hover: #ddd;
+  --fab4m-pager-next-bg: #333;
+  --fab4m-pager-next-color: #fff;
+  --fab4m-pager-next-bg-hover: #555;
+  --fab4m-pager-complete-bg: #333;
+  --fab4m-pager-complete-color: #fff;
+  --fab4m-pager-complete-bg-hover: #555;
+}
+.fab4m-component {
+  margin-bottom: 0.5em;
+  width: 100%;
+}
+
+.fab4m-prefixed-form-element {
+  display: flex;
+}
+
+.fab4m-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.4em;
+}
+
+.fab4m-checkbox {
+  display: flex;
+}
+
+.fab4m-checkbox input {
+  padding: 0;
+  margin: 0;
+}
+
+.fab4m-description {
+  font-size: .8em;
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
+
+.fab4m-checkbox span {
+  margin: auto 0;
+  height: 1em;
+  line-height: 1em;
+  margin-left: 0.3em;
+}
+
+.fab4m-wrapper {
+  width: 100%;
+}
+
+.fab4m-wrapper * {
+  box-sizing: border-box;
+}
+
+.fab4m-input {
+  width: 100%;
+  box-sizing: border-box;
+  appearance: none;
+  border: 1px solid var(--fab4m-input-border);
+  height: 2.5em;
+  padding: 0.5em;
+  border-radius: 0.2em;
+}
+
+.fab4m-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  appearance: none;
+  border: 1px solid var(--fab4m-input-border);
+  padding: 1em;
+  border-radius: 0.2em;
+  min-height: 9em;
+  resize: none;
+}
+
+.fab4m-submit {
+  appearance: none;
+  border: none;
+  background: var(--fab4m-submit-bg);
+  color: var(--fab4m-submit-color);
+  padding: 0.5em 2em;
+  font-weight: bold;
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+
+.fab4m-submit:hover {
+  background: var(--fab4m-submit-bg-hover);
+}
+
+.fab4m-fieldset {
+  border: 1px solid var(--fab4m-fieldset-border);
+  padding: 1em;
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+}
+
+.fab4m-fieldset legend {
+  font-weight: bold;
+}
+
+.fab4m-multiple-item, .fab4m-multiple-items {
+  margin-bottom: 0.5em;
+}
+
+.fab4m-remove-item-button {
+  appearance: none;
+  border: none;
+  background: var(--fab4m-remove-item-bg);
+  color: var(--fab4m-remove-item-color);
+  padding: 0.5em 2em;
+  font-weight: bold;
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+
+.fab4m-remove-item-button:hover {
+  background: var(--fab4m-remove-item-bg-hover);
+}
+
+.fab4m-add-item-button {
+  appearance: none;
+  border: none;
+  background: var(--fab4m-add-item-bg);
+  color: var(--fab4m-add-item-color);
+  padding: 0.5em 2em;
+  font-weight: bold;
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+
+.fab4m-add-item-button:hover {
+  background: var(--fab4m-add-item-bg-hover);
+}
+
+.fab4m-error-list {
+  margin: 0;
+  padding: 0;
+  margin-top: .5em;
+  list-style-type: none;
+  font-size: .8em;
+  color: var(--fab4m-error-text);
+}
+
+.fab4m-error-item {
+  margin-bottom: .3em;
+}
+
+.fab4m-pager {
+  display: flex;
+}
+
+.fab4m-pager-previous, .fab4m-pager-next, .fab4m-pager-complete {
+  appearance: none;
+  border: none;
+  padding: 0.5em 2em;
+  font-weight: bold;
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+
+.fab4m-pager-next {
+  margin-left: auto;
+  background: var(--fab4m-pager-next-bg);
+  color: var(--fab4m-pager-next-color);
+}
+
+.fab4m-pager-next:hover {
+  background: var(--fab4m-pager-next-bg-hover);
+}
+
+.fab4m-pager-complete {
+  margin-left: auto;
+  background: var(--fab4m-pager-complete-bg);
+  color: var(--fab4m-pager-complete-color);
+}
+
+.fab4m-pager-complete:hover {
+  background: var(--fab4m-pager-complete-bg-hover);
+}
+
+.fab4m-pager-previous {
+  background: var(--fab4m-pager-previous-bg);
+  color: var(--fab4m-pager-previous-color);
+}
+
+.fab4m-pager-previous:hover {
+  background: var(--fab4m-pager-previous-bg-hover);
+}

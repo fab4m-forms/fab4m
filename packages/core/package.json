@@ -1,0 +1,46 @@
+{
+  "name": "fab4m",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -d && npm run build-browser && npm run build-node && npm run css",
+    "build-browser": "esbuild --external:react --external:react-dom --external:react-router --external:react-router-dom --bundle src/index.ts --format=esm --outfile=dist/index.es.js",
+    "build-node": "esbuild --platform=node --external:react --external:react-dom --bundle src/index.ts --outfile=dist/index.cjs.js",
+    "test": "vitest",
+    "autoprefixer": "postcss css/basic/basic.css -o css/basic/basic.css",
+    "sass": "node-sass --omit-source-map-url src/themes/basic/basic.scss css/basic/basic.css",
+    "css": "npm run sass && npm run autoprefixer",
+    "watch-css": "npm run sass -- --watch",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint-fix": "eslint --fix . --ext .js,.jsx,.ts,.tsx",
+    "docs-html": "typedoc --plugin none --out docs src/index.ts",
+    "docs-md": "typedoc --out docs-md src/index.ts",
+    "docs-json": "typedoc --json docs.json src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "test:unit": "vitest --run"
+  },
+  "directories": {
+    "dist": "dist",
+    "test": "test"
+  },
+  "files": [
+    "dist",
+    "css",
+    "src"
+  ],
+  "author": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "ajv": ">=7",
+    "react": ">=15",
+    "react-dom": ">=15"
+  },
+  "dependencies": {
+    "tslib": "^2.2.0"
+  },
+  "devDependencies": {
+  }
+}

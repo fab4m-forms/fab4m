@@ -1,0 +1,34 @@
+{
+  "name": "@fab4m/date",
+  "version": "1.0.0",
+  "description": "Date components for fab4m",
+  "author": "Fabian Sorqvist <fabian@sorqvist.nu>",
+  "homepage": "",
+  "license": "MIT",
+  "module": "dist/index.es.js",
+  "main": "dist/index.cjs.js",
+  "types": "dist/index.d.ts",
+  "directories": {
+    "lib": "dist",
+    "test": "test"
+  },
+  "files": [
+    "dist",
+    "src/datepicker.css"
+  ],
+  "scripts": {
+      "test": "vitest",
+      "test:unit": "vitest --run",
+    "build-browser": "esbuild --external:react --external:react-dom --external:react-datepicker --external:fab4m  --bundle src/index.ts --format=esm --outfile=dist/index.es.js",
+    "build-node": "esbuild --platform=node --external:react --external:react-dom --external:react-datepicker --external:fab4m --minify --bundle src/index.ts --outfile=dist/index.cjs.js",
+    "build": "npm run build-browser && npm run build-node && tsc -d"
+  },
+  "peerDependencies": {
+    "react-datepicker": "^4.2"
+  },
+  "devDependencies": {
+    "date-fns": "^2.24.0",
+    "react-datepicker": "^4.5.0",
+    "typescript": "^4.5.4"
+  }
+}

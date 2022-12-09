@@ -1,0 +1,11 @@
+browser
+node
+css
+node_modules
+dist
+lib
+esm
+.idea
+docs.json
+docs
+docs-md

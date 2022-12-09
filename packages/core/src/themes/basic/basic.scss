@@ -1,0 +1,347 @@
+$input-border: #aaa !default;
+$input-bg: #fff !default;
+$input-color: #333;
+$input-bg-dark: #333 !default;
+$input-border-dark: #fff !default;
+$input-color-dark: #fff;
+
+$submit-bg: #333 !default;
+$submit-color: #fff !default;
+$submit-bg-dark: #fff !default;
+$submit-color-dark: #333 !default;
+$submit-bg-hover: #555 !default;
+
+$fieldset-border: #aaa !default;
+$remove-item-bg: #E14444 !default;
+$remove-item-color: #fff !default;
+$remove-item-bg-hover: #E12B2B !default;
+$add-item-bg: #13902D !default;
+$add-item-color: #FFF !default;
+$add-item-bg-hover: #2C6638 !default;
+$error-text: #AB1C1C !default;
+$pager-previous-bg: #eee !default;
+$pager-previous-color: #333 !default;
+$pager-previous-bg-hover: #ddd !default;
+$pager-next-bg: #333 !default;
+$pager-next-color: #fff !default;
+$pager-next-bg-hover: #555 !default;
+$pager-complete-bg: #333 !default;
+$pager-complete-color: #fff !default;
+$pager-complete-bg-hover: #555 !default;
+$tag-background: #eee !default;
+$remove-tag-bg: #AB1C1C !default;
+$remove-tag-color: #FFF !default;
+$remove-tag-bg-hover: #7B1F1F !default;
+
+.fab4m-button {
+  appearance: none;
+  border: none;
+  padding: 0.5em 2em;
+  font-weight: bold;
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+
+.fab4m-component {
+  margin-bottom: 0.5em;
+  width: 100%;
+}
+
+.fab4m-prefixed-form-element {
+  display: flex;
+}
+
+.fab4m-label-wrapper {
+  display: flex;
+}
+
+.fab4m-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.4em;
+}
+
+.fab4m-checkbox, .fab4m-radio {
+  margin-left: 5px;
+  input {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.fab4m-description {
+  font-size: .8em;
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
+
+.fab4m-description-list {
+  margin: .5em 0;
+  padding: 0;
+  margin-left: 1em;
+  font-size: .9em;
+  list-style-type: none;
+}
+
+.fab4m-description-item {
+  margin: 0;
+  display: flex;
+  .fab4m-description-item-placeholder, .fab4m-description-item-icon {
+    width: 1.2em;
+    margin-right: .2em;
+  }
+  span {
+    margin: auto 0;
+    line-height: 1em;
+  }
+}
+
+.fab4m-checkbox span {
+  margin: auto 0;
+  height: 1em;
+  line-height: 1em;
+  margin-left: 0.3em;
+}
+
+.fab4m-wrapper {
+  width: 100%;
+}
+
+.fab4m-wrapper * {
+  box-sizing: border-box;
+}
+
+.fab4m-input {
+  width: 100%;
+  box-sizing: border-box;
+  appearance: none;
+  border: 1px solid $input-border;
+  background: $input-bg;
+  color: $input-color;
+  height: 2.5em;
+  padding: 0.5em;
+  border-radius: 0.2em;
+}
+
+.fab4m-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  appearance: none;
+  border: 1px solid $input-border;
+  color: $input-color;
+  background: $input-bg;
+  padding: 1em;
+  border-radius: 0.2em;
+  min-height: 9em;
+  resize: none;
+}
+
+.fab4m-submit {
+  appearance: none;
+  border: none;
+  background: $submit-bg;
+  color: $submit-color;
+  padding: 0.5em 2em;
+  font-weight: bold;
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+
+.fab4m-submit:hover {
+  background: $submit-bg-hover;
+}
+
+.fab4m-fieldset {
+  border: 1px solid $fieldset-border;
+  padding: 1em;
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+}
+
+.fab4m-fieldset legend {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.fab4m-multiple-item, .fab4m-multiple-items {
+  margin-bottom: 0.5em;
+}
+
+.fab4m-remove-item-button {
+  appearance: none;
+  border: none;
+  background: $remove-item-bg;
+  color: $remove-item-color;
+}
+
+.fab4m-remove-item-button:hover {
+  background: $remove-item-bg-hover;
+}
+
+.fab4m-add-item-button {
+  @extend .fab4m-button;
+  background: $add-item-bg;
+  color: $add-item-color;
+}
+
+.fab4m-add-item-button:hover {
+  background: $add-item-bg-hover;
+}
+
+.fab4m-error-list {
+  margin: 0;
+  padding: 0;
+  margin-top: .5em;
+  list-style-type: none;
+  font-size: .8em;
+  color: $error-text;
+}
+
+.fab4m-error-item {
+  margin-bottom: .3em;
+}
+
+.fab4m-pager {
+  display: flex;
+}
+
+.fab4m-pager-previous, .fab4m-pager-next, .fab4m-pager-complete {
+  @extend .fab4m-button
+}
+
+.fab4m-pager-next {
+  margin-left: auto;
+  background: $pager-next-bg;
+  color: $pager-next-color;
+}
+
+.fab4m-pager-next:hover {
+  background: $pager-next-bg-hover;
+}
+
+.fab4m-pager-complete {
+  margin-left: auto;
+  background: $pager-complete-bg;
+  color: $pager-complete-color;
+}
+
+.fab4m-pager-complete:hover {
+  background: $pager-complete-bg-hover;
+}
+
+.fab4m-pager-previous {
+  background: $pager-previous-bg;
+  color: $pager-previous-color;
+}
+
+.fab4m-pager-previous:hover {
+  background: $pager-previous-bg-hover;
+}
+
+.fab4m-add-tag-wrapper {
+  display: flex;
+  margin-bottom: 0.5em;
+  .fab4m-component {
+    width: auto;
+    margin-bottom: 0;
+    height: 100%;
+  }
+  .fab4m-form-element {
+    height: 100%;
+    height: 2em;
+    * {
+      height: 100%;
+    }
+  }
+}
+
+.fab4m-add-tag {
+  @extend .fab4m-button;
+  margin-left: 0.5em;
+  height: 2.2em;
+  background: $add-item-bg;
+  color: $add-item-color;
+  &:hover {
+    background: $add-item-bg-hover;
+  }
+}
+
+.fab4m-added-tags {
+  display: flex;
+  margin-bottom: 0.5em;
+}
+
+.fab4m-tag {
+  display: flex;
+  margin-right: 0.5em;
+  height: 2em;
+  line-height: 1em;
+  background: $tag-background;
+}
+
+.fab4m-tag-label {
+  margin: 0.5em;
+}
+
+.fab4m-remove-tag {
+  appearance: none;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  line-height: 1em;
+  height: 1.5em;
+  font-size: .8em;
+  background: $remove-tag-bg;
+  color: $remove-tag-color;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  padding: 0em 0.5em;
+  &:hover {
+    background: $remove-tag-bg-hover;
+  }
+}
+
+.fab4m-horizontal-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.fab4m-horizontal-group-component-wrapper {
+  margin-right: 1em;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.fab4m-date-range-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  .react-datepicker-wrapper {
+    width: auto;
+  }
+}
+
+.fab4m-date-range-separator {
+  margin: auto .5em;
+}
+
+.fab4m-required-indicator {
+  font-weight: bold;
+  color: $error-text;
+  margin-left: 0.2em;
+  display: inline-block;
+}
+
+.fab4m-dark-form-wrapper {
+  .fab4m-submit {
+    background: $submit-bg-dark;
+    color: $submit-color-dark;
+  }
+  .fab4m-input, .fab4m-textarea {
+    background: $input-bg-dark;
+    color: $input-color-dark;
+  }
+}

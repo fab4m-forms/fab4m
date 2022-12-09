@@ -1,0 +1,33 @@
+{
+  "name": "@fab4m/password",
+  "version": "1.0.0",
+  "description": "Password components and validators for fab4m",
+  "author": "Fabian Sorqvist <fabian@sorqvist.nu>",
+  "homepage": "https://github.com/fab4m-forms/fab4m#readme",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "directories": {
+    "lib": "dist",
+    "test": "test"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fab4m-forms/fab4m.git"
+  },
+    "scripts": {
+        "test": "vitest",
+        "test:unit": "vitest --run",
+        "build-browser": "esbuild --external:react --external:react-dom --external:react-router-dom  --external:fab4m  --bundle src/index.ts --format=esm --outfile=dist/index.es.js",
+        "build-node": "esbuild --external:react-router-dom --platform=node --external:react --external:react-dom --external:fab4m --minify --bundle src/index.ts --outfile=dist/index.cjs.js",
+      "build": "npm run build-browser && npm run build-node && tsc -d"
+  },
+  "bugs": {
+    "url": "https://github.com/fab4m-forms/fab4m/issues"
+  }
+}
