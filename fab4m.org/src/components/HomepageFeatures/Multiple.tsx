@@ -83,7 +83,7 @@ export default function Multiple() {
         <p>Collect multiple values for any component.</p>
         <Link
           className="button button--primary"
-          to="/docs/guide/docs/guide/widgets#widgets-for-multiple-components"
+          to="/docs/guide/widgets#widgets-for-multiple-components"
         >
           Read more about multiple values
         </Link>

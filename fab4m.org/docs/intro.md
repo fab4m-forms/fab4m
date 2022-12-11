@@ -36,4 +36,4 @@ StatefulFormView component to render the it. The StatefulFormView
 component provides the form with an internal state so that you don't
 have to worry about that, and it's the simplest way to get started.
 
-Head over to our [step by step guide](guide/define-your-form) to learn about more complex use cases.
+Head over to our [step by step guide](guide/define-a-form) to learn about more complex use cases.

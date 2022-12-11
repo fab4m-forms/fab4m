@@ -1,11 +1,9 @@
 import React from "react";
 import {
   createForm,
-  pageBreak,
-  textField,
   StatefulFormView,
   content,
-  allowedValues,
+  booleanField,
 } from "@fab4m/fab4m";
 import "fab4m/css/basic/basic.css";
 
