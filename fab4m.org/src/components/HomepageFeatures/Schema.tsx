@@ -45,7 +45,7 @@ export default function Schema() {
           to validate your data anywhere outside of the browser.
         </p>
         <Link className="button button--primary" to="/docs/guide/validation">
-          Read more about JSON Schema validatoin
+          Read more about JSON Schema
         </Link>
       </div>
       <div className="example">

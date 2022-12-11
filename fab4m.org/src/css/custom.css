@@ -65,30 +65,35 @@
 .feature-arrow {
     height: 5em;
     width: 5em;
-    margin-top: 1em;
-    margin-left: 1em;
-    margin-right: 1em;
 	  fill: var(--ifm-color-primary-darkest);
+    transform: rotate(90deg);
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
 }
 
 .features {
-    display: flex;
     margin-bottom: 2em;
-    flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
 }
+
 
 .feature {
     flex: 1;
 }
 
 .feature-large {
-    display: flex;
-    flex-wrap: wrap;
     padding: 2em;
     background: var(--feature-box-bg);
 }
 
+.feature-large .example .feature-box {
+    padding: 0;
+}
+
 .feature-large .description {
+    margin-bottom: 1em;
     flex: 1;
 }
 .feature-large .example {
@@ -98,6 +103,31 @@
 
 .feature .language-jsx {
     max-width: 320x;
+}
+
+@media only screen and (min-width: 800px) {
+    .feature-large {
+    display: flex;
+    flex-wrap: wrap;
+
+    }
+    .example {
+        max-width: 60vw;
+    }
+}
+
+@media only screen and (min-width: 1400px) {
+   .features {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+   }
+    .feature-arrow {
+        transform: none;
+        margin-left: 1em;
+        margin-right: 1em;
+        margin-bottom: 0;
+    }
 }
 
 .intro {
