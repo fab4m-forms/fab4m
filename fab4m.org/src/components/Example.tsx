@@ -12,7 +12,7 @@ export default function Example(props: { source: string; example: ReactNode }) {
       </TabItem>
 
       <TabItem value="example" label="Example">
-        <BrowserOnly>{props.example}</BrowserOnly>
+        <BrowserOnly>{() => props.example}</BrowserOnly>
       </TabItem>
     </Tabs>
   );
