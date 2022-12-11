@@ -60,7 +60,7 @@ const config = {
             label: "Documentation",
           },
           {
-            href: "https://github.com/fab4m/fab4m",
+            href: "https://github.com/fab4m-forms/fab4m",
             label: "GitHub",
             position: "right",
           },
@@ -104,7 +104,7 @@ const config = {
               },
               {
                 label: "GitHub",
-                href: "https://github.com/fab4m/fab4m",
+                href: "https://github.com/fab4m-forms/fab4m",
               },
             ],
           },
