@@ -2,8 +2,10 @@
   "name": "@fab4m/fab4m",
   "version": "1.0.0-beta1",
   "description": "Creating forms should be easy!",
+"publishConfig": {
   "access": "public",
-  "registry": "https://registry.npmjs.org/",
+  "registry": "https://registry.npmjs.org/"
+},
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
@@ -36,11 +38,10 @@
   "author": "Fabian Sörqvist",
   "license": "MIT",
   "peerDependencies": {
-    "ajv": ">=7",
     "react": ">=15",
     "react-dom": ">=15"
   },
-  "dependencies": {
+  "devDependencies": {
     "tslib": "^2.2.0"
   },
   "gitHead": "d07ff4934399152b5c403dd81d77534d985997e4"
