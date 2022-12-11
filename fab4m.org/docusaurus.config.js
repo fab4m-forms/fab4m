@@ -86,8 +86,8 @@ const config = {
                 href: "https://stackoverflow.com/questions/tagged/fab4m",
               },
               {
-                label: "Discord",
-                href: "https://discordapp.com/invite/fab4m",
+                label: "Matrix chat",
+                href: "https://matrix.to/#/#fab4m:matrix.org",
               },
               {
                 label: "Twitter",
