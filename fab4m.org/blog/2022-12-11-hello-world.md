@@ -24,7 +24,7 @@ const form = createForm({
 
 This makes it easy to build your structure however you like without having to think about how to structure the markup.
 
-The form is made up from [components](/docs/define-a-form). The component describes one part of the form and the data that it contains.
+The form is made up from [components](/docs/guide/define-a-form). The component describes one part of the form and the data that it contains.
 
 Each component can have different widgets. The widget is responsible for rendering the component:
 
