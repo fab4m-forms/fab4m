@@ -1,4 +1,4 @@
-# Working with fab4m in Laravel
+# Using fab4m with Laravel and Inertia.js
 
 This is the first part in a blog series about how you can use fab4m together
 with different backend frameworks.
