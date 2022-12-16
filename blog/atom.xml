@@ -8,7 +8,7 @@
     <subtitle>Fab4m Blog</subtitle>
     <icon>https://fab4m.org/img/favicon.ico</icon>
     <entry>
-        <title type="html"><![CDATA[Working with fab4m in Laravel]]></title>
+        <title type="html"><![CDATA[Using fab4m with Laravel and Inertia.js]]></title>
         <id>/2022/12/16/fab4m-and-laravel</id>
         <link href="https://fab4m.org/blog/2022/12/16/fab4m-and-laravel"/>
         <updated>2022-12-16T00:00:00.000Z</updated>

@@ -9,7 +9,7 @@
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <item>
-            <title><![CDATA[Working with fab4m in Laravel]]></title>
+            <title><![CDATA[Using fab4m with Laravel and Inertia.js]]></title>
             <link>https://fab4m.org/blog/2022/12/16/fab4m-and-laravel</link>
             <guid>/2022/12/16/fab4m-and-laravel</guid>
             <pubDate>Fri, 16 Dec 2022 00:00:00 GMT</pubDate>
