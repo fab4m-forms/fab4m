@@ -351,4 +351,4 @@ This example wasn't particularly exciting in terms of form building,
 so in the next blog post I will expand on this application to include
 something that would be more of a challenge!
 
-The full source code for this blog post is available [here](https://github.com/fab4m-forms/fab4m-laravel-example)
+The full source code for this blog post is available [here](https://github.com/fab4m-forms/fab4m-laravel-example).
