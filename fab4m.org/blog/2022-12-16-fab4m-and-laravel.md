@@ -3,7 +3,7 @@
 This is the first part in a blog series about how you can use fab4m together
 with different backend frameworks.
 
-At my current workplace ([Leanlab.co](https://leanlab.co/)) we use Laravel as our web framework and we are veryhappy with it. That's why it's only natural to start there!
+At my workplace ([Leanlab.co](https://leanlab.co/)) we use Laravel as our web framework and we are veryhappy with it. That's why it's only natural to start there!
 
 In this blog post we are going to set up a laravel installation with
 [Laravel
