@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[2535],{5641:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Working with fab4m in Laravel","permalink":"/blog/2022/12/16/fab4m-and-laravel"},{"title":"Hello world!","permalink":"/blog/2022/12/11/hello-world"}]}')}}]);
