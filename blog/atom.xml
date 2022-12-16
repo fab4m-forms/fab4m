@@ -14,7 +14,7 @@
         <updated>2022-12-16T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[This is the first part in a blog series about how you can use fab4m together]]></summary>
         <content type="html"><![CDATA[<p>This is the first part in a blog series about how you can use fab4m together
-with different backend frameworks.</p><p>At my current workplace (<a href="https://leanlab.co/" target="_blank" rel="noopener noreferrer">Leanlab.co</a>) we use Laravel as our web framework and we are veryhappy with it. That's why it's only natural to start there!</p><p>In this blog post we are going to set up a laravel installation with
+with different backend frameworks.</p><p>At my workplace (<a href="https://leanlab.co/" target="_blank" rel="noopener noreferrer">Leanlab.co</a>) we use Laravel as our web framework and we are veryhappy with it. That's why it's only natural to start there!</p><p>In this blog post we are going to set up a laravel installation with
 <a href="https://laravel.com/docs/9.x/starter-kits#laravel-breeze" target="_blank" rel="noopener noreferrer">Laravel
 breeze</a>, a
 starter kit for laravel that provides you with a solid boilerplate to
