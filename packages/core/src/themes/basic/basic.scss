@@ -173,6 +173,8 @@ $remove-tag-bg-hover: #7B1F1F !default;
   border: none;
   background: $remove-item-bg;
   color: $remove-item-color;
+  padding: .2em .5em;
+  margin: 0;
 }
 
 .fab4m-remove-item-button:hover {
@@ -249,7 +251,6 @@ $remove-tag-bg-hover: #7B1F1F !default;
   }
   .fab4m-form-element {
     height: 100%;
-    height: 2em;
     * {
       height: 100%;
     }
@@ -259,7 +260,6 @@ $remove-tag-bg-hover: #7B1F1F !default;
 .fab4m-add-tag {
   @extend .fab4m-button;
   margin-left: 0.5em;
-  height: 2.2em;
   background: $add-item-bg;
   color: $add-item-color;
   &:hover {
