@@ -1,4 +1,4 @@
-import { FormDefinition } from "./form";
+import { FormDefinition, formFromDefinition } from "./form";
 import {
   ComponentDataType,
   FormComponentType,
@@ -329,11 +329,11 @@ export async function unserialize(
   if (!theme) {
     throw new Error("Could not find theme " + form.theme);
   }
-  return {
+  return formFromDefinition({
     ...form,
     theme,
     components,
-  };
+  });
 }
 
 /**
