@@ -463,3 +463,5 @@ That was a long post! But we accomplished a lot:
 
 There are of course tons of features we didn't expose here, but it's still a nice
 demo of how to construct any form you'd like and validate easily.
+
+The source is available in the [fab4m laravel example repository](https://github.com/fab4m-forms/fab4m-laravel-example).
