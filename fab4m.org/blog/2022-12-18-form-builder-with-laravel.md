@@ -456,7 +456,7 @@ This will render the data that was just submitted!
 
 ## That's it
 
-A bit of a longer post! But we accomplished a lot:
+That was a long post! But we accomplished a lot:
 
 * We made it possible to create any form and save it along with a schema to validate it.
 * We made it possible to save submissions for that form.
