@@ -1,6 +1,6 @@
 # Fab4m and Laravel: Creating a simple form builder
 
-In the [previous blog post](/blog/fab4m-and-laravel) we got started
+In the [previous blog post](/blog/2022/12/16/fab4m-and-laravel) we got started
 with Laravel and Inertia and showed how we can use Fab4m inside of
 this environment to generate our forms.
 
