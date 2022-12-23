@@ -1,6 +1,11 @@
 import * as React from "react";
 
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import {
+  fireEvent,
+  queryByLabelText,
+  render,
+  waitFor,
+} from "@testing-library/react";
 import {
   textField,
   basic,
@@ -18,6 +23,7 @@ import {
   fieldsetWidgetType,
   groupWidgetType,
   allowedValues,
+  detailsWidget,
 } from "../../src";
 import { getFormElement } from "../util";
 interface GroupedData {
@@ -189,5 +195,56 @@ describe("groups", () => {
       // The error must be within the right component.
       expect(queryByText("Not allowed")).not.toBeNull();
     });
+  });
+  const widget = detailsWidget();
+  const detailsForm = createForm({
+    group: group(
+      {
+        label: "Details label",
+        widget,
+      },
+      { field1, field2 }
+    ),
+  });
+  test("Details widget", async () => {
+    const { queryByText, findByLabelText } = render(
+      <StatefulFormView form={detailsForm} />
+    );
+    expect(queryByText("Details label")).not.toBe(null);
+    expect(await findByLabelText("Text field 1")).not.toBeVisible();
+    expect(await findByLabelText("Text field 2")).not.toBeVisible();
+  });
+  test("Details widget with html summary", () => {
+    widget.settings = { summary: <span data-testid="details-span"></span> };
+    const { queryByText, queryByTestId } = render(
+      <StatefulFormView form={detailsForm} />
+    );
+    expect(queryByText("Details label")).toBe(null);
+    expect(queryByTestId("details-span")).not.toBe(null);
+  });
+  test("Details widget with group content", () => {
+    widget.settings = {
+      summary: (data) => <span>label: {data.field1}</span>,
+    };
+    const { queryByText } = render(
+      <StatefulFormView
+        form={detailsForm}
+        data={{ group: { field1: "Value" } }}
+      />
+    );
+    expect(queryByText("label: Value")).not.toBe(null);
+  });
+  test("Details widget with open content", async () => {
+    widget.settings = {
+      open: true,
+    };
+    const { findByLabelText } = render(
+      <StatefulFormView
+        form={detailsForm}
+        data={{ group: { field1: "Value" } }}
+      />
+    );
+    expect(await findByLabelText("Text field 1")).toBeVisible();
+    expect(await findByLabelText("Text field 2")).toBeVisible();
   });
 });

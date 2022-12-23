@@ -23,6 +23,7 @@ import {
   maxLength,
   minLength,
   horizontalGroupWidget,
+  detailsWidget,
   submit,
   fileSize,
 } from "../../src/index";
@@ -102,6 +103,28 @@ export default function App() {
           multiple: true,
           minItems: 1,
           widget: horizontalGroupWidget(),
+        },
+        {
+          in_group: textField({ name: "in_group", label: "In group" }),
+          another_in_group: textField({
+            name: "another_in_group",
+            label: "Another in group",
+          }),
+        }
+      ),
+      details_groups: group(
+        {
+          label: "Multiple Group",
+          multiple: true,
+          minItems: 1,
+          widget: detailsWidget({
+            summary: (data) => (
+              <span>
+                <strong>[{data?.another_in_group}]</strong> Whatever
+              </span>
+            ),
+            open: true,
+          }),
         },
         {
           in_group: textField({ name: "in_group", label: "In group" }),

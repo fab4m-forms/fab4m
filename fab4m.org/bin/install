@@ -17,9 +17,9 @@ npm pack
 popd
 
 
-npm install ../packages/core/fab4m-fab4m-1.0.0-beta1.tgz
-npm install ../packages/date/fab4m-date-1.0.0-beta1.tgz
-npm install ../packages/password/fab4m-password-1.0.0-beta1.tgz
-rm ../packages/core/fab4m-fab4m-1.0.0-beta1.tgz
-rm ../packages/date/fab4m-date-1.0.0-beta1.tgz
-rm ../packages/password/fab4m-password-1.0.0-beta1.tgz
+npm install ../packages/core/fab4m-fab4m-*.tgzbin
+npm install ../packages/date/fab4m-date-*.tgz
+npm install ../packages/password/fab4m-password-*.tgz
+rm ../packages/core/fab4m-fab4m-*.tgz
+rm ../packages/date/fab4m-date-*.tgz
+rm ../packages/password/fab4m-password-*.tgz
