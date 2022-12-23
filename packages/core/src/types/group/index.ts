@@ -9,6 +9,9 @@ import { Widget, widget, WidgetType } from "../../widget";
 import Fieldset from "./Fieldset";
 import Group from "./Group";
 import HorizontalGroup from "./HorizontalGroup";
+
+import Details from "./Details";
+
 /**
  * The group form component type allows you to group components together.
  * @group Components
@@ -147,5 +150,60 @@ export function horizontalGroupWidget<DataType = Record<string, any>>(): Widget<
   return widget<DataType, undefined>({
     type: widgetType,
     settings: undefined,
+  });
+}
+
+/**
+ * Describes a summary that can be rendered as part of the details widget.
+ * @group widgets
+ */
+export type Summary<DataType> =
+  | React.ReactNode
+  | ((data?: DataType) => React.ReactNode);
+
+/**
+ * Settings for the Details widget.
+ */
+export interface DetailsSettings<DataType> {
+  // The summary can be used to render custom summary content.
+  summary?: Summary<DataType>;
+  // Indicates if the summary will be open or closed by default.
+  open?: boolean;
+}
+
+/**
+ * This widget renders a group of fields inside of a details
+ * html element with a summary as a label.
+ * @group Widgets
+ */
+export const detailsWidgetType: WidgetType<
+  Record<string, any>,
+  DetailsSettings<Record<string, any>>
+> = {
+  name: "details",
+  components: ["group"],
+  title: "Details",
+  widget: Details,
+  init: detailsWidget,
+};
+
+/**
+ * This widget renders a group of fields inside of a details
+ * html element with a summary as a label.
+ * @group Widgets
+ */
+export function detailsWidget<DataType = Record<string, any>>(
+  settings: DetailsSettings<DataType> = {}
+): Widget<DataType, DetailsSettings<DataType>> {
+  const widgetType: WidgetType<DataType, DetailsSettings<DataType>> = {
+    name: "details",
+    components: ["group"],
+    title: "Details",
+    widget: Details,
+    init: detailsWidget,
+  };
+  return widget<DataType, DetailsSettings<DataType>>({
+    type: widgetType,
+    settings,
   });
 }

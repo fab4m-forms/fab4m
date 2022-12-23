@@ -58,6 +58,9 @@ interface BaseThemeClasses {
   selectWrapper: string;
   /** This class is applied to the indicator that a field is required.*/
   requiredIndicator: string;
+  details: string;
+  summary: string;
+  detailsContent: string;
   /** Any extra classes can be added for custom widgets */
   [name: string]: string;
 }
@@ -109,6 +112,7 @@ export const defaultThemeClasses: ThemeClasses = {
   group: "group",
   multipleItems: "multiple-items",
   multipleItem: "multiple-item",
+  multipleItemWrapper: "multiple-item-wrapper",
   removeItem: "remove-item-button",
   addItem: "add-item-button",
   fieldset: "fieldset",
@@ -131,4 +135,7 @@ export const defaultThemeClasses: ThemeClasses = {
   addedTags: "added-tags",
   requiredIndicator: "required-indicator",
   labelWrapper: "label-wrapper",
+  details: "details",
+  summary: "summary",
+  detailsContent: "summary-content",
 };
