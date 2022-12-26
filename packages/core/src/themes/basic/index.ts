@@ -3,6 +3,12 @@ const fab4mPrefixed: ThemeClasses = {
   ...defaultThemeClasses,
   dateRangeWrapper: "date-range-wrapper",
   dateRangeSeparator: "date-range-separator",
+  autocompleteList: "autocomplete-list",
+  autocompleteListOpen: "autocomplete-list-open",
+  autocompleteItem: "autocomplete-item",
+  highlightedAutocompleteItem: "autocomplete-item-highlighted",
+  selectedAutocompleteItem: "autocomplete-item-selected",
+  autocompleteContainer: "autocomplete-container",
 };
 for (const name in fab4mPrefixed) {
   fab4mPrefixed[name] = `fab4m-${fab4mPrefixed[name]}`;

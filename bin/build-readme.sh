@@ -33,3 +33,10 @@ sed -i '1,5d' packages/routerforms/README.md
 sed -i 's|Router forms|@fab4m/routerforms|g' packages/routerforms/README.md
 cat .readme-license.md >> packages/routerforms/README.md
 cp LICENSE packages/routerforms/.
+
+# Autocomplete readme
+node bin/example-to-md.js fab4m.org/docs/packages/autocomplete.mdx packages/autocomplete/README.md
+sed -i '1,7d' packages/autocomplete/README.md
+sed -i 's|Autocomplete|@fab4m/autocomplete|g' packages/autocomplete/README.md
+cat .readme-license.md >> packages/autocomplete/README.md
+cp LICENSE packages/autocomplete/.

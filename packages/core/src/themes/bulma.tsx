@@ -48,6 +48,12 @@ const bulma: Theme = {
     details: "panel",
     summary: "panel-heading",
     detailsContent: "p-4",
+    autocompleteList: "card mt-1",
+    autocompleteListOpen: "is-block",
+    autocompleteItem: "p-2",
+    highlightedAutocompleteItem: "has-background-primary-light",
+    selectedAutocompleteItem: "is-bold",
+    autocompleteContainer: "autocomplete-container",
   },
 };
 
