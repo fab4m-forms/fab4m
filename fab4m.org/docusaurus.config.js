@@ -123,6 +123,13 @@ const config = {
       },
     },
   themes: ["@docusaurus/theme-live-codeblock"],
+  scripts: [
+    {
+      src: "https://plausible.io/js/script.js",
+      defer: true,
+      "data-domain": "fab4m.org",
+    },
+  ],
 };
 
 module.exports = config;
