@@ -1,0 +1,43 @@
+import Example from "@site/src/components/Example";
+import AutocompleteExample from "@site/src/components/Autocomplete/AutocompleteExample";
+import AutocompleteExampleSource from "!!raw-loader!@site/src/components/Autocomplete/AutocompleteExample";
+import CallbackExample from "@site/src/components/Autocomplete/CallbackExample";
+import CallbackExampleSource from "!!raw-loader!@site/src/components/Autocomplete/CallbackExample";
+import ItemElementExample from "@site/src/components/Autocomplete/ItemElementExample";
+import ItemElementExampleSource from "!!raw-loader!@site/src/components/Autocomplete/ItemElementExample";
+
+
+# Autocomplete
+
+The `@fab4m/autocomplete` package provides an autocomplete widget component using the popular
+[Downshift js package](https://www.downshift-js.com/).
+
+## Installing
+
+Install `@fab4m/autocomplete` and `downshift` (7.x):
+
+```bash
+npm install --save @fab4m/autocomplete downshift
+```
+
+## Using the autocomplete widget
+
+`@fab4m/autocomplete` provides one widget: the `autocompleteWidget`.
+
+The following example shows it in action:
+
+<Example source={AutocompleteExampleSource} example={<AutocompleteExample />} />
+
+## Using a callback to fetch the items
+
+If you have many items to fetch you can use a callback to fetch the items
+on the fly:
+
+<Example source={CallbackExampleSource} example={<CallbackExample />} />
+
+## Customizing the autocomplete item element
+
+You might want to customize the way each item looks in the autocomplete list.
+This can be done by specifying a custom `itemElement`:
+
+<Example source={ItemElementExampleSource} example={<ItemElementExample />} />

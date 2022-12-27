@@ -1,0 +1,36 @@
+.fab4m-autocomplete-list {
+    list-style-type: none;
+    margin: 0;
+    padding: .5em;
+    border: 1px solid #aaa;
+    display: none;
+    position: absolute;
+    width: 100%;
+    border-radius: 2px;
+    margin-top: .2em;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.fab4m-autocomplete-container {
+    position: relative;
+    width: 100%;
+}
+
+.fab4m-autocomplete-list-open {
+    display: block;
+}
+
+.fab4m-autocomplete-item {
+    margin-bottom: .2em;
+    font-size: .8em;
+    padding: .2em;
+}
+
+.fab4m-autocomplete-item-highlighted {
+    background: #eee;
+}
+
+.fab4m-autocomplete-item-selected {
+    font-weight: bold;
+}

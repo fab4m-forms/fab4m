@@ -1,0 +1,45 @@
+{
+  "name": "@fab4m/autocomplete",
+  "version": "1.0.0-beta1",
+  "description": "Autocomplete field for fab4m",
+  "keywords": [
+    "autocomplete",
+    "fab4m"
+  ],
+  "author": "Fabian Sorqvist <fabian@sorqvist.nu>",
+  "homepage": "https://fab4m.org/",
+    "license": "MIT",
+  "module": "dist/index.es.js",
+  "main": "dist/index.cjs.js",
+    "types": "dist/index.d.ts",
+  "directories": {
+    "lib": "dist",
+    "test": "test"
+  },
+  "files": [
+      "dist",
+      "src/style.css"
+  ],
+"publishConfig": {
+  "access": "public",
+  "registry": "https://registry.npmjs.org/"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fab4m-forms/fab4m.git"
+  },
+    "scripts": {
+    "test": "vitest",
+        "test:unit": "vitest --run",
+    "build-browser": "esbuild --external:react --external:react-dom --external:react-datepicker --external:fab4m  --bundle src/index.tsx --format=esm --outfile=dist/index.es.js",
+    "build-node": "esbuild --platform=node --external:react --external:react-dom --external:react-datepicker --external:fab4m --minify --bundle src/index.tsx --outfile=dist/index.cjs.js",
+    "build": "npm run build-browser && npm run build-node && tsc -d"
+    },
+  "peerDependencies": {
+    "downshift": "^7.0"
+  },
+
+  "bugs": {
+    "url": "https://github.com/fab4m-forms/fab4m/issues"
+  }
+}
