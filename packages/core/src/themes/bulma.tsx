@@ -45,6 +45,9 @@ const bulma: Theme = {
     descriptionList: "mt-2 mb-2",
     descriptionItem: "is-flex",
     descriptionItemIcon: "mr-1",
+    details: "panel",
+    summary: "panel-heading",
+    detailsContent: "p-4",
   },
 };
 
