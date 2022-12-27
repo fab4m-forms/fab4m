@@ -1,0 +1,5 @@
+# Set up a new remix project
+
+npx create-remix@latest --template remix-run/indie-stack fab4m-remix
+
+#
