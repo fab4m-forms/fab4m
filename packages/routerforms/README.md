@@ -1,9 +1,4 @@
-import RouterExample from "!!raw-loader!@site/../packages/routerforms/examples/src/BasicRouter";
-import ExistingRouter from "!!raw-loader!@site/../packages/routerforms/examples/src/ExistingRouter";
-import RouterForm from "!!raw-loader!@site/../packages/routerforms/examples/src/RouterForm";
-import Rewrite from "@site/src/components/RouterRewrite";
-
-# Router forms
+# @fab4m/routerforms
 
 The `@fab4m/routerforms` package integrates your fab4m forms with [React router](https://reactrouter.com/en/main). This allows you to render multipage forms as react router routes!
 
@@ -88,3 +83,7 @@ export const route: RouteObject = {
 };
 
 ```
+
+# License
+
+All the code is licensed under the [MIT License.](LICENSE)
