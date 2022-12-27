@@ -260,8 +260,7 @@ export function serialize(form: FormDefinition): SerializedForm {
  * @param multipleWidgets A list of available multiple widget types that can be used in the form.
  * Any component that has a multiple widget type that isn't provided in the list will be removed from the unserialized form.
  * @param rules A list of available rule types that can be used in the form.
- * Any component that has a rule type that isn't provided in the list will be removed from the unserial
-ized form.
+ * Any component that has a rule type that isn't provided in the list will be removed from the unserialized form.
  * @param validators A list of available validator types that can be used in the form.
  * Any component that has a validator type that isn't provided in the list will be removed from the unserialized form.
  * @param ruleGroups A list of available rule groupo types that can be used in the form.
@@ -271,12 +270,12 @@ ized form.
  */
 export async function unserialize(
   form: SerializedForm,
-  types: FormComponentType[],
-  themes: Theme[],
-  widgets: WidgetType[],
-  multipleWidgets: MultipleWidgetType[],
-  validators: ValidatorType[],
-  ruleGroups: RuleGroupType[]
+  types: FormComponentType[] = [],
+  themes: Theme[] = [],
+  widgets: WidgetType[] = [],
+  multipleWidgets: MultipleWidgetType[] = [],
+  validators: ValidatorType[] = [],
+  ruleGroups: RuleGroupType[] = []
 ): Promise<FormDefinition> {
   const typeMap: Record<string, FormComponentType> = {};
   const widgetMap: Record<string, WidgetType> = {};
