@@ -20,7 +20,7 @@ describe("Password field", () => {
   const form = createForm({
     strings: textField({
       label: "Strings",
-      widget: autocompleteWidget({ items: ["test", "test2"] }),
+      widget: autocompleteWidget({ items: ["test", "test2", "Test3"] }),
     }),
     labels: textField({
       label: "Labels",
@@ -109,7 +109,7 @@ describe("Password field", () => {
       "strings",
       "Strings",
       "test",
-      ["test", "test"],
+      ["test", "test2"],
       "test",
       "test"
     )
@@ -147,6 +147,25 @@ describe("Password field", () => {
     fireEvent.input(element, { target: { value: "item" } });
     await waitFor(() => {
       expect(queryByText("This is person 1")).not.toBeNull();
+    });
+  });
+
+  test("Autocomplete search", async () => {
+    const { findAllByLabelText, queryByText } = render(
+      <FormView form={form} data={{}} />
+    );
+    const element = (
+      await findAllByLabelText("Strings")
+    )[1] as HTMLInputElement;
+    // Uppercase search => lowercase
+    fireEvent.input(element, { target: { value: "Test" } });
+    await waitFor(() => {
+      expect(queryByText("test")).not.toBeNull();
+    });
+    // items to lowercase
+    fireEvent.input(element, { target: { value: "test" } });
+    await waitFor(() => {
+      expect(queryByText("Test3")).not.toBeNull();
     });
   });
 });

@@ -39,7 +39,7 @@ export default function Autocomplete<OptionType extends string | number>(
         : props.settings.items;
     return search
       ? itemsToShow.filter((item) =>
-          itemLabel(item).toLowerCase().includes(search)
+          itemLabel(item).toLowerCase().includes(search.toLowerCase())
         )
       : itemsToShow;
   };
@@ -49,7 +49,7 @@ export default function Autocomplete<OptionType extends string | number>(
       onChange={(selection) => {
         props.onChange(optionValue(selection));
       }}
-      inputValue={currentValue ? currentValue.toString() : null}
+      inputValue={currentValue ? currentValue.toString() : ""}
       selectedItem={props.value ?? ""}
       onInputValueChange={(value) => search(value)}
       itemToString={(item) => {
