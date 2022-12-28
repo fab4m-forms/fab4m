@@ -93,7 +93,7 @@ export const textFieldWidgetType: WidgetType<string, TextFieldWidgetSettings> =
 
 /**
  * A text input field that can be used with the text component.
- * See the [text field component](/docs/components/textfield) for an example.
+ * See the [text field component](/docs/components/text) for an example.
  * @group Widgets
  */
 export function textFieldWidget(
@@ -119,7 +119,7 @@ export const textAreaWidgetType: WidgetType<string, unknown> = {
 
 /**
  * Provides a text area element.
- * See the [text area component](/docs/components/textarea) for an example.
+ * See the [text field component](/docs/components/text) for an example.
  * @group Widgets
  */
 export function textAreaWidget(): Widget<string, unknown> {
