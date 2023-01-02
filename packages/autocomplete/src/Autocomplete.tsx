@@ -1,7 +1,7 @@
 import * as React from "react";
-import { WidgetProps, Option, optionValue, ThemeClasses } from "@fab4m/fab4m";
+import { WidgetProps, optionValue, ThemeClasses } from "@fab4m/fab4m";
 import Downshift from "downshift";
-import { AutocompleteSettings } from ".";
+import { AutocompleteSettings, Option } from ".";
 
 export default function Autocomplete<OptionType extends string | number>(
   props: WidgetProps<OptionType, AutocompleteSettings<OptionType>>
@@ -104,7 +104,8 @@ export default function Autocomplete<OptionType extends string | number>(
                       {props.settings.itemElement
                         ? props.settings.itemElement(
                             optionValue(item),
-                            itemLabel(item)
+                            itemLabel(item),
+                            itemContext(item)
                           )
                         : Array.isArray(item)
                         ? item[0]
@@ -123,6 +124,10 @@ export default function Autocomplete<OptionType extends string | number>(
 function itemLabel<OptionType>(item: Option<OptionType>) {
   const value = Array.isArray(item) ? item[0] : item;
   return (value as string | number).toString();
+}
+
+function itemContext<OptionType>(item: Option<OptionType>) {
+  return Array.isArray(item) && item[2] ? item[2] : undefined;
 }
 
 function optionItemProps(

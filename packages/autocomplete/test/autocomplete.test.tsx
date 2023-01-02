@@ -6,16 +6,17 @@ import { createForm, textField, integerField, FormView } from "@fab4m/fab4m";
 
 describe("Password field", () => {
   const fakeItems = [];
-  const profiles = [];
-
   for (let i = 0; i < 30; i++) {
-    fakeItems.push([`Item ${i}`, i + 1]);
-    profiles.push({
-      name: `Item ${i + 1}`,
-      picture:
-        "https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg",
-      description: `This is person ${i + 1}`,
-    });
+    fakeItems.push([
+      `Item ${i}`,
+      i + 1,
+      {
+        name: `Item ${i + 1}`,
+        picture:
+          "https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg",
+        description: `This is person ${i + 1}`,
+      },
+    ]);
   }
   const form = createForm({
     strings: textField({
@@ -49,8 +50,7 @@ describe("Password field", () => {
     customElement: integerField({
       label: "Custom element",
       widget: autocompleteWidget({
-        itemElement: (value) => {
-          const profile = profiles[value - 1];
+        itemElement: (value, label, profile) => {
           return (
             <div>
               <div style={{ display: "flex" }}>

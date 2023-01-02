@@ -1,13 +1,16 @@
 import Autocomplete from "./Autocomplete";
-import { Option, widget, WidgetType } from "@fab4m/fab4m";
-
+import { widget, WidgetType } from "@fab4m/fab4m";
+export type Option<OptionsType, Context = Record<string, unknown>> =
+  | [string, OptionsType, Context?]
+  | OptionsType;
 type AutocompleteCallback<OptionType> = (
   search: string
 ) => Promise<Option<OptionType>[]>;
 
-type ElementCallback<OptionType> = (
+type ElementCallback<OptionType, Context = Record<string, unknown>> = (
   value: OptionType,
-  label: string
+  label: string,
+  context?: Context
 ) => React.ReactNode;
 
 export interface AutocompleteSettings<OptionType> {
