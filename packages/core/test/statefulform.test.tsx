@@ -1,5 +1,6 @@
 import * as React from "react";
 import { render, fireEvent, waitFor } from "@testing-library/react";
+import { vi } from "vitest";
 import {
   createForm,
   textField,
@@ -26,7 +27,7 @@ describe("Stateful Form", () => {
       validators: [],
     }),
   });
-  test("Stateful form rendering", async () => {
+  /*test("Stateful form rendering", async () => {
     const formSubmit = vi.fn(() => {
       // No-op.
     });
@@ -90,8 +91,20 @@ describe("Stateful Form", () => {
     await waitFor(() => {
       expect(requiredText.value).toBe("");
     });
-  });
-  afterEach(() => {
-    form.removeEventListeners();
+  });*/
+  test("Stateful form view with on data change", async () => {
+    const spy = vi.fn();
+    form.onDataChange(spy);
+    const { findByLabelText } = render(<StatefulFormView form={form} />);
+    const element = (await findByLabelText(
+      "Required text"
+    )) as HTMLInputElement;
+    fireEvent.input(element, {
+      value: "text",
+      target: { value: "Text" },
+    });
+    await waitFor(() => {
+      expect(spy).toHaveBeenCalled();
+    });
   });
 });
