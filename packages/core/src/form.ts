@@ -117,11 +117,11 @@ export class Form<DataType = Record<string, any>> implements FormDefinition {
   public labels?: Partial<Labels>;
   public description?: string;
   public title?: string;
-  private submitListeners: SubmitCallback<DataType>[] = [];
-  private afterSubmitListeners: SubmitCallback<DataType>[] = [];
-  private dataChangeListeners: DataChangeCallback<DataType>[] = [];
-  private componentChangeListeners: ComponentChangeCallback<DataType>[] = [];
-  private partValidators: PartValidatorCallback<DataType>[] = [];
+  public submitListeners: SubmitCallback<DataType>[] = [];
+  public afterSubmitListeners: SubmitCallback<DataType>[] = [];
+  public dataChangeListeners: DataChangeCallback<DataType>[] = [];
+  public componentChangeListeners: ComponentChangeCallback<DataType>[] = [];
+  public partValidators: PartValidatorCallback<DataType>[] = [];
 
   /**
    * Determine if this form has any submit listeners attached to it.

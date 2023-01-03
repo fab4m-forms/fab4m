@@ -12,13 +12,13 @@ If you have a working environment with react or preact, you can install
 fab4m through npm:
 
 ```bash
-npm install --save fab4m
+npm install --save @fab4m/fab4m
 ```
 
 ## Create your first form
 
 ```javascript
-import { createForm, textField, StatefulFormView } from fab4m;
+import { createForm, textField, StatefulFormView } from "@fab4m/fab4m";
 
 const form = createForm({
     name: textField({
@@ -38,7 +38,7 @@ StatefulFormView component to render the it. The StatefulFormView
 component provides the form with an internal state so that you don't
 have to worry about that, and it's the simplest way to get started.
 
-Head over to our [step by step guide](https://fab4m.org/guide/define-your-form) to learn about more complex use cases.
+Head over to our [step by step guide](https://fab4m.org/guide/define-a-form) to learn about more complex use cases.
 
 # Packages
 
