@@ -1,6 +1,6 @@
 import { FormComponentWithName } from "./component";
 import { CompoundType, Schema } from "./schema";
-import { Validator, ValidatorType } from "./validator";
+import { Validator } from "./validator";
 /**
  * @group Rule API
  */
@@ -29,10 +29,7 @@ export interface RuleGroupType {
 /**
  * @group Rule API
  */
-export type Rule = [
-  string,
-  Validator<ValidatorType<unknown, unknown, unknown>, unknown>
-];
+export type Rule = [string, Validator];
 
 /**
  * Definition of a rule group that can be added to a component.
