@@ -2,4 +2,23 @@
 
 npx create-remix@latest --template remix-run/indie-stack fab4m-remix
 
-#
+# Create a diary schema
+
+```prisma
+model Diary {
+  id    String @id @default(cuid())
+  title String
+  body  String
+  tags  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+```
+```bash
+npx prisma db push
+npx prisma migrate dev
+```
+
+# Set up your diary module
+
+
