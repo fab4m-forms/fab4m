@@ -19,7 +19,7 @@ export interface WidgetProps<ValueType, SettingsType> {
   /**
    *This event should be triggered every time the component value is updated.
    */
-  onChange: (value: ValueType) => void;
+  onChange: (value: ValueType | undefined) => void;
   /**
    * Attributes that should be passed along to the form element in this widget.
    */
