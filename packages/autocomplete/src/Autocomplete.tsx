@@ -3,14 +3,15 @@ import { WidgetProps, optionValue, ThemeClasses } from "@fab4m/fab4m";
 import Downshift from "downshift";
 import { AutocompleteSettings, Option } from ".";
 
-export default function Autocomplete<OptionType extends string | number>(
-  props: WidgetProps<OptionType, AutocompleteSettings<OptionType>>
-) {
+export default function Autocomplete<
+  OptionType extends string | number,
+  Context = undefined
+>(props: WidgetProps<OptionType, AutocompleteSettings<OptionType, Context>>) {
   // The loaded items contains the currently loaded items from
   // when the items setting is a callback.
-  const [loadedItems, changeLoadedItems] = React.useState<Option<OptionType>[]>(
-    []
-  );
+  const [loadedItems, changeLoadedItems] = React.useState<
+    Option<OptionType, Context>[]
+  >([]);
   const [currentValue, changeCurrentValue] = React.useState<
     OptionType | string | undefined
   >(props.value ? findValueLabel(props.value) : "");
