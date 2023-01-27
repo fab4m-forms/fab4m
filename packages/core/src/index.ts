@@ -40,7 +40,7 @@ export * from "./types/url";
 export * from "./widgets/multiple";
 export * from "./hooks";
 export * from "./formview";
-
+export * from "./formdata";
 let defaultTheme: Theme = basic;
 export { defaultTheme, basic, basicDark };
 
