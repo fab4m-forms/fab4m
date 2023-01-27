@@ -2,20 +2,32 @@ import * as React from "react";
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import { autocompleteWidget } from "../src";
 import { vi } from "vitest";
-import { createForm, textField, integerField, FormView } from "@fab4m/fab4m";
+import {
+  createForm,
+  textField,
+  integerField,
+  FormView,
+  StatefulFormView,
+} from "@fab4m/fab4m";
+interface Profile {
+  name: string;
+  picture: string;
+  description: string;
+}
 
-describe("Password field", () => {
-  const fakeItems = [];
-  const profiles = [];
-
+describe("Autocomplete field", () => {
+  const fakeItems: Array<[string, number, Profile]> = [];
   for (let i = 0; i < 30; i++) {
-    fakeItems.push([`Item ${i}`, i + 1]);
-    profiles.push({
-      name: `Item ${i + 1}`,
-      picture:
-        "https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg",
-      description: `This is person ${i + 1}`,
-    });
+    fakeItems.push([
+      `Item ${i}`,
+      i + 1,
+      {
+        name: `Item ${i + 1}`,
+        picture:
+          "https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg",
+        description: `This is person ${i + 1}`,
+      },
+    ]);
   }
   const form = createForm({
     strings: textField({
@@ -48,9 +60,8 @@ describe("Password field", () => {
     }),
     customElement: integerField({
       label: "Custom element",
-      widget: autocompleteWidget({
-        itemElement: (value) => {
-          const profile = profiles[value - 1];
+      widget: autocompleteWidget<number, Profile>({
+        itemElement: (value, label, profile) => {
           return (
             <div>
               <div style={{ display: "flex" }}>
@@ -166,6 +177,23 @@ describe("Password field", () => {
     fireEvent.input(element, { target: { value: "test" } });
     await waitFor(() => {
       expect(queryByText("Test3")).not.toBeNull();
+    });
+  });
+
+  test("Element selection", async () => {
+    const { findAllByLabelText, findByText } = render(
+      <StatefulFormView form={form} />
+    );
+    const element = (await findAllByLabelText("Labels"))[1] as HTMLInputElement;
+    fireEvent.input(element, { target: { value: "test" } });
+    fireEvent.click(await findByText("Test label"));
+    await waitFor(() => {
+      expect(element).toHaveValue("Test label");
+    });
+    fireEvent.input(element, { target: { value: "" } });
+    fireEvent.blur(element);
+    await waitFor(() => {
+      expect(element).toHaveValue("");
     });
   });
 });
