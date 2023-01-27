@@ -21,4 +21,4 @@ npx prisma migrate dev
 
 # Set up your diary module
 
-
+# Set up the diary routes
