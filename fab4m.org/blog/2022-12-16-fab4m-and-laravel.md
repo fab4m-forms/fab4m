@@ -13,6 +13,8 @@ start building any app.
 
 To get things integrated with react we are using [Inertja.js](https://inertiajs.com/), a way to easily tie your react frontend together with your backend.
 
+<!--truncate-->
+
 ## Installing laravel
 
 Have a look at the [Laravel installation guide](https://laravel.com/docs/9.x/installation) for the full details,

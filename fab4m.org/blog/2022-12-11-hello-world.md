@@ -11,6 +11,8 @@ problem: validation, rendering, and so on.
 I set out to finally solve the problem once and for all. It took way
 more time than I anticipated, but here it is!
 
+<!--truncate-->
+
 What are the highlights then?
 
 Instead of working directly with markup, you structure your form using a javascript object:

@@ -7,6 +7,8 @@ this environment to generate our forms.
 Now let's flex our muscles a bit more and create a form builder. This
 is were fab4m really shines!
 
+<!--truncate-->
+
 ## Create a new model, migration and controller
 
 We start by setting up a new form controller:
