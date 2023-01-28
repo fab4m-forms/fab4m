@@ -34,8 +34,8 @@ export function DatePicker(
           id={pickerId}
           value={
             props.withTime
-              ? props.value?.toISOString()
-              : props.value?.toISOString().split("T")[0]
+              ? props.value?.toISOString() ?? ""
+              : props.value?.toISOString().split("T")[0] ?? ""
           }
         />
       ) : (
@@ -45,8 +45,8 @@ export function DatePicker(
             name={props.name}
             value={
               props.withTime
-                ? props.value?.toISOString()
-                : props.value?.toISOString().split("T")[0]
+                ? props.value?.toISOString() ?? ""
+                : props.value?.toISOString().split("T")[0] ?? ""
             }
           />
           <ReactDatePicker
@@ -58,7 +58,7 @@ export function DatePicker(
             className={theme.classes.input}
             showTimeSelect={props.withTime}
             selected={props.value}
-            onChange={props.onChange}
+            onChange={(value) => props.onChange(value ?? undefined)}
           />
         </>
       )}

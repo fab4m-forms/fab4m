@@ -3,7 +3,7 @@ import { createForm, StatefulFormView } from "@fab4m/fab4m";
 import { dateField, dateTimeField, dateRangeField } from "../../src";
 import "react-datepicker/dist/react-datepicker.css";
 import "./index.css";
-import "fab4m/css/basic/basic.css";
+import "@fab4m/fab4m/css/basic/basic.css";
 
 const form = createForm({
   date: dateField({
