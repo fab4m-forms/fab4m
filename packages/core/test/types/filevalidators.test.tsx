@@ -8,6 +8,7 @@ import {
   FormComponentWithName,
   mimeType,
 } from "../../src/index";
+import { vi } from "vitest";
 import { fireEvent, render, waitFor } from "@testing-library/react";
 
 describe("Size validator", () => {
@@ -73,13 +74,14 @@ describe("File extension validator", () => {
     // No-op polyfill.
   };
   const form = createForm();
+  const message = "The file extension is not allowed!";
   form.add(
     fileField({
       name: "extension_validator",
       label: "Extensions",
       validators: [
         fileExtension(["jpg", "png"], {
-          message: "The file extension is not allowed!",
+          message,
         }),
       ],
     })
@@ -92,7 +94,7 @@ describe("File extension validator", () => {
     const submit = getByText("Save");
     fireEvent.click(submit);
     await waitFor(() => {
-      expect(queryByText("The file mimetype is not valid!")).toBeNull();
+      expect(queryByText(message)).toBeNull();
     });
   });
 
@@ -104,10 +106,13 @@ describe("File extension validator", () => {
     const submit = getByText("Save");
     fireEvent.click(submit);
     await waitFor(() => {
-      expect(queryByText("The file extension is not allowed!")).not.toBeNull();
+      expect(queryByText(message)).not.toBeNull();
     });
   });
+
   test("Allowed file extension", async () => {
+    const spy = vi.fn();
+    form.onSubmit(spy);
     data.extension_validator = new File(["png file"], "value.png");
     const { getByText, queryByText } = render(
       <FormView form={form} data={data} />
@@ -115,7 +120,8 @@ describe("File extension validator", () => {
     const submit = getByText("Save");
     fireEvent.click(submit);
     await waitFor(() => {
-      expect(queryByText("The file extension is not allowed!")).toBeNull();
+      expect(queryByText(message)).toBeNull();
+      expect(spy).toHaveBeenCalled();
     });
   });
 });

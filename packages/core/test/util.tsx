@@ -102,7 +102,7 @@ export function inputElementOk(component: FormComponent, name = ""): void {
   });
 }
 
-export function getFormElement(container: Element): Element {
+export function getFormElement(container: Element): HTMLFormElement {
   const form = container.querySelector("form");
   if (!form) {
     throw new Error("Could not find form");
