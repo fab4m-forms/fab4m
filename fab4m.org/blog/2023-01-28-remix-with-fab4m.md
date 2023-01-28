@@ -491,3 +491,4 @@ export default function NewDiaryPage() {
 ```
 
 And that's it. We now have a fully working remix app with the fab4m goodness built in.
+The full source code is available in the [example repository.](https://github.com/fab4m-forms/fab4m-remix-example)
