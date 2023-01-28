@@ -1,4 +1,4 @@
-# Fab4m and remix
+# Remix and fab4m
 
 [Remix](https://remix.run/) is a great node framework to render react components server side. It
 comes with some really great ways of handling loading and saving data and
@@ -446,7 +446,7 @@ const ajv = new Ajv();
 const validate = ajv.compile(generateSchema(form));
 
 export async function action({ request }: ActionArgs) {
-  const formData = fromFormData(form, await request.formData());
+  const formData = fromFormData<Diary>(form, await request.formData());
   // Validate our form submission, and send back any errors to then
   // component if there were any.
   const valid = validate(formData);
