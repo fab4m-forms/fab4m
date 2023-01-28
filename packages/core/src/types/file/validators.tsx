@@ -128,7 +128,7 @@ export const fileExtensionValidator: FileExtensionValidatorType = {
   validate: async (value, settings) => {
     return value &&
       !settings.extensions.includes(
-        value.name.slice(value.name.lastIndexOf("."), value.name.length - 1)
+        value.name.slice(value.name.lastIndexOf(".") + 1, value.name.length)
       )
       ? [
           {
@@ -141,7 +141,7 @@ export const fileExtensionValidator: FileExtensionValidatorType = {
   valid: (value, settings) =>
     !value ||
     settings.extensions.includes(
-      value.name.slice(value.name.lastIndexOf("."), value.name.length - 1)
+      value.name.slice(value.name.lastIndexOf(".") + 1, value.name.length)
     ),
 };
 
