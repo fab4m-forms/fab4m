@@ -4,12 +4,12 @@ import { Form } from "./form";
 export function fromFormData<Data = Record<string, unknown>>(
   form: Form<Data>,
   formData: FormData
-): Record<string, unknown> {
+): Data {
   const returnData: Record<string, unknown> = {};
   form.components.map((component) => {
     returnData[component.name] = componentData(component, formData);
   });
-  return returnData;
+  return returnData as Data;
 }
 
 function componentData(
