@@ -92,11 +92,7 @@ export default function FormComponentView(props: {
     <div className={props.theme.classes.componentWrapper}>
       <props.component.widget.type.widget
         component={props.component}
-        value={
-          typeof props.value !== "undefined"
-            ? props.value
-            : props.component.defaultValue
-        }
+        value={props.value}
         settings={props.component.widget.settings}
         onChange={props.onChange}
         errors={props.errors}
