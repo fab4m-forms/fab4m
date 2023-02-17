@@ -41,11 +41,7 @@ export default function FormPart(props: {
         (component, index) =>
           component.name && (
             <FormComponentView
-              value={
-                typeof props.data[component.name] !== undefined
-                  ? props.data[component.name]
-                  : component.defaultValue
-              }
+              value={props.data[component.name]}
               ssr={props.ssr}
               errors={componentErrors(`/${component.name}`, props.errors)}
               component={component}

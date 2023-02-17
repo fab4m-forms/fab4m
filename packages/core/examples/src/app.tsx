@@ -204,6 +204,15 @@ export default function App() {
   multistep.add(pageBreak({ name: "second" }));
   multistep.add(textField({ name: "third_page", label: "Last page" }));
 
+  const testForm = createForm({
+    text: textField({
+      label: "Wat wat",
+      defaultValue: "test",
+    }),
+  }).onSubmit((e, data) => {
+    e.preventDefault();
+    console.log(data);
+  });
   return (
     <React.StrictMode>
       <div
@@ -232,7 +241,9 @@ export default function App() {
         <StatefulFormView form={form} />
         <h2 className="title">Multistep form</h2>
         <StatefulFormView form={multistep} />
-        <h2 className="title">Form component with errors</h2>
+
+        <h2 className="title">Form for testing</h2>
+        <StatefulFormView form={testForm} />
         <FormComponentView
           name="component"
           component={component}

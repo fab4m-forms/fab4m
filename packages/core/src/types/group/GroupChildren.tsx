@@ -29,9 +29,7 @@ export default function GroupChildren(
       <FormComponentView
         key={index}
         value={
-          value && value[component.name]
-            ? value[component.name]
-            : component.defaultValue
+          value && value[component.name] ? value[component.name] : undefined
         }
         name={`${props.name}[${component.name}]`}
         id={`${props.id}_${component.name}`}

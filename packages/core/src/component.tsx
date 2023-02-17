@@ -92,10 +92,6 @@ export interface FormComponent<ValueType = any, SettingsType = any> {
    */
   readonly multiple?: boolean;
   /**
-   * The default value to display for this component if no data has been provided.
-   */
-  defaultValue?: ValueType;
-  /**
    * The name for this component. This will be used as the name on the form HTML element in the form.
    */
   readonly name?: string;
