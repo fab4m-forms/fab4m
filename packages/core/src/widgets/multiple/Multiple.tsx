@@ -15,7 +15,7 @@ function Multiple(
 ) {
   const [items, changeItems] = useState<Array<unknown>>(props.value ?? []);
   useEffect(() => {
-    changeItems(props.value ?? []);
+    changeItems(props.value ?? defaultItems(props.component));
   }, [props.value]);
   const addItem = () => changeItems([...items, undefined]);
   const itemComponents = items.map((value, index) => {
@@ -109,6 +109,15 @@ function Multiple(
       )}
     </div>
   );
+}
+
+function defaultItems(component: FormComponent) {
+  const noItems = component.minItems ?? 0;
+  const values = [];
+  for (let i = 0; i < noItems; i++) {
+    values.push(undefined);
+  }
+  return values;
 }
 
 export default Multiple as React.FC;
