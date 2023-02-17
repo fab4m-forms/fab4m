@@ -248,7 +248,7 @@ export async function validateComponent(
 
   if (component.multiple) {
     const items = data[component.name];
-    if (Array.isArray(items)) {
+    if (Array.isArray(items) && items.length > 0) {
       if (items.length === 0 && component.required) {
         errors.push({
           path,

@@ -1,5 +1,6 @@
 import * as React from "react";
 import "@testing-library/jest-dom";
+import { vi } from "vitest";
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import {
   textField,
@@ -12,6 +13,7 @@ import {
   FormView,
   group,
   defaultMultipleWidget,
+  StatefulFormView,
 } from "../src";
 import { getFormElement } from "./util";
 import { validate } from "../src/schemaValidator";
@@ -27,7 +29,6 @@ describe("Multiple fields", () => {
   const changeData = (value: unknown) => {
     data = value as string[];
   };
-
   test("Multiple items", async () => {
     const { findByText, findAllByLabelText, findAllByText } = render(
       <FormComponentView
@@ -234,6 +235,30 @@ describe("Multiple fields", () => {
     fireEvent.click(addMore);
     await waitFor(() => {
       expect(queryByText("Add")).toBeNull();
+    });
+  });
+  test("Empty field with min items that isn't required should work with empty array", async () => {
+    const submit = vi.fn().mockImplementation((e: React.FormEvent) => {
+      e.preventDefault();
+    });
+    const form = createForm(
+      {
+        multiple: textField({
+          label: "Multiple",
+          minItems: 1,
+          multiple: true,
+        }),
+      },
+      { title: "Multiple form" }
+    ).onSubmit(submit);
+    const { queryByText, findByRole } = render(
+      <StatefulFormView form={form} data={{ multiple: [] }} />
+    );
+    const formElement = await findByRole("form");
+    fireEvent.submit(formElement);
+    await waitFor(() => {
+      expect(submit).toHaveBeenCalled();
+      expect(queryByText("must have at least")).toBeNull();
     });
   });
   test("Min and max items schema", () => {

@@ -136,7 +136,9 @@ describe("groups", () => {
   });
 
   test("Rules in grouped components", async () => {
-    const form = createForm();
+    const form = createForm({
+      outside_group: textField({ label: "Outside group" }),
+    });
     form.add(
       textField({
         name: "outside_group",
@@ -149,6 +151,11 @@ describe("groups", () => {
           name: "inside_group",
           label: "Inside group",
           rules: [["outside_group", equals("outside")]],
+        }),
+        textField({
+          name: "conditional_inside_group",
+          label: "Conditional inside group",
+          rules: [["group.inside_group", equals("inside")]],
         }),
       ])
     );

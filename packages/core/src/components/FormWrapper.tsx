@@ -87,6 +87,8 @@ export default function FormWrapper(
     <div className={props.form.theme.classes.formWrapper}>
       <form
         {...formProps}
+        aria-label={props.form.title}
+        aria-description={props.form.description}
         className={props.className ?? "form"}
         method="post"
         ref={formRef}

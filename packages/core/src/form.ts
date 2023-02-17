@@ -44,7 +44,7 @@ export interface FormDefinition {
   labels?: Partial<Labels>;
   /** The form description is used as the description in the JSON schema. */
   description?: string;
-  /** The form title is used as the title in the JSON schema. */
+  /** The form title is used as the title in the JSON schema, and also labels the form. */
   title?: string;
 }
 
