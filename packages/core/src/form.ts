@@ -64,7 +64,7 @@ export type SubmitCallback<DataType> = (
  * @typeParam DataType the type of data that is submitted.
  * @group Form API
  */
-export type DataChangeCallback<DataType> = (data: DataType) => void;
+export type DataChangeCallback<DataType> = (data: Partial<DataType>) => void;
 
 /**
  * @param part the part number that is being validated
@@ -343,7 +343,9 @@ export class Form<DataType = Record<string, any>> implements FormDefinition {
   /**
    * Trigger the change data event.
    */
-  triggerChangeData: DataChangeCallback<DataType> = (data: DataType) => {
+  triggerChangeData: DataChangeCallback<DataType> = (
+    data: Partial<DataType>
+  ) => {
     this.dataChangeListeners.forEach((listener) => listener(data));
   };
 
