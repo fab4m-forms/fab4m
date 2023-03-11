@@ -65,12 +65,16 @@ The first locale in the list will be used as a default.
 
 <Example source={BrowserLocaleSource} example={<BrowserLocale />} />
 
-### Customizing the all react datepicker properties
+### Customizing React datepicker properties
 
-react-datepicker supports many options and you might want to customize them according to your needs. You can do this by passing the props into the datePicker widget:
+react-datepicker supports many options and you might want to customize them according to your needs. You can do this by passing in the properties you want in the datePicker widget settings:
 
 <Example source={DatePickerPropsSource} example={<DatePickerProps />} />
 
+:::caution
+Properties passed to react datepicker aren't serialized with your form, since we can't
+possibly support serializing all of the possible configurations!
+:::
 # The date range widget
 
 The date range widget is used with the date range field. It supports all settings from the date picker

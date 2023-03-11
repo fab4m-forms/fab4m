@@ -132,7 +132,7 @@ describe("date field", () => {
     }
   });
 
-  it("datepicker settings", () => {
+  it("datepicker properties", () => {
     const customSettings = {
       ...date,
       widget: {
@@ -152,6 +152,46 @@ describe("date field", () => {
     );
     // Check if monday is visible.
     expect(queryByText("Mo")).toBeVisible();
+  });
+
+  it("datepicker settings as a function", () => {
+    const customSettings = {
+      ...date,
+      widget: {
+        ...date.widget,
+        settings: {
+          datePickerProps: (value) => ({
+            inline: true,
+            openToDate: !value ? new Date("1990-01-01") : undefined,
+          }),
+        },
+      },
+    };
+    const withoutValue = render(
+      <FormComponentView
+        name="withSettings"
+        onChange={() => {}}
+        component={customSettings}
+        theme={basic}
+        value={undefined}
+      />
+    );
+    // Check if 1990 is visible.
+    expect(withoutValue.queryByText("1990", { exact: false })).toBeVisible();
+    const currentDate = new Date();
+    const withValue = render(
+      <FormComponentView
+        name="withSettings"
+        onChange={() => {}}
+        component={customSettings}
+        theme={basic}
+        value={currentDate}
+      />
+    );
+    // The current year should be visible.
+    expect(
+      withValue.queryByText(currentDate.getFullYear(), { exact: false })
+    ).toBeVisible();
   });
 
   it("date widget serialization", () => {

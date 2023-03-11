@@ -19,7 +19,7 @@
     "@docusaurus/preset-classic": "2.0.1",
     "@docusaurus/theme-live-codeblock": "^2.0.1",
     "@fab4m/autocomplete": "file:../packages/autocomplete/fab4m-autocomplete-1.0.0-beta6.tgz",
-    "@fab4m/date": "file:../packages/date/fab4m-date-1.0.0-beta7.tgz",
+    "@fab4m/date": "file:../packages/date/fab4m-date-1.0.0-beta9.tgz",
     "@fab4m/fab4m": "file:../packages/core/fab4m-fab4m-1.0.0-beta8.tgz",
     "@fab4m/password": "file:../packages/password/fab4m-password-1.0.0-beta1.tgz",
     "@mdx-js/react": "^1.6.22",
