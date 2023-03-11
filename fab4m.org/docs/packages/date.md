@@ -11,7 +11,9 @@ import BrowserLocaleSource from "!!raw-loader!@site/src/components/Date/BrowserL
 // Custom format example
 import CustomFormat from "@site/src/components/Date/CustomFormat";
 import CustomFormatSource from "!!raw-loader!@site/src/components/Date/CustomFormat";
-
+// Datepickerprops example
+import DatePickerProps from "@site/src/components/Date/DatePickerProps";
+import DatePickerPropsSource from "!!raw-loader!@site/src/components/Date/DatePickerProps";
 
 
 # Date and time
@@ -62,6 +64,12 @@ The datepicker widget will try to find out the browser locale and use the locale
 The first locale in the list will be used as a default.
 
 <Example source={BrowserLocaleSource} example={<BrowserLocale />} />
+
+### Customizing the all react datepicker properties
+
+react-datepicker supports many options and you might want to customize them according to your needs. You can do this by passing the props into the datePicker widget:
+
+<Example source={DatePickerPropsSource} example={<DatePickerProps />} />
 
 # The date range widget
 

@@ -132,6 +132,28 @@ describe("date field", () => {
     }
   });
 
+  it("datepicker settings", () => {
+    const customSettings = {
+      ...date,
+      widget: {
+        ...date.widget,
+        settings: { datePickerProps: { inline: true } },
+      },
+    };
+    let data = new Date();
+    const { queryByText } = render(
+      <FormComponentView
+        name="withSettings"
+        onChange={() => {}}
+        component={customSettings}
+        theme={basic}
+        value={data}
+      />
+    );
+    // Check if monday is visible.
+    expect(queryByText("Mo")).toBeVisible();
+  });
+
   it("date widget serialization", () => {
     const form = createForm();
     form.add(

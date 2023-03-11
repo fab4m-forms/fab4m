@@ -9,6 +9,7 @@ import {
   Widget,
   WidgetSerializer,
 } from "@fab4m/fab4m";
+import { ReactDatePickerProps } from "react-datepicker";
 
 export type LocaleLoader = (code: string) => Promise<Locale | undefined>;
 let localeLoader: LocaleLoader;
@@ -102,6 +103,7 @@ export interface DateFieldWidgetSettings {
   locales?: Locale[];
   useBrowserLocale?: boolean;
   format?: string;
+  datePickerProps?: ReactDatePickerProps;
 }
 
 interface SerializedDateFieldSettings {
