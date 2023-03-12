@@ -103,7 +103,9 @@ export interface DateFieldWidgetSettings {
   locales?: Locale[];
   useBrowserLocale?: boolean;
   format?: string;
-  datePickerProps?: ReactDatePickerProps;
+  datePickerProps?:
+    | ReactDatePickerProps
+    | ((value?: Date) => ReactDatePickerProps);
 }
 
 interface SerializedDateFieldSettings {
