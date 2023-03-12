@@ -1,4 +1,5 @@
 import { FormComponentWithName } from "./component";
+import { FormComponentsList } from "./form";
 import { CompoundType, Schema } from "./schema";
 import { Validator } from "./validator";
 /**
@@ -64,12 +65,46 @@ export function ruleGroup(type: RuleGroupType, rules: AnyRule[]): RuleGroup {
  * @group Rule API
  */
 export function filterComponents(
-  components: FormComponentWithName[],
+  components: FormComponentsList,
   data: Record<string, unknown>,
   filterBreaks = false
 ): FormComponentWithName[] {
   const filteredComponents: FormComponentWithName[] = [];
-  for (const component of components) {
+  for (const definition of components) {
+    let component: FormComponentWithName | undefined;
+    // If this is an array, then we are dealing with
+    // potential alternate components, and need to pick which one
+    // to render.
+    if (Array.isArray(definition)) {
+      for (const alternative of definition) {
+        // If the alternative isn't an array, then it's a component.
+        if (!Array.isArray(alternative)) {
+          component = alternative;
+          break;
+        }
+        // If the the first value is a string, then we're dealing with a rule
+        // to validate.
+        if (alternative.length === 3) {
+          const [ruleComponent, validator, candidate] = alternative;
+          if (validator.type.valid(data[ruleComponent], validator.settings)) {
+            component = candidate;
+            break;
+          }
+          // The final case deals with rule grops.
+        } else if (
+          alternative.length == 2 &&
+          alternative[0].type.handler(alternative[0].rules, data)
+        ) {
+          component = alternative[1];
+          break;
+        }
+      }
+    } else {
+      component = definition;
+    }
+    if (!component) {
+      continue;
+    }
     let valid = true;
     for (const rule of component.rules) {
       if (Array.isArray(rule)) {

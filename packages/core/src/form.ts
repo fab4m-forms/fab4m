@@ -9,10 +9,10 @@ import {
   FormComponentWithName,
   validateComponent,
 } from "./component";
-import { filterComponents } from "./rule";
+import { AnyRule, filterComponents, RuleGroup } from "./rule";
 import { Theme } from "./theme";
 import { defaultTheme } from ".";
-import { ValidationError } from "./validator";
+import { ValidationError, Validator } from "./validator";
 /**
  * This interface defines the labels that are used throughout the form.
  * @group Form API
@@ -30,6 +30,16 @@ export interface Labels {
   required: string;
 }
 
+type FormComponentVariants = Array<
+  | [string, Validator, FormComponentWithName]
+  | [RuleGroup, FormComponentWithName]
+  | FormComponentWithName
+>;
+
+export type FormComponentsList = Array<
+  FormComponentWithName | FormComponentVariants
+>;
+
 /**
  * Base interface for forms.
  * An instance of the form class can be created from this interface.
@@ -39,7 +49,7 @@ export interface FormDefinition {
   /** The form theme that should be used to render this form. */
   theme: Theme;
   /** A list of Form components that this form contains. */
-  components: FormComponentWithName[];
+  components: FormComponentsList;
   /** The labels that should be used in the form. */
   labels?: Partial<Labels>;
   /** The form description is used as the description in the JSON schema. */
@@ -144,7 +154,23 @@ export class Form<DataType = Record<string, any>> implements FormDefinition {
     for (const name in components) {
       const component = components[name];
       if (component) {
-        this.components.push({ name, ...component });
+        this.components.push(
+          Array.isArray(component)
+            ? component.map((alternative) => {
+                if (!Array.isArray(alternative)) {
+                  return { name, ...alternative };
+                }
+                if (alternative.length === 3) {
+                  return [
+                    alternative[0],
+                    alternative[1],
+                    { name, ...alternative[2] },
+                  ];
+                }
+                return [alternative[0], { name, ...alternative[1] }];
+              })
+            : { name, ...component }
+        );
       }
     }
     this.title = settings?.title;
@@ -398,10 +424,13 @@ type FormPart = FormComponentWithName[];
  * @param form The form to get the parts for.
  * @group Form API
  */
-export function formParts(form: FormDefinition): FormPart[] {
+export function formParts(
+  form: FormDefinition,
+  data: Record<string, unknown>
+): FormPart[] {
   const parts: FormPart[] = [[]];
   let partIndex = 0;
-  for (const component of form.components) {
+  for (const component of filterComponents(form.components, data)) {
     parts[partIndex].push(component);
     if (component.type.splitsForm) {
       parts.push([]);
