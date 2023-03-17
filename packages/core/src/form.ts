@@ -30,14 +30,18 @@ export interface Labels {
   required: string;
 }
 
-type FormComponentVariants = Array<
-  | [string, Validator, FormComponentWithName]
-  | [RuleGroup, FormComponentWithName]
-  | FormComponentWithName
->;
+export type VariantDefinition<ValueType = any> =
+  | [string, Validator, FormComponent<ValueType>]
+  | [RuleGroup, FormComponent<ValueType>]
+  | FormComponent<ValueType>;
+
+interface FormComponentVariant {
+  rule?: AnyRule;
+  component: FormComponentWithName;
+}
 
 export type FormComponentsList = Array<
-  FormComponentWithName | FormComponentVariants
+  FormComponentWithName | FormComponentVariant[]
 >;
 
 /**
@@ -110,8 +114,10 @@ export type Components<DataType> = {
   [Property in keyof DataType]?: NonNullable<DataType[Property]> extends Array<
     infer Type
   >
-    ? FormComponent<Type, unknown>
-    : FormComponent<NonNullable<DataType[Property]>, unknown>;
+    ? FormComponent<Type, unknown> | Array<VariantDefinition<Type>>
+    :
+        | FormComponent<NonNullable<DataType[Property]>, unknown>
+        | Array<VariantDefinition<NonNullable<DataType[Property]>>>;
 };
 
 /**
@@ -123,7 +129,7 @@ export type Components<DataType> = {
  */
 export class Form<DataType = Record<string, any>> implements FormDefinition {
   public theme: Theme;
-  public components: FormComponentWithName[];
+  public components: FormComponentsList;
   public labels?: Partial<Labels>;
   public description?: string;
   public title?: string;
@@ -156,19 +162,9 @@ export class Form<DataType = Record<string, any>> implements FormDefinition {
       if (component) {
         this.components.push(
           Array.isArray(component)
-            ? component.map((alternative) => {
-                if (!Array.isArray(alternative)) {
-                  return { name, ...alternative };
-                }
-                if (alternative.length === 3) {
-                  return [
-                    alternative[0],
-                    alternative[1],
-                    { name, ...alternative[2] },
-                  ];
-                }
-                return [alternative[0], { name, ...alternative[1] }];
-              })
+            ? component.map((definition) =>
+                variantFromDefinition(definition, name)
+              )
             : { name, ...component }
         );
       }
@@ -185,12 +181,18 @@ export class Form<DataType = Record<string, any>> implements FormDefinition {
    * form.add(component1).add(component2);
    * ```
    */
-  add(component: FormComponent) {
-    if (component.name) {
+  add(component: FormComponentWithName | VariantDefinition) {
+    if (Array.isArray(component)) {
+      const componentName = Array.isArray(component)
+        ? component[0].name
+        : component.name;
       if (
-        this.components.findIndex(
-          (candidate) => candidate.name === component.name
-        ) !== -1
+        this.components.findIndex((candidate) => {
+          const name = Array.isArray(candidate)
+            ? candidate[0].name
+            : candidate.name;
+          name === componentName;
+        }) !== -1
       ) {
         throw new Error("A component with the same name already exists.");
       }
@@ -408,7 +410,7 @@ export function formFromDefinition<DataType = Record<string, any>>(
 ) {
   const form = new Form<DataType>(definition.theme, {}, { ...definition });
   for (const component of definition.components) {
-    form.add(component);
+    form.components.push(component);
   }
   return form;
 }
@@ -494,6 +496,24 @@ export const FormDataContext = createContext({} as Record<string, unknown>);
  */
 export const FormErrorsContext = createContext([] as ValidationError[]);
 
+function variantFromDefinition(
+  definition: VariantDefinition,
+  name: string
+): FormComponentVariant {
+  if (!Array.isArray(definition)) {
+    return { component: { name, ...definition } };
+  }
+  if (definition.length === 3) {
+    return {
+      rule: [definition[0], definition[1]],
+      component: { name, ...definition[2] },
+    };
+  }
+  return {
+    rule: definition[0],
+    component: { name, ...definition[1] },
+  };
+}
 /**
  * This hook can be used by form widgets to access all of the form data.
  *  @group React widget API
@@ -521,12 +541,12 @@ export function componentErrors(
   return errors
     .filter((e) => e.path.startsWith(path))
     .map((e) => {
-      return { ...e, path: e.path.substr(path.length) };
+      return { ...e, path: e.path.substring(path.length) };
     });
 }
 
 async function validateComponents(
-  components: FormComponentWithName[],
+  components: FormComponentsList,
   data: unknown
 ) {
   let errors: ValidationError[] = [];

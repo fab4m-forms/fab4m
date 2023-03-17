@@ -76,26 +76,29 @@ export function filterComponents(
     // potential alternate components, and need to pick which one
     // to render.
     if (Array.isArray(definition)) {
-      for (const alternative of definition) {
-        // If the alternative isn't an array, then it's a component.
-        if (!Array.isArray(alternative)) {
-          component = alternative;
+      for (const variant of definition) {
+        // If we have no rule to execute we can just return it.
+        if (!variant.rule) {
+          component = variant.component;
           break;
         }
-        // If the the first value is a string, then we're dealing with a rule
-        // to validate.
-        if (alternative.length === 3) {
-          const [ruleComponent, validator, candidate] = alternative;
-          if (validator.type.valid(data[ruleComponent], validator.settings)) {
-            component = candidate;
-            break;
-          }
-          // The final case deals with rule grops.
-        } else if (
-          alternative.length == 2 &&
-          alternative[0].type.handler(alternative[0].rules, data)
+        // Handle rules.
+        if (
+          Array.isArray(variant.rule) &&
+          variant.rule[1].type.valid(
+            data[variant.rule[0]],
+            variant.rule[1].settings
+          )
         ) {
-          component = alternative[1];
+          component = variant.component;
+          break;
+        }
+        // Handle rule groups.
+        else if (
+          !Array.isArray(variant.rule) &&
+          variant.rule.type.handler(variant.rule.rules, data)
+        ) {
+          component = variant.component;
           break;
         }
       }
