@@ -65,7 +65,7 @@ export default function FormWrapper(
     const errors = await validateFormPart(
       props.form,
       props.part,
-      props.data,
+      props.data as Record<string, unknown>,
       e
     );
     if (errors.length === 0) {

@@ -30,16 +30,31 @@ export interface Labels {
   required: string;
 }
 
+/**
+ * The variant definition type is used to easily describe
+ * a form component variant. It can either be just a form component,
+ * in which case it's always selected, a rule definition with a component,
+ * in which case the variant is selected if the rule is true, or a rule group,
+ * in which chase the variant is selected if the rule group passes.
+ * @group Form API
+ */
 export type VariantDefinition<ValueType = any> =
   | [string, Validator, FormComponent<ValueType>]
   | [RuleGroup, FormComponent<ValueType>]
   | FormComponent<ValueType>;
 
-interface FormComponentVariant {
+/**
+ * Representation of a form variant.
+ * @group Form API
+ */
+export interface FormComponentVariant {
   rule?: AnyRule;
   component: FormComponentWithName;
 }
 
+/**
+ * A list of form components.
+ */
 export type FormComponentsList = Array<
   FormComponentWithName | FormComponentVariant[]
 >;
@@ -156,19 +171,7 @@ export class Form<DataType = Record<string, any>> implements FormDefinition {
     settings?: Partial<FormDefinition>
   ) {
     this.theme = theme;
-    this.components = [];
-    for (const name in components) {
-      const component = components[name];
-      if (component) {
-        this.components.push(
-          Array.isArray(component)
-            ? component.map((definition) =>
-                variantFromDefinition(definition, name)
-              )
-            : { name, ...component }
-        );
-      }
-    }
+    this.components = componentsListFromObject<DataType>(components);
     this.title = settings?.title;
     this.description = settings?.description;
     this.labels = settings?.labels;
@@ -181,25 +184,30 @@ export class Form<DataType = Record<string, any>> implements FormDefinition {
    * form.add(component1).add(component2);
    * ```
    */
-  add(component: FormComponentWithName | VariantDefinition) {
-    if (Array.isArray(component)) {
-      const componentName = Array.isArray(component)
-        ? component[0].name
-        : component.name;
-      if (
-        this.components.findIndex((candidate) => {
-          const name = Array.isArray(candidate)
-            ? candidate[0].name
-            : candidate.name;
-          name === componentName;
-        }) !== -1
-      ) {
-        throw new Error("A component with the same name already exists.");
-      }
-      this.components.push({ ...component, name: component.name });
-    } else {
+  add(component: FormComponentWithName | [string, VariantDefinition[]]) {
+    const componentName = Array.isArray(component)
+      ? component[0]
+      : component.name;
+    if (!componentName) {
       throw new Error("The component must have a name");
     }
+    if (
+      this.components.findIndex((candidate) => {
+        const name = Array.isArray(candidate)
+          ? candidate[0].component.name
+          : candidate.name;
+        name === componentName;
+      }) !== -1
+    ) {
+      throw new Error("A component with the same name already exists.");
+    }
+    this.components.push(
+      Array.isArray(component)
+        ? component[1].map((definition) =>
+            variantFromDefinition(definition, component[0])
+          )
+        : component
+    );
     return this;
   }
 
@@ -496,7 +504,26 @@ export const FormDataContext = createContext({} as Record<string, unknown>);
  */
 export const FormErrorsContext = createContext([] as ValidationError[]);
 
-function variantFromDefinition(
+export function componentsListFromObject<Type>(
+  components: Components<Type>
+): FormComponentsList {
+  const list = [];
+  for (const name in components) {
+    const component = components[name];
+    if (component) {
+      list.push(
+        Array.isArray(component)
+          ? component.map((definition) =>
+              variantFromDefinition(definition, name)
+            )
+          : { name, ...component }
+      );
+    }
+  }
+  return list;
+}
+
+export function variantFromDefinition(
   definition: VariantDefinition,
   name: string
 ): FormComponentVariant {
@@ -588,10 +615,10 @@ export async function validateForm(form: Form, data: unknown) {
 export async function validateFormPart(
   form: Form,
   part: number,
-  data: unknown,
+  data: Record<string, unknown>,
   event: React.FormEvent<HTMLFormElement>
 ) {
-  const parts = formParts(form);
+  const parts = formParts(form, data);
   if (part > parts.length - 1) {
     throw new Error("Invalid part provided");
   }
