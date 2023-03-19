@@ -2,7 +2,7 @@ import React from "react";
 import { FormComponentWithName } from "../component";
 import { getNextPart, validateFormPart } from "../form";
 import { ValidationError } from "../validator";
-import { FormViewProps } from "../formview";
+import { formDataDefinition, FormViewProps } from "../formview";
 /**
  * This form wrapper component does a lot of heavy lifting with
  * managing the form and it's state. It's mostly for internal use,
@@ -20,6 +20,7 @@ export default function FormWrapper(
   }
 ): JSX.Element {
   const formRef = React.useRef<HTMLFormElement>(null);
+
   // This ref keeps track on if we completed the submission process.
   // Normally browsers don't seem to execute the submit handlers
   // when calling submit() directly on the form, but jsDOM does it
@@ -29,6 +30,7 @@ export default function FormWrapper(
   let formProps: React.FormHTMLAttributes<HTMLFormElement> = {
     className: "form",
   };
+  const definition = JSON.stringify(formDataDefinition(props.form, data));
   for (const component of props.parts[props.part]) {
     if (component.type.formProps) {
       formProps = component.type.formProps(formProps, component);
@@ -95,6 +97,7 @@ export default function FormWrapper(
         action={props.action}
         onSubmit={onSubmit}
       >
+        <input type="hidden" name="_definition" value={definition} />
         <input
           type="hidden"
           name="_renderer"

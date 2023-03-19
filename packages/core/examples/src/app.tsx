@@ -26,6 +26,8 @@ import {
   detailsWidget,
   submit,
   fileSize,
+  fromFormData,
+  equals,
 } from "../../src/index";
 import "./index.css";
 import "../../src/themes/basic/basic.scss";
@@ -204,14 +206,54 @@ export default function App() {
   multistep.add(pageBreak({ name: "second" }));
   multistep.add(textField({ name: "third_page", label: "Last page" }));
 
-  const testForm = createForm({
-    text: textField({
-      label: "Wat wat",
-      defaultValue: "test",
+  const fields = {
+    string: textField({
+      label: "String",
     }),
-  }).onSubmit((e, data) => {
+    number: [
+      [
+        "string",
+        equals("asdf"),
+        integerField({
+          label: "Number",
+          required: true,
+        }),
+      ],
+      [
+        "string",
+        equals("asdf2"),
+        textField({
+          label: "Not a number",
+        }),
+      ],
+    ],
+    bool: booleanField({
+      label: "Boolean",
+    }),
+    multipleString: textField({
+      label: "Multiple string",
+      multiple: true,
+    }),
+    multipleNumber: integerField({
+      label: "Multiple number",
+      multiple: true,
+    }),
+  };
+
+  const testForm = createForm({
+    ...fields,
+    /*group: group(
+      { label: "Group" },
+      {
+        //...fields,
+        subgroup: group({ label: "Sub group" }, fields),
+      }
+    ),
+    groups: group({ label: "Groups", multiple: true }, fields),*/
+  }).onSubmit((e) => {
+    const data = new FormData(e.target);
     e.preventDefault();
-    console.log(data);
+    const result = fromFormData(testForm, data);
   });
   return (
     <React.StrictMode>
@@ -243,7 +285,7 @@ export default function App() {
         <StatefulFormView form={multistep} />
 
         <h2 className="title">Form for testing</h2>
-        <StatefulFormView form={testForm} />
+        <StatefulFormView form={testForm} data={{ multipleNumber: [0, 1] }} />
         <FormComponentView
           name="component"
           component={component}

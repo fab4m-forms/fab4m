@@ -1,4 +1,6 @@
+import { ComponentDataType, FormComponentWithName } from "./component";
 import { Form } from "./form";
+import { filterComponents, FilteredComponent } from "./rule";
 import { ValidationError } from "./validator";
 /**
  * Properties for all form views.
@@ -50,4 +52,33 @@ export interface FormViewProps {
    * Add a prefix to all form ids.
    */
   idPrefix?: string;
+}
+
+export interface ComponentDataDefinition {
+  name: string;
+  type: ComponentDataType;
+  multiple?: boolean;
+  components?: ComponentDataDefinition[];
+}
+
+export function formDataDefinition(form: Form, data: Record<string, unknown>) {
+  return formComponentsDefinition(filterComponents(form.components, data));
+}
+
+function formComponentsDefinition(components: FormComponentWithName[]) {
+  const definition: ComponentDataDefinition[] = [];
+  for (const component of components) {
+    definition.push({
+      name: component.name,
+      type: component.type.dataType ?? "string",
+      multiple: component.multiple,
+      components: component.components
+        ? formComponentsDefinition(
+            // The components have already been converted by filterComponents.
+            component.components as FormComponentWithName[]
+          )
+        : undefined,
+    });
+  }
+  return definition;
 }
