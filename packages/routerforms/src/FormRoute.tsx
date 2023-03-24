@@ -36,7 +36,8 @@ export default function FormRoute(props: FormRouteProps): JSX.Element | null {
   if (!part) {
     part = props.part ?? 0;
   }
-  const parts = formParts(props.form);
+  const data = props.data as Record<string, unknown>;
+  const parts = formParts(props.form, data);
   // Ensure that the part we are trying to look at exists.
   React.useEffect(() => {
     if (part && (part > parts.length - 1 || part > completedParts)) {
@@ -54,7 +55,6 @@ export default function FormRoute(props: FormRouteProps): JSX.Element | null {
   if (part > parts.length - 1) {
     return null;
   }
-  const data = props.data as Record<string, unknown>;
   const prevPart = getPrevPart(parts, part, data);
   const renderedParts = parts
     .slice(0, part + 1)
