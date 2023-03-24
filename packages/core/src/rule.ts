@@ -157,10 +157,10 @@ export function filterData(
   if (validNames.length === components.length) {
     return data;
   }
-  const filteredData: Record<string, unknown> = { ...data };
-  for (const component of components) {
-    if (component.name && validNames.indexOf(component.name) === -1) {
-      delete filteredData[component.name];
+  const filteredData: Record<string, unknown> = {};
+  for (const name of validNames) {
+    if (typeof data[name] !== "undefined") {
+      filteredData[name] = data[name];
     }
   }
   return filteredData;

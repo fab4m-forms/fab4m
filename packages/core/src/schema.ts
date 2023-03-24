@@ -116,6 +116,9 @@ function defaultSchema(component: FormComponent): SchemaProperty | undefined {
     case "object":
       if (component.components) {
         for (const child of component.components) {
+          if (Array.isArray(child)) {
+            continue;
+          }
           const childSchema = generateComponentSchema(child);
           if (childSchema && child.name) {
             properties[child.name] = childSchema;
@@ -204,6 +207,9 @@ export function generateSchema(form: FormDefinition): Schema {
   const rules: Map<string, Array<Partial<Schema>>> = new Map();
   const groupRules = [];
   for (const component of form.components) {
+    if (Array.isArray(component)) {
+      continue;
+    }
     const componentSchema = generateComponentSchema(component);
     if (!componentSchema || !component.name) {
       continue;
@@ -313,6 +319,9 @@ export function generatePartSchemas(form: FormDefinition): Schema[] {
   let part = 0;
   const partSchemas = [{ ...schemaBase(form) }];
   for (const component of form.components) {
+    if (Array.isArray(component)) {
+      continue;
+    }
     const componentSchema = generateComponentSchema(component);
     if (componentSchema && component.name) {
       partSchemas[part].properties[component.name] = componentSchema;
@@ -337,6 +346,9 @@ export function generatePartSchemas(form: FormDefinition): Schema[] {
 export function schemaMessages(form: FormDefinition): Record<string, string> {
   const messages: Record<string, string> = {};
   for (const component of form.components) {
+    if (Array.isArray(component)) {
+      continue;
+    }
     if (component.type.schemaErrorMessages) {
       const componentMessages = component.type.schemaErrorMessages(component);
       for (const key in componentMessages) {

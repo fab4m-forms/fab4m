@@ -22,11 +22,8 @@ export default function GroupChildren(
       [name]: newValue,
     });
   };
-  const children = filterComponents(
-    props.component.components,
-    value ?? {}
-  ).map((component, index) => {
-    if (!component.name) {
+  const children = props.component.components.map((component, index) => {
+    if (Array.isArray(component) || !component.name) {
       return null;
     }
     const renderedComponent = (

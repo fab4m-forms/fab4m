@@ -1,6 +1,6 @@
 import { ComponentDataType, FormComponentWithName } from "./component";
 import { Form } from "./form";
-import { filterComponents, FilteredComponent } from "./rule";
+import { filterComponents } from "./rule";
 import { ValidationError } from "./validator";
 /**
  * Properties for all form views.

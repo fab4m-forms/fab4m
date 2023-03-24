@@ -184,7 +184,7 @@ export class Form<DataType = Record<string, any>> implements FormDefinition {
    * form.add(component1).add(component2);
    * ```
    */
-  add(component: FormComponentWithName | [string, VariantDefinition[]]) {
+  add(component: FormComponent | [string, VariantDefinition[]]) {
     const componentName = Array.isArray(component)
       ? component[0]
       : component.name;
@@ -196,7 +196,7 @@ export class Form<DataType = Record<string, any>> implements FormDefinition {
         const name = Array.isArray(candidate)
           ? candidate[0].component.name
           : candidate.name;
-        name === componentName;
+        return name === componentName;
       }) !== -1
     ) {
       throw new Error("A component with the same name already exists.");
@@ -206,7 +206,7 @@ export class Form<DataType = Record<string, any>> implements FormDefinition {
         ? component[1].map((definition) =>
             variantFromDefinition(definition, component[0])
           )
-        : component
+        : { name: componentName, ...component }
     );
     return this;
   }
