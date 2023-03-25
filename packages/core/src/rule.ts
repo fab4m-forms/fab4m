@@ -60,13 +60,15 @@ export function ruleGroup(type: RuleGroupType, rules: AnyRule[]): RuleGroup {
  * @param components a list of components to potentially hide.
  * @param data the current data to filter against.
  * @param filterBreaks stop evaluating rules if a page break is encountered.
+ * @param parentData the data of the parent component, if any.
  * @return A list of components without the components that was filtered by the rules.
  * @group Rule API
  */
 export function filterComponents(
   components: FormComponentWithName[],
   data: Record<string, unknown>,
-  filterBreaks = false
+  filterBreaks = false,
+  parentData?: Record<string, unknown>
 ): FormComponentWithName[] {
   const filteredComponents: FormComponentWithName[] = [];
   for (const component of components) {
@@ -74,7 +76,12 @@ export function filterComponents(
     for (const rule of component.rules) {
       if (Array.isArray(rule)) {
         const [ruleComponent, validator] = rule;
-        if (!validator.type.valid(data[ruleComponent], validator.settings)) {
+        if (
+          !validator.type.valid(
+            getRuleValue(ruleComponent, data, parentData),
+            validator.settings
+          )
+        ) {
           valid = false;
           break;
         }
@@ -89,14 +96,7 @@ export function filterComponents(
     if (filterBreaks && component.type.splitsForm) {
       break;
     }
-    if (component.components && component.components.length > 0) {
-      filteredComponents.push({
-        ...component,
-        components: filterComponents(component.components, data),
-      });
-    } else {
-      filteredComponents.push(component);
-    }
+    filteredComponents.push(component);
   }
   return filteredComponents;
 }
@@ -105,7 +105,7 @@ export function filterComponents(
  * Filter data that shouldn't be in the data structure, because there
  * are rules that aren't followed.
  * Data belonging to filtered components is removed from the data.
- * @param components a list of compoents to filter against.
+ * @param components a list of components to filter against.
  * @param data The data to filter
  * @return A new set of data without data belonging to non-visible components.
  * @group Rule API
@@ -126,4 +126,31 @@ export function filterData(
     }
   }
   return filteredData;
+}
+
+export function getRuleValue(
+  name: string,
+  data: Record<string, unknown> | Array<Record<string, unknown>>,
+  parentData?: Record<string, unknown>
+): unknown {
+  const parts = name.split(".");
+  for (const part of parts) {
+    if (Array.isArray(data)) {
+      if (part === "$" && parentData) {
+        data = parentData;
+      } else {
+        const partIndex = parseInt(part, 10);
+        if (typeof data[partIndex] === "undefined") {
+          return undefined;
+        }
+        data = data[partIndex];
+      }
+    } else {
+      if (typeof data[part] === "undefined") {
+        return undefined;
+      }
+      data = data[part] as Record<string, unknown>;
+    }
+  }
+  return data;
 }
