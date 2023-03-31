@@ -120,7 +120,7 @@ function defaultSchema(component: FormComponent): SchemaProperty | undefined {
           const childSchema = generateComponentSchema(child);
           if (childSchema && child.name) {
             properties[child.name] = childSchema;
-            if (child.required) {
+            if (child.required && child.rules && child.rules.length === 0) {
               required.push(child.name);
             }
           }
@@ -192,6 +192,7 @@ function schemaBase(form: FormDefinition): Schema {
   };
 }
 
+type FormComponentWithParents = FormComponentWithName & { parents?: string[] };
 /**
  * Generate a JSON schema for the provided form.
  * @param form The form to generate the schema for.
@@ -201,7 +202,7 @@ function schemaBase(form: FormDefinition): Schema {
 export function generateSchema(form: FormDefinition): Schema {
   const schema: Schema = schemaBase(form);
   const componentSchemas: Record<string, SchemaProperty> = {};
-  const hasRules: FormComponentWithName[] = [];
+  const hasRules: Array<FormComponentWithParents> = [];
   const rules: Map<string, Array<Partial<Schema>>> = new Map();
   const groupRules = [];
   for (const component of form.components) {
@@ -225,6 +226,7 @@ export function generateSchema(form: FormDefinition): Schema {
         hasRules.push(component);
       }
     }
+    addChildRules(component, hasRules, [component.name]);
   }
   for (const component of hasRules) {
     for (const rule of component.rules) {
@@ -256,6 +258,23 @@ export function generateSchema(form: FormDefinition): Schema {
     }
   }
   return schema;
+}
+
+function addChildRules(
+  component: FormComponentWithParents,
+  hasRules: FormComponentWithParents[],
+  parents: string[]
+) {
+  if (!component.components) {
+    return;
+  }
+  for (const child of component.components as FormComponentWithParents[]) {
+    if (child.rules.length > 0) {
+      child.parents = parents;
+      hasRules.push(child);
+    }
+    addChildRules(child, hasRules, [...parents, component.name]);
+  }
 }
 
 function generateComponentRuleSchema(
@@ -297,31 +316,26 @@ function generateComponentRuleSchema(
 function buildIfStatement(
   path: string[],
   validator: Validator,
-  component: FormComponentWithName,
+  component: FormComponentWithParents,
   componentSchemas: Record<string, SchemaProperty>
 ): any {
   const ifStatement = {
     if: {
       properties: {},
     },
-    then: {
-      required: component.required ? [component.name] : [],
-    },
+    then: {},
   };
   let ifCursor = ifStatement.if.properties;
+  let thenCursor = ifStatement.then;
   let schemaCursor = componentSchemas;
-  while (path.length > 1) {
-    const nextNode = path.shift();
-    if (!nextNode) {
-      return null;
+  if (component.parents) {
+    const parents = component.parents.slice(path.length - 2);
+    for (const parent of component.parents) {
+      thenCursor.properties = { [parent]: { type: "object" } };
+      thenCursor = thenCursor.properties[parent];
     }
-    if (!schemaCursor[nextNode]) {
-      return null;
-    }
-    ifCursor[nextNode] = { type: "object", properties: {} };
-    schemaCursor = schemaCursor[nextNode].properties;
-    ifCursor = ifCursor[nextNode].properties;
   }
+  thenCursor.required = [component.name];
   ifCursor[path[0]] = validator.type.schema(
     validator.settings,
     schemaCursor[path[0]]

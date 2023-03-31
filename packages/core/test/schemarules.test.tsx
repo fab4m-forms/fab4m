@@ -68,7 +68,7 @@ describe("Schema Rule engine", () => {
         otherField: textField({
           label: "Other field",
           required: true,
-          rules: [["group.field", exists()]],
+          rules: [["group.nestedField", exists()]],
         }),
         dependsOnOutside: textField({
           label: "Depends on outside",
