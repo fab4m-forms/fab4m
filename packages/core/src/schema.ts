@@ -1,6 +1,7 @@
 import { FormComponent, FormComponentWithName } from "./component";
 import { FormDefinition } from "./form";
 import { AnyRule } from "./rule";
+import { Validator } from "./validator";
 interface ErrorObject {
   schemaPath: string;
   message?: string;
@@ -263,22 +264,12 @@ function generateComponentRuleSchema(
   componentSchemas: Record<string, SchemaProperty>
 ): Partial<Schema> | null {
   if (Array.isArray(rule)) {
-    if (!componentSchemas[rule[0]] || !componentSchemas[component.name]) {
-      return null;
-    }
-    return {
-      if: {
-        properties: {
-          [rule[0]]: rule[1].type.schema(
-            rule[1].settings,
-            componentSchemas[rule[0]]
-          ),
-        },
-      },
-      then: {
-        required: component.required ? [component.name] : [],
-      },
-    };
+    return buildIfStatement(
+      rule[0].split("."),
+      rule[1],
+      component,
+      componentSchemas
+    );
   }
   const groupRules: Array<Partial<Schema>> = [];
   for (const childRule of rule.rules) {
@@ -301,6 +292,41 @@ function generateComponentRuleSchema(
   } else {
     return { [rule.type.schemaCompoundKeyword]: groupRules };
   }
+}
+
+function buildIfStatement(
+  path: string[],
+  validator: Validator,
+  component: FormComponentWithName,
+  componentSchemas: Record<string, SchemaProperty>
+): any {
+  const ifStatement = {
+    if: {
+      properties: {},
+    },
+    then: {
+      required: component.required ? [component.name] : [],
+    },
+  };
+  let ifCursor = ifStatement.if.properties;
+  let schemaCursor = componentSchemas;
+  while (path.length > 1) {
+    const nextNode = path.shift();
+    if (!nextNode) {
+      return null;
+    }
+    if (!schemaCursor[nextNode]) {
+      return null;
+    }
+    ifCursor[nextNode] = { type: "object", properties: {} };
+    schemaCursor = schemaCursor[nextNode].properties;
+    ifCursor = ifCursor[nextNode].properties;
+  }
+  ifCursor[path[0]] = validator.type.schema(
+    validator.settings,
+    schemaCursor[path[0]]
+  );
+  return ifStatement;
 }
 
 /**
