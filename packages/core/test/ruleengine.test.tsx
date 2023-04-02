@@ -6,7 +6,16 @@ import {
   RenderResult,
   waitFor,
 } from "@testing-library/react";
-import { textField, createForm, equals, FormView, and, or } from "../src";
+import {
+  textField,
+  createForm,
+  equals,
+  FormView,
+  and,
+  or,
+  group,
+  StatefulFormView,
+} from "../src";
 
 describe("Rule engine", () => {
   const form = createForm();
@@ -128,5 +137,85 @@ describe("Rule engine", () => {
     screen.unmount();
     screen = render(<FormView data={data} form={form} />);
     expect(screen.queryByText("Complex")).not.toBeNull();
+  });
+
+  function nestedForm(multiple = false) {
+    return createForm({
+      group: group(
+        { label: "Group", multiple },
+        {
+          inGroup: textField({ label: "In group" }),
+          dependsOnInGroup: textField({
+            label: "Dependent in group",
+            rules: [
+              [
+                multiple ? "group.$.inGroup" : "group.inGroup",
+                equals("dependent inside group"),
+              ],
+            ],
+          }),
+        }
+      ),
+      dependsOnInGroup: textField({
+        label: "Depends on in group",
+        rules: [
+          [multiple ? "group.1.inGroup" : "group.inGroup", equals("In group")],
+        ],
+      }),
+    });
+  }
+
+  test("Nested rules", async () => {
+    const form = nestedForm();
+    const { findByLabelText, queryByLabelText } = render(
+      <StatefulFormView form={form} />
+    );
+    expect(queryByLabelText("Depends on in group")).toBeNull();
+    expect(queryByLabelText("Dependent in group")).toBeNull();
+    fireEvent.input(await findByLabelText("In group"), {
+      target: { value: "In group" },
+      value: "In group",
+    });
+    await waitFor(async () => {
+      expect(await findByLabelText("Depends on in group")).toBeVisible();
+      expect(queryByLabelText("Dependent in group")).toBeNull();
+    });
+    fireEvent.input(await findByLabelText("In group"), {
+      target: { value: "dependent inside group" },
+      value: "dependent inside group",
+    });
+    await waitFor(async () => {
+      expect(await findByLabelText("Dependent in group")).toBeVisible();
+    });
+  });
+
+  test("Nested array rules", async () => {
+    const form = nestedForm(true);
+    const { findByLabelText } = render(
+      <FormView
+        form={form}
+        data={{
+          group: [{ inGroup: "test" }, { inGroup: "In group" }],
+        }}
+      />
+    );
+    await waitFor(async () => {
+      expect(await findByLabelText("Depends on in group")).toBeVisible();
+    });
+  });
+
+  test("Rule inside of multiple group", async () => {
+    const form = nestedForm(true);
+    const { findByLabelText } = render(
+      <FormView
+        form={form}
+        data={{
+          group: [{ inGroup: "test" }, { inGroup: "dependent inside group" }],
+        }}
+      />
+    );
+    await waitFor(async () => {
+      expect(await findByLabelText("Dependent in group")).toBeVisible();
+    });
   });
 });

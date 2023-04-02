@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, existsSync } from "fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
 
 const data = readFileSync("../packages/core/docs.json");
 const docs = JSON.parse(data);
@@ -128,8 +128,10 @@ function build() {
     }
   for (const name in plugins) {
       for (const [pluginName, plugin] of plugins[name]) {
-      if (plugin.template) {
-        const components =
+        if (plugin.template) {
+          if (!existsSync(`docs/${name}`)) {
+            mkdirSync(`docs/${name}`);
+          }
           writeFileSync(`docs/${name}/${pluginName}.mdx`, plugin.template(plugin, plugins));
       }
     }

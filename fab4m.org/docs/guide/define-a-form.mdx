@@ -10,6 +10,9 @@ import GroupedComponents from "@site/src/components/Guide/defining/GroupedCompon
 import GroupedComponentsSource from "!!raw-loader!@site/src/components/Guide/defining/GroupedComponents";
 import PageBreaks from "@site/src/components/Guide/defining/PageBreaks";
 import PageBreaksSource from "!!raw-loader!@site/src/components/Guide/defining/PageBreaks";
+import Labels from "@site/src/components/Guide/defining/Labels";
+import LabelsSource from "!!raw-loader!@site/src/components/Guide/defining/Labels";
+
 
 # Creating forms
 
@@ -46,3 +49,19 @@ Large forms can be split up into multiple parts. This is done using the `pageBre
 component. All data will be validated before each page break.
 
 <Example source={PageBreaksSource} example={<PageBreaks />} />
+
+## Changing labels (submit button text etc.)
+
+Each form comes with some default labels that can be overridden, for example the form submit text. This is done by changing the labels setting when creating the form.
+
+<Example source={LabelsSource} example={<Labels />} />
+
+These are the labels you can configure:
+
+Name | Description | Default value |
+------|-------------|---------------|
+submit | Used as the text for the submit button. | "Save"
+next | Used as the text on the next button on multipage forms. | "Next"
+previous | Used as the text on the previous button on multipage forms. | "Previous"
+complete | Used as the complete text on the complete button on multipage forms. | "Coplete"
+required | Used for the "Required" label on required form components. | "Required"
