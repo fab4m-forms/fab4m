@@ -9,6 +9,8 @@ import {
   getPrevPart,
   ValidationError,
   FormViewProps,
+  FormDataContext,
+  FormErrorsContext,
 } from "@fab4m/fab4m";
 
 export interface FormRouteProps extends FormViewProps {
@@ -72,25 +74,29 @@ export default function FormRoute(props: FormRouteProps): JSX.Element | null {
     ));
 
   return (
-    <FormWrapper
-      {...props}
-      parts={parts}
-      part={part}
-      setPart={setPart}
-      setFormErrors={setFormErrors}
-    >
-      {renderedParts}
-      <FormPager
-        theme={props.form.theme}
-        part={part}
-        form={props.form}
-        hasNextPart={getNextPart(parts, part, data) !== -1}
-        hasPrevPart={prevPart !== -1}
-        goBack={() => {}}
-        back={() => <Link to={`${basePath}/${prevPart}`}>Previous</Link>}
-        noParts={parts.length}
-      />
-    </FormWrapper>
+    <FormDataContext.Provider value={data}>
+      <FormErrorsContext.Provider value={formErrors}>
+        <FormWrapper
+          {...props}
+          parts={parts}
+          part={part}
+          setPart={setPart}
+          setFormErrors={setFormErrors}
+        >
+          {renderedParts}
+          <FormPager
+            theme={props.form.theme}
+            part={part}
+            form={props.form}
+            hasNextPart={getNextPart(parts, part, data) !== -1}
+            hasPrevPart={prevPart !== -1}
+            goBack={() => {}}
+            back={() => <Link to={`${basePath}/${prevPart}`}>Previous</Link>}
+            noParts={parts.length}
+          />
+        </FormWrapper>
+      </FormErrorsContext.Provider>
+    </FormDataContext.Provider>
   );
 }
 

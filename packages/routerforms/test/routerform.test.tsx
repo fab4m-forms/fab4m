@@ -1,8 +1,13 @@
 import "@testing-library/jest-dom";
 import "cross-fetch/polyfill";
-import { createForm, textField, pageBreak } from "@fab4m/fab4m";
+import { createForm, textField, pageBreak, content } from "@fab4m/fab4m";
 import { act, fireEvent, render, waitFor } from "@testing-library/react";
-import { FormRouteProps, FormRoute, StatefulFormRoute } from "../src";
+import {
+  FormRouteProps,
+  FormRoute,
+  StatefulFormRoute,
+  RouterFormView,
+} from "../src";
 import { vi } from "vitest";
 import * as React from "react";
 import {
@@ -132,5 +137,22 @@ describe("Routed form", () => {
       expect(data.get("first")).toBe("A text");
       expect(data.get("second")).toBe("Another text");
     });
+  });
+  it("Route form with form context", async () => {
+    const formWithRouteContext = createForm({
+      text: textField({
+        label: "text",
+      }),
+      content: content<{ text: string }>({}, (data) => (
+        <div data-testid="content">{data.text}</div>
+      )),
+    });
+    const { findByTestId } = render(
+      <RouterFormView
+        form={formWithRouteContext}
+        data={{ text: "This is a text" }}
+      />
+    );
+    expect(await findByTestId("content")).toContainHTML("This is a text");
   });
 });
