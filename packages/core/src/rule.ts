@@ -88,7 +88,7 @@ export function filterComponents(
         if (
           Array.isArray(variant.rule) &&
           variant.rule[1].type.valid(
-            data[variant.rule[0]],
+            getRuleValue(variant.rule[0], data, parentData),
             variant.rule[1].settings
           )
         ) {
