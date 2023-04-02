@@ -31,8 +31,8 @@
     "scripts": {
     "test": "vitest",
         "test:unit": "vitest --run",
-    "build-browser": "esbuild --external:react --external:react-dom --external:downshift --external:fab4m  --bundle src/index.tsx --format=esm --outfile=dist/index.es.js",
-    "build-node": "esbuild --platform=node --external:react --external:react-dom --external:downshift --external:fab4m --minify --bundle src/index.tsx --outfile=dist/index.cjs.js",
+    "build-browser": "esbuild --external:react --external:react-dom --external:downshift --external:@fab4m/fab4m  --bundle src/index.tsx --format=esm --outfile=dist/index.es.js",
+    "build-node": "esbuild --platform=node --external:react --external:react-dom --external:downshift --external:@fab4m/fab4m --minify --bundle src/index.tsx --outfile=dist/index.cjs.js",
     "build": "npm run build-browser && npm run build-node && tsc -d"
     },
   "peerDependencies": {
