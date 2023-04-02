@@ -77,7 +77,7 @@ describe("Schema Rule engine", () => {
         }),
       }
     ),
-    /*multipleGroup: group(
+    multipleGroup: group(
       { label: "Multiple group", multiple: true },
       {
         field: textField({ label: "Field" }),
@@ -87,12 +87,7 @@ describe("Schema Rule engine", () => {
           rules: [["multipleGroup.$.field", exists()]],
         }),
       }
-    ),*/
-    /*dependsOn: textField({
-      label: "Depends on",
-      required: true,
-      rules: [["group.nestedField", exists()]],
-    }),*/
+    ),
   });
 
   test("Required conditional field", () => {
@@ -175,6 +170,11 @@ describe("Schema Rule engine", () => {
         },
       }).valid
     ).toBe(false);
+    expect(
+      validate(nestedForm, {
+        group: { nestedField: "test", otherField: "test" },
+      }).valid
+    ).toBe(true);
   });
   test("Nested field, depends on outside", () => {
     expect(
@@ -187,6 +187,18 @@ describe("Schema Rule engine", () => {
       validate(nestedForm, {
         outside: "test",
         group: { dependsOnOutside: "test" },
+      }).valid
+    ).toBe(true);
+  });
+  test("Rules in arrays", () => {
+    expect(
+      validate(nestedForm, {
+        multipleGroup: [{ field: "test" }],
+      }).valid
+    ).toBe(false);
+    expect(
+      validate(nestedForm, {
+        multipleGroup: [{ field: "test", dependent: "test" }],
       }).valid
     ).toBe(true);
   });

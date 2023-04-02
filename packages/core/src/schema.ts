@@ -7,6 +7,24 @@ interface ErrorObject {
   message?: string;
   dataPath: string;
 }
+
+interface SchemaObject {
+  type: "object";
+  description?: string;
+  properties: Record<string, SchemaProperty>;
+  title?: string;
+  required?: string[];
+  dependencies?: Record<string, Partial<Schema>>;
+}
+
+interface SchemaArray {
+  type: "array";
+  description?: string;
+  title?: string;
+  items: SchemaProperty | SchemaProperty[];
+  minItems?: number;
+  maxItems?: number;
+}
 /**
  * Definition of a JSON schema property.
  * @group JSON Schema
@@ -39,21 +57,8 @@ export type SchemaProperty =
       title?: string;
       description?: string;
     }
-  | {
-      type: "object";
-      description?: string;
-      properties: Record<string, SchemaProperty>;
-      title?: string;
-      required?: string[];
-    }
-  | {
-      type: "array";
-      description?: string;
-      title?: string;
-      items: SchemaProperty | SchemaProperty[];
-      minItems?: number;
-      maxItems?: number;
-    };
+  | SchemaObject
+  | SchemaArray;
 
 interface PartialProperties {
   properties: Record<string, Partial<SchemaProperty>>;
@@ -247,9 +252,30 @@ export function generateSchema(form: FormDefinition): Schema {
       }
     }
   }
-  schema.dependencies = {};
   for (const [dependency, dependencyRules] of rules.entries()) {
-    schema.dependencies[dependency] = { allOf: dependencyRules };
+    const parts = dependency.split(".");
+    let cursor: SchemaObject | SchemaArray = schema as SchemaObject;
+    while (parts.length > 1) {
+      const part = parts.shift();
+      if (part) {
+        if (
+          part === "$" &&
+          cursor.type === "array" &&
+          !Array.isArray(cursor.items) &&
+          (cursor.items.type === "object" || cursor.items.type === "array")
+        ) {
+          cursor = cursor.items;
+        } else if (cursor.type === "object") {
+          cursor = cursor.properties[part] as SchemaObject | SchemaArray;
+        }
+      }
+    }
+    if (cursor.type === "object") {
+      cursor.dependencies ??= {};
+      cursor.dependencies[parts[0]] = {
+        allOf: dependencyRules,
+      };
+    }
   }
   if (groupRules.length > 0) {
     schema.allOf = [];
@@ -319,27 +345,51 @@ function buildIfStatement(
   component: FormComponentWithParents,
   componentSchemas: Record<string, SchemaProperty>
 ): any {
-  const ifStatement = {
+  const ifStatement: Partial<Schema> = {
     if: {
       properties: {},
     },
     then: {},
   };
-  let ifCursor = ifStatement.if.properties;
-  let thenCursor = ifStatement.then;
-  let schemaCursor = componentSchemas;
+  let thenCursor: Partial<SchemaProperty> =
+    ifStatement.then as Partial<SchemaProperty>;
+  let schemaCursor: SchemaProperty = componentSchemas[path[0]];
   if (component.parents) {
-    const parents = component.parents.slice(path.length - 2);
-    for (const parent of component.parents) {
-      thenCursor.properties = { [parent]: { type: "object" } };
-      thenCursor = thenCursor.properties[parent];
+    for (let i = 0; i < component.parents.length; i++) {
+      // Exclude parts of our path that is part of the
+      if (path[i] === component.parents[i]) {
+        continue;
+      }
+      const parent = component.parents[i];
+      if (thenCursor.type === "object" || !thenCursor.type) {
+        (thenCursor as SchemaObject).properties = {
+          [parent]: { type: "object", properties: {} },
+        };
+        if ((thenCursor as SchemaObject).properties[parent]) {
+          thenCursor = (thenCursor as SchemaObject).properties[parent];
+        }
+      }
     }
   }
-  thenCursor.required = [component.name];
-  ifCursor[path[0]] = validator.type.schema(
-    validator.settings,
-    schemaCursor[path[0]]
-  );
+  for (const node of path.slice(1)) {
+    if (
+      node === "$" &&
+      schemaCursor.type === "array" &&
+      schemaCursor.items &&
+      !Array.isArray(schemaCursor.items)
+    ) {
+      schemaCursor = schemaCursor.items;
+    } else if (schemaCursor.type === "object") {
+      schemaCursor = schemaCursor.properties[node];
+    }
+  }
+  (thenCursor as SchemaObject).required = [component.name];
+  if (ifStatement.if) {
+    ifStatement.if.properties[path[path.length - 1]] = validator.type.schema(
+      validator.settings,
+      schemaCursor
+    );
+  }
   return ifStatement;
 }
 
