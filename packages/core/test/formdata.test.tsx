@@ -10,6 +10,7 @@ import {
   group,
   FormView,
   fromFormData,
+  equals,
 } from "../src";
 describe("Form data unpacking", () => {
   const fields = {
@@ -30,6 +31,22 @@ describe("Form data unpacking", () => {
       label: "Multiple number",
       multiple: true,
     }),
+    conditional: [
+      [
+        "string",
+        equals("test"),
+        textField({
+          label: "Variant 1",
+        }),
+      ],
+      [
+        "number",
+        equals(1),
+        integerField({
+          label: "Variant 2",
+        }),
+      ],
+    ],
   };
   const form = createForm({
     ...fields,
@@ -54,14 +71,23 @@ describe("Form data unpacking", () => {
     group: { ...fieldData, subgroup: { ...fieldData } },
     groups: [{ ...fieldData }, { ...fieldData }],
   };
-  const { container } = render(<FormView id="form" form={form} data={data} />);
-  const getFormData = () => {
+
+  const getFormData = (renderData: Record<string, unknown>) => {
+    const { container } = render(
+      <FormView id="form" form={form} data={renderData} />
+    );
     const element = getFormElement(container);
     return new FormData(element);
   };
   test("Data conversion", async () => {
-    const formData = getFormData();
+    const formData = getFormData(data);
     const result = fromFormData(form, formData);
     expect(data).toEqual(result);
+  });
+  test("Variants data conversion", async () => {
+    const variantData = { ...data, number: 1, conditional: 2 };
+    const formData = getFormData(variantData);
+    const result = fromFormData(form, formData);
+    expect(variantData).toEqual(result);
   });
 });

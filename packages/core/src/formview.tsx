@@ -62,10 +62,16 @@ export interface ComponentDataDefinition {
 }
 
 export function formDataDefinition(form: Form, data: Record<string, unknown>) {
-  return formComponentsDefinition(filterComponents(form.components, data));
+  return formComponentsDefinition(
+    filterComponents(form.components, data),
+    data
+  );
 }
 
-function formComponentsDefinition(components: FormComponentWithName[]) {
+function formComponentsDefinition(
+  components: FormComponentWithName[],
+  data: Record<string, unknown>
+) {
   const definition: ComponentDataDefinition[] = [];
   for (const component of components) {
     definition.push({
@@ -74,8 +80,8 @@ function formComponentsDefinition(components: FormComponentWithName[]) {
       multiple: component.multiple,
       components: component.components
         ? formComponentsDefinition(
-            // The components have already been converted by filterComponents.
-            component.components as FormComponentWithName[]
+            filterComponents(component.components, data),
+            data
           )
         : undefined,
     });
