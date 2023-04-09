@@ -90,4 +90,13 @@ describe("Form data unpacking", () => {
     const result = fromFormData(form, formData);
     expect(variantData).toEqual(result);
   });
+  test("Variant data, in array", async () => {
+    const variantData = {
+      ...data,
+      groups: [{ number: 1, conditional: 2 }],
+    };
+    const formData = getFormData(variantData);
+    const result = fromFormData(form, formData);
+    expect(result.groups[0].conditional).toEqual(2);
+  });
 });

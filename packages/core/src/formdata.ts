@@ -18,7 +18,7 @@ export function fromFormData<Data = Record<string, unknown>>(
   const returnData: Record<string, unknown> = {};
   for (const component of form.components) {
     // We can't handle variant data unless the client sent us a way to parse it,
-    // so we bail from any component variant and only deal with components directly.
+    // so we bail from parsing compoent variants.
     if (Array.isArray(component)) {
       continue;
     }
@@ -65,6 +65,9 @@ function convertFormDataValue(
         items[index] = convertFormDataValue(
           {
             ...definition,
+            components: definition.components
+              ? definition.components[index]
+              : undefined,
             multiple: false,
             name: `${definition.name}[${index}]`,
           },

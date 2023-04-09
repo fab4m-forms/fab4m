@@ -54,37 +54,65 @@ export interface FormViewProps {
   idPrefix?: string;
 }
 
-export interface ComponentDataDefinition {
-  name: string;
-  type: ComponentDataType;
-  multiple?: boolean;
-  components?: ComponentDataDefinition[];
-}
+export type ComponentDataDefinition =
+  | {
+      name: string;
+      type: ComponentDataType;
+    } & (
+      | { multiple: false; components?: ComponentDataDefinition[] }
+      | {
+          multiple: true;
+          components?: ComponentDataDefinition[][];
+        }
+    );
 
 export function formDataDefinition(form: Form, data: Record<string, unknown>) {
   return formComponentsDefinition(
     filterComponents(form.components, data),
+    data,
     data
   );
 }
 
 function formComponentsDefinition(
   components: FormComponentWithName[],
-  data: Record<string, unknown>
+  data: Record<string, unknown>,
+  allData: Record<string, unknown>
 ) {
   const definition: ComponentDataDefinition[] = [];
   for (const component of components) {
-    definition.push({
+    const componentDefinition: ComponentDataDefinition = {
       name: component.name,
       type: component.type.dataType ?? "string",
-      multiple: component.multiple,
-      components: component.components
-        ? formComponentsDefinition(
-            filterComponents(component.components, data),
-            data
-          )
-        : undefined,
-    });
+      multiple: component.multiple ? true : false,
+    };
+    const componentData = data[component.name];
+    const components = component.components;
+    if (
+      componentDefinition.multiple &&
+      components &&
+      Array.isArray(componentData)
+    ) {
+      componentDefinition.components = componentData.map((value) =>
+        formComponentsDefinition(
+          filterComponents(components, data, false, value),
+          value,
+          allData
+        )
+      );
+    } else if (components && data[component.name]) {
+      componentDefinition.components = formComponentsDefinition(
+        filterComponents(
+          components,
+          allData,
+          false,
+          data[component.name] as Record<string, unknown>
+        ),
+        data[component.name] as Record<string, unknown>,
+        allData
+      );
+    }
+    definition.push(componentDefinition);
   }
   return definition;
 }
