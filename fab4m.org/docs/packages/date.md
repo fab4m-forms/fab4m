@@ -84,3 +84,18 @@ widget above and the following additional settings:
 * **toLabel**: The text that is is displayed inside of the to input field.
 * **optionalEndDate**: This makes the end date optional.
 * **withTime**: If this is true, then you get the option to specify the time in the date range, not just the dates.
+
+# Unserializing date widget settings
+
+The locale and locales settings are stored just as a language code when a date widget is serialized. In order to unserialize the widget properly, you need to provide
+the available locales, so that the language codes can be converted to locale objects.
+
+This is done by calling the `setLocales()` function before unserializing:
+
+```jsx
+import { enUS, sv } from "date-fns/locale";
+import { setLocales } from "@fab4m/date"
+setLocales([enUS, sv]);
+```
+
+Now it's safe to go on and unserialize your forms.
