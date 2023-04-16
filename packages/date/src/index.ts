@@ -11,16 +11,14 @@ import {
 } from "@fab4m/fab4m";
 import { ReactDatePickerProps } from "react-datepicker";
 
-export type LocaleLoader = (code: string) => Promise<Locale | undefined>;
-let localeLoader: LocaleLoader;
-
-export function setLocaleLoader(loader: LocaleLoader) {
-  localeLoader = loader;
-}
-
 export interface DateRange {
   from: Date;
   to?: Date;
+}
+
+let locales: Locale[] = [];
+export function setLocales(availableLocales: Locale[]) {
+  locales = availableLocales;
 }
 
 export const dateFieldType: FormComponentType = {
@@ -138,23 +136,12 @@ function serializeDateSettings(settings: DateFieldWidgetSettings) {
   };
 }
 
-async function unserializeDateSettings(settings: SerializedDateFieldSettings) {
-  let locales: Locale[] | undefined = undefined;
-  if (settings.locales && localeLoader) {
-    locales = [];
-    for (const code of settings.locales) {
-      const loaded = await localeLoader(code);
-      if (loaded) {
-        locales.push(loaded);
-      }
-    }
-  }
+function unserializeDateSettings(settings: SerializedDateFieldSettings) {
   return {
     locales,
-    locale:
-      settings.locale && localeLoader
-        ? await localeLoader(settings.locale)
-        : undefined,
+    locale: settings.locale
+      ? locales.find((locale) => locale.code === settings.locale)
+      : undefined,
     useBrowserLocale: settings.useBrowserLocale,
     format: settings.format,
   };
@@ -170,8 +157,8 @@ function dateSettingsSerializer(
         settings: serializeDateSettings(widget.settings),
       };
     },
-    unserialize: async (serialized) => {
-      const settings = await unserializeDateSettings(
+    unserialize: (serialized) => {
+      const settings = unserializeDateSettings(
         serialized.settings as SerializedDateFieldSettings
       );
       return {
@@ -195,8 +182,8 @@ const dateRangeSettingsSerializer: WidgetSerializer<
       },
     };
   },
-  unserialize: async (serialized) => {
-    const settings = await unserializeDateSettings(
+  unserialize: (serialized) => {
+    const settings = unserializeDateSettings(
       serialized.settings as SerializedDateFieldSettings
     );
     return {

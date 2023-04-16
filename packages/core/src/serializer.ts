@@ -135,7 +135,7 @@ export interface WidgetSerializer<ValueType, SettingsType> {
   unserialize: (
     widget: SerializedWidget,
     plugins: SerializerPlugins
-  ) => Promise<Widget<ValueType, SettingsType> | null>;
+  ) => Widget<ValueType, SettingsType> | null;
 }
 /**
  * A 'multiple widget' serializer is used to serialize and unserialize a 'multiple widget'.
@@ -268,7 +268,7 @@ export function serialize(form: FormDefinition): SerializedForm {
  * @return The unserialized form.
  * @group Serializer API
  */
-export async function unserialize(
+export function unserialize(
   form: SerializedForm,
   types: FormComponentType[] = [],
   themes: Theme[] = [],
@@ -276,7 +276,7 @@ export async function unserialize(
   multipleWidgets: MultipleWidgetType[] = [],
   validators: ValidatorType[] = [],
   ruleGroups: RuleGroupType[] = []
-): Promise<FormDefinition> {
+): FormDefinition {
   const typeMap: Record<string, FormComponentType> = {};
   const widgetMap: Record<string, WidgetType> = {};
   const multipleWidgetMap: Record<string, MultipleWidgetType> = {};
@@ -313,10 +313,7 @@ export async function unserialize(
     multipleWidgets: multipleWidgetMap,
   };
   for (const component of form.components) {
-    const unserializedComponent = await unserializeComponent(
-      component,
-      plugins
-    );
+    const unserializedComponent = unserializeComponent(component, plugins);
     if (unserializedComponent && unserializedComponent.name) {
       components.push({
         ...unserializedComponent,
@@ -342,17 +339,17 @@ export async function unserialize(
  * @return The unserialized version of the widget or null if any type was missing from the plugin library.
  * @group Serializer API
  */
-export async function unserializeComponent(
+export function unserializeComponent(
   component: SerializedComponent,
   plugins: SerializerPlugins
-): Promise<FormComponentWithName | null> {
+): FormComponentWithName | null {
   if (plugins.types[component.type]) {
-    const widget = await unserializeWidget(component.widget, plugins);
+    const widget = unserializeWidget(component.widget, plugins);
     if (!widget) {
       return null;
     }
     const multipleWidget = component.multipleWidget
-      ? await unserializeMultipleWidget(component.multipleWidget, plugins)
+      ? unserializeMultipleWidget(component.multipleWidget, plugins)
       : undefined;
     const validators: Validator[] = [];
     for (const validator of component.validators) {
@@ -384,7 +381,7 @@ export async function unserializeComponent(
     if (component.components) {
       components = [];
       for (const serializedComponent of component.components) {
-        const unserializedComponent = await unserializeComponent(
+        const unserializedComponent = unserializeComponent(
           serializedComponent,
           plugins
         );
@@ -449,10 +446,10 @@ export function serializeMultipleWidget(
  * @return The unserialized version of the widget or null if any type was missing from the plugin library.
  * @group Serializer API
  */
-export async function unserializeWidget(
+export function unserializeWidget(
   widget: SerializedWidget,
   plugins: SerializerPlugins
-): Promise<Widget | null> {
+): Widget | null {
   if (!plugins.widgets[widget.type]) {
     return null;
   }
@@ -473,10 +470,10 @@ export async function unserializeWidget(
  * @return The unserialized version of the widget or null if any type was missing from the plugin library.
  * @group Serializer API
  */
-export async function unserializeMultipleWidget(
+export function unserializeMultipleWidget(
   widget: SerializedWidget,
   plugins: SerializerPlugins
-): Promise<MultipleWidget | null> {
+): MultipleWidget | null {
   if (!plugins.multipleWidgets[widget.type]) {
     return null;
   }
