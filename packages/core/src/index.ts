@@ -49,3 +49,4 @@ export function setDefaultTheme(theme: Theme) {
 }
 
 export { default as bulma } from "./themes/bulma";
+export { default as tailwind } from "./themes/tailwind";
