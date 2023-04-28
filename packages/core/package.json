@@ -1,6 +1,6 @@
 {
   "name": "@fab4m/fab4m",
-  "version": "1.0.0-beta11",
+  "version": "1.0.0-beta12",
   "description": "Creating forms should be easy!",
   "publishConfig": {
     "access": "public",
