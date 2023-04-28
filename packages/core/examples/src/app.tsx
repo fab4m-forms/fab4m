@@ -127,6 +127,59 @@ export default function App() {
     },
   });
 
+  // Form building info
+  function textFieldWidgetBuilderInfo(settings: MyWidgetSettings) {
+    return widget({
+      type: {
+        name: "myfield",
+        title: "My magic widget",
+        components: ["text"],
+        init: () => textFieldWidgetBuilderInfo({ color: "blue" }),
+        widget: (props) => {
+          return (
+            <FormComponentWrapper {...props}>
+              <input
+                type="text"
+                name={props.name}
+                id={props.id}
+                required={props.component.required}
+                className={props.theme.classes.input}
+                disabled={props.component.disabled}
+                value={props.value ?? ""}
+                onChange={(e) => {
+                  props.onChange(e.currentTarget.value);
+                }}
+                {...props.attributes}
+              />
+            </FormComponentWrapper>
+          );
+        },
+      },
+    });
+  }
+
+  // Typescript support
+  const typedWidget = widget<string, MyWidgetSettings>({
+    type: {
+      widget: (props) => (
+        <input
+          type="text"
+          name={props.name}
+          id={props.id}
+          style={{ color: props.settings.color }}
+          required={props.component.required}
+          className={props.theme.classes.input}
+          disabled={props.component.disabled}
+          value={props.value ?? ""}
+          onChange={(e) => {
+            props.onChange(e.currentTarget.value);
+          }}
+          {...props.attributes}
+        />
+      ),
+    },
+  });
+
   const form = createForm(
     {
       text: textField({
