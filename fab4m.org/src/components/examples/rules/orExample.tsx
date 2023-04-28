@@ -8,7 +8,7 @@ import {
   equals,
   or,
 } from "@fab4m/fab4m";
-import "fab4m/css/basic/basic.css";
+import "@fab4m/fab4m/css/basic/basic.css";
 
 const form = createForm({
   age: integerField({
