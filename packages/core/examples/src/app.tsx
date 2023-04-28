@@ -46,7 +46,7 @@ const themes: Record<string, Theme> = {
 };
 
 export default function App() {
-  const [selectedTheme, changeSelectedTheme] = useState("tailwindCustom");
+  const [selectedTheme, changeSelectedTheme] = useState("tailwind");
   const [darkMode, changeDarkMode] = useState(true);
   const theme = themes[selectedTheme] ?? tailwind;
   const form = createForm(
