@@ -10,10 +10,12 @@ import {
   setDefaultTheme,
 } from "@fab4m/fab4m";
 
+import tailwind from "../../../core/src/themes/tailwind";
+
 import { autocompleteWidget } from "../../src";
 
 function App() {
-  setDefaultTheme(bulma);
+  setDefaultTheme(tailwind);
   const fakeItems = [];
   const profiles = [];
   for (let i = 0; i < 30; i++) {

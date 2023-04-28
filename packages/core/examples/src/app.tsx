@@ -26,6 +26,9 @@ import {
   detailsWidget,
   submit,
   fileSize,
+  tailwind,
+  textFieldWidget,
+  createTailwindTheme,
 } from "../../src/index";
 import "./index.css";
 import "../../src/themes/basic/basic.scss";
@@ -35,17 +38,27 @@ const themes: Record<string, Theme> = {
   bulma,
   basic,
   basicDark,
+  tailwind,
+  tailwindDark: tailwind,
+  tailwindCustom: createTailwindTheme({
+    settings: { primaryBg: "bg-red-600 hover:bg-green-900" },
+  }),
 };
 
 export default function App() {
-  const [selectedTheme, changeSelectedTheme] = useState("basic");
-  const [darkMode, changeDarkMode] = useState(false);
-  const theme = themes[selectedTheme] ?? basic;
+  const [selectedTheme, changeSelectedTheme] = useState("tailwind");
+  const [darkMode, changeDarkMode] = useState(true);
+  const theme = themes[selectedTheme] ?? tailwind;
   const form = createForm(
     {
       text: textField({
         label: "Text",
         description: "This field is has a magical description",
+        required: true,
+      }),
+      prefixed: textField({
+        label: "Text, prefixed",
+        widget: textFieldWidget("Prefix"),
       }),
       checkbox: booleanField({ label: "Checkbox" }),
       options: textField({
@@ -224,7 +237,7 @@ export default function App() {
         <select
           onChange={(e) => {
             const value = e.currentTarget.value;
-            if (value === "basicDark") {
+            if (value === "basicDark" || value === "tailwindDark") {
               changeDarkMode(true);
             } else {
               changeDarkMode(false);
@@ -236,9 +249,17 @@ export default function App() {
           <option value="bulma">Bulma</option>
           <option value="basic">Basic</option>
           <option value="basicDark">Basic, dark</option>
+          <option value="tailwind">Tailwind</option>
+          <option value="tailwindDark">Tailwind, dark</option>
         </select>
         <h2 className="title">Form Example</h2>
-        <StatefulFormView form={form} />
+        <StatefulFormView
+          form={form}
+          errors={[
+            { path: "/text", message: "This is an error" },
+            { path: "/text", message: "This is another error" },
+          ]}
+        />
         <h2 className="title">Multistep form</h2>
         <StatefulFormView form={multistep} />
 

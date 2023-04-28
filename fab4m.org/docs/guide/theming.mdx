@@ -10,23 +10,55 @@ fab4m into your solution, you probably want to change the theme of your forms to
 
 ## Provided themes
 
-Fab4m provides two themes out of the box. `basic` and `bulma`. The basic form is designed to blend in with other design, and the bulma theme uses classes from the `bulma` css framework, which means the forms conform to the style used there.
+Fab4m provides three themes out of the box. `basic` `tailwind` and `bulma`. The basic form is designed to blend in with other design, the tailwind theme provides a starting point if you are already using [Tailwind CSS](https://tailwindcss.com/), and the bulma theme uses classes from the `bulma` css framework, which means the forms conform to the style used there.
 
-## Select your theme
+## Selecting a theme
 
-You get to select your desired form theme for each form you create:
+The easiest way to change the theme is to do it globally:
 
 ```jsx
-createForm(theme_name, name);
+import { setDefaultTheme, tailwind } from "@fab4m/fab4m";
+setDefaultTheme(tailwind);
 ```
 
-## Using the basic basic theme
+The tailwind theme is now used automatically for all your forms.
 
-In order for your forms to be styled, you need to include the basic css, for example byimporting it (if you're build pipeline supports that):
+You can also specify which theme to used on a per-form basis:
+
+```jsx
+import { tailwind, createForm } from "@fab4m/fab4m";
+createForm({}, { theme: tailwind });
+```
+
+## Using the basic theme
+
+In order for your forms to be styled, you need to include the basic css, for example byimporting it (if your build pipeline supports that):
 
 ```jsx
 import "fab4m/css/basic/basic.css";
 ```
+
+## Using the tailwind theme
+
+[Tailwind CSS](https://tailwindcss.com/) is a very popular CSS framework,
+and fab4m provides a tailwind-based theme to make it easy.
+
+Start by making sure you have tailwind up and running using [their excellent guide.](https://tailwindcss.com/docs/installation)
+
+Once you have everything up and running, you need to configure tailwind to pick up on
+the classes that fab4m is using, edit your `tailwind.config.js` file and add the following entry to the `content` list:
+
+```js
+module.exports = {
+  content: [
+    // Your entries...
+    './node_modules/@fab4m/fab4m/dist/index.es.js',
+  // ...
+};
+```
+
+Note that if your node_modules lives somewhere else relative your tailwind.config.js,
+you need to modify the path to match.
 
 ## Using the bulma theme
 
@@ -65,10 +97,51 @@ const yourTheme = {
 }
 ```
 
-## Using your own theme
+### Using your theme
 
-Once your theme is defined, it can be used as any of the core themes:
+Once your theme is defined, it can be selected just as any other theme.
 
 ```jsx
-const form = createForm(yourTheme, {});
+import { setDefaultTheme } from "@fab4m/fab4m";
+setDefaultTheme(yourTheme);
+```
+
+## Making changes to an existing theme
+
+If you just want to make tiny changes to an existing theme you can base
+your theme on the existing one.
+
+```jsx
+import { basic, setDefaultTheme } from "@fab4m/fab4m";
+const yourTheme = {
+  name: "your theme",
+  module: "yourmodule",
+  classes: {
+    ...basic.classes,
+    input: "my-input-class",
+  }
+}
+setDefaultTheme(yourTheme);
+```
+
+### Extending the tailwind theme
+
+The tailwind theme provides a helper to make it a lot easier to create your
+own tailwind theme. Some things like colors and so on are repeated many times, so
+we provide a createTailwindTheme() function to make it easier to adjust the theme
+to your needs. If additional customization is required, you can apply it as above.
+
+```jsx
+import { createTailwindTheme } from "@fab4m/core";
+createTailwindTheme({
+  settings: {
+    primaryBg: "bg-green-700 hover:bg-green-900",
+    secondaryBg:
+      "bg-slate-500 hover:bg-slate-900 dark:bg-slate-800 dark:hover:bg-slate-500",
+    inputBorder: "border border-slate-300 dark:border-slate-500",
+    inputBg: "bg-white dark:bg-slate-700",
+    inputText: "text-white dark:text-slate-100",
+    inputHeight: "h-10",
+  }
+});
 ```

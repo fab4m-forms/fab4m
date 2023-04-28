@@ -95,6 +95,7 @@ export const defaultThemeClasses: ThemeClasses = {
   inputPrefix: "input-prefix",
   textarea: "textarea",
   fileInput: "file-input",
+  select: "select",
   label: "label",
   checkboxWrapper: "checkbox",
   radioWrapper: "radio",

@@ -139,7 +139,7 @@ export class Form<DataType = Record<string, any>> implements FormDefinition {
     components: Components<DataType> = {},
     settings?: Partial<FormDefinition>
   ) {
-    this.theme = theme;
+    this.theme = settings?.theme ? settings.theme : theme;
     this.components = [];
     for (const name in components) {
       const component = components[name];
