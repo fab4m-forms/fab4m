@@ -18,7 +18,7 @@ import {
 } from "../../src";
 import "react-datepicker/dist/react-datepicker.css";
 import "./index.css";
-import "fab4m/css/basic/basic.css";
+import "@fab4m/fab4m/css/basic/basic.css";
 
 export default function App() {
   const [theme, changeTheme] = React.useState("basic");

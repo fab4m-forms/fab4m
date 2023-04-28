@@ -183,22 +183,52 @@ export interface MultipleWidgetType<ValueType = any, SettingsType = any> {
  */
 export interface MultipleWidget<ValueType = any, SettingsType = any> {
   type: MultipleWidgetType<ValueType, SettingsType>;
-  settings: SettingsType;
+  settings?: SettingsType;
 }
 
 /**
+ * This interface contains the minimum amount of required info
+ * to create a widget.
+ */
+type CreateWidget<ValueType = any, SettingsType = undefined> = {
+  type: Exclude<Partial<WidgetType<ValueType, SettingsType>>, "widget"> & {
+    widget: ComponentType<WidgetProps<ValueType, SettingsType>>;
+  };
+} & (SettingsType extends undefined
+  ? { settings?: SettingsType }
+  : { settings: SettingsType });
+
+/**
  * Creates a widget that can be used with a component.
- * @param settings The widget settings.
+ * @param args The widget definition
  * @return a Widget that is ready for use.
  * @group Widget API
  */
-export function widget<ValueType, SettingsType>(
-  settings: Widget<ValueType, SettingsType>
+export function widget<ValueType = any, SettingsType = undefined>(
+  args: CreateWidget<ValueType, SettingsType>
 ): Widget<ValueType, SettingsType> {
   return {
-    ...settings,
+    ...args,
+    type: {
+      name: args.type.widget.displayName ?? "",
+      title: args.type.widget.displayName ?? "",
+      components: [],
+      ...args.type,
+    },
+    settings: args.settings as SettingsType,
   };
 }
+
+type CreateMultipleWidget<ValueType = any, SettingsType = undefined> = {
+  type: Exclude<
+    Partial<MultipleWidgetType<ValueType, SettingsType>>,
+    "widget"
+  > & {
+    widget: ComponentType<MultipleWidgetProps<ValueType, SettingsType>>;
+  };
+} & (SettingsType extends undefined
+  ? { settings?: SettingsType }
+  : { settings: SettingsType });
 
 /**
  * Creates a 'multiple widget' that can be used with a component.
@@ -207,9 +237,14 @@ export function widget<ValueType, SettingsType>(
  * @group Widget API
  */
 export function multipleWidget<ValueType, SettingsType>(
-  settings: MultipleWidget<ValueType, SettingsType>
+  args: CreateMultipleWidget<ValueType, SettingsType>
 ): MultipleWidget<ValueType, SettingsType> {
   return {
-    ...settings,
+    ...args,
+    type: {
+      name: args.type.widget.displayName ?? "",
+      title: args.type.widget.displayName ?? "",
+      ...args.type,
+    },
   };
 }
