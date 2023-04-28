@@ -28,6 +28,7 @@ import {
   fileSize,
   tailwind,
   textFieldWidget,
+  createTailwindTheme,
 } from "../../src/index";
 import "./index.css";
 import "../../src/themes/basic/basic.scss";
@@ -39,10 +40,13 @@ const themes: Record<string, Theme> = {
   basicDark,
   tailwind,
   tailwindDark: tailwind,
+  tailwindCustom: createTailwindTheme({
+    settings: { primaryBg: "bg-red-600 hover:bg-green-900" },
+  }),
 };
 
 export default function App() {
-  const [selectedTheme, changeSelectedTheme] = useState("tailwindDark");
+  const [selectedTheme, changeSelectedTheme] = useState("tailwindCustom");
   const [darkMode, changeDarkMode] = useState(true);
   const theme = themes[selectedTheme] ?? tailwind;
   const form = createForm(
