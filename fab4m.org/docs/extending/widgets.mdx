@@ -1,0 +1,31 @@
+---
+sidebar_position: 1
+---
+import Example from "@site/src/components/Example";
+import BasicWidget from '@site/src/components/examples/extending/BasicWidget';
+import BasicWidgetSource from '!!raw-loader!@site/src/components/examples/extending/BasicWidget';
+import Fab4mWidget from '@site/src/components/examples/extending/Fab4mWidget';
+import Fab4mWidgetSource from '!!raw-loader!@site/src/components/examples/extending/Fab4mWidget';
+import TypescriptSupport from '@site/src/components/examples/extending/TypescriptSupport';
+import TypescriptSupportSource from '!!raw-loader!@site/src/components/examples/extending/TypescriptSupport';
+import WidgetSettings from '@site/src/components/examples/extending/WidgetSettings';
+import WidgetSettingsSource from '!!raw-loader!@site/src/components/examples/extending/WidgetSettings';
+
+
+# Creating widgets
+
+bla bla
+
+## The most basic widget
+
+<Example source={BasicWidgetSource} example={<BasicWidget />} />
+
+## Using the fab4m wrapper
+
+<Example source={Fab4mWidgetSource} example={<Fab4mWidget />} />
+
+## Typescript support
+<Example source={TypescriptSupportSource} example={<TypescriptSupport />} />
+
+## Providing settings for your widget
+<Example source={WidgetSettingsSource} example={<WidgetSettings />} />

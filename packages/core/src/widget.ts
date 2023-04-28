@@ -149,7 +149,7 @@ export interface Widget<ValueType = any, SettingsType = any> {
   /** The widget type definition */
   type: WidgetType<ValueType, SettingsType>;
   /** Settings for this widget */
-  settings?: SettingsType;
+  settings: SettingsType;
 }
 
 /**
@@ -190,12 +190,13 @@ export interface MultipleWidget<ValueType = any, SettingsType = any> {
  * This interface contains the minimum amount of required info
  * to create a widget.
  */
-interface CreateWidget<ValueType = any, SettingsType = undefined> {
+type CreateWidget<ValueType = any, SettingsType = undefined> = {
   type: Exclude<Partial<WidgetType<ValueType, SettingsType>>, "widget"> & {
     widget: ComponentType<WidgetProps<ValueType, SettingsType>>;
   };
-  settings?: SettingsType;
-}
+} & (SettingsType extends undefined
+  ? { settings?: SettingsType }
+  : { settings: SettingsType });
 
 /**
  * Creates a widget that can be used with a component.
@@ -214,18 +215,20 @@ export function widget<ValueType = any, SettingsType = undefined>(
       components: [],
       ...args.type,
     },
+    settings: args.settings as SettingsType,
   };
 }
 
-interface CreateMultipleWidget<ValueType = any, SettingsType = undefined> {
+type CreateMultipleWidget<ValueType = any, SettingsType = undefined> = {
   type: Exclude<
     Partial<MultipleWidgetType<ValueType, SettingsType>>,
     "widget"
   > & {
     widget: ComponentType<MultipleWidgetProps<ValueType, SettingsType>>;
   };
-  settings?: SettingsType;
-}
+} & (SettingsType extends undefined
+  ? { settings?: SettingsType }
+  : { settings: SettingsType });
 
 /**
  * Creates a 'multiple widget' that can be used with a component.

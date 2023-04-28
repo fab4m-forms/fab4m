@@ -52,7 +52,8 @@ export default function App() {
   const theme = themes[selectedTheme] ?? tailwind;
   // Creating a new widget.
   // This is the most basic working exampple
-  const newTextFieldWidget = widget({
+
+  const newTextFieldWidget = widget<string>({
     type: {
       widget: (props) => {
         return (
@@ -60,8 +61,8 @@ export default function App() {
             type="text"
             name={props.name}
             id={props.id}
-            required={props.required}
-            disabled={props.disabled}
+            required={props.component.required}
+            disabled={props.component.disabled}
             value={props.value ?? ""}
             onChange={(e) => {
               props.onChange(e.currentTarget.value);
@@ -87,8 +88,8 @@ export default function App() {
               name={props.name}
               id={props.id}
               style={{ color: props.settings.color }}
-              required={props.required}
-              disabled={props.disabled}
+              required={props.component.required}
+              disabled={props.component.disabled}
               value={props.value ?? ""}
               onChange={(e) => {
                 props.onChange(e.currentTarget.value);
