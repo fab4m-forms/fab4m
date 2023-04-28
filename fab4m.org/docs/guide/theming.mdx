@@ -133,7 +133,7 @@ to your needs. If additional customization is required, you can apply it as abov
 
 ```jsx
 import { createTailwindTheme } from "@fab4m/core";
-createTailwindTheme({
+const yourTheme = createTailwindTheme({
   settings: {
     primaryBg: "bg-green-700 hover:bg-green-900",
     secondaryBg:
@@ -144,4 +144,5 @@ createTailwindTheme({
     inputHeight: "h-10",
   }
 });
+setDefaultTheme(yourTheme);
 ```
