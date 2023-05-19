@@ -7,6 +7,8 @@ export interface TailwindSettings {
   inputBg: string;
   inputText: string;
   inputHeight: string;
+  text: string;
+  labelText: string;
 }
 
 const defaultSettings: TailwindSettings = {
@@ -17,6 +19,8 @@ const defaultSettings: TailwindSettings = {
   inputBg: "bg-white dark:bg-slate-700",
   inputText: "text-white dark:text-slate-100",
   inputHeight: "h-10",
+  text: "dark:text-white",
+  labelText: "dark:text-white",
 };
 
 /**
@@ -38,12 +42,12 @@ export function createTailwindTheme(args: {
     classes: {
       radioWrapper: "mr-2",
       formWrapper: "",
-      label: "font-bold",
+      label: `font-bold ${s.labelText}`,
       labelWrapper: "font-bold mb-1",
       checkboxInput: "mr-1",
-      checkboxWrapper: "flex cursor-pointer",
+      checkboxWrapper: `flex cursor-pointer ${s.text}`,
       radiosWrapper: "flex",
-      description: "text-xs",
+      description: `text-xs ${s.text}`,
       group: "",
       formPart: "",
       componentWrapper: "mb-4",
@@ -59,7 +63,7 @@ export function createTailwindTheme(args: {
       errorList: "mt-1",
       errorItem: "text-xs text-red-500 mb-1",
       fieldset: "border p-2",
-      fieldsetLegend: "m-2 font-bold",
+      fieldsetLegend: "m-2 font-bold ${s.text}",
       pager: "flex",
       pagerNext: `${button} ml-auto`,
       pagerPrevious:
@@ -70,8 +74,8 @@ export function createTailwindTheme(args: {
       multipleItem: "mb-2 is-clearfix",
       removeItem:
         "block cursor-pointer -mt-1 text-xs text-red-500 hover:text-red-700",
-      horizontalGroup: "",
-      horizontalGroupComponentWrapper: "column",
+      horizontalGroup: "flex",
+      horizontalGroupComponentWrapper: "mr-2",
       multipleItemWrapper: "mb-2",
       selectWrapper: "",
       select:
