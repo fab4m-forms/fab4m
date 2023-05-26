@@ -392,7 +392,7 @@ export function unserializeComponentListItem(
     }
     return variants;
   }
-  return (unserializeComponent(item, plugins)) ?? null;
+  return unserializeComponent(item, plugins) ?? null;
 }
 
 /**
@@ -444,11 +444,7 @@ export function unserializeComponent(
     if (component.components) {
       components = [];
       for (const serializedComponent of component.components) {
-<<<<<<< HEAD
-        const unserializedComponent = await unserializeComponentListItem(
-=======
-        const unserializedComponent = unserializeComponent(
->>>>>>> main
+        const unserializedComponent = unserializeComponentListItem(
           serializedComponent,
           plugins
         );
