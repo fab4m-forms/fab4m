@@ -6,8 +6,15 @@ import {
   FormComponentView,
   generateSchema,
   serialize,
+  unserialize,
 } from "@fab4m/fab4m";
-import { dateField, datePickerWidget } from "../src";
+import {
+  dateField,
+  dateFieldType,
+  datePickerWidget,
+  datePickerWidgetType,
+  setLocales,
+} from "../src";
 import { format } from "date-fns";
 import { enUS, sv, fi } from "date-fns/locale";
 
@@ -208,6 +215,7 @@ describe("date field", () => {
         }),
       })
     );
+    setLocales([sv, enUS]);
     const serialized = serialize(form);
     const widget = serialized.components[0].widget;
     const settings = widget.settings as Record<string, unknown>;
@@ -216,5 +224,16 @@ describe("date field", () => {
     const locales = settings.locales as string[];
     expect(locales[0]).toBe("sv");
     expect(locales[1]).toBe("en-US");
+    const unserialized = unserialize(
+      serialized,
+      [dateFieldType],
+      [basic],
+      [datePickerWidgetType]
+    );
+    expect(unserialized.components[0].widget.settings.locale).toBe(sv);
+    expect(unserialized.components[0].widget.settings.locales).toStrictEqual([
+      sv,
+      enUS,
+    ]);
   });
 });

@@ -10,7 +10,7 @@ import {
   useForm,
   Form,
 } from "@fab4m/fab4m";
-import "fab4m/css/basic/basic.css";
+import "@fab4m/fab4m/css/basic/basic.css";
 
 function componentTemplate(component: string) {
   return definitions.get(component).code;

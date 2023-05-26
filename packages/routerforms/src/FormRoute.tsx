@@ -9,6 +9,8 @@ import {
   getPrevPart,
   ValidationError,
   FormViewProps,
+  FormDataContext,
+  FormErrorsContext,
 } from "@fab4m/fab4m";
 
 export interface FormRouteProps extends FormViewProps {
@@ -36,6 +38,7 @@ export default function FormRoute(props: FormRouteProps): JSX.Element | null {
   if (!part) {
     part = props.part ?? 0;
   }
+  const data = props.data as Record<string, unknown>;
   const parts = formParts(props.form);
   // Ensure that the part we are trying to look at exists.
   React.useEffect(() => {
@@ -54,7 +57,6 @@ export default function FormRoute(props: FormRouteProps): JSX.Element | null {
   if (part > parts.length - 1) {
     return null;
   }
-  const data = props.data as Record<string, unknown>;
   const prevPart = getPrevPart(parts, part, data);
   const renderedParts = parts
     .slice(0, part + 1)
@@ -72,25 +74,30 @@ export default function FormRoute(props: FormRouteProps): JSX.Element | null {
     ));
 
   return (
-    <FormWrapper
-      {...props}
-      parts={parts}
-      part={part}
-      setPart={setPart}
-      setFormErrors={setFormErrors}
-    >
-      {renderedParts}
-      <FormPager
-        theme={props.form.theme}
-        part={part}
-        form={props.form}
-        hasNextPart={getNextPart(parts, part, data) !== -1}
-        hasPrevPart={prevPart !== -1}
-        goBack={() => {}}
-        back={() => <Link to={`${basePath}/${prevPart}`}>Previous</Link>}
-        noParts={parts.length}
-      />
-    </FormWrapper>
+    <FormDataContext.Provider value={data}>
+      <FormErrorsContext.Provider value={formErrors}>
+        <FormWrapper
+          {...props}
+          parts={parts}
+          part={part}
+          setPart={setPart}
+          setFormErrors={setFormErrors}
+        >
+          {renderedParts}
+          <FormPager
+            theme={props.form.theme}
+            part={part}
+            form={props.form}
+            hasNextPart={getNextPart(parts, part, data) !== -1}
+            hasPrevPart={prevPart !== -1}
+            goBack={() => {}}
+            back={() => <Link to={`${basePath}/${prevPart}`}>Previous</Link>}
+            noParts={parts.length}
+            hideSubmit={props.hideSubmit}
+          />
+        </FormWrapper>
+      </FormErrorsContext.Provider>
+    </FormDataContext.Provider>
   );
 }
 

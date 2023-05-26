@@ -1,18 +1,17 @@
 {
   "name": "@fab4m/routerforms",
-  "version": "1.0.0-beta2",
+  "version": "1.0.0-beta13",
   "description": "Forms using react router with fab4m",
   "author": "Fabian Sorqvist <fabian@sorqvist.nu>",
   "homepage": "",
   "license": "MIT",
   "module": "dist/index.es.js",
   "main": "dist/index.cjs.js",
-    "types": "dist/index.d.ts",
-"publishConfig": {
-  "access": "public",
-  "registry": "https://registry.npmjs.org/"
-},
-
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "directories": {
     "lib": "dist",
     "test": "test"
@@ -23,8 +22,8 @@
   "scripts": {
     "test": "vitest",
     "test:unit": "vitest --run",
-    "build-browser": "esbuild --external:react --external:react-dom --external:react-router-dom  --external:fab4m  --bundle src/index.ts --format=esm --outfile=dist/index.es.js",
-    "build-node": "esbuild --external:react-router-dom --platform=node --external:react --external:react-dom --external:fab4m --minify --bundle src/index.ts --outfile=dist/index.cjs.js",
+    "build-browser": "esbuild --external:react --external:react-dom --external:react-router-dom  --external:@fab4m/fab4m  --bundle src/index.ts --format=esm --outfile=dist/index.es.js",
+    "build-node": "esbuild --external:react-router-dom --platform=node --external:react --external:react-dom --external:@fab4m/fab4m --minify --bundle src/index.ts --outfile=dist/index.cjs.js",
     "build": "npm run build-browser && npm run build-node && tsc -d"
   },
   "peerDependencies": {
