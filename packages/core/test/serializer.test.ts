@@ -97,7 +97,7 @@ describe("Serializer", () => {
 
   test("Unserialize", async () => {
     const serializedForm = serialize(form);
-    const unserializedForm = await unserialize(
+    const unserializedForm = unserialize(
       serializedForm,
       [textFieldType, booleanFieldType],
       [basic],

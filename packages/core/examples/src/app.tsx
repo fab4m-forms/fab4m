@@ -28,6 +28,10 @@ import {
   fileSize,
   fromFormData,
   equals,
+  tailwind,
+  createTailwindTheme,
+  widget,
+  FormComponentWrapper,
 } from "../../src/index";
 import "./index.css";
 import "../../src/themes/basic/basic.scss";
@@ -37,17 +41,159 @@ const themes: Record<string, Theme> = {
   bulma,
   basic,
   basicDark,
+  tailwind,
+  tailwindDark: tailwind,
+  tailwindCustom: createTailwindTheme({
+    settings: { primaryBg: "bg-red-600 hover:bg-green-900" },
+  }),
 };
 
 export default function App() {
-  const [selectedTheme, changeSelectedTheme] = useState("basic");
+  const [selectedTheme, changeSelectedTheme] = useState("tailwind");
   const [darkMode, changeDarkMode] = useState(false);
-  const theme = themes[selectedTheme] ?? basic;
+  const theme = themes[selectedTheme] ?? tailwind;
+  // Creating a new widget.
+  // This is the most basic working exampple
+
+  const newTextFieldWidget = widget<string>({
+    type: {
+      widget: (props) => {
+        return (
+          <input
+            type="text"
+            name={props.name}
+            id={props.id}
+            required={props.component.required}
+            disabled={props.component.disabled}
+            value={props.value ?? ""}
+            onChange={(e) => {
+              props.onChange(e.currentTarget.value);
+            }}
+            {...props.attributes}
+          />
+        );
+      },
+    },
+  });
+
+  // Create a function for easily creating a new widget instance
+  type MyWidgetSettings = {
+    color: string;
+  };
+  const myTextWidget = (settings: MyWidgetSettings) => {
+    return widget({
+      type: {
+        widget: (props) => {
+          return (
+            <input
+              type="text"
+              name={props.name}
+              id={props.id}
+              style={{ color: props.settings.color }}
+              required={props.component.required}
+              disabled={props.component.disabled}
+              value={props.value ?? ""}
+              onChange={(e) => {
+                props.onChange(e.currentTarget.value);
+              }}
+              {...props.attributes}
+            />
+          );
+        },
+      },
+      settings,
+    });
+  };
+
+  // Applying fab4m standard things to your widget
+  const textFieldWidgetWithFab4m = widget({
+    type: {
+      widget: (props) => {
+        return (
+          <FormComponentWrapper {...props}>
+            <input
+              type="text"
+              name={props.name}
+              id={props.id}
+              required={props.component.required}
+              className={props.theme.classes.input}
+              disabled={props.component.disabled}
+              value={props.value ?? ""}
+              onChange={(e) => {
+                props.onChange(e.currentTarget.value);
+              }}
+              {...props.attributes}
+            />
+          </FormComponentWrapper>
+        );
+      },
+    },
+  });
+
+  // Form building info
+  function textFieldWidgetBuilderInfo(settings: MyWidgetSettings) {
+    return widget({
+      type: {
+        name: "myfield",
+        title: "My magic widget",
+        components: ["text"],
+        init: () => textFieldWidgetBuilderInfo({ color: "blue" }),
+        widget: (props) => {
+          return (
+            <FormComponentWrapper {...props}>
+              <input
+                type="text"
+                name={props.name}
+                id={props.id}
+                required={props.component.required}
+                className={props.theme.classes.input}
+                disabled={props.component.disabled}
+                value={props.value ?? ""}
+                onChange={(e) => {
+                  props.onChange(e.currentTarget.value);
+                }}
+                {...props.attributes}
+              />
+            </FormComponentWrapper>
+          );
+        },
+      },
+    });
+  }
+
+  // Typescript support
+  const typedWidget = widget<string, MyWidgetSettings>({
+    type: {
+      widget: (props) => (
+        <input
+          type="text"
+          name={props.name}
+          id={props.id}
+          style={{ color: props.settings.color }}
+          required={props.component.required}
+          className={props.theme.classes.input}
+          disabled={props.component.disabled}
+          value={props.value ?? ""}
+          onChange={(e) => {
+            props.onChange(e.currentTarget.value);
+          }}
+          {...props.attributes}
+        />
+      ),
+    },
+  });
+
   const form = createForm(
     {
       text: textField({
         label: "Text",
         description: "This field is has a magical description",
+        required: true,
+        widget: textFieldWidgetWithFab4m,
+      }),
+      prefixed: textField({
+        label: "Text, prefixed",
+        widget: textFieldWidgetWithFab4m,
       }),
       checkbox: booleanField({ label: "Checkbox" }),
       options: textField({
@@ -266,7 +412,7 @@ export default function App() {
         <select
           onChange={(e) => {
             const value = e.currentTarget.value;
-            if (value === "basicDark") {
+            if (value === "basicDark" || value === "tailwindDark") {
               changeDarkMode(true);
             } else {
               changeDarkMode(false);
@@ -278,9 +424,17 @@ export default function App() {
           <option value="bulma">Bulma</option>
           <option value="basic">Basic</option>
           <option value="basicDark">Basic, dark</option>
+          <option value="tailwind">Tailwind</option>
+          <option value="tailwindDark">Tailwind, dark</option>
         </select>
         <h2 className="title">Form Example</h2>
-        <StatefulFormView form={form} />
+        <StatefulFormView
+          form={form}
+          errors={[
+            { path: "/text", message: "This is an error" },
+            { path: "/text", message: "This is another error" },
+          ]}
+        />
         <h2 className="title">Multistep form</h2>
         <StatefulFormView form={multistep} />
 

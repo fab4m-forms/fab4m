@@ -1,0 +1,46 @@
+---
+sidebar_position: 1
+---
+import Example from "@site/src/components/Example";
+import BasicWidget from '@site/src/components/examples/extending/BasicWidget';
+import BasicWidgetSource from '!!raw-loader!@site/src/components/examples/extending/BasicWidget';
+import Fab4mWidget from '@site/src/components/examples/extending/Fab4mWidget';
+import Fab4mWidgetSource from '!!raw-loader!@site/src/components/examples/extending/Fab4mWidget';
+import TypescriptSupport from '@site/src/components/examples/extending/TypescriptSupport';
+import TypescriptSupportSource from '!!raw-loader!@site/src/components/examples/extending/TypescriptSupport';
+import WidgetSettings from '@site/src/components/examples/extending/WidgetSettings';
+import WidgetSettingsSource from '!!raw-loader!@site/src/components/examples/extending/WidgetSettings';
+
+
+# Creating widgets
+
+Sometimes you need to make custom widgets if you need more control over the
+markup or need to introduce new functionality into your forms.
+
+## A very basic example
+
+The example below is the smallest possible working example for creating a widget:
+
+<Example source={BasicWidgetSource} example={<BasicWidget />} />
+
+## Using the fab4m wrapper
+
+If you want to provide most of the basic functionality that is
+provided with the standard fab4m widgets you can wrap your widget in
+the `FormComponentWrapper` component.
+
+<Example source={Fab4mWidgetSource} example={<Fab4mWidget />} />
+
+## Typescript support
+
+You can define the data type that the widget is operating on, as well as
+the settings type that the widget is using (see the next section):
+
+<Example source={TypescriptSupportSource} example={<TypescriptSupport />} />
+
+## Providing settings for your widget
+
+You can define settings for your widget, in those situations it's best
+to provide a function to create your widget with the appropriate settings.
+
+<Example source={WidgetSettingsSource} example={<WidgetSettings />} />
