@@ -41,6 +41,7 @@ export * from "./widgets/multiple";
 export * from "./hooks";
 export * from "./formview";
 export * from "./formdata";
+export * from "./widgets/hidden";
 let defaultTheme: Theme = basic;
 export { defaultTheme, basic, basicDark };
 
