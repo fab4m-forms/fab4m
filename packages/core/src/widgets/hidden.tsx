@@ -3,7 +3,7 @@ import { widget, WidgetProps, WidgetType } from "../widget";
 
 type HiddenType = string | number;
 /**
- * The radios widget renders the options as a serios of radio buttons.
+ * The Hidden widget renders a hidden field inside of your form.
  * @group Widgets
  */
 export const hiddenFieldWidgetType: WidgetType<string | number, undefined> = {
@@ -14,6 +14,10 @@ export const hiddenFieldWidgetType: WidgetType<string | number, undefined> = {
   init: () => hiddenFieldWidget(),
 };
 
+/**
+ * The hidden widget renders a hidden field inside of your form.
+ * @group Widgets
+ */
 export function hiddenFieldWidget<Type extends HiddenType>() {
   return widget<Type, undefined>({
     type: hiddenFieldWidgetType as unknown as WidgetType<Type, undefined>,
