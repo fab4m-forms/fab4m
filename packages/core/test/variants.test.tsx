@@ -1,11 +1,13 @@
 import * as React from "react";
 import { render, fireEvent, waitFor } from "@testing-library/react";
+import { validate } from "../src/schemaValidator";
 import {
   createForm,
   textField,
   textFieldWidget,
   StatefulFormView,
   equals,
+  generateSchema,
 } from "../src";
 
 describe("Variants API", () => {
@@ -43,6 +45,14 @@ describe("Variants API", () => {
           required: false,
         }),
       ],
+      [
+        "dependent",
+        equals("test2"),
+        textField({
+          label: "Dependent on other field",
+          required: true,
+        }),
+      ],
       textField({
         label: "Default dependent",
         required: false,
@@ -77,5 +87,21 @@ describe("Variants API", () => {
   test("Default component rendered when no other matches", async () => {
     const { findByText } = render(<StatefulFormView form={form} />);
     expect(await findByText("Default dependent")).toBeVisible();
+  });
+  test("Variants schema", async () => {
+    expect(validate(form, { text: "test" }).valid).toBe(false);
+    expect(validate(form, { text: "test", dependent: "asdf" }).valid).toBe(
+      true
+    );
+    expect(validate(form, { text: "test2", dependent: 2 }).valid).toBe(false);
+    expect(validate(form, { text: "test2", dependent: "asdf" }).valid).toBe(
+      true
+    );
+  });
+
+  test("Nested variants", async () => {
+    expect(validate(form, { text: "test", dependent: "test2" }).valid).toBe(
+      false
+    );
   });
 });
