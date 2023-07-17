@@ -39,7 +39,7 @@ export default function FormRoute(props: FormRouteProps): JSX.Element | null {
     part = props.part ?? 0;
   }
   const data = props.data as Record<string, unknown>;
-  const parts = formParts(props.form);
+  const parts = formParts(props.form, data);
   // Ensure that the part we are trying to look at exists.
   React.useEffect(() => {
     if (part && (part > parts.length - 1 || part > completedParts)) {

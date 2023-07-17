@@ -1,6 +1,6 @@
 {
   "name": "@fab4m/fab4m",
-  "version": "1.0.0-beta13",
+  "version": "1.0.0-beta15",
   "description": "Creating forms should be easy!",
   "publishConfig": {
     "access": "public",
@@ -15,7 +15,7 @@
     "build-node": "esbuild --platform=node --external:react --external:react-dom --bundle src/index.ts --outfile=dist/index.cjs.js",
     "test": "vitest",
     "autoprefixer": "postcss css/basic/basic.css -o css/basic/basic.css",
-    "sass": "node-sass --omit-source-map-url src/themes/basic/basic.scss css/basic/basic.css",
+    "sass": "sass src/themes/basic/basic.scss css/basic/basic.css",
     "css": "npm run sass && npm run autoprefixer",
     "watch-css": "npm run sass -- --watch",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",

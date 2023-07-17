@@ -9,10 +9,10 @@ import {
   FormComponentWithName,
   validateComponent,
 } from "./component";
-import { filterComponents } from "./rule";
+import { AnyRule, filterComponents, RuleGroup } from "./rule";
 import { Theme } from "./theme";
 import { defaultTheme } from ".";
-import { ValidationError } from "./validator";
+import { ValidationError, Validator } from "./validator";
 /**
  * This interface defines the labels that are used throughout the form.
  * @group Form API
@@ -31,6 +31,35 @@ export interface Labels {
 }
 
 /**
+ * The variant definition type is used to easily describe
+ * a form component variant. It can either be just a form component,
+ * in which case it's always selected, a rule definition with a component,
+ * in which case the variant is selected if the rule is true, or a rule group,
+ * in which chase the variant is selected if the rule group passes.
+ * @group Form API
+ */
+export type VariantDefinition<ValueType = any> =
+  | [string, Validator, FormComponent<ValueType>]
+  | [RuleGroup, FormComponent<ValueType>]
+  | FormComponent<ValueType>;
+
+/**
+ * Representation of a form variant.
+ * @group Form API
+ */
+export interface FormComponentVariant {
+  rule?: AnyRule;
+  component: FormComponentWithName;
+}
+
+/**
+ * A list of form components.
+ */
+export type FormComponentsList = Array<
+  FormComponentWithName | FormComponentVariant[]
+>;
+
+/**
  * Base interface for forms.
  * An instance of the form class can be created from this interface.
  * @group Form API
@@ -39,7 +68,7 @@ export interface FormDefinition {
   /** The form theme that should be used to render this form. */
   theme: Theme;
   /** A list of Form components that this form contains. */
-  components: FormComponentWithName[];
+  components: FormComponentsList;
   /** The labels that should be used in the form. */
   labels?: Partial<Labels>;
   /** The form description is used as the description in the JSON schema. */
@@ -100,8 +129,10 @@ export type Components<DataType> = {
   [Property in keyof DataType]?: NonNullable<DataType[Property]> extends Array<
     infer Type
   >
-    ? FormComponent<Type, unknown>
-    : FormComponent<NonNullable<DataType[Property]>, unknown>;
+    ? FormComponent<Type, unknown> | Array<VariantDefinition<Type>>
+    :
+        | FormComponent<NonNullable<DataType[Property]>, unknown>
+        | Array<VariantDefinition<NonNullable<DataType[Property]>>>;
 };
 
 /**
@@ -113,7 +144,7 @@ export type Components<DataType> = {
  */
 export class Form<DataType = Record<string, any>> implements FormDefinition {
   public theme: Theme;
-  public components: FormComponentWithName[];
+  public components: FormComponentsList;
   public labels?: Partial<Labels>;
   public description?: string;
   public title?: string;
@@ -140,13 +171,7 @@ export class Form<DataType = Record<string, any>> implements FormDefinition {
     settings?: Partial<FormDefinition>
   ) {
     this.theme = settings?.theme ? settings.theme : theme;
-    this.components = [];
-    for (const name in components) {
-      const component = components[name];
-      if (component) {
-        this.components.push({ name, ...component });
-      }
-    }
+    this.components = componentsListFromObject<DataType>(components);
     this.title = settings?.title;
     this.description = settings?.description;
     this.labels = settings?.labels;
@@ -159,19 +184,30 @@ export class Form<DataType = Record<string, any>> implements FormDefinition {
    * form.add(component1).add(component2);
    * ```
    */
-  add(component: FormComponent) {
-    if (component.name) {
-      if (
-        this.components.findIndex(
-          (candidate) => candidate.name === component.name
-        ) !== -1
-      ) {
-        throw new Error("A component with the same name already exists.");
-      }
-      this.components.push({ ...component, name: component.name });
-    } else {
+  add(component: FormComponent | [string, VariantDefinition[]]) {
+    const componentName = Array.isArray(component)
+      ? component[0]
+      : component.name;
+    if (!componentName) {
       throw new Error("The component must have a name");
     }
+    if (
+      this.components.findIndex((candidate) => {
+        const name = Array.isArray(candidate)
+          ? candidate[0].component.name
+          : candidate.name;
+        return name === componentName;
+      }) !== -1
+    ) {
+      throw new Error("A component with the same name already exists.");
+    }
+    this.components.push(
+      Array.isArray(component)
+        ? component[1].map((definition) =>
+            variantFromDefinition(definition, component[0])
+          )
+        : { name: componentName, ...component }
+    );
     return this;
   }
 
@@ -382,7 +418,7 @@ export function formFromDefinition<DataType = Record<string, any>>(
 ) {
   const form = new Form<DataType>(definition.theme, {}, { ...definition });
   for (const component of definition.components) {
-    form.add(component);
+    form.components.push(component);
   }
   return form;
 }
@@ -398,10 +434,13 @@ type FormPart = FormComponentWithName[];
  * @param form The form to get the parts for.
  * @group Form API
  */
-export function formParts(form: FormDefinition): FormPart[] {
+export function formParts(
+  form: FormDefinition,
+  data: Record<string, unknown>
+): FormPart[] {
   const parts: FormPart[] = [[]];
   let partIndex = 0;
-  for (const component of form.components) {
+  for (const component of filterComponents(form.components, data)) {
     parts[partIndex].push(component);
     if (component.type.splitsForm) {
       parts.push([]);
@@ -465,6 +504,43 @@ export const FormDataContext = createContext({} as Record<string, unknown>);
  */
 export const FormErrorsContext = createContext([] as ValidationError[]);
 
+export function componentsListFromObject<Type>(
+  components: Components<Type>
+): FormComponentsList {
+  const list = [];
+  for (const name in components) {
+    const component = components[name];
+    if (component) {
+      list.push(
+        Array.isArray(component)
+          ? component.map((definition) =>
+              variantFromDefinition(definition, name)
+            )
+          : { name, ...component }
+      );
+    }
+  }
+  return list;
+}
+
+export function variantFromDefinition(
+  definition: VariantDefinition,
+  name: string
+): FormComponentVariant {
+  if (!Array.isArray(definition)) {
+    return { component: { name, ...definition } };
+  }
+  if (definition.length === 3) {
+    return {
+      rule: [definition[0], definition[1]],
+      component: { name, ...definition[2] },
+    };
+  }
+  return {
+    rule: definition[0],
+    component: { name, ...definition[1] },
+  };
+}
 /**
  * This hook can be used by form widgets to access all of the form data.
  *  @group React widget API
@@ -492,12 +568,12 @@ export function componentErrors(
   return errors
     .filter((e) => e.path.startsWith(path))
     .map((e) => {
-      return { ...e, path: e.path.substr(path.length) };
+      return { ...e, path: e.path.substring(path.length) };
     });
 }
 
 async function validateComponents(
-  components: FormComponentWithName[],
+  components: FormComponentsList,
   data: unknown
 ) {
   let errors: ValidationError[] = [];
@@ -539,10 +615,10 @@ export async function validateForm(form: Form, data: unknown) {
 export async function validateFormPart(
   form: Form,
   part: number,
-  data: unknown,
+  data: Record<string, unknown>,
   event: React.FormEvent<HTMLFormElement>
 ) {
-  const parts = formParts(form);
+  const parts = formParts(form, data);
   if (part > parts.length - 1) {
     throw new Error("Invalid part provided");
   }

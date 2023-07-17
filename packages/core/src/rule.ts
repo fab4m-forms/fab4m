@@ -1,4 +1,5 @@
 import { FormComponentWithName } from "./component";
+import { FormComponentsList } from "./form";
 import { CompoundType, Schema } from "./schema";
 import { Validator } from "./validator";
 /**
@@ -65,13 +66,50 @@ export function ruleGroup(type: RuleGroupType, rules: AnyRule[]): RuleGroup {
  * @group Rule API
  */
 export function filterComponents(
-  components: FormComponentWithName[],
+  components: FormComponentsList,
   data: Record<string, unknown>,
   filterBreaks = false,
   parentData?: Record<string, unknown>
 ): FormComponentWithName[] {
   const filteredComponents: FormComponentWithName[] = [];
-  for (const component of components) {
+  for (const definition of components) {
+    let component: FormComponentWithName | undefined;
+    // If this is an array, then we are dealing with
+    // potential alternate components, and need to pick which one
+    // to render.
+    if (Array.isArray(definition)) {
+      for (const variant of definition) {
+        // If we have no rule to execute we can just return it.
+        if (!variant.rule) {
+          component = variant.component;
+          break;
+        }
+        // Handle rules.
+        if (
+          Array.isArray(variant.rule) &&
+          variant.rule[1].type.valid(
+            getRuleValue(variant.rule[0], data, parentData),
+            variant.rule[1].settings
+          )
+        ) {
+          component = variant.component;
+          break;
+        }
+        // Handle rule groups.
+        else if (
+          !Array.isArray(variant.rule) &&
+          variant.rule.type.handler(variant.rule.rules, data)
+        ) {
+          component = variant.component;
+          break;
+        }
+      }
+    } else {
+      component = definition;
+    }
+    if (!component) {
+      continue;
+    }
     let valid = true;
     for (const rule of component.rules) {
       if (Array.isArray(rule)) {
@@ -119,10 +157,10 @@ export function filterData(
   if (validNames.length === components.length) {
     return data;
   }
-  const filteredData: Record<string, unknown> = { ...data };
-  for (const component of components) {
-    if (component.name && validNames.indexOf(component.name) === -1) {
-      delete filteredData[component.name];
+  const filteredData: Record<string, unknown> = {};
+  for (const name of validNames) {
+    if (typeof data[name] !== "undefined") {
+      filteredData[name] = data[name];
     }
   }
   return filteredData;
