@@ -43,4 +43,4 @@ const form = createForm({
 });
 ```
 
-You can read the full documentation [/guide/variants](here).
+You can read the full documentation [here](/docs/guide/variants).
