@@ -1,4 +1,4 @@
-import { Components } from "../../form";
+import { Components, componentsListFromObject } from "../../form";
 import {
   CreateFormComponentType,
   formComponent,
@@ -33,19 +33,12 @@ export function group<DataType = Record<string, any>>(
   attributes: Omit<CreateFormComponentType<DataType>, "settings">,
   components: Components<DataType>
 ): FormComponent<DataType> {
-  const componentsList = [];
-  for (const name in components) {
-    const component = components[name];
-    if (component) {
-      componentsList.push({ name, ...component });
-    }
-  }
   return formComponent<DataType>({
     widget: groupWidget<DataType>(),
     ...attributes,
     settings: undefined,
     type: groupType,
-    components: componentsList,
+    components: componentsListFromObject<DataType>(components),
   });
 }
 

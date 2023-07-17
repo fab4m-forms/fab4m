@@ -264,14 +264,13 @@ describe("Form", () => {
   });
 
   it("ID Prefix", () => {
-    const { container, debug } = render(
+    const { container } = render(
       <FormView
         idPrefix="prefix_"
         data={{ required_text: "hello" }}
         form={form}
       />
     );
-    debug();
     expect(container.querySelector("#prefix_required_text")).not.toBe(null);
     expect(container.querySelector("#prefix_multiple-0")).not.toBe(null);
     expect(container.querySelector("#prefix_multiple-1")).not.toBe(null);

@@ -3,7 +3,8 @@
  * @module Component API
  */
 import { FormHTMLAttributes } from "react";
-import { AnyRule } from "./rule";
+import { FormComponentsList } from "./form";
+import { AnyRule, filterComponents } from "./rule";
 import { SchemaProperty } from "./schema";
 import { ComponentSerializer } from "./serializer";
 import { checkValidators, Validator, ValidationError } from "./validator";
@@ -131,7 +132,7 @@ export interface FormComponent<ValueType = any, SettingsType = any> {
   /**
    * Group components can have subcomponents that are rendered as part of the component. They should be provided here as a list of components.
    */
-  components?: FormComponentWithName[];
+  components?: FormComponentsList;
   /**
    * A list of validators to determine if the data inputted into this component is valid. See the [/docs/guide/validators](Validators guide) for more info.
    */
@@ -270,7 +271,7 @@ export async function validateComponent(
       let i = 0;
       for (const item of items) {
         if (component.components) {
-          for (const child of component.components) {
+          for (const child of filterComponents(component.components, data)) {
             errors = [
               ...errors,
               ...(await validateComponent(
@@ -290,7 +291,7 @@ export async function validateComponent(
     }
   } else {
     if (component.components && data[component.name]) {
-      for (const child of component.components) {
+      for (const child of filterComponents(component.components, data)) {
         errors = [
           ...errors,
           ...(await validateComponent(

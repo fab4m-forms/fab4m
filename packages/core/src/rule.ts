@@ -1,4 +1,5 @@
 import { FormComponentWithName } from "./component";
+import { FormComponentsList } from "./form";
 import { CompoundType, Schema } from "./schema";
 import { Validator } from "./validator";
 /**
@@ -60,21 +61,65 @@ export function ruleGroup(type: RuleGroupType, rules: AnyRule[]): RuleGroup {
  * @param components a list of components to potentially hide.
  * @param data the current data to filter against.
  * @param filterBreaks stop evaluating rules if a page break is encountered.
+ * @param parentData the data of the parent component, if any.
  * @return A list of components without the components that was filtered by the rules.
  * @group Rule API
  */
 export function filterComponents(
-  components: FormComponentWithName[],
+  components: FormComponentsList,
   data: Record<string, unknown>,
-  filterBreaks = false
+  filterBreaks = false,
+  parentData?: Record<string, unknown>
 ): FormComponentWithName[] {
   const filteredComponents: FormComponentWithName[] = [];
-  for (const component of components) {
+  for (const definition of components) {
+    let component: FormComponentWithName | undefined;
+    // If this is an array, then we are dealing with
+    // potential alternate components, and need to pick which one
+    // to render.
+    if (Array.isArray(definition)) {
+      for (const variant of definition) {
+        // If we have no rule to execute we can just return it.
+        if (!variant.rule) {
+          component = variant.component;
+          break;
+        }
+        // Handle rules.
+        if (
+          Array.isArray(variant.rule) &&
+          variant.rule[1].type.valid(
+            getRuleValue(variant.rule[0], data, parentData),
+            variant.rule[1].settings
+          )
+        ) {
+          component = variant.component;
+          break;
+        }
+        // Handle rule groups.
+        else if (
+          !Array.isArray(variant.rule) &&
+          variant.rule.type.handler(variant.rule.rules, data)
+        ) {
+          component = variant.component;
+          break;
+        }
+      }
+    } else {
+      component = definition;
+    }
+    if (!component) {
+      continue;
+    }
     let valid = true;
     for (const rule of component.rules) {
       if (Array.isArray(rule)) {
         const [ruleComponent, validator] = rule;
-        if (!validator.type.valid(data[ruleComponent], validator.settings)) {
+        if (
+          !validator.type.valid(
+            getRuleValue(ruleComponent, data, parentData),
+            validator.settings
+          )
+        ) {
           valid = false;
           break;
         }
@@ -89,14 +134,7 @@ export function filterComponents(
     if (filterBreaks && component.type.splitsForm) {
       break;
     }
-    if (component.components && component.components.length > 0) {
-      filteredComponents.push({
-        ...component,
-        components: filterComponents(component.components, data),
-      });
-    } else {
-      filteredComponents.push(component);
-    }
+    filteredComponents.push(component);
   }
   return filteredComponents;
 }
@@ -105,7 +143,7 @@ export function filterComponents(
  * Filter data that shouldn't be in the data structure, because there
  * are rules that aren't followed.
  * Data belonging to filtered components is removed from the data.
- * @param components a list of compoents to filter against.
+ * @param components a list of components to filter against.
  * @param data The data to filter
  * @return A new set of data without data belonging to non-visible components.
  * @group Rule API
@@ -119,11 +157,38 @@ export function filterData(
   if (validNames.length === components.length) {
     return data;
   }
-  const filteredData: Record<string, unknown> = { ...data };
-  for (const component of components) {
-    if (component.name && validNames.indexOf(component.name) === -1) {
-      delete filteredData[component.name];
+  const filteredData: Record<string, unknown> = {};
+  for (const name of validNames) {
+    if (typeof data[name] !== "undefined") {
+      filteredData[name] = data[name];
     }
   }
   return filteredData;
+}
+
+export function getRuleValue(
+  name: string,
+  data: Record<string, unknown> | Array<Record<string, unknown>>,
+  parentData?: Record<string, unknown>
+): unknown {
+  const parts = name.split(".");
+  for (const part of parts) {
+    if (Array.isArray(data)) {
+      if (part === "$" && parentData) {
+        data = parentData;
+      } else {
+        const partIndex = parseInt(part, 10);
+        if (typeof data[partIndex] === "undefined") {
+          return undefined;
+        }
+        data = data[partIndex];
+      }
+    } else {
+      if (typeof data[part] === "undefined") {
+        return undefined;
+      }
+      data = data[part] as Record<string, unknown>;
+    }
+  }
+  return data;
 }

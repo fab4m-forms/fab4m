@@ -1,7 +1,8 @@
 import * as React from "react";
-import { componentErrors, FormDataContext } from "../../form";
+import { componentErrors, FormDataContext, useFormData } from "../../form";
 import FormComponentView from "../../components/FormComponentView";
 import { WidgetProps } from "../../widget";
+import { filterComponents } from "../../rule";
 /**
  * Helper react component to render children of a component.
  * @group React Widget API
@@ -14,6 +15,7 @@ export default function GroupChildren(
   if (!props.component.components) {
     return null;
   }
+  const formData = useFormData();
   const value = props.value as Record<string, unknown> | undefined;
   const changeChildValue = (name: string, newValue: unknown) => {
     props.onChange({
@@ -21,7 +23,12 @@ export default function GroupChildren(
       [name]: newValue,
     });
   };
-  const children = props.component.components.map((component, index) => {
+  const children = filterComponents(
+    props.component.components,
+    formData,
+    false,
+    value
+  ).map((component, index) => {
     if (!component.name) {
       return null;
     }

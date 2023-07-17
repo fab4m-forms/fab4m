@@ -1,8 +1,8 @@
 import "@testing-library/jest-dom";
-import { textField, createForm, equals, or, exists, not } from "../src";
+import { textField, createForm, equals, or, exists, not, group } from "../src";
 import { validate } from "../src/schemaValidator";
 
-describe("Rule engine", () => {
+describe("Schema Rule engine", () => {
   const form = createForm({
     field: textField({ label: "Field" }),
     otherField: textField({ label: "Other field" }),
@@ -56,6 +56,39 @@ describe("Rule engine", () => {
     dependentRules: "dependent",
     orRule: "text",
   };
+
+  const nestedForm = createForm({
+    outside: textField({ label: "Outside" }),
+    group: group(
+      {
+        label: "Group",
+      },
+      {
+        nestedField: textField({ label: "Nested field" }),
+        otherField: textField({
+          label: "Other field",
+          required: true,
+          rules: [["group.nestedField", exists()]],
+        }),
+        dependsOnOutside: textField({
+          label: "Depends on outside",
+          required: true,
+          rules: [["outside", exists()]],
+        }),
+      }
+    ),
+    multipleGroup: group(
+      { label: "Multiple group", multiple: true },
+      {
+        field: textField({ label: "Field" }),
+        dependent: textField({
+          label: "Dependent",
+          required: true,
+          rules: [["multipleGroup.$.field", exists()]],
+        }),
+      }
+    ),
+  });
 
   test("Required conditional field", () => {
     expect(validate(form, { field: "text" }).valid).toBe(false);
@@ -127,5 +160,46 @@ describe("Rule engine", () => {
   });
   test("Group in group", () => {
     expect(validate(form, {}).valid).toBe(false);
+  });
+
+  test("Nested validation rule", () => {
+    expect(
+      validate(nestedForm, {
+        group: {
+          nestedField: "test",
+        },
+      }).valid
+    ).toBe(false);
+    expect(
+      validate(nestedForm, {
+        group: { nestedField: "test", otherField: "test" },
+      }).valid
+    ).toBe(true);
+  });
+  test("Nested field, depends on outside", () => {
+    expect(
+      validate(nestedForm, {
+        outside: "test",
+        group: {},
+      }).valid
+    ).toBe(false);
+    expect(
+      validate(nestedForm, {
+        outside: "test",
+        group: { dependsOnOutside: "test" },
+      }).valid
+    ).toBe(true);
+  });
+  test("Rules in arrays", () => {
+    expect(
+      validate(nestedForm, {
+        multipleGroup: [{ field: "test" }],
+      }).valid
+    ).toBe(false);
+    expect(
+      validate(nestedForm, {
+        multipleGroup: [{ field: "test", dependent: "test" }],
+      }).valid
+    ).toBe(true);
   });
 });

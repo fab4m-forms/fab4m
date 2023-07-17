@@ -28,8 +28,8 @@ export default function FormView(props: FormViewProps): JSX.Element {
   const goBack = () => {
     setPart(part - 1);
   };
-  const parts = formParts(props.form);
   const data = props.data as Record<string, unknown>;
+  const parts = formParts(props.form, data);
   const renderedParts =
     typeof props.part !== "undefined" ? (
       <FormPart

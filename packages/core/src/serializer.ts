@@ -1,4 +1,9 @@
-import { FormDefinition, formFromDefinition } from "./form";
+import {
+  FormComponentsList,
+  FormComponentVariant,
+  FormDefinition,
+  formFromDefinition,
+} from "./form";
 import {
   ComponentDataType,
   FormComponentType,
@@ -79,11 +84,28 @@ export type SerializedComponent = Omit<
   widget: SerializedWidget;
   multipleWidget?: SerializedWidget;
   settings?: unknown;
-  components?: SerializedComponent[];
+  components?: SerializedComponentsList;
   validators: SerializedValidator[];
   rules: Array<SerializedRuleGroup | SerializedRule>;
   dataType?: ComponentDataType;
 };
+
+/**
+ * A serialized version of a form component.
+ * @group Serializer API
+ */
+export interface SerializedVariant {
+  rule?: SerializedRule | SerializedRuleGroup;
+  component: SerializedComponent;
+}
+
+/**
+ * The list of serialized components or component variants.
+ * @group Serializer API
+ */
+export type SerializedComponentsList = Array<
+  SerializedComponent | SerializedVariant[]
+>;
 
 /**
  * A component serializer is used to serialize and unserialize a component.
@@ -175,8 +197,8 @@ export interface SerializedForm {
   schemaParts: Schema[];
   /** Schema error messages are error message overrides that can be used instead of the JSON Schema errors. **/
   schemaMessages: Record<string, string>;
-  /** A list of serialized for components */
-  components: SerializedComponent[];
+  /** A list of serialized for components or component variants. */
+  components: SerializedComponentsList;
 }
 
 /**
@@ -195,6 +217,20 @@ export function serializeRule(
     type: rule.type.name,
     rules: rule.rules.map(serializeRule),
   };
+}
+
+export function serializeComponentListItem(
+  item: FormComponent | FormComponentVariant[]
+): SerializedComponent | SerializedVariant[] {
+  if (Array.isArray(item)) {
+    return item.map((item): SerializedVariant => {
+      return {
+        component: serializeComponent(item.component),
+        rule: item.rule ? serializeRule(item.rule) : undefined,
+      };
+    });
+  }
+  return serializeComponent(item);
 }
 
 /**
@@ -219,7 +255,7 @@ export function serializeComponent(
       ? serializeMultipleWidget(component.multipleWidget)
       : undefined,
     components: component.components
-      ? component.components.map(serializeComponent)
+      ? component.components.map(serializeComponentListItem)
       : undefined,
     validators: component.validators.map((v) => ({
       settings: v.settings,
@@ -236,8 +272,7 @@ export function serializeComponent(
  * @group Serializer API
  */
 export function serialize(form: FormDefinition): SerializedForm {
-  const components: SerializedComponent[] =
-    form.components.map(serializeComponent);
+  const components = form.components.map(serializeComponentListItem);
   return {
     ...form,
     theme: form.theme.name,
@@ -303,7 +338,7 @@ export function unserialize(
     ruleGroupMap[group.name] = group;
   }
 
-  const components: FormComponentWithName[] = [];
+  const components: FormComponentsList = [];
   const plugins: SerializerPlugins = {
     types: typeMap,
     themes: themeMap,
@@ -313,12 +348,12 @@ export function unserialize(
     multipleWidgets: multipleWidgetMap,
   };
   for (const component of form.components) {
-    const unserializedComponent = unserializeComponent(component, plugins);
-    if (unserializedComponent && unserializedComponent.name) {
-      components.push({
-        ...unserializedComponent,
-        name: unserializedComponent.name,
-      });
+    const unserializedComponent = unserializeComponentListItem(
+      component,
+      plugins
+    );
+    if (unserializedComponent) {
+      components.push(unserializedComponent);
     }
   }
   const theme = themes.find((theme) => theme.name === form.theme);
@@ -330,6 +365,34 @@ export function unserialize(
     theme,
     components,
   });
+}
+
+export function unserializeComponentListItem(
+  item: SerializedComponent | SerializedVariant[],
+  plugins: SerializerPlugins
+): FormComponentWithName | FormComponentVariant[] | null {
+  if (Array.isArray(item)) {
+    const variants: FormComponentVariant[] = [];
+    for (const variant of item) {
+      let rule = undefined;
+      if (variant.rule) {
+        rule = unserializeRule(variant.rule, plugins);
+        if (!rule) {
+          continue;
+        }
+      }
+      const component = unserializeComponent(variant.component, plugins);
+      if (!component) {
+        continue;
+      }
+      variants.push({
+        rule,
+        component,
+      });
+    }
+    return variants;
+  }
+  return unserializeComponent(item, plugins) ?? null;
 }
 
 /**
@@ -381,7 +444,7 @@ export function unserializeComponent(
     if (component.components) {
       components = [];
       for (const serializedComponent of component.components) {
-        const unserializedComponent = unserializeComponent(
+        const unserializedComponent = unserializeComponentListItem(
           serializedComponent,
           plugins
         );
