@@ -86,7 +86,7 @@ export interface Schema {
 }
 
 /**
- * Generate a default schema for a component based on its definition.
+ * Generate a default schema for a component based on it's definition.
  */
 function defaultSchema(component: FormComponent): SchemaProperty | undefined {
   const properties: Record<string, SchemaProperty> = {};

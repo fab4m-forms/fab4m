@@ -1,0 +1,29 @@
+---
+sidebar_position: 7
+---
+
+import Example from "@site/src/components/Example";
+import RequiredWhenPresent from '@site/src/components/Guide/variants/RequiredWhenPresent.tsx';
+import RequiredWhenPresentSource from '!!raw-loader!@site/src/components/Guide/variants/RequiredWhenPresent.tsx';
+import VariantSelection from '@site/src/components/Guide/variants/VariantSelection.tsx';
+import VariantSelectionSource from '!!raw-loader!@site/src/components/Guide/variants/VariantSelection.tsx';
+
+# Component Variants
+
+Component variants allows you to change all aspects of a form component based
+on the state of the rest of the form.
+
+While rules allows you to show and hide different component based on the form state,
+variants let's you customize everything.
+
+Here's a simple example where we make the form component required or not, depending
+on the form state:
+
+<Example source={RequiredWhenPresentSource} example={<RequiredWhenPresent />} />
+
+## Variant selection
+
+A variant array is evaluated in order, and the first variant where the rule passes
+is selected. If you provide a component without a rule, it will always be selected.
+
+<Example source={VariantSelectionSource} example={<VariantSelection />} />
