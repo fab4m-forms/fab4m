@@ -3,6 +3,7 @@ import {
   FormComponentVariant,
   FormDefinition,
   formFromDefinition,
+  Labels,
 } from "./form";
 import {
   ComponentDataType,
@@ -193,6 +194,8 @@ export interface SerializedForm {
   theme: string;
   /** The JSON schema for the full form. **/
   schema: Schema;
+  /** The labels that should be used in the form. */
+  labels: Labels;
   /** A list of schemas for each form part. **/
   schemaParts: Schema[];
   /** Schema error messages are error message overrides that can be used instead of the JSON Schema errors. **/
