@@ -17,7 +17,7 @@ const defaultSettings: TailwindSettings = {
     "bg-slate-500 hover:bg-slate-900 dark:bg-slate-800 dark:hover:bg-slate-500",
   inputBorder: "border border-slate-300 dark:border-slate-500",
   inputBg: "bg-white dark:bg-slate-700",
-  inputText: "text-white dark:text-slate-100",
+  inputText: "text-black dark:text-slate-100",
   inputHeight: "h-10",
   text: "dark:text-white",
   labelText: "dark:text-white",
