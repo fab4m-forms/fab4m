@@ -23,6 +23,8 @@ import {
   tagsWidgetType,
   checkboxWidgetType,
   booleanFieldType,
+  SerializedComponent,
+  FormComponent,
 } from "../src";
 describe("Serializer", () => {
   const form = createForm();
@@ -72,14 +74,15 @@ describe("Serializer", () => {
   test("Serialize", () => {
     const serializedForm = serialize(form);
     expect(serializedForm.schemaParts).toHaveLength(1);
-    expect(serializedForm.components[0].type).toBe("text");
-    expect(serializedForm.components[0].widget.type).toBe("textfield");
-    expect(serializedForm.components[1].type).toBe("text");
-    expect(serializedForm.components[1].widget.type).toBe("textarea");
-    expect(serializedForm.components[1].validators[0].type).toBe("maxLength");
-    expect(serializedForm.components[1].validators[0].settings).toBe(5);
-    expect(serializedForm.components[2].dataType).toBe("boolean");
-    const rules = serializedForm.components[1].rules;
+    const components = serializedForm.components as SerializedComponent[];
+    expect(components[0].type).toBe("text");
+    expect(components[0].widget.type).toBe("textfield");
+    expect(components[1].type).toBe("text");
+    expect(components[1].widget.type).toBe("textarea");
+    expect(components[1].validators[0].type).toBe("maxLength");
+    expect(components[1].validators[0].settings).toBe(5);
+    expect(components[2].dataType).toBe("boolean");
+    const rules = components[1].rules;
     expect(rules[0][0]).toBe("text");
     expect(rules[0][1].type).toBe("equals");
     expect(rules[0][1].settings.value).toBe("text");
@@ -91,8 +94,15 @@ describe("Serializer", () => {
       expect(groupRules[0][1].settings.values).toHaveLength(2);
       expect(groupRules[1][1].type).toBe("equals");
     }
-    expect(serializedForm.components[3].multiple).toBe(true);
-    expect(serializedForm.components[3].multipleWidget?.type).toBe("tags");
+    expect(components[3].multiple).toBe(true);
+    expect(components[3].multipleWidget?.type).toBe("tags");
+  });
+
+  test("Remove unused members from form", () => {
+    const serializedForm = serialize(form) as unknown;
+    expect(
+      (serializedForm as Record<string, unknown>).submitListeners
+    ).not.toBeDefined();
   });
 
   test("Unserialize", async () => {
@@ -106,20 +116,17 @@ describe("Serializer", () => {
       [maxLengthValidator, allowedValuesValidator, equalsValidator],
       [orType]
     );
-    expect(unserializedForm.components[0].type.name).toBe("text");
-    expect(unserializedForm.components[0].widget.type.name).toBe("textfield");
-    expect(unserializedForm.components[1].widget.type.name).toBe("textarea");
-    expect(unserializedForm.components[1].validators[0].type.name).toBe(
-      "maxLength"
-    );
-    expect(unserializedForm.components[1].validators[0].settings).toBe(5);
-    expect(unserializedForm.components[1].rules[0][1].type.name).toBe("equals");
-    if (!Array.isArray(unserializedForm.components[1].rules[1])) {
-      expect(unserializedForm.components[1].rules[1].type.name).toBe("or");
+    const components = unserializedForm.components as FormComponent[];
+    expect(components[0].type.name).toBe("text");
+    expect(components[0].widget.type.name).toBe("textfield");
+    expect(components[1].widget.type.name).toBe("textarea");
+    expect(components[1].validators[0].type.name).toBe("maxLength");
+    expect(components[1].validators[0].settings).toBe(5);
+    expect(components[1].rules[0][1].type.name).toBe("equals");
+    if (!Array.isArray(components[1].rules[1])) {
+      expect(components[1].rules[1].type.name).toBe("or");
     }
-    expect(unserializedForm.components[3].multiple).toBe(true);
-    expect(unserializedForm.components[3].multipleWidget?.type.name).toBe(
-      "tags"
-    );
+    expect(components[3].multiple).toBe(true);
+    expect(components[3].multipleWidget?.type.name).toBe("tags");
   });
 });
