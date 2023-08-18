@@ -277,7 +277,7 @@ export function serializeComponent(
 export function serialize(form: FormDefinition): SerializedForm {
   const components = form.components.map(serializeComponentListItem);
   return {
-    ...form,
+    labels: form.labels,
     theme: form.theme.name,
     schema: generateSchema(form),
     schemaParts: generatePartSchemas(form),
