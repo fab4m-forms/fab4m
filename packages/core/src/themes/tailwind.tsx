@@ -12,9 +12,8 @@ export interface TailwindSettings {
 }
 
 const defaultSettings: TailwindSettings = {
-  primaryBg: "bg-emerald-700 hover:bg-emerald-900",
-  secondaryBg:
-    "bg-slate-500 hover:bg-slate-900 dark:bg-slate-800 dark:hover:bg-slate-500",
+  primaryBg: "bg-neutral-900 hover:bg-neutral-700",
+  secondaryBg: "bg-neutral-400 hover:bg-neutral-600",
   inputBorder: "border border-slate-300 dark:border-slate-500",
   inputBg: "bg-white dark:bg-slate-700",
   inputText: "text-black dark:text-slate-100",
@@ -34,8 +33,8 @@ export function createTailwindTheme(args: {
 }): Theme {
   const s = { ...defaultSettings, ...args.settings };
   const btnStyle = "p-2 rounded text-white cursor-pointer font-bold";
-  const button = `${btnStyle} ${s.primaryBg}`;
-  const secondaryButton = `${btnStyle} ${s.secondaryBg}`;
+  const button = `${btnStyle} ${s.primaryBg} justify-center text-sm`;
+  const secondaryButton = `${btnStyle} ${s.secondaryBg} justify-center text-xs`;
   return {
     name: args.name ?? "tailwind",
     module: args.module ?? "fab4m",
