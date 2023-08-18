@@ -404,7 +404,7 @@ export default function App() {
   return (
     <React.StrictMode>
       <div
-        className={`App ${darkMode ? "fab4m-dark" : ""}`}
+        className={`App ${darkMode ? "fab4m-dark dark" : ""}`}
         style={{ maxWidth: "900px", padding: "1em", margin: "0 auto" }}
       >
         <label className="label">Theme</label>
