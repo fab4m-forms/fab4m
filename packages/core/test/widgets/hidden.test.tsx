@@ -1,5 +1,5 @@
 import * as React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { basic, textField, hiddenFieldWidget } from "../../src";
 import FormComponentView from "../../src/components/FormComponentView";
 

@@ -7,7 +7,6 @@ import {
   textFieldWidget,
   StatefulFormView,
   equals,
-  generateSchema,
 } from "../src";
 
 describe("Variants API", () => {

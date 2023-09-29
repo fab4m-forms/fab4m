@@ -1,11 +1,6 @@
 import * as React from "react";
 
-import {
-  fireEvent,
-  queryByLabelText,
-  render,
-  waitFor,
-} from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import {
   textField,
   basic,
