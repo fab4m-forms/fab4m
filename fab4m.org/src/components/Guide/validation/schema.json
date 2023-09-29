@@ -14,10 +14,7 @@
     "city": {
       "type": "string",
       "minLength": 1,
-      "enum": [
-        "Gothenburg",
-        "Stockholm"
-      ]
+      "enum": ["Gothenburg", "Stockholm"]
     },
     "vegetarian": {
       "type": "boolean",
@@ -48,8 +45,5 @@
       "required": []
     }
   },
-  "required": [
-    "username",
-    "city"
-  ]
+  "required": ["username", "city"]
 }

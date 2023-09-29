@@ -4,13 +4,13 @@
   --fab4m-submit-color: #fff;
   --fab4m-submit-bg-hover: #555;
   --fab4m-fieldset-border: #aaa;
-  --fab4m-remove-item-bg: #E14444;
+  --fab4m-remove-item-bg: #e14444;
   --fab4m-remove-item-color: #fff;
-  --fab4m-remove-item-bg-hover: #E12B2B;
-  --fab4m-add-item-bg: #13902D;
-  --fab4m-add-item-color: #FFF;
-  --fab4m-add-item-bg-hover: #2C6638;
-  --fab4m-error-text: #AB1C1C;
+  --fab4m-remove-item-bg-hover: #e12b2b;
+  --fab4m-add-item-bg: #13902d;
+  --fab4m-add-item-color: #fff;
+  --fab4m-add-item-bg-hover: #2c6638;
+  --fab4m-error-text: #ab1c1c;
   --fab4m-pager-previous-bg: #eee;
   --fab4m-pager-previous-color: #333;
   --fab4m-pager-previous-bg-hover: #ddd;
@@ -46,9 +46,9 @@
 }
 
 .fab4m-description {
-  font-size: .8em;
-  margin-top: .5em;
-  margin-bottom: .5em;
+  font-size: 0.8em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 .fab4m-checkbox span {
@@ -114,7 +114,8 @@
   font-weight: bold;
 }
 
-.fab4m-multiple-item, .fab4m-multiple-items {
+.fab4m-multiple-item,
+.fab4m-multiple-items {
   margin-bottom: 0.5em;
 }
 
@@ -151,21 +152,23 @@
 .fab4m-error-list {
   margin: 0;
   padding: 0;
-  margin-top: .5em;
+  margin-top: 0.5em;
   list-style-type: none;
-  font-size: .8em;
+  font-size: 0.8em;
   color: var(--fab4m-error-text);
 }
 
 .fab4m-error-item {
-  margin-bottom: .3em;
+  margin-bottom: 0.3em;
 }
 
 .fab4m-pager {
   display: flex;
 }
 
-.fab4m-pager-previous, .fab4m-pager-next, .fab4m-pager-complete {
+.fab4m-pager-previous,
+.fab4m-pager-next,
+.fab4m-pager-complete {
   appearance: none;
   border: none;
   padding: 0.5em 2em;
