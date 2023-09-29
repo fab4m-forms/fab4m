@@ -24,7 +24,8 @@
     "docs-md": "typedoc --out docs-md src/index.ts",
     "docs-json": "typedoc --json docs.json src/index.ts",
     "typecheck": "tsc --noEmit",
-    "test:unit": "vitest --run"
+    "test:unit": "vitest --run",
+    "prettier-fix": "prettier fix -w src test"
   },
   "directories": {
     "dist": "dist",
