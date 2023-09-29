@@ -25,7 +25,7 @@
     "docs-json": "typedoc --json docs.json src/index.ts",
     "typecheck": "tsc --noEmit",
     "test:unit": "vitest --run",
-    "prettier-fix": "prettier fix -w src test"
+    "prettier-fix": "prettier fix -w ."
   },
   "directories": {
     "dist": "dist",

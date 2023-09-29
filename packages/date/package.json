@@ -25,7 +25,12 @@
     "test:unit": "vitest --run",
     "build-browser": "esbuild --external:react --external:react-dom --external:react-datepicker --external:@fab4m/fab4m  --bundle src/index.ts --format=esm --outfile=dist/index.es.js",
     "build-node": "esbuild --platform=node --external:react --external:react-dom --external:react-datepicker --external:@fab4m/fab4m --minify --bundle src/index.ts --outfile=dist/index.cjs.js",
-    "build": "npm run build-browser && npm run build-node && tsc -d"
+    "build": "npm run build-browser && npm run build-node && tsc -d",
+    "typecheck": "tsc --noEmit",
+    "test:unit": "vitest --run",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint-fix": "eslint --fix . --ext .js,.jsx,.ts,.tsx",
+    "prettier-fix": "prettier -w ."
   },
   "peerDependencies": {
     "react-datepicker": "^4.2"

@@ -71,7 +71,7 @@ export const validPasswordValidator: PasswordValidatorType = {
   },
   valid: (value, settings) =>
     new RegExp(passwordRegex(settings)).test(
-      typeof value === "string" ? value : value.password
+      typeof value === "string" ? value : value.password,
     ),
   defaultSettings: {
     minLength: 8,
@@ -145,7 +145,7 @@ export const validOldPasswordValidator: PasswordValidateOldType = {
  * @group Validators
  */
 export function validPassword(
-  settings?: ValidationSettings
+  settings?: ValidationSettings,
 ): Validator<PasswordValidatorType, ValidationSettings> {
   return {
     type: validPasswordValidator,
@@ -160,7 +160,7 @@ export function validPassword(
  * @group Validators
  */
 export function validOldPassword(
-  validate: (password: string) => Promise<boolean>
+  validate: (password: string) => Promise<boolean>,
 ): Validator<PasswordValidateOldType, ValidateOldSettings> {
   return {
     type: validOldPasswordValidator,

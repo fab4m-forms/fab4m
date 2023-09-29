@@ -5,7 +5,7 @@ import FormRoute from "./FormRoute";
 import { RouterFormViewProps } from "./RouterFormView";
 
 export function StaticRouterFormView(
-  props: RouterFormViewProps & { location: string }
+  props: RouterFormViewProps & { location: string },
 ): JSX.Element {
   return (
     <StaticRouter basename={props.basename} location={props.location}>

@@ -4,13 +4,13 @@ export type Option<OptionsType, Context = any> =
   | [string, OptionsType, Context]
   | OptionsType;
 type AutocompleteCallback<OptionType, Context> = (
-  search: string
+  search: string,
 ) => Promise<Option<OptionType, Context>[]>;
 
 type ElementCallback<OptionType, Context = undefined> = (
   value: OptionType,
   label: string,
-  context: Context
+  context: Context,
 ) => React.ReactNode;
 
 export interface AutocompleteSettings<OptionType, Context> {
@@ -32,7 +32,7 @@ export const autocompleteWidgetType: WidgetType<
 };
 
 export function autocompleteWidget<OptionType, Context = undefined>(
-  options?: AutocompleteSettings<OptionType, Context>
+  options?: AutocompleteSettings<OptionType, Context>,
 ) {
   return widget<OptionType, AutocompleteSettings<OptionType, Context>>({
     type: autocompleteWidgetType,

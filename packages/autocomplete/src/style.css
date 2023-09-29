@@ -1,36 +1,36 @@
 .fab4m-autocomplete-list {
-    list-style-type: none;
-    margin: 0;
-    padding: .5em;
-    border: 1px solid #aaa;
-    display: none;
-    position: absolute;
-    width: 100%;
-    border-radius: 2px;
-    margin-top: .2em;
-    background: #fff;
-    box-sizing: border-box;
+  list-style-type: none;
+  margin: 0;
+  padding: 0.5em;
+  border: 1px solid #aaa;
+  display: none;
+  position: absolute;
+  width: 100%;
+  border-radius: 2px;
+  margin-top: 0.2em;
+  background: #fff;
+  box-sizing: border-box;
 }
 
 .fab4m-autocomplete-container {
-    position: relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
 }
 
 .fab4m-autocomplete-list-open {
-    display: block;
+  display: block;
 }
 
 .fab4m-autocomplete-item {
-    margin-bottom: .2em;
-    font-size: .8em;
-    padding: .2em;
+  margin-bottom: 0.2em;
+  font-size: 0.8em;
+  padding: 0.2em;
 }
 
 .fab4m-autocomplete-item-highlighted {
-    background: #eee;
+  background: #eee;
 }
 
 .fab4m-autocomplete-item-selected {
-    font-weight: bold;
+  font-weight: bold;
 }

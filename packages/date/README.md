@@ -62,7 +62,6 @@ export default function DateExamples() {
     </div>
   );
 }
-
 ```
 
 ## The datepicker widget
@@ -97,7 +96,6 @@ export default function CustomFormat() {
     </div>
   );
 }
-
 ```
 
 ### Fixed locale
@@ -128,7 +126,6 @@ export default function SingleLocale() {
     </div>
   );
 }
-
 ```
 
 ### Using the browser locale
@@ -162,7 +159,6 @@ export default function BrowserLocale() {
     </div>
   );
 }
-
 ```
 
 # The date range widget
@@ -170,10 +166,10 @@ export default function BrowserLocale() {
 The date range widget is used with the date range field. It supports all settings from the date picker
 widget above and the following additional settings:
 
-* **fromLabel**: The text that is displayed inside of the from input field.
-* **toLabel**: The text that is is displayed inside of the to input field.
-* **optionalEndDate**: This makes the end date optional.
-* **withTime**: If this is true, then you get the option to specify the time in the date range, not just the dates.
+- **fromLabel**: The text that is displayed inside of the from input field.
+- **toLabel**: The text that is is displayed inside of the to input field.
+- **optionalEndDate**: This makes the end date optional.
+- **withTime**: If this is true, then you get the option to specify the time in the date range, not just the dates.
 
 # License
 

@@ -31,7 +31,7 @@ describe("date time field", () => {
         component={date}
         theme={basic}
         value={data}
-      />
+      />,
     );
     const element = (await findByLabelText("Date field")) as HTMLInputElement;
     const currentDateString = format(new Date(), "Pp");
@@ -56,7 +56,7 @@ describe("date time field", () => {
         name: "date",
         label: "Date",
         required: true,
-      })
+      }),
     );
     const schema = generateSchema(form);
     const dateSchema = schema.properties.date;
@@ -78,7 +78,7 @@ describe("date time field", () => {
           useBrowserLocale: true,
           locales: [sv, enUS],
         }),
-      })
+      }),
     );
     const serialized = serialize(form);
     const widget = serialized.components[0].widget;

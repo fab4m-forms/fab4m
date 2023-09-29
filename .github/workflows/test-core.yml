@@ -17,6 +17,6 @@ jobs:
           cache: "npm"
       - run: npm ci
       - run: cd packages/core && npm run build
-      - run: cd packages/${{matrix.package}} && npx prettier --check src test
+      - run: cd packages/${{matrix.package}} && npx prettier --check .
       - run: cd packages/${{matrix.package}} && npx eslint . --ext .js,.jsx,.ts,.tsx
       - run: cd packages/${{matrix.package}} && npm run test:unit

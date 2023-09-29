@@ -8,7 +8,7 @@ import FormRoute, { FormRouteProps } from "./FormRoute";
 export default function StatefulFormRoute(
   props: Omit<FormRouteProps, "data"> & {
     data?: unknown;
-  }
+  },
 ): JSX.Element {
   const [data, changeData] = React.useState(props.data ?? {});
   props.form.onAfterSubmit(() => {

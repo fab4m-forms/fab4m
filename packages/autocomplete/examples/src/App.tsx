@@ -55,7 +55,7 @@ function App() {
           !search
             ? []
             : fakeItems.filter((item) =>
-                item[0].toLowerCase().includes(search.toLowerCase())
+                item[0].toLowerCase().includes(search.toLowerCase()),
               ),
       }),
     }),
@@ -78,7 +78,7 @@ function App() {
           !search
             ? []
             : fakeItems.filter((item) =>
-                item[0].toLowerCase().includes(search.toLowerCase())
+                item[0].toLowerCase().includes(search.toLowerCase()),
               ),
       }),
     }),

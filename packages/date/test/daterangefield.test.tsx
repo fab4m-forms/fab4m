@@ -29,10 +29,10 @@ describe("date range field", () => {
         component={date}
         theme={basic}
         value={data}
-      />
+      />,
     );
     const fromElement = (await findByPlaceholderText(
-      "From"
+      "From",
     )) as HTMLInputElement;
     const toElement = (await findByPlaceholderText("To")) as HTMLInputElement;
     const currentDateString = format(now, "P");

@@ -5,6 +5,7 @@ repeating yourself with lots of tedious markup. Fab4m lets you define
 the form structure and the representation at the same time.
 
 Check the [full documentation](https://fab4m.org/) for a complete overview of the features.
+
 ## Install fab4m
 
 Fab4m requires you to be up and running with react or preact first.

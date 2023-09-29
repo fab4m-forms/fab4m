@@ -54,7 +54,7 @@ describe("Autocomplete field", () => {
           !search
             ? []
             : fakeItems.filter((item) =>
-                item[0].toLowerCase().includes(search.toLowerCase())
+                item[0].toLowerCase().includes(search.toLowerCase()),
               ),
       }),
     }),
@@ -76,7 +76,7 @@ describe("Autocomplete field", () => {
           !search
             ? []
             : fakeItems.filter((item) =>
-                item[0].toLowerCase().includes(search.toLowerCase())
+                item[0].toLowerCase().includes(search.toLowerCase()),
               ),
       }),
     }),
@@ -88,7 +88,7 @@ describe("Autocomplete field", () => {
     inputValue: string,
     labels: string[],
     itemLabel: string,
-    formValue: string | number
+    formValue: string | number,
   ) => {
     return async () => {
       let value: string | undefined;
@@ -97,7 +97,7 @@ describe("Autocomplete field", () => {
       });
       form.onDataChange(spy);
       const { findAllByLabelText, queryByText, findByText } = render(
-        <FormView form={form} data={{}} />
+        <FormView form={form} data={{}} />,
       );
       const element = (await findAllByLabelText(label))[1] as HTMLInputElement;
       fireEvent.input(element, { target: { value: inputValue } });
@@ -122,8 +122,8 @@ describe("Autocomplete field", () => {
       "test",
       ["test", "test2"],
       "test",
-      "test"
-    )
+      "test",
+    ),
   );
   test(
     "Autcomplete, labels",
@@ -133,8 +133,8 @@ describe("Autocomplete field", () => {
       "test",
       ["Test label", "Test label 2"],
       "Test label",
-      "test"
-    )
+      "test",
+    ),
   );
   test(
     "Autcomplete, callback",
@@ -144,13 +144,13 @@ describe("Autocomplete field", () => {
       "item 1",
       ["Item 1", "Item 10"],
       "Item 10",
-      11
-    )
+      11,
+    ),
   );
 
   test("Custom element", async () => {
     const { findAllByLabelText, queryByText } = render(
-      <FormView form={form} data={{}} />
+      <FormView form={form} data={{}} />,
     );
     const element = (
       await findAllByLabelText("Custom element")
@@ -163,7 +163,7 @@ describe("Autocomplete field", () => {
 
   test("Autocomplete search", async () => {
     const { findAllByLabelText, queryByText } = render(
-      <FormView form={form} data={{}} />
+      <FormView form={form} data={{}} />,
     );
     const element = (
       await findAllByLabelText("Strings")
@@ -182,7 +182,7 @@ describe("Autocomplete field", () => {
 
   test("Element selection", async () => {
     const { findAllByLabelText, findByText } = render(
-      <StatefulFormView form={form} />
+      <StatefulFormView form={form} />,
     );
     const element = (await findAllByLabelText("Labels"))[1] as HTMLInputElement;
     fireEvent.input(element, { target: { value: "test" } });

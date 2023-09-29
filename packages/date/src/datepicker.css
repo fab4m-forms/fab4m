@@ -1,7 +1,7 @@
 .date-range-wrapper {
-    display: flex;
+  display: flex;
 }
 .date-range-separator {
-    margin: auto 5px;
-    font-weight: bold;
+  margin: auto 5px;
+  font-weight: bold;
 }

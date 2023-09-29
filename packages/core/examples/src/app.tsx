@@ -233,7 +233,7 @@ export default function App() {
         {
           in_group: textField({ label: "In group" }),
           another_in_group: textField({ label: "Another in group" }),
-        }
+        },
       ),
       fieldset: group(
         { label: "Fieldset Group", widget: fieldsetWidget() },
@@ -243,7 +243,7 @@ export default function App() {
             name: "another_in_group",
             label: "Another in group",
           }),
-        }
+        },
       ),
       multiple_group: group(
         {
@@ -258,7 +258,7 @@ export default function App() {
             name: "another_in_group",
             label: "Another in group",
           }),
-        }
+        },
       ),
       details_groups: group(
         {
@@ -280,7 +280,7 @@ export default function App() {
             name: "another_in_group",
             label: "Another in group",
           }),
-        }
+        },
       ),
       multiple_text: textField({
         label: "Multiple text",
@@ -330,7 +330,7 @@ export default function App() {
       submit: submit({ name: "submit" }, { title: "Custom Submit" }),
     },
     {},
-    theme
+    theme,
   );
   form.onSubmit((e, data) => {
     e.preventDefault();
@@ -343,11 +343,11 @@ export default function App() {
 
   multistep.add(textField({ name: "first_page", label: "First page" }));
   multistep.add(
-    fileField({ name: "file", label: "File", validators: [fileSize(1)] })
+    fileField({ name: "file", label: "File", validators: [fileSize(1)] }),
   );
   multistep.add(pageBreak({ name: "first" }));
   multistep.add(
-    textField({ name: "second_page", required: true, label: "Second page" })
+    textField({ name: "second_page", required: true, label: "Second page" }),
   );
   multistep.add(pageBreak({ name: "second" }));
   multistep.add(textField({ name: "third_page", label: "Last page" }));

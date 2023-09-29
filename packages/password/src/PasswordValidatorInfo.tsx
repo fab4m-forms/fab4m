@@ -10,7 +10,7 @@ import { Theme, ValidatorInfoProps } from "@fab4m/fab4m";
  * @group Internal React API
  */
 export default function PasswordValidatorInfo(
-  props: ValidatorInfoProps<PasswordVerifyData | string, ValidationSettings>
+  props: ValidatorInfoProps<PasswordVerifyData | string, ValidationSettings>,
 ): JSX.Element | null {
   const rules = [];
   if (!props.value) {
@@ -24,7 +24,7 @@ export default function PasswordValidatorInfo(
       <li className={props.theme.classes.descriptionItem} key={rules.length}>
         <Valid valid={/\w/.test(password)} theme={props.theme} />
         <span>The password needs to include at least one letter</span>
-      </li>
+      </li>,
     );
   }
   if (props.settings.requiredNumber) {
@@ -32,7 +32,7 @@ export default function PasswordValidatorInfo(
       <li className={props.theme.classes.descriptionItem} key={rules.length}>
         <Valid valid={/[0-9]/.test(password)} theme={props.theme} />
         <span>The password needs to include at least one number</span>
-      </li>
+      </li>,
     );
   }
   if (props.settings.requiredSpecialChar) {
@@ -42,7 +42,7 @@ export default function PasswordValidatorInfo(
         <span>
           The password needs to include at least one special character
         </span>
-      </li>
+      </li>,
     );
   }
   return (
