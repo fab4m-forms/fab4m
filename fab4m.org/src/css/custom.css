@@ -15,12 +15,12 @@
   --ifm-color-primary-lightest: #1dc17d;
   --ifm-code-font-size: 95%;
   --feature-box-bg: #eee;
-  --feature-box-border:  #333;
+  --feature-box-border: #333;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
+[data-theme="dark"] {
   --ifm-color-primary: #25c2a0;
   --ifm-color-primary-dark: #21af90;
   --ifm-color-primary-darker: #1fa588;
@@ -30,110 +30,107 @@
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --feature-box-bg: #333;
-  --feature-box-border:  #fff;
-
+  --feature-box-border: #fff;
 }
 
 .fab4m-required-indicator {
-    border: none !important;
-    clip: rect(0, 0, 0, 0) !important;
-    height: 0.01em !important;
-    overflow: hidden !important;
-    padding: 0 !important;
-    position: absolute !important;
-    white-space: nowrap !important;
-    width: 0.01em !important;
+  border: none !important;
+  clip: rect(0, 0, 0, 0) !important;
+  height: 0.01em !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+  width: 0.01em !important;
 }
 
 .fab4m-required-indicator:after {
-    top: 2px;
+  top: 2px;
 }
 
 .form-box {
-    background: var(--ifm-pre-background);
-    border-radius: .2em;
-    padding: 1em;
+  background: var(--ifm-pre-background);
+  border-radius: 0.2em;
+  padding: 1em;
 }
 
 .feature-box {
-    flex: 1;
-    background: var(--feature-box-bg);
-    border-radius: .5em;
-    padding: 1.5em;
+  flex: 1;
+  background: var(--feature-box-bg);
+  border-radius: 0.5em;
+  padding: 1.5em;
 }
 
 .feature-arrow {
-    height: 5em;
-    width: 5em;
-	  fill: var(--ifm-color-primary-darkest);
-    transform: rotate(90deg);
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 1em;
+  height: 5em;
+  width: 5em;
+  fill: var(--ifm-color-primary-darkest);
+  transform: rotate(90deg);
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1em;
 }
 
 .features {
-    margin-bottom: 2em;
-    display: flex;
-    flex-direction: column;
+  margin-bottom: 2em;
+  display: flex;
+  flex-direction: column;
 }
 
-
 .feature {
-    flex: 1;
+  flex: 1;
 }
 
 .feature-large {
-    padding: 2em;
-    background: var(--feature-box-bg);
+  padding: 2em;
+  background: var(--feature-box-bg);
 }
 
 .feature-large .example .feature-box {
-    padding: 0;
+  padding: 0;
 }
 
 .feature-large .description {
-    margin-bottom: 1em;
-    flex: 1;
+  margin-bottom: 1em;
+  flex: 1;
 }
 .feature-large .example {
-    flex: 2;
-    margin-left: 1em;
+  flex: 2;
+  margin-left: 1em;
 }
 
 .feature .language-jsx {
-    max-width: 320x;
+  max-width: 320x;
 }
 
 @media only screen and (min-width: 800px) {
-    .feature-large {
+  .feature-large {
     display: flex;
     flex-wrap: wrap;
-
-    }
-    .example {
-        max-width: 60vw;
-    }
+  }
+  .example {
+    max-width: 60vw;
+  }
 }
 
 @media only screen and (min-width: 1400px) {
-   .features {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-   }
-    .feature-arrow {
-        transform: none;
-        margin-left: 1em;
-        margin-right: 1em;
-        margin-bottom: 0;
-    }
+  .features {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+  .feature-arrow {
+    transform: none;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-bottom: 0;
+  }
 }
 
 .intro {
-    margin-top: 2em;
+  margin-top: 2em;
 }
 
 .intro .button {
-    --ifm-button-size-multiplier: 2;
+  --ifm-button-size-multiplier: 2;
 }

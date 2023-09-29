@@ -141,16 +141,17 @@ export interface WidgetType<ValueType = any, SettingsType = any> {
 
 /**
  * Definition of a widget that can be added to a component.
+ * The widget can either be a definition or a render component.
  * @typeParam ValueType the type of value the widget can handle.
  * @typeParam SettingsValue The type of settings this widget type will be using.
  * @group Widget API
  */
-export interface Widget<ValueType = any, SettingsType = any> {
+export type Widget<ValueType = any, SettingsType = any> = {
   /** The widget type definition */
   type: WidgetType<ValueType, SettingsType>;
   /** Settings for this widget */
   settings: SettingsType;
-}
+};
 
 /**
  * Definition of a 'multiple widget' that can be added to a component.

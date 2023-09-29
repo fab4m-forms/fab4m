@@ -12,13 +12,13 @@ $submit-color-dark: #333 !default;
 $submit-bg-hover: #555 !default;
 
 $fieldset-border: #aaa !default;
-$remove-item-bg: #E14444 !default;
+$remove-item-bg: #e14444 !default;
 $remove-item-color: #fff !default;
-$remove-item-bg-hover: #E12B2B !default;
-$add-item-bg: #13902D !default;
-$add-item-color: #FFF !default;
-$add-item-bg-hover: #2C6638 !default;
-$error-text: #AB1C1C !default;
+$remove-item-bg-hover: #e12b2b !default;
+$add-item-bg: #13902d !default;
+$add-item-color: #fff !default;
+$add-item-bg-hover: #2c6638 !default;
+$error-text: #ab1c1c !default;
 $pager-previous-bg: #eee !default;
 $pager-previous-color: #333 !default;
 $pager-previous-bg-hover: #ddd !default;
@@ -29,9 +29,9 @@ $pager-complete-bg: #333 !default;
 $pager-complete-color: #fff !default;
 $pager-complete-bg-hover: #555 !default;
 $tag-background: #eee !default;
-$remove-tag-bg: #AB1C1C !default;
-$remove-tag-color: #FFF !default;
-$remove-tag-bg-hover: #7B1F1F !default;
+$remove-tag-bg: #ab1c1c !default;
+$remove-tag-color: #fff !default;
+$remove-tag-bg-hover: #7b1f1f !default;
 
 .fab4m-button {
   appearance: none;
@@ -61,7 +61,8 @@ $remove-tag-bg-hover: #7B1F1F !default;
   margin-bottom: 0.4em;
 }
 
-.fab4m-checkbox, .fab4m-radio {
+.fab4m-checkbox,
+.fab4m-radio {
   margin-left: 5px;
   input {
     padding: 0;
@@ -70,25 +71,26 @@ $remove-tag-bg-hover: #7B1F1F !default;
 }
 
 .fab4m-description {
-  font-size: .8em;
-  margin-top: .5em;
-  margin-bottom: .5em;
+  font-size: 0.8em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 .fab4m-description-list {
-  margin: .5em 0;
+  margin: 0.5em 0;
   padding: 0;
   margin-left: 1em;
-  font-size: .9em;
+  font-size: 0.9em;
   list-style-type: none;
 }
 
 .fab4m-description-item {
   margin: 0;
   display: flex;
-  .fab4m-description-item-placeholder, .fab4m-description-item-icon {
+  .fab4m-description-item-placeholder,
+  .fab4m-description-item-icon {
     width: 1.2em;
-    margin-right: .2em;
+    margin-right: 0.2em;
   }
   span {
     margin: auto 0;
@@ -164,7 +166,8 @@ $remove-tag-bg-hover: #7B1F1F !default;
   font-weight: bold;
 }
 
-.fab4m-multiple-item, .fab4m-multiple-items {
+.fab4m-multiple-item,
+.fab4m-multiple-items {
   margin-bottom: 0.5em;
 }
 
@@ -173,7 +176,7 @@ $remove-tag-bg-hover: #7B1F1F !default;
   border: none;
   background: $remove-item-bg;
   color: $remove-item-color;
-  padding: .2em .5em;
+  padding: 0.2em 0.5em;
   margin: 0;
 }
 
@@ -194,22 +197,24 @@ $remove-tag-bg-hover: #7B1F1F !default;
 .fab4m-error-list {
   margin: 0;
   padding: 0;
-  margin-top: .5em;
+  margin-top: 0.5em;
   list-style-type: none;
-  font-size: .8em;
+  font-size: 0.8em;
   color: $error-text;
 }
 
 .fab4m-error-item {
-  margin-bottom: .3em;
+  margin-bottom: 0.3em;
 }
 
 .fab4m-pager {
   display: flex;
 }
 
-.fab4m-pager-previous, .fab4m-pager-next, .fab4m-pager-complete {
-  @extend .fab4m-button
+.fab4m-pager-previous,
+.fab4m-pager-next,
+.fab4m-pager-complete {
+  @extend .fab4m-button;
 }
 
 .fab4m-pager-next {
@@ -291,7 +296,7 @@ $remove-tag-bg-hover: #7B1F1F !default;
   cursor: pointer;
   line-height: 1em;
   height: 1.5em;
-  font-size: .8em;
+  font-size: 0.8em;
   background: $remove-tag-bg;
   color: $remove-tag-color;
   margin-top: auto;
@@ -325,7 +330,7 @@ $remove-tag-bg-hover: #7B1F1F !default;
 }
 
 .fab4m-date-range-separator {
-  margin: auto .5em;
+  margin: auto 0.5em;
 }
 
 .fab4m-required-indicator {
@@ -340,7 +345,8 @@ $remove-tag-bg-hover: #7B1F1F !default;
     background: $submit-bg-dark;
     color: $submit-color-dark;
   }
-  .fab4m-input, .fab4m-textarea {
+  .fab4m-input,
+  .fab4m-textarea {
     background: $input-bg-dark;
     color: $input-color-dark;
   }
