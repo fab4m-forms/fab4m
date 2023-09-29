@@ -5,7 +5,7 @@ jobs:
   test:
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
         package: ["core", "password", "date", "routerforms", "autocomplete"]
     runs-on: ubuntu-latest
     steps:
