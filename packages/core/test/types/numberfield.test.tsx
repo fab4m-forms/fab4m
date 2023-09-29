@@ -37,10 +37,10 @@ describe("number field", () => {
         component={integer}
         theme={basic}
         value={data}
-      />
+      />,
     );
     const element = (await findByLabelText(
-      "Integer field"
+      "Integer field",
     )) as HTMLInputElement;
     expect(element.value).toBe("0");
     fireEvent.input(element, {
@@ -71,7 +71,7 @@ describe("number field", () => {
         component={float}
         theme={basic}
         value={data}
-      />
+      />,
     );
     const element = (await findByLabelText("Float field")) as HTMLInputElement;
     expect(element.value).toBe("10");

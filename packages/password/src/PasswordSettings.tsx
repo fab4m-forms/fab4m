@@ -34,7 +34,7 @@ export default function PasswordStrength(props: {
         className={`password-rule ${
           props.value.length >= props.settings.minLength ? "valid" : "invalid"
         }}`}
-      ></li>
+      ></li>,
     );
   }
 
@@ -44,7 +44,7 @@ export default function PasswordStrength(props: {
         value={props.value}
         pattern={/\w/}
         description={"Must contain at least one letter"}
-      />
+      />,
     );
   }
   if (props.settings.requiredNumber) {
@@ -53,7 +53,7 @@ export default function PasswordStrength(props: {
         value={props.value}
         pattern={/\d/}
         description={"Must contain at least one number"}
-      />
+      />,
     );
   }
   if (props.settings.requiredSpecialChar) {
@@ -62,7 +62,7 @@ export default function PasswordStrength(props: {
         value={props.value}
         pattern={/[@$!%*#?&]/}
         description={"Must contain at least one special character"}
-      />
+      />,
     );
   }
   return <ul className="password-rules">{rules}</ul>;

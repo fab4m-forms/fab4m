@@ -8,7 +8,7 @@ import FormComponentWrapper from "../../components/FormComponentWrapper";
  * @group React widgets
  */
 export default function NumberField(
-  props: WidgetProps<number, NumberWidgetSettings>
+  props: WidgetProps<number, NumberWidgetSettings>,
 ): JSX.Element {
   const classes = props.theme.classes;
   const component = props.component;
@@ -18,7 +18,7 @@ export default function NumberField(
       : parseInt(value, 10);
   };
   const [draft, changeDraft] = useState<string | undefined>(
-    props.value?.toString()
+    props.value?.toString(),
   );
 
   useEffect(() => {

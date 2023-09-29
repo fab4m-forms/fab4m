@@ -61,7 +61,7 @@ export const customWidgetType: WidgetType<any, CustomWidget<any>> = {
  * @group Widgets
  */
 export function customWidget<ValueType = unknown>(
-  component: CustomWidget<ValueType>
+  component: CustomWidget<ValueType>,
 ) {
   return widget<ValueType, CustomWidget<ValueType>>({
     type: customWidgetType,
@@ -88,7 +88,7 @@ export const customMultipleWidgetType: MultipleWidgetType<
  * @group Widgets
  */
 export function customMultipleWidget<ValueType = unknown>(
-  component: CustomMultipleWidget<ValueType>
+  component: CustomMultipleWidget<ValueType>,
 ) {
   return multipleWidget<ValueType, CustomMultipleWidget<ValueType>>({
     type: customMultipleWidgetType,

@@ -97,7 +97,7 @@ interface ValuesValidator {
  */
 export function allowedValues(
   values: Array<string | number> = [],
-  message = "The value is not allowed"
+  message = "The value is not allowed",
 ): ValuesValidator {
   return {
     type: allowedValuesValidator,
@@ -112,7 +112,7 @@ export function allowedValues(
  */
 export function disallowedValues(
   values: Array<string | number> = [],
-  message = "The value is not allowed"
+  message = "The value is not allowed",
 ): ValuesValidator {
   return {
     type: disallowedValuesValidator,

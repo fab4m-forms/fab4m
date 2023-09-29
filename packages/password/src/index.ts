@@ -124,7 +124,7 @@ export const passwordValidateOldFieldType: FormComponentType = {
  * @group Components
  */
 export function passwordField(
-  attributes: CreateFormComponentType<string>
+  attributes: CreateFormComponentType<string>,
 ): FormComponent<string> {
   return formComponent<string>({
     settings: undefined,
@@ -140,7 +140,7 @@ export function passwordField(
  * @group Components
  */
 export function passwordVerifyField(
-  attributes: CreateFormComponentType<PasswordVerifyData>
+  attributes: CreateFormComponentType<PasswordVerifyData>,
 ): FormComponent<PasswordVerifyData> {
   return formComponent<PasswordVerifyData>({
     settings: {},
@@ -156,7 +156,7 @@ export function passwordVerifyField(
  * @group Components
  */
 export function passwordValidateOldField(
-  attributes: CreateFormComponentType<PasswordValidateOldData>
+  attributes: CreateFormComponentType<PasswordValidateOldData>,
 ): FormComponent<PasswordValidateOldData> {
   return formComponent({
     settings: {},
@@ -211,7 +211,7 @@ export const passwordVerifyWidgetType: WidgetType<
  * @group Widgets
  */
 export function passwordVerifyWidget(
-  confirmTitle = "Confirm password"
+  confirmTitle = "Confirm password",
 ): Widget<PasswordVerifyData, PasswordSettings> {
   return widget({
     type: passwordVerifyWidgetType,

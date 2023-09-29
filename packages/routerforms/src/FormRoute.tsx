@@ -32,7 +32,7 @@ export default function FormRoute(props: FormRouteProps): JSX.Element | null {
   const navigate = useNavigate();
   const basePath = props.basePath ?? "";
   const [completedParts, changeCompletedParts] = React.useState(
-    props.completedParts ?? 0
+    props.completedParts ?? 0,
   );
   let part = params.part ? parseInt(params.part, 10) : null;
   if (!part) {
@@ -52,7 +52,7 @@ export default function FormRoute(props: FormRouteProps): JSX.Element | null {
   };
   const [formErrors, setFormErrors] = initFormErrors(
     props.errors,
-    props.errorsChanged
+    props.errorsChanged,
   );
   if (part > parts.length - 1) {
     return null;
@@ -103,7 +103,7 @@ export default function FormRoute(props: FormRouteProps): JSX.Element | null {
 
 function initFormErrors(
   errors?: ValidationError[],
-  errorsChanged?: (errors: ValidationError[]) => void
+  errorsChanged?: (errors: ValidationError[]) => void,
 ): [ValidationError[], (errors: ValidationError[]) => void] {
   if (errorsChanged) {
     return [errors ?? [], errorsChanged];

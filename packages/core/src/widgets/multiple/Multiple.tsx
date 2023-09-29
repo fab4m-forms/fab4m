@@ -11,7 +11,7 @@ import { componentErrors } from "../../form";
  * @group React multiple widgets
  */
 function Multiple(
-  props: MultipleWidgetProps<unknown, MultipleSettings | undefined>
+  props: MultipleWidgetProps<unknown, MultipleSettings | undefined>,
 ) {
   const [items, changeItems] = useState<Array<unknown>>(props.value ?? []);
   useEffect(() => {

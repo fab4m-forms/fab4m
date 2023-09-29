@@ -41,7 +41,6 @@ export default function RouterExample() {
     </div>
   );
 }
-
 ```
 
 # Usage with an existing router

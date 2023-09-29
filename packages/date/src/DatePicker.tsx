@@ -10,7 +10,7 @@ import ReactDatePicker, { registerLocale } from "react-datepicker";
 import { Locale } from "date-fns";
 
 export function DatePicker(
-  props: WidgetProps<Date, DateFieldWidgetSettings> & { withTime?: boolean }
+  props: WidgetProps<Date, DateFieldWidgetSettings> & { withTime?: boolean },
 ) {
   const pickerId = `${props.id}_picker`;
   const { theme } = props;
@@ -70,7 +70,7 @@ export function DatePicker(
 }
 
 export function DateRangePicker(
-  props: WidgetProps<DateRange, DateRangeWidgetSettings>
+  props: WidgetProps<DateRange, DateRangeWidgetSettings>,
 ) {
   const [state, changeState] = useState<Partial<DateRange>>(props.value ?? {});
   useEffect(() => {
@@ -173,7 +173,7 @@ export function DateRangePicker(
 }
 
 export function DateTimePicker(
-  props: WidgetProps<Date, DateFieldWidgetSettings>
+  props: WidgetProps<Date, DateFieldWidgetSettings>,
 ) {
   return <DatePicker {...props} withTime={true} />;
 }
@@ -214,7 +214,7 @@ function useBrowserLocale(locales: Locale[]): LoadedLocale | undefined {
   return useMemo(() => {
     for (const code of navigator.languages) {
       const matchingLocale = locales.find(
-        (locale) => locale.code && locale.code === code
+        (locale) => locale.code && locale.code === code,
       );
       if (matchingLocale && matchingLocale.code) {
         registerLocale(matchingLocale.code, matchingLocale);

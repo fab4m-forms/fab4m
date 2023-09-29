@@ -12,7 +12,7 @@ type OptionsValue = "string" | "number";
 
 function renderOption<OptionsType extends OptionsValue>(
   option: Option<OptionsType> | OptionGroup<OptionsType>,
-  index: number
+  index: number,
 ) {
   return isOptionGroup(option) ? (
     <optgroup key={index} label={option[0]}>
@@ -29,7 +29,7 @@ function renderOption<OptionsType extends OptionsValue>(
  * @group React widgets
  */
 function Select<OptionsType extends OptionsValue>(
-  props: WidgetProps<OptionsType, SelectWidgetSettings<OptionsType>>
+  props: WidgetProps<OptionsType, SelectWidgetSettings<OptionsType>>,
 ) {
   const classes = props.theme.classes;
   const options = props.settings.options.map(renderOption);

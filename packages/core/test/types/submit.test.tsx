@@ -8,7 +8,7 @@ describe("Submit button", () => {
     {
       name: "content",
     },
-    { title: "Submit button" }
+    { title: "Submit button" },
   );
   test("Submit button", async () => {
     const data = {};
@@ -22,7 +22,7 @@ describe("Submit button", () => {
         onChange={changeData}
         component={field}
         value={data}
-      />
+      />,
     );
     expect(queryByText("Submit button")).not.toBe(null);
   });

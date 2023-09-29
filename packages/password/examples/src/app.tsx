@@ -38,9 +38,9 @@ export default function App() {
           }),
         },
         {},
-        theme === "bulma" ? bulma : basic
+        theme === "bulma" ? bulma : basic,
       ),
-    [theme]
+    [theme],
   );
 
   const themeSelector = textField({

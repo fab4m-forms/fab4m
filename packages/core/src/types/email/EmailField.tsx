@@ -6,7 +6,7 @@ import { WidgetProps } from "../../widget";
  * @group React widgets
  */
 export default function EmailField(
-  props: WidgetProps<string, unknown | undefined>
+  props: WidgetProps<string, unknown | undefined>,
 ): JSX.Element {
   const inputProps = {
     ...props,

@@ -24,7 +24,7 @@ export const booleanFieldType: FormComponentType = {
  * @group Components
  */
 export function booleanField(
-  attributes: CreateFormComponentType<boolean>
+  attributes: CreateFormComponentType<boolean>,
 ): FormComponent<boolean> {
   return formComponent({
     settings: undefined,

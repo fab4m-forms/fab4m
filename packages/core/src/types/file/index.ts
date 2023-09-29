@@ -34,7 +34,7 @@ export const fileFieldType: FormComponentType<FileUploadSettings> = {
  * @group Components
  */
 export function fileField(
-  attributes: CreateFormComponentType<File, FileUploadSettings>
+  attributes: CreateFormComponentType<File, FileUploadSettings>,
 ): FormComponent<File, FileUploadSettings> {
   return formComponent({
     widget: fileUploadWidget(),

@@ -10,7 +10,7 @@ export interface ValidationStatus {
 
 export function validate(
   form: FormDefinition,
-  data: unknown
+  data: unknown,
 ): ValidationStatus {
   const schema = generateSchema(form);
   const ajv = new Ajv({ $data: true, allErrors: true });
@@ -29,7 +29,7 @@ export function validate(
     errors: validate.errors
       ? errorMessages(
           form,
-          validate.errors.map((e) => ({ ...e, dataPath: e.instancePath }))
+          validate.errors.map((e) => ({ ...e, dataPath: e.instancePath })),
         )
       : {},
   };

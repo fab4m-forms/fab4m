@@ -30,7 +30,7 @@ describe("upload field", () => {
         onChange={changeData}
         component={field}
         value={null}
-      />
+      />,
     );
     fireEvent.change(getByLabelText("A file"), { files: [file] });
     waitFor(() => {
@@ -42,10 +42,10 @@ describe("upload field", () => {
     const form = createForm();
     form.add(field as FormComponentWithName);
     const { container } = render(
-      <StatefulFormView form={form}></StatefulFormView>
+      <StatefulFormView form={form}></StatefulFormView>,
     );
     expect(container.querySelector("form")?.getAttribute("enctype")).toBe(
-      "multipart/form-data"
+      "multipart/form-data",
     );
   });
   inputElementOk(field, "file:");

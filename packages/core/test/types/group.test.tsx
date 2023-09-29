@@ -1,11 +1,6 @@
 import * as React from "react";
 
-import {
-  fireEvent,
-  queryByLabelText,
-  render,
-  waitFor,
-} from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import {
   textField,
   basic,
@@ -51,7 +46,7 @@ describe("groups", () => {
 
   const groupItem = group(
     { name: "group", label: "Group with fields" },
-    { field1, field2, multiple }
+    { field1, field2, multiple },
   );
 
   let data: GroupedData = {
@@ -72,12 +67,12 @@ describe("groups", () => {
         component={groupItem}
         theme={basic}
         value={data}
-      />
+      />,
     );
     const field1 = (await findByLabelText("Text field 1")) as HTMLInputElement;
     const field2 = (await findByLabelText("Text field 2")) as HTMLInputElement;
     const multipleField = (await findAllByLabelText(
-      "Multiple text"
+      "Multiple text",
     )) as HTMLInputElement[];
     expect(field1.value).toBe("Text");
     expect(field2.value).toBe("Other text");
@@ -98,7 +93,7 @@ describe("groups", () => {
         component={groupItem}
         theme={basic}
         value={data}
-      />
+      />,
     );
     const legend = await findByText("Group with fields");
     const field1 = (await findByLabelText("Text field 1")) as HTMLInputElement;
@@ -125,7 +120,7 @@ describe("groups", () => {
       [fieldsetWidgetType, groupWidgetType, textFieldWidgetType],
       [],
       [],
-      []
+      [],
     );
     const unserializedComponents = unserialized.components[0].components;
     expect(unserializedComponents).toBeDefined();
@@ -141,7 +136,7 @@ describe("groups", () => {
       textField({
         name: "outside_group",
         label: "Outside group",
-      })
+      }),
     );
     form.add(
       group({ name: "group", label: "group" }, [
@@ -150,14 +145,14 @@ describe("groups", () => {
           label: "Inside group",
           rules: [["outside_group", equals("outside")]],
         }),
-      ])
+      ]),
     );
     const { queryByLabelText, findByLabelText } = render(
-      <StatefulFormView form={form} />
+      <StatefulFormView form={form} />,
     );
     expect(queryByLabelText("Inside group")).toBe(null);
     const outside = (await findByLabelText(
-      "Outside group"
+      "Outside group",
     )) as HTMLInputElement;
     fireEvent.input(outside, {
       value: "outside",
@@ -176,10 +171,10 @@ describe("groups", () => {
           label: "Inside group",
           validators: [allowedValues(["inside"], "Not allowed")],
         }),
-      ])
+      ]),
     );
     const { queryByText, findByLabelText, container } = render(
-      <StatefulFormView form={form} />
+      <StatefulFormView form={form} />,
     );
     const formElement = getFormElement(container);
     const field = (await findByLabelText("Inside group")) as HTMLInputElement;
@@ -203,12 +198,12 @@ describe("groups", () => {
         label: "Details label",
         widget,
       },
-      { field1, field2 }
+      { field1, field2 },
     ),
   });
   test("Details widget", async () => {
     const { queryByText, findByLabelText } = render(
-      <StatefulFormView form={detailsForm} />
+      <StatefulFormView form={detailsForm} />,
     );
     expect(queryByText("Details label")).not.toBe(null);
     expect(await findByLabelText("Text field 1")).not.toBeVisible();
@@ -217,7 +212,7 @@ describe("groups", () => {
   test("Details widget with html summary", () => {
     widget.settings = { summary: <span data-testid="details-span"></span> };
     const { queryByText, queryByTestId } = render(
-      <StatefulFormView form={detailsForm} />
+      <StatefulFormView form={detailsForm} />,
     );
     expect(queryByText("Details label")).toBe(null);
     expect(queryByTestId("details-span")).not.toBe(null);
@@ -230,7 +225,7 @@ describe("groups", () => {
       <StatefulFormView
         form={detailsForm}
         data={{ group: { field1: "Value" } }}
-      />
+      />,
     );
     expect(queryByText("label: Value")).not.toBe(null);
   });
@@ -242,7 +237,7 @@ describe("groups", () => {
       <StatefulFormView
         form={detailsForm}
         data={{ group: { field1: "Value" } }}
-      />
+      />,
     );
     expect(await findByLabelText("Text field 1")).toBeVisible();
     expect(await findByLabelText("Text field 2")).toBeVisible();

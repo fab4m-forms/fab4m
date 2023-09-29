@@ -7,7 +7,7 @@ import { PasswordSettings, PasswordVerifyData } from ".";
  * @group React widgets
  */
 export default function PasswordVerify(
-  props: WidgetProps<PasswordVerifyData, PasswordSettings>
+  props: WidgetProps<PasswordVerifyData, PasswordSettings>,
 ): JSX.Element {
   const component = props.component;
   const confirmName = `${props.id}_confirm`;

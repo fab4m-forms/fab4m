@@ -5,7 +5,7 @@ import { AutocompleteSettings, Option } from ".";
 
 export default function Autocomplete<
   OptionType extends string | number,
-  Context = undefined
+  Context = undefined,
 >(props: WidgetProps<OptionType, AutocompleteSettings<OptionType, Context>>) {
   // The loaded items contains the currently loaded items from
   // when the items setting is a callback.
@@ -37,13 +37,13 @@ export default function Autocomplete<
     }
   };
   const getItems = (search?: string | null): Option<OptionType>[] => {
-    let itemsToShow =
+    const itemsToShow =
       typeof props.settings.items === "function"
         ? loadedItems
         : props.settings.items;
     return search
       ? itemsToShow.filter((item) =>
-          itemLabel(item).toLowerCase().includes(search.toLowerCase())
+          itemLabel(item).toLowerCase().includes(search.toLowerCase()),
         )
       : itemsToShow;
   };
@@ -103,15 +103,15 @@ export default function Autocomplete<
                             index,
                             highlightedIndex,
                             selectedItem,
-                            props.theme.classes
-                          )
+                            props.theme.classes,
+                          ),
                         )}
                       >
                         {props.settings.itemElement
                           ? props.settings.itemElement(
                               optionValue(item),
                               itemLabel(item),
-                              itemContext(item)
+                              itemContext(item),
                             )
                           : Array.isArray(item)
                           ? item[0]
@@ -142,7 +142,7 @@ function optionItemProps(
   index: number,
   highlightedIndex: number | null,
   selectedItem: Option<any>,
-  theme: ThemeClasses
+  theme: ThemeClasses,
 ) {
   const value = optionValue(item).toString();
   const classes = [theme.autocompleteItem];

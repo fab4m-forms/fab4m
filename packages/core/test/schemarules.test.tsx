@@ -75,7 +75,7 @@ describe("Schema Rule engine", () => {
           required: true,
           rules: [["outside", exists()]],
         }),
-      }
+      },
     ),
     multipleGroup: group(
       { label: "Multiple group", multiple: true },
@@ -86,14 +86,14 @@ describe("Schema Rule engine", () => {
           required: true,
           rules: [["multipleGroup.$.field", exists()]],
         }),
-      }
+      },
     ),
   });
 
   test("Required conditional field", () => {
     expect(validate(form, { field: "text" }).valid).toBe(false);
     expect(
-      validate(form, { field: "text", requiredWithField: "text" }).valid
+      validate(form, { field: "text", requiredWithField: "text" }).valid,
     ).toBe(true);
   });
 
@@ -102,15 +102,15 @@ describe("Schema Rule engine", () => {
     expect(validate(form, validData).valid).toBe(true);
     // The component should not exist, so this should be fine.
     expect(validate(form, { ...validData, otherField: undefined }).valid).toBe(
-      true
+      true,
     );
     // The field is not visible, so this should be fine as well.
     expect(validate(form, { ...validData, field: "notvisible" }).valid).toBe(
-      true
+      true,
     );
     // The component is visible, and has an invalid value.
     expect(validate(form, { ...validData, twoRules: "Invalid" }).valid).toBe(
-      false
+      false,
     );
   });
 
@@ -121,7 +121,7 @@ describe("Schema Rule engine", () => {
         ...validData,
         twoRules: undefined,
         dependentRules: undefined,
-      }).valid
+      }).valid,
     ).toBe(true);
 
     // The dependent rule is not present.
@@ -129,14 +129,14 @@ describe("Schema Rule engine", () => {
       validate(form, {
         ...validData,
         dependentRules: undefined,
-      }).valid
+      }).valid,
     ).toBe(false);
     // The dependent rule has an invalid value.
     expect(
       validate(form, {
         ...validData,
         dependentRules: "notright",
-      }).valid
+      }).valid,
     ).toBe(false);
   });
 
@@ -148,14 +148,14 @@ describe("Schema Rule engine", () => {
         requiredWithField: "present",
         otherField: "present",
         twoRules: undefined,
-      }).valid
+      }).valid,
     ).toBe(false);
     expect(
       validate(form, {
         field: "test",
         requiredWithField: "present",
         otherField: "present",
-      }).valid
+      }).valid,
     ).toBe(false);
   });
   test("Group in group", () => {
@@ -168,12 +168,12 @@ describe("Schema Rule engine", () => {
         group: {
           nestedField: "test",
         },
-      }).valid
+      }).valid,
     ).toBe(false);
     expect(
       validate(nestedForm, {
         group: { nestedField: "test", otherField: "test" },
-      }).valid
+      }).valid,
     ).toBe(true);
   });
   test("Nested field, depends on outside", () => {
@@ -181,25 +181,25 @@ describe("Schema Rule engine", () => {
       validate(nestedForm, {
         outside: "test",
         group: {},
-      }).valid
+      }).valid,
     ).toBe(false);
     expect(
       validate(nestedForm, {
         outside: "test",
         group: { dependsOnOutside: "test" },
-      }).valid
+      }).valid,
     ).toBe(true);
   });
   test("Rules in arrays", () => {
     expect(
       validate(nestedForm, {
         multipleGroup: [{ field: "test" }],
-      }).valid
+      }).valid,
     ).toBe(false);
     expect(
       validate(nestedForm, {
         multipleGroup: [{ field: "test", dependent: "test" }],
-      }).valid
+      }).valid,
     ).toBe(true);
   });
 });

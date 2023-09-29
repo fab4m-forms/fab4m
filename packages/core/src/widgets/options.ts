@@ -25,7 +25,7 @@ export type Options<OptionsType> = Array<
  * @group Internal React API
  */
 export function isOptionGroup<OptionsType>(
-  option: Option<OptionsType> | OptionGroup<OptionsType>
+  option: Option<OptionsType> | OptionGroup<OptionsType>,
 ): option is OptionGroup<OptionsType> {
   return Array.isArray(option) && Array.isArray(option[1]);
 }
@@ -71,7 +71,7 @@ export const selectWidgetType: WidgetType<any, SelectWidgetSettings<any>> = {
   init: (settings) =>
     selectWidget(
       settings?.options,
-      settings ? { notSelectedLabel: settings.notSelectedLabel } : undefined
+      settings ? { notSelectedLabel: settings.notSelectedLabel } : undefined,
     ),
 };
 
@@ -80,7 +80,7 @@ export const selectWidgetType: WidgetType<any, SelectWidgetSettings<any>> = {
  * @group Widgets
  */
 export function radiosWidget<OptionsType>(
-  options: Option<OptionsType>[] = []
+  options: Option<OptionsType>[] = [],
 ): Widget<OptionsType, Option<OptionsType>[]> {
   return widget<OptionsType, Option<OptionsType>[]>({
     type: radiosWidgetType,
@@ -94,7 +94,7 @@ export function radiosWidget<OptionsType>(
  */
 export function selectWidget<OptionsType>(
   options: Options<OptionsType> = [],
-  settings: Omit<SelectWidgetSettings<OptionsType>, "options"> = {}
+  settings: Omit<SelectWidgetSettings<OptionsType>, "options"> = {},
 ): Widget<OptionsType, SelectWidgetSettings<OptionsType>> {
   return widget({
     type: selectWidgetType,
@@ -107,7 +107,7 @@ export function selectWidget<OptionsType>(
  */
 export function findOption<OptionsType>(
   options: Options<OptionsType>,
-  value: OptionsType
+  value: OptionsType,
 ): Option<OptionsType> | void {
   for (const option of options) {
     if (isOptionGroup(option)) {

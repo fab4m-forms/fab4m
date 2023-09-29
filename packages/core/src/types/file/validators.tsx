@@ -59,7 +59,7 @@ export const fileSizeValidator: FileSizeValidatorType = {
     <div className={"validator-info"}>
       {props.settings.maxSizeInfo.replace(
         "%size",
-        humanSize(props.settings.size)
+        humanSize(props.settings.size),
       )}
     </div>
   ),
@@ -84,7 +84,7 @@ export const fileSizeValidator: FileSizeValidatorType = {
  */
 export function fileSize(
   size: number,
-  settings?: Partial<FileSizeSettings>
+  settings?: Partial<FileSizeSettings>,
 ): Validator<FileSizeValidatorType, FileSizeSettings> {
   return {
     type: fileSizeValidator,
@@ -128,7 +128,7 @@ export const fileExtensionValidator: FileExtensionValidatorType = {
   validate: async (value, settings) => {
     return value &&
       !settings.extensions.includes(
-        value.name.slice(value.name.lastIndexOf(".") + 1, value.name.length)
+        value.name.slice(value.name.lastIndexOf(".") + 1, value.name.length),
       )
       ? [
           {
@@ -141,7 +141,7 @@ export const fileExtensionValidator: FileExtensionValidatorType = {
   valid: (value, settings) =>
     !value ||
     settings.extensions.includes(
-      value.name.slice(value.name.lastIndexOf(".") + 1, value.name.length)
+      value.name.slice(value.name.lastIndexOf(".") + 1, value.name.length),
     ),
 };
 
@@ -152,7 +152,7 @@ export const fileExtensionValidator: FileExtensionValidatorType = {
  */
 export function fileExtension(
   types: string[],
-  settings?: Partial<FileExtensionValidatorSettings>
+  settings?: Partial<FileExtensionValidatorSettings>,
 ): Validator<FileExtensionValidatorType, FileExtensionValidatorSettings> {
   return {
     type: fileExtensionValidator,
@@ -209,7 +209,7 @@ export const mimeTypeValidator: MimeTypeValidatorType = {
  */
 export function mimeType(
   types: string[],
-  settings?: Partial<MimeTypeValidatorSettings>
+  settings?: Partial<MimeTypeValidatorSettings>,
 ): Validator<MimeTypeValidatorType, MimeTypeValidatorSettings> {
   return {
     type: mimeTypeValidator,

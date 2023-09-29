@@ -17,9 +17,6 @@ jobs:
           cache: "npm"
       - run: npm ci
       - run: cd packages/core && npm run build
-      - name: Check prettier standards
-        run:  cd packages/${{matrix.package}} && npx prettier --check src test
-      - name: Check eslint rules
-        run:  cd packages/${{matrix.package}} && npx lint . --ext .js,.jsx,.ts,.tsx
-      - name: Run tests
+      - run: cd packages/${{matrix.package}} && npx prettier --check .
+      - run: cd packages/${{matrix.package}} && npx eslint . --ext .js,.jsx,.ts,.tsx
       - run: cd packages/${{matrix.package}} && npm run test:unit

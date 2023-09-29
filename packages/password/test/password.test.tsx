@@ -39,7 +39,7 @@ describe("Password field", () => {
       name: "simple_password",
       label: "Simple password",
       validators: [validator],
-    })
+    }),
   );
 
   const password = passwordVerifyField({
@@ -55,7 +55,7 @@ describe("Password field", () => {
   test("Password form", async () => {
     const { findByLabelText } = render(<StatefulFormView form={form} />);
     const simple = (await findByLabelText(
-      "Simple password"
+      "Simple password",
     )) as HTMLInputElement;
     expect(simple.type).toBe("password");
   });
@@ -72,7 +72,7 @@ describe("Password field", () => {
     const invalidResult = validate(form, data);
     expect(invalidResult.valid).toBe(false);
     expect(invalidResult.errors["/password/confirmPassword"]).toBe(
-      "The passwords don't match"
+      "The passwords don't match",
     );
   });
 
@@ -96,10 +96,10 @@ describe("Password field", () => {
           theme={basic}
           value={passwordValue}
           component={password}
-        />
+        />,
       );
       const passwordEl = context.container.querySelector(
-        "#password"
+        "#password",
       ) as HTMLInputElement;
       expect(passwordEl.checkValidity()).toBe(valid);
       data.password.password = value;
@@ -108,7 +108,7 @@ describe("Password field", () => {
       expect(status.valid).toBe(valid);
       if (!status.valid) {
         expect(status.errors["/password/password"]).toBe(
-          "The password isn't strong enough"
+          "The password isn't strong enough",
         );
       }
     };
@@ -163,16 +163,16 @@ describe("Password field", () => {
         theme={basic}
         component={password}
         onChange={noOp}
-      />
+      />,
     );
     expect(context.container.innerHTML).toContain(
-      "The password needs to include at least one number"
+      "The password needs to include at least one number",
     );
     expect(context.container.innerHTML).toContain(
-      "The password needs to contain at least 5 characters"
+      "The password needs to contain at least 5 characters",
     );
     expect(context.container.innerHTML).not.toContain(
-      "The password needs to include at least one letter"
+      "The password needs to include at least one letter",
     );
   });
 
@@ -192,10 +192,10 @@ describe("Password field", () => {
     );
     const context = render(component());
     const passwordEl = context.container.querySelector(
-      "#password"
+      "#password",
     ) as HTMLInputElement;
     const confirmPasswordEl = context.container.querySelector(
-      "#password-confirmPassword"
+      "#password-confirmPassword",
     ) as HTMLInputElement;
     expect(passwordEl.value).toBe("password");
     expect(confirmPasswordEl.value).toBe("");
@@ -246,17 +246,17 @@ describe("Password field", () => {
         theme={basic}
         component={password}
         onChange={changeData}
-      />
+      />,
     );
     const oldPasswordEl = context.container.querySelector(
-      "#password_oldpassword"
+      "#password_oldpassword",
     ) as HTMLInputElement;
 
     const passwordEl = context.container.querySelector(
-      "#password"
+      "#password",
     ) as HTMLInputElement;
     const confirmPasswordEl = context.container.querySelector(
-      "#password_confirm"
+      "#password_confirm",
     ) as HTMLInputElement;
     expect(passwordEl.value).toBe("password");
     expect(confirmPasswordEl.value).toBe("");
@@ -304,7 +304,7 @@ describe("Password field", () => {
         password: "otherpassword",
         confimPassword: "otherpassword",
       },
-      password
+      password,
     );
     expect(noErrors.length).toBe(0);
     const errors = await checkValidators(
@@ -314,12 +314,12 @@ describe("Password field", () => {
         password: "otherpassword",
         confimPassword: "otherpassword",
       },
-      password
+      password,
     );
     expect(errors.length).toBe(1);
   });
   inputElementOk(
     passwordField({ name: "simple_password", label: "Simple password" }),
-    "password:"
+    "password:",
   );
 });

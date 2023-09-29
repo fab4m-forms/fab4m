@@ -1,5 +1,3 @@
-
-
 # @fab4m/autocomplete
 
 The `@fab4m/autocomplete` package provides an autocomplete widget component using the popular

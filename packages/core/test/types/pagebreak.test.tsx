@@ -23,7 +23,7 @@ describe("Page break", () => {
   });
   test("Interactive page break form", async () => {
     const { queryByText, queryByLabelText, findByText } = render(
-      <StatefulFormView form={form} />
+      <StatefulFormView form={form} />,
     );
     expect(queryByText("Before page break")).toBeVisible();
     expect(queryByLabelText("After page break")).toBeNull();

@@ -10,7 +10,7 @@ export interface RouterFormViewProps extends FormViewProps {
 }
 
 export default function RouterFormView(
-  props: RouterFormViewProps
+  props: RouterFormViewProps,
 ): JSX.Element {
   return (
     <BrowserRouter basename={props.basename}>

@@ -35,7 +35,7 @@ describe("Serializer", () => {
       required: true,
       widget: textFieldWidget(),
       validators: [],
-    })
+    }),
   );
   form.add(
     textField({
@@ -51,7 +51,7 @@ describe("Serializer", () => {
         ]),
       ],
       validators: [maxLength(5)],
-    })
+    }),
   );
   form.add(
     booleanField({
@@ -60,7 +60,7 @@ describe("Serializer", () => {
       required: true,
       widget: checkboxWidget(),
       validators: [],
-    })
+    }),
   );
 
   form.add(
@@ -68,7 +68,7 @@ describe("Serializer", () => {
       name: "multiple",
       multiple: true,
       multipleWidget: tagsWidget(),
-    })
+    }),
   );
 
   test("Serialize", () => {
@@ -101,7 +101,7 @@ describe("Serializer", () => {
   test("Remove unused members from form", () => {
     const serializedForm = serialize(form) as unknown;
     expect(
-      (serializedForm as Record<string, unknown>).submitListeners
+      (serializedForm as Record<string, unknown>).submitListeners,
     ).not.toBeDefined();
   });
 
@@ -114,7 +114,7 @@ describe("Serializer", () => {
       [textAreaWidgetType, textFieldWidgetType, checkboxWidgetType],
       [tagsWidgetType],
       [maxLengthValidator, allowedValuesValidator, equalsValidator],
-      [orType]
+      [orType],
     );
     const components = unserializedForm.components as FormComponent[];
     expect(components[0].type.name).toBe("text");

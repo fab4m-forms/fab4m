@@ -9,7 +9,7 @@ import GroupChildren from "./GroupChildren";
  * @group React widgets
  */
 export default function Details<DataType = Record<string, any>>(
-  props: WidgetProps<DataType, DetailsSettings<DataType>>
+  props: WidgetProps<DataType, DetailsSettings<DataType>>,
 ): JSX.Element | null {
   if (!props.component.components) {
     return null;

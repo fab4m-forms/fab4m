@@ -16,7 +16,7 @@ import ValidationErrors from "../../components/ValidationErrors";
  * @group React multiple widgets
  */
 export default function Tags<Value>(
-  props: MultipleWidgetProps<Value, TagsSettings | undefined>
+  props: MultipleWidgetProps<Value, TagsSettings | undefined>,
 ): JSX.Element | null {
   const addItem = (value: Value) => props.onChange([...items, value]);
   const items = props.value ?? [];
@@ -115,7 +115,7 @@ export default function Tags<Value>(
 
 function getDisplayValue<Value>(
   component: FormComponent<Value>,
-  value: Value
+  value: Value,
 ): string | number | React.ReactNode | undefined {
   const validValue = (value: Value) =>
     typeof value === "number" || typeof value === "string" ? value : undefined;
@@ -132,7 +132,7 @@ function getDisplayValue<Value>(
 
 function alterComponent<Value>(
   component: FormComponent<Value>,
-  values: Value[] | undefined
+  values: Value[] | undefined,
 ): FormComponent<Value> {
   // We need to clone the relevant bits so that we don't break the
   // original objects.

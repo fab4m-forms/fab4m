@@ -18,7 +18,7 @@ export function inputElementOk(component: FormComponent, name = ""): void {
         onChange={changeData}
         component={component}
         theme={basic}
-      />
+      />,
     );
     const input = queryByLabelText(component.title) as FormElement;
 
@@ -41,7 +41,7 @@ export function inputElementOk(component: FormComponent, name = ""): void {
         component={component}
         theme={basic}
         id="custom-id"
-      />
+      />,
     );
     expect((await findByLabelText(component.title)).id).toBe("custom-id");
     cleanup();
@@ -56,10 +56,10 @@ export function inputElementOk(component: FormComponent, name = ""): void {
         component={component}
         theme={basic}
         name="custom-name"
-      />
+      />,
     );
     const customNameElement = (await findByLabelText(
-      component.title
+      component.title,
     )) as FormElement;
     expect(customNameElement.name).toBe("custom-name");
     cleanup();
@@ -77,7 +77,7 @@ export function inputElementOk(component: FormComponent, name = ""): void {
         component={component}
         theme={basic}
         hideLabel={true}
-      />
+      />,
     );
     expect(queryByLabelText(component.title)).toBe(null);
     cleanup();
@@ -93,10 +93,10 @@ export function inputElementOk(component: FormComponent, name = ""): void {
         name="choice"
         theme={basic}
         component={disabled}
-      />
+      />,
     );
     expect(
-      ((await findByLabelText(component.title)) as HTMLInputElement).disabled
+      ((await findByLabelText(component.title)) as HTMLInputElement).disabled,
     ).toBe(true);
     cleanup();
   });

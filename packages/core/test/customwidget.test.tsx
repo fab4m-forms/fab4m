@@ -57,7 +57,7 @@ describe("Custom widget", () => {
   });
   test("Custom widget", async () => {
     const { findByLabelText, findByText } = render(
-      <StatefulFormView form={form} />
+      <StatefulFormView form={form} />,
     );
     expect(await findByLabelText("Field")).toHaveAttribute("id", "field");
     expect(await findByText("Custom text")).toBeVisible();
@@ -69,7 +69,7 @@ describe("Custom widget", () => {
       multipleField: ["Test 1", "Test 2"],
     };
     const { findByLabelText, findByText } = render(
-      <StatefulFormView form={form} data={value} />
+      <StatefulFormView form={form} data={value} />,
     );
     expect(await findByText("Custom multiple text")).toBeVisible();
     expect(await findByLabelText("Multiple field 0")).toHaveValue("Test 1");

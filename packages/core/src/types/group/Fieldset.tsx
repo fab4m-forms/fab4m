@@ -7,7 +7,7 @@ import GroupChildren from "./GroupChildren";
  * @group React widgets
  */
 export default function Fieldset<DataType = Record<string, unknown>>(
-  props: WidgetProps<DataType, unknown>
+  props: WidgetProps<DataType, unknown>,
 ): JSX.Element | null {
   if (!props.component.components) {
     return null;

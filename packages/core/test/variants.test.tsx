@@ -7,7 +7,6 @@ import {
   textFieldWidget,
   StatefulFormView,
   equals,
-  generateSchema,
 } from "../src";
 
 describe("Variants API", () => {
@@ -61,7 +60,7 @@ describe("Variants API", () => {
   });
   test("Dependent rendering", async () => {
     const { findByLabelText, queryByLabelText } = render(
-      <StatefulFormView form={form} />
+      <StatefulFormView form={form} />,
     );
     const text = await findByLabelText("Text");
     fireEvent.input(text, { target: { value: "test" } });
@@ -91,17 +90,17 @@ describe("Variants API", () => {
   test("Variants schema", async () => {
     expect(validate(form, { text: "test" }).valid).toBe(false);
     expect(validate(form, { text: "test", dependent: "asdf" }).valid).toBe(
-      true
+      true,
     );
     expect(validate(form, { text: "test2", dependent: 2 }).valid).toBe(false);
     expect(validate(form, { text: "test2", dependent: "asdf" }).valid).toBe(
-      true
+      true,
     );
   });
 
   test("Nested variants", async () => {
     expect(validate(form, { text: "test", dependent: "test2" }).valid).toBe(
-      false
+      false,
     );
   });
 });

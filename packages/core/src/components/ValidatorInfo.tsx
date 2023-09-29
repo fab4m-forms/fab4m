@@ -20,7 +20,7 @@ export default function ValidatorInfo(props: {
           value={props.value}
           settings={v.settings}
         />
-      ) : null
+      ) : null,
     );
   return info.length > 0 ? <div>{info}</div> : null;
 }

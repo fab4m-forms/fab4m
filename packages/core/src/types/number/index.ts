@@ -34,7 +34,7 @@ export const floatFieldType: FormComponentType = {
  * @group Components
  */
 export function integerField(
-  attributes: CreateFormComponentType<number>
+  attributes: CreateFormComponentType<number>,
 ): FormComponent<number> {
   return formComponent({
     widget: numberFieldWidget(),
@@ -49,7 +49,7 @@ export function integerField(
  * @group Components
  */
 export function floatField(
-  attributes: CreateFormComponentType<number>
+  attributes: CreateFormComponentType<number>,
 ): FormComponent<number> {
   return formComponent({
     widget: numberFieldWidget(),
@@ -83,7 +83,7 @@ export const numberFieldWidgetType: WidgetType<number, NumberWidgetSettings> = {
  * @group Widgets
  */
 export function numberFieldWidget(
-  prefix?: string
+  prefix?: string,
 ): Widget<number, NumberWidgetSettings> {
   return widget({
     type: numberFieldWidgetType,

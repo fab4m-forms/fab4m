@@ -11,7 +11,7 @@ describe("Not rule", () => {
       required: true,
       label: "Second",
       rules: [not([["first", equals("first")]])],
-    })
+    }),
   );
   const testNotRule = (form: Form) => {
     return async () => {

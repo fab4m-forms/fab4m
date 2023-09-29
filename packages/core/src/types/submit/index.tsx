@@ -34,7 +34,7 @@ export const submitType: FormComponentType = {
  */
 export function submit(
   attributes: CreateFormComponentType<unknown>,
-  settings: SubmitWidgetSettings
+  settings: SubmitWidgetSettings,
 ): FormComponent<unknown> {
   return formComponent({
     widget: submitWidget(settings),
@@ -48,7 +48,7 @@ export function submit(
  * @group React widgets
  */
 function Submit(
-  props: WidgetProps<unknown, SubmitWidgetSettings>
+  props: WidgetProps<unknown, SubmitWidgetSettings>,
 ): React.ReactElement {
   return (
     <input

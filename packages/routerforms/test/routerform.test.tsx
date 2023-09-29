@@ -40,7 +40,7 @@ describe("Routed form", () => {
     textField({
       name: "second",
       label: "After page break",
-    })
+    }),
   );
   let data = {};
   form.onComponentChange((property, value) => {
@@ -48,7 +48,7 @@ describe("Routed form", () => {
   });
   it("Router form", async () => {
     const screen = render(
-      <MemoryRouterFormView path="/" form={form} data={data} />
+      <MemoryRouterFormView path="/" form={form} data={data} />,
     );
     expect(screen.queryByText("Before page break")).toBeVisible();
     expect(screen.queryByLabelText("After page break")).toBeNull();
@@ -66,14 +66,14 @@ describe("Routed form", () => {
   });
   it("Invalid page should redirect to first page", () => {
     const { queryByText, queryByLabelText } = render(
-      <MemoryRouterFormView form={form} path="/2" data={data} />
+      <MemoryRouterFormView form={form} path="/2" data={data} />,
     );
     expect(queryByText("Previous")).toBeNull();
     expect(queryByLabelText("Before page break")).toBeVisible();
   });
   it("Don't allow viewing a page when we haven't completed the previos page", () => {
     const { queryByText, queryByLabelText } = render(
-      <MemoryRouterFormView form={form} path="/1" data={data} />
+      <MemoryRouterFormView form={form} path="/1" data={data} />,
     );
     expect(queryByText("Previous")).toBeNull();
     expect(queryByLabelText("Before page break")).toBeVisible();
@@ -85,7 +85,7 @@ describe("Routed form", () => {
         form={form}
         path="/1"
         data={data}
-      />
+      />,
     );
     expect(queryByText("Previous")).toBeVisible();
     expect(queryByLabelText("After page break")).toBeVisible();
@@ -109,7 +109,7 @@ describe("Routed form", () => {
             element: <StatefulFormRoute useRouteAction={true} form={form} />,
           },
         ],
-        { initialEntries: ["/0"] }
+        { initialEntries: ["/0"] },
       );
       return <RouterProvider router={router} />;
     }
@@ -151,7 +151,7 @@ describe("Routed form", () => {
       <RouterFormView
         form={formWithRouteContext}
         data={{ text: "This is a text" }}
-      />
+      />,
     );
     expect(await findByTestId("content")).toContainHTML("This is a text");
   });

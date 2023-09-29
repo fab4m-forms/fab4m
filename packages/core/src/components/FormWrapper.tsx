@@ -17,7 +17,7 @@ export default function FormWrapper(
     className?: string;
     setPart: (part: number) => void;
     setFormErrors: (errors: ValidationError[]) => void;
-  }
+  },
 ): JSX.Element {
   const formRef = React.useRef<HTMLFormElement>(null);
 
@@ -68,7 +68,7 @@ export default function FormWrapper(
       props.form,
       props.part,
       props.data as Record<string, unknown>,
-      e
+      e,
     );
     if (errors.length === 0) {
       if (props.errors && props.errors?.length > 0) {
@@ -123,7 +123,7 @@ function ExtraData(props: { extra?: Record<string, string | number> }) {
         name={key}
         id={key}
         value={props.extra[key]}
-      />
+      />,
     );
   }
   return <>{fields}</>;

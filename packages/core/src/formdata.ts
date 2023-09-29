@@ -4,13 +4,13 @@ import { ComponentDataDefinition } from "./formview";
 
 export function fromFormData<Data = Record<string, unknown>>(
   form: Form<Data>,
-  formData: FormData
+  formData: FormData,
 ): Data {
   // Use the definition passed to use from the client if it's available.
   const definitionData = formData.get("_definition");
   if (definitionData) {
     const definition: ComponentDataDefinition[] = JSON.parse(
-      definitionData.toString()
+      definitionData.toString(),
     );
     return formDataFromDefinition(definition, formData) as Data;
   }
@@ -29,7 +29,7 @@ export function fromFormData<Data = Record<string, unknown>>(
 
 function formDataFromDefinition(
   definition: ComponentDataDefinition[],
-  data: FormData
+  data: FormData,
 ) {
   // We're going to need the keys from the form data many times, so
   // let's create an array of them at the top level.
@@ -44,14 +44,14 @@ function formDataFromDefinition(
 function convertFormDataValue(
   definition: ComponentDataDefinition,
   data: FormData,
-  keys: string[]
+  keys: string[],
 ): unknown {
   if (definition.multiple) {
     const items = [];
     const regex = new RegExp(
       `${definition.name
         .replace(/\[/g, "\\[")
-        .replace(/\]/g, "\\]")}\\[(\\d+)\\]`
+        .replace(/\]/g, "\\]")}\\[(\\d+)\\]`,
     );
     const componentKeys = keys.filter((key) => regex.test(key));
     for (const key of componentKeys) {
@@ -72,7 +72,7 @@ function convertFormDataValue(
             name: `${definition.name}[${index}]`,
           },
           data,
-          keys
+          keys,
         );
       }
     }
@@ -87,7 +87,7 @@ function convertFormDataValue(
           name: `${definition.name}[${component.name}]`,
         },
         data,
-        keys
+        keys,
       );
     }
     return componentData;
@@ -110,7 +110,7 @@ function convertFormDataValue(
 function componentData(
   component: FormComponentWithName,
   data: FormData,
-  parents: string[] = []
+  parents: string[] = [],
 ) {
   if (component.multiple) {
     const returnData: unknown[] = [];
@@ -119,7 +119,7 @@ function componentData(
       name.replace(/\[/g, "\\[").replace(/\]/g, "\\]") +
         `\\[(\\d+)\\]` +
         // There's more in the match if this is a group.
-        (!component.multiple ? "$" : "")
+        (!component.multiple ? "$" : ""),
     );
     for (const key of data.keys()) {
       const result = regex.exec(key);
@@ -127,7 +127,7 @@ function componentData(
         returnData[parseInt(result[1], 10)] = componentData(
           { ...component, multiple: false, name: result[1] },
           data,
-          [...parents, component.name]
+          [...parents, component.name],
         );
       }
     }

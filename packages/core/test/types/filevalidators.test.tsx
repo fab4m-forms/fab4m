@@ -25,13 +25,13 @@ describe("Size validator", () => {
       name: "size_validator",
       label: "With size validator",
       validators: [validator],
-    }) as FormComponentWithName
+    }) as FormComponentWithName,
   );
 
   const data: Record<string, unknown> = {};
   test("undefined value", async () => {
     const { getByText, queryByText } = render(
-      <FormView form={form} data={{}} />
+      <FormView form={form} data={{}} />,
     );
     const submit = getByText("Save");
     fireEvent.click(submit);
@@ -48,7 +48,7 @@ describe("Size validator", () => {
   test("Large files arent allowed", async () => {
     data.size_validator = new File(["It's too long to handle"], "value.png");
     const { getByText, queryByText } = render(
-      <FormView form={form} data={data} />
+      <FormView form={form} data={data} />,
     );
     const submit = getByText("Save");
     fireEvent.click(submit);
@@ -59,7 +59,7 @@ describe("Size validator", () => {
   test("Small files passes", async () => {
     data.size_validator = new File(["I"], "value.png");
     const { getByText, queryByText } = render(
-      <FormView form={form} data={data} />
+      <FormView form={form} data={data} />,
     );
     const submit = getByText("Save");
     fireEvent.click(submit);
@@ -84,12 +84,12 @@ describe("File extension validator", () => {
           message,
         }),
       ],
-    })
+    }),
   );
   const data: Record<string, unknown> = {};
   test("undefined value", async () => {
     const { getByText, queryByText } = render(
-      <FormView form={form} data={{}} />
+      <FormView form={form} data={{}} />,
     );
     const submit = getByText("Save");
     fireEvent.click(submit);
@@ -101,7 +101,7 @@ describe("File extension validator", () => {
   test("Disallowed file extension", async () => {
     data.extension_validator = new File(["exe file"], "value.exe");
     const { getByText, queryByText } = render(
-      <FormView form={form} data={data} />
+      <FormView form={form} data={data} />,
     );
     const submit = getByText("Save");
     fireEvent.click(submit);
@@ -115,7 +115,7 @@ describe("File extension validator", () => {
     form.onSubmit(spy);
     data.extension_validator = new File(["png file"], "value.png");
     const { getByText, queryByText } = render(
-      <FormView form={form} data={data} />
+      <FormView form={form} data={data} />,
     );
     const submit = getByText("Save");
     fireEvent.click(submit);
@@ -140,12 +140,12 @@ describe("Mime type validator", () => {
           message: "The file mimetype is not valid!",
         }),
       ],
-    })
+    }),
   );
   const data: Record<string, unknown> = {};
   test("undefined value", async () => {
     const { getByText, queryByText } = render(
-      <FormView form={form} data={{}} />
+      <FormView form={form} data={{}} />,
     );
     const submit = getByText("Save");
     fireEvent.click(submit);
@@ -158,7 +158,7 @@ describe("Mime type validator", () => {
       type: "application/vnd.microsoft.portable-executable.",
     });
     const { getByText, queryByText } = render(
-      <FormView form={form} data={data} />
+      <FormView form={form} data={data} />,
     );
     const submit = getByText("Save");
     fireEvent.click(submit);
@@ -171,7 +171,7 @@ describe("Mime type validator", () => {
       type: "image/png",
     });
     const { getByText, queryByText } = render(
-      <FormView form={form} data={data} />
+      <FormView form={form} data={data} />,
     );
     const submit = getByText("Save");
     fireEvent.click(submit);

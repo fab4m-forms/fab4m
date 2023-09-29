@@ -20,10 +20,10 @@ import FormWrapper from "./FormWrapper";
 export default function FormView(props: FormViewProps): JSX.Element {
   const [formErrors, setFormErrors] = initFormErrors(
     props.errors,
-    props.errorsChanged
+    props.errorsChanged,
   );
   const [part, setPart] = React.useState(
-    typeof props.part !== "undefined" ? props.part : 0
+    typeof props.part !== "undefined" ? props.part : 0,
   );
   const goBack = () => {
     setPart(part - 1);
@@ -89,7 +89,7 @@ export default function FormView(props: FormViewProps): JSX.Element {
 
 export function initFormErrors(
   errors?: ValidationError[],
-  errorsChanged?: (errors: ValidationError[]) => void
+  errorsChanged?: (errors: ValidationError[]) => void,
 ): [ValidationError[], (errors: ValidationError[]) => void] {
   if (errorsChanged) {
     return [errors ?? [], errorsChanged];

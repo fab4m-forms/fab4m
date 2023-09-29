@@ -39,7 +39,7 @@ describe("date field", () => {
         component={date}
         theme={basic}
         value={data}
-      />
+      />,
     );
     const element = (await findByLabelText("Date field")) as HTMLInputElement;
     const currentDateString = format(new Date(), "P");
@@ -63,7 +63,8 @@ describe("date field", () => {
         settings: { locale: sv },
       },
     };
-    let data = new Date();
+
+    const data = new Date();
     const { queryAllByDisplayValue } = render(
       <FormComponentView
         name="textfield"
@@ -71,10 +72,10 @@ describe("date field", () => {
         component={withLocale}
         theme={basic}
         value={data}
-      />
+      />,
     );
     expect(
-      queryAllByDisplayValue(format(data, "P", { locale: sv }))
+      queryAllByDisplayValue(format(data, "P", { locale: sv })),
     ).toHaveLength(2);
   });
 
@@ -95,10 +96,10 @@ describe("date field", () => {
         component={field}
         theme={basic}
         value={date}
-      />
+      />,
     );
     expect((queryByLabelText("Date") as HTMLInputElement).value).toBe(
-      format(date, "yyyy-MM-dd")
+      format(date, "yyyy-MM-dd"),
     );
   });
   it("custom format", async () => {
@@ -109,7 +110,7 @@ describe("date field", () => {
         settings: { format: "yyyy" },
       },
     };
-    let data = new Date();
+    const data = new Date();
     const { queryByDisplayValue } = render(
       <FormComponentView
         name="textfield"
@@ -117,7 +118,7 @@ describe("date field", () => {
         component={withFormat}
         theme={basic}
         value={data}
-      />
+      />,
     );
     expect(queryByDisplayValue(format(data, "yyyy"))).not.toBeNull();
   });
@@ -129,7 +130,7 @@ describe("date field", () => {
         name: "date",
         label: "Date",
         required: true,
-      })
+      }),
     );
     const schema = generateSchema(form);
     const dateSchema = schema.properties.date;
@@ -147,7 +148,7 @@ describe("date field", () => {
         settings: { datePickerProps: { inline: true } },
       },
     };
-    let data = new Date();
+    const data = new Date();
     const { queryByText } = render(
       <FormComponentView
         name="withSettings"
@@ -155,7 +156,7 @@ describe("date field", () => {
         component={customSettings}
         theme={basic}
         value={data}
-      />
+      />,
     );
     // Check if monday is visible.
     expect(queryByText("Mo")).toBeVisible();
@@ -181,7 +182,7 @@ describe("date field", () => {
         component={customSettings}
         theme={basic}
         value={undefined}
-      />
+      />,
     );
     // Check if 1990 is visible.
     expect(withoutValue.queryByText("1990", { exact: false })).toBeVisible();
@@ -193,11 +194,11 @@ describe("date field", () => {
         component={customSettings}
         theme={basic}
         value={currentDate}
-      />
+      />,
     );
     // The current year should be visible.
     expect(
-      withValue.queryByText(currentDate.getFullYear(), { exact: false })
+      withValue.queryByText(currentDate.getFullYear(), { exact: false }),
     ).toBeVisible();
   });
 
@@ -213,7 +214,7 @@ describe("date field", () => {
           useBrowserLocale: true,
           locales: [sv, enUS],
         }),
-      })
+      }),
     );
     setLocales([sv, enUS]);
     const serialized = serialize(form);
@@ -228,7 +229,7 @@ describe("date field", () => {
       serialized,
       [dateFieldType],
       [basic],
-      [datePickerWidgetType]
+      [datePickerWidgetType],
     );
     expect(unserialized.components[0].widget.settings.locale).toBe(sv);
     expect(unserialized.components[0].widget.settings.locales).toStrictEqual([

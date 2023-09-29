@@ -16,7 +16,7 @@ describe("Form content", () => {
       name: "content",
       label: "Some content",
     },
-    () => <div>This is some content we put in the form.</div>
+    () => <div>This is some content we put in the form.</div>,
   );
   test("Form content is visible", async () => {
     let data = {};
@@ -30,10 +30,10 @@ describe("Form content", () => {
         onChange={changeData}
         component={field}
         value={data}
-      />
+      />,
     );
     expect(queryByText("This is some content we put in the form.")).not.toBe(
-      null
+      null,
     );
   });
   test("Form content with data", async () => {
@@ -47,7 +47,7 @@ describe("Form content", () => {
     });
     const data = { text: "Hello world" };
     const { queryByText } = render(
-      <StatefulFormView form={form} data={data} />
+      <StatefulFormView form={form} data={data} />,
     );
     expect(queryByText("Hello world")).not.toBe(null);
   });
@@ -58,7 +58,7 @@ describe("Form content", () => {
       {
         text: textField({ label: "Text" }),
         content: content({}, (value) => <div>{value.text as string}</div>),
-      }
+      },
     );
     const data = { text: "Hello world" };
     const fn = () => {
@@ -71,7 +71,7 @@ describe("Form content", () => {
         component={groupComponent}
         name="group"
         value={data}
-      />
+      />,
     );
     expect(queryByText("Hello world")).not.toBe(null);
   });

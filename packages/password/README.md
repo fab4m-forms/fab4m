@@ -14,11 +14,11 @@ npm install --save @fab4m/password
 
 The package provides the following fields:
 
-* **passwordField**: A basic password input
+- **passwordField**: A basic password input
 
-* **passwordVerifyField**: A password input with a password verification input field.
+- **passwordVerifyField**: A password input with a password verification input field.
 
-* **passwordValidateOldField** A password field with a password validation input field and an extra field to verify the old password.
+- **passwordValidateOldField** A password field with a password validation input field and an extra field to verify the old password.
 
 The following example shows all of the fields in action:
 
@@ -55,11 +55,11 @@ export default function @fab4m/passwordFields() {
 
 The `passwordVerifyWidget`, which is used wit the passwordVerifyField has the following settings:
 
-* **confirmLabel**: The label of the confirm password field.
+- **confirmLabel**: The label of the confirm password field.
 
 The `passwordValidateOldWidget` has the settings above and these settings:
 
-* **oldPassowrdLabel**: The label of the old password field.
+- **oldPassowrdLabel**: The label of the old password field.
 
 ## Validating passwords
 
@@ -69,10 +69,10 @@ The package comes with two useful validators for your passwords:
 
 The valid@fab4m/password validator allows you to set several constraints on the inputted password:
 
-* *minLength*: The minimal length of the password.
-* *requiredLetter*: At least one letter is required.
-* *requiredNumber*: At least one number is required.
-* *requiredSpecialChar*: At least onje special character is required.
+- _minLength_: The minimal length of the password.
+- _requiredLetter_: At least one letter is required.
+- _requiredNumber_: At least one number is required.
+- _requiredSpecialChar_: At least onje special character is required.
 
 ```jsx
 import * as React from "react";

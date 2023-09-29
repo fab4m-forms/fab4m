@@ -21,7 +21,7 @@ describe("Equals", () => {
       label: "Second",
       required: true,
       rules: [["first", equals("first")]],
-    })
+    }),
   );
   const third = textField({
     name: "third",
@@ -48,7 +48,7 @@ describe("Equals", () => {
 
   test("Form validator", async () => {
     const { findByLabelText, queryByText, container } = render(
-      <StatefulFormView form={form} />
+      <StatefulFormView form={form} />,
     );
     const formElement = getFormElement(container);
     fireEvent.input(await findByLabelText("Third"), {

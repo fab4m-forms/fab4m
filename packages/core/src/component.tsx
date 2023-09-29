@@ -46,7 +46,7 @@ export interface FormComponentType<SettingsType = unknown> {
    */
   schema?: (
     component: FormComponent<unknown, SettingsType>,
-    defaultSchema?: SchemaProperty
+    defaultSchema?: SchemaProperty,
   ) => SchemaProperty;
   /**
    * The datatype this component should use in the JSON Schema. Defaults to string.
@@ -64,13 +64,13 @@ export interface FormComponentType<SettingsType = unknown> {
    */
   formProps?: (
     props: FormHTMLAttributes<HTMLFormElement>,
-    component: FormComponent<unknown, SettingsType>
+    component: FormComponent<unknown, SettingsType>,
   ) => FormHTMLAttributes<HTMLFormElement>;
   /**
    * This allows you to specify a custom error message for this component or parts of it.
    */
   schemaErrorMessages?: (
-    component: FormComponent<unknown, SettingsType>
+    component: FormComponent<unknown, SettingsType>,
   ) => Record<string, () => string>;
 }
 
@@ -167,7 +167,7 @@ export type FormComponentWithName = Omit<FormComponent, "name"> & {
  */
 export type CreateFormComponentType<
   ValueType,
-  SettingsType = undefined
+  SettingsType = undefined,
 > = Partial<Omit<FormComponent<ValueType, SettingsType>, "type">>;
 
 const defaultComponentDefinition = {
@@ -193,7 +193,7 @@ export function formComponent<ValueType, SettingsType = unknown>(
         FormComponent<ValueType, SettingsType>,
         "validators" | "required" | "rules"
       >
-    >
+    >,
 ): FormComponent<ValueType, SettingsType> {
   return {
     ...defaultComponentDefinition,
@@ -206,7 +206,7 @@ export function formComponent<ValueType, SettingsType = unknown>(
  * @internal
  */
 export function attributes(
-  component: FormComponent<unknown, unknown>
+  component: FormComponent<unknown, unknown>,
 ): Record<string, string | boolean | number> {
   let attributes = {};
   for (const validator of component.validators) {
@@ -230,7 +230,7 @@ export function attributes(
 export async function validateComponent(
   path: string,
   component: FormComponent,
-  data: Record<string, unknown>
+  data: Record<string, unknown>,
 ): Promise<ValidationError[]> {
   let errors = [];
   if (!component.name) {
@@ -277,7 +277,7 @@ export async function validateComponent(
               ...(await validateComponent(
                 `${path}/${i}/${child.name}`,
                 child,
-                item as Record<string, unknown>
+                item as Record<string, unknown>,
               )),
             ];
           }
@@ -297,7 +297,7 @@ export async function validateComponent(
           ...(await validateComponent(
             `${path}/${child.name}`,
             child,
-            data[component.name] as Record<string, unknown>
+            data[component.name] as Record<string, unknown>,
           )),
         ];
       }
@@ -305,7 +305,7 @@ export async function validateComponent(
     const validatorErrors = await checkValidators(
       path,
       data[component.name],
-      component
+      component,
     );
     errors = [...errors, ...validatorErrors];
   }

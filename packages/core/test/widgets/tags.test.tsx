@@ -55,10 +55,10 @@ describe("Tags", () => {
 
   const renderForm = async (data: unknown) => {
     const { findByLabelText, queryByText, queryByLabelText } = render(
-      <FormView data={data} form={form} />
+      <FormView data={data} form={form} />,
     );
     const optionsElement = (await findByLabelText(
-      "Options"
+      "Options",
     )) as HTMLSelectElement;
     const textElement = queryByLabelText("Free text") as HTMLInputElement;
     const addButton = queryByText("Custom add text");
@@ -150,7 +150,7 @@ describe("Tags", () => {
         value={["text", "text2", "text3"]}
         component={disabled}
         onChange={noOp}
-      />
+      />,
     );
     expect(queryByLabelText("Options")).toBe(null);
     expect(queryByText("Remove")).toBe(null);

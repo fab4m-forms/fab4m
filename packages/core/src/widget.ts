@@ -70,7 +70,7 @@ export interface WidgetProps<ValueType, SettingsType> {
  */
 export interface MultipleWidgetProps<
   ValueType = unknown,
-  SettingsType = unknown
+  SettingsType = unknown,
 > {
   /**The Component that this widget is rendered for.*/
   component: FormComponent<ValueType, unknown>;
@@ -206,7 +206,7 @@ type CreateWidget<ValueType = any, SettingsType = undefined> = {
  * @group Widget API
  */
 export function widget<ValueType = any, SettingsType = undefined>(
-  args: CreateWidget<ValueType, SettingsType>
+  args: CreateWidget<ValueType, SettingsType>,
 ): Widget<ValueType, SettingsType> {
   return {
     ...args,
@@ -238,7 +238,7 @@ type CreateMultipleWidget<ValueType = any, SettingsType = undefined> = {
  * @group Widget API
  */
 export function multipleWidget<ValueType, SettingsType>(
-  args: CreateMultipleWidget<ValueType, SettingsType>
+  args: CreateMultipleWidget<ValueType, SettingsType>,
 ): MultipleWidget<ValueType, SettingsType> {
   return {
     ...args,

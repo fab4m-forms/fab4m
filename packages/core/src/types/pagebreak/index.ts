@@ -23,7 +23,7 @@ export const pageBreakType: FormComponentType = {
  * @group Components
  */
 export function pageBreak(
-  attributes?: CreateFormComponentType<unknown>
+  attributes?: CreateFormComponentType<unknown>,
 ): FormComponent<unknown> {
   return formComponent({
     settings: undefined,

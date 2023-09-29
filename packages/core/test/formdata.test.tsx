@@ -55,7 +55,7 @@ describe("Form data unpacking", () => {
       {
         ...fields,
         subgroup: group({ label: "Sub group" }, fields),
-      }
+      },
     ),
     groups: group({ label: "Groups", multiple: true }, fields),
   });
@@ -74,7 +74,7 @@ describe("Form data unpacking", () => {
 
   const getFormData = (renderData: Record<string, unknown>) => {
     const { container } = render(
-      <FormView id="form" form={form} data={renderData} />
+      <FormView id="form" form={form} data={renderData} />,
     );
     const element = getFormElement(container);
     return new FormData(element);

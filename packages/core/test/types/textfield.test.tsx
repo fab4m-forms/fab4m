@@ -96,7 +96,7 @@ describe("text field", () => {
         name="textarea"
         component={textarea}
         theme={basic}
-      />
+      />,
     );
     const element = container.querySelector("textarea");
     expect(element).not.toBe(null);

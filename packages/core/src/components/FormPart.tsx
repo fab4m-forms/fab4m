@@ -53,7 +53,7 @@ export default function FormPart(props: {
                 component.name && changeComponent(component.name, value)
               }
             />
-          )
+          ),
       )}
     </div>
   );
