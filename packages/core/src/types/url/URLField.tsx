@@ -8,7 +8,7 @@ import Input from "../../components/Input";
  * @group React widgets
  */
 export default function URLField(
-  props: WidgetProps<string, URLFieldWidgetSettings>
+  props: WidgetProps<string, URLFieldWidgetSettings>,
 ): JSX.Element {
   return <Input {...props} type="url" />;
 }

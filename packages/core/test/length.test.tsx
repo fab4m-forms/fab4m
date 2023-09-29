@@ -23,7 +23,7 @@ describe("Length validator", () => {
       required: true,
       widget: textFieldWidget(),
       validators: [minValidator, maxValidator],
-    })
+    }),
   );
   form.add(
     textField({
@@ -32,7 +32,7 @@ describe("Length validator", () => {
       required: true,
       widget: textAreaWidget(),
       validators: [minValidator, maxValidator],
-    })
+    }),
   );
 
   minValidator.settings = 5;

@@ -7,7 +7,7 @@ import Input from "../../components/Input";
  * @group React widgets
  */
 export default function TextField(
-  props: WidgetProps<string, TextFieldWidgetSettings>
+  props: WidgetProps<string, TextFieldWidgetSettings>,
 ): JSX.Element {
   return <Input {...props} type="text" />;
 }

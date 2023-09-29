@@ -20,7 +20,7 @@ describe("Allowed/Disallowed values validator", () => {
       validators: [
         disallowedValues(["text", "text2"], "Custom disallowed message"),
       ],
-    })
+    }),
   );
   form.add(
     textField({
@@ -28,14 +28,14 @@ describe("Allowed/Disallowed values validator", () => {
       label: "Another text field",
       required: true,
       validators: [allowedValues(["text", "text2"], "Custom allowed message")],
-    })
+    }),
   );
 
   test("disallowed Field schema", () => {
     const schema = generateSchema(form);
     if (schema.properties.disallowedText.type === "string") {
       expect(schema.properties.disallowedText.not?.enum).toEqual(
-        expect.arrayContaining(["text", "text2"])
+        expect.arrayContaining(["text", "text2"]),
       );
     }
   });
@@ -44,7 +44,7 @@ describe("Allowed/Disallowed values validator", () => {
     const schema = generateSchema(form);
     if (schema.properties.allowedText.type === "string") {
       expect(schema.properties.allowedText.enum).toEqual(
-        expect.arrayContaining(["text", "text2"])
+        expect.arrayContaining(["text", "text2"]),
       );
     }
   });
@@ -63,7 +63,7 @@ describe("Allowed/Disallowed values validator", () => {
     expect(validResult.valid).toBe(true);
     expect(invalidResult.valid).toBe(false);
     expect(invalidResult.errors["/disallowedText"]).toBe(
-      "Custom disallowed message"
+      "Custom disallowed message",
     );
     expect(invalidResult.errors["/allowedText"]).toBe("Custom allowed message");
   });
@@ -71,10 +71,10 @@ describe("Allowed/Disallowed values validator", () => {
   test("Form validation", async () => {
     const context = render(<StatefulFormView form={form} />);
     const disallowedInput = context.container.querySelector(
-      "#disallowedText"
+      "#disallowedText",
     ) as HTMLInputElement;
     const allowedInput = context.container.querySelector(
-      "#allowedText"
+      "#allowedText",
     ) as HTMLInputElement;
     const formElement = context.container.querySelector("form");
     if (allowedInput && disallowedInput && formElement) {
@@ -92,7 +92,7 @@ describe("Allowed/Disallowed values validator", () => {
       });
       fireEvent.submit(formElement);
       expect(
-        await context.findByText("Custom disallowed message")
+        await context.findByText("Custom disallowed message"),
       ).toBeVisible();
       expect(await context.findByText("Custom allowed message")).toBeVisible();
     }

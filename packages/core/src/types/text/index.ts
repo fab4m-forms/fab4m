@@ -44,7 +44,7 @@ const defaultTextField = () => ({
  * @group Components
  */
 export function textField(
-  attributes: CreateFormComponentType<string>
+  attributes: CreateFormComponentType<string>,
 ): FormComponent<string> {
   return formComponent<string>({
     ...defaultTextField(),
@@ -59,7 +59,7 @@ export function textField(
  * @group Components
  */
 export function textAreaField(
-  attributes: CreateFormComponentType<string>
+  attributes: CreateFormComponentType<string>,
 ): FormComponent<string> {
   return formComponent<string>({
     ...defaultTextField(),
@@ -97,7 +97,7 @@ export const textFieldWidgetType: WidgetType<string, TextFieldWidgetSettings> =
  * @group Widgets
  */
 export function textFieldWidget(
-  prefix?: string
+  prefix?: string,
 ): Widget<string, TextFieldWidgetSettings> {
   return widget<string, TextFieldWidgetSettings>({
     type: textFieldWidgetType,

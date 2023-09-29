@@ -35,11 +35,11 @@ describe("Select", () => {
   });
   test("Select choices", async () => {
     const { findByLabelText, findByText } = render(
-      <FormView form={form} data={data} />
+      <FormView form={form} data={data} />,
     );
     const textElement = (await findByLabelText("Texts")) as HTMLSelectElement;
     const numberElement = (await findByLabelText(
-      "Numbers"
+      "Numbers",
     )) as HTMLSelectElement;
     expect((await findByText("three")).nodeName).toBe("OPTION");
     fireEvent.change(textElement, { target: { value: "one" } });
@@ -76,11 +76,11 @@ describe("Select", () => {
         value={selected}
         onChange={noOp}
         component={groups}
-      />
+      />,
     );
     const firstGroup = container.querySelector("optgroup[label='A group']");
     const secondGroup = container.querySelector(
-      "optgroup[label='Another group']"
+      "optgroup[label='Another group']",
     );
     expect(firstGroup).not.toBe(null);
     expect(secondGroup).not.toBe(null);

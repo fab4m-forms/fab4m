@@ -97,7 +97,7 @@ describe("Stateful Form", () => {
     form.onDataChange(spy);
     const { findByLabelText } = render(<StatefulFormView form={form} />);
     const element = (await findByLabelText(
-      "Required text"
+      "Required text",
     )) as HTMLInputElement;
     fireEvent.input(element, {
       value: "text",

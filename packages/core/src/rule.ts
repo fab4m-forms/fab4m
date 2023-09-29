@@ -69,7 +69,7 @@ export function filterComponents(
   components: FormComponentsList,
   data: Record<string, unknown>,
   filterBreaks = false,
-  parentData?: Record<string, unknown>
+  parentData?: Record<string, unknown>,
 ): FormComponentWithName[] {
   const filteredComponents: FormComponentWithName[] = [];
   for (const definition of components) {
@@ -89,7 +89,7 @@ export function filterComponents(
           Array.isArray(variant.rule) &&
           variant.rule[1].type.valid(
             getRuleValue(variant.rule[0], data, parentData),
-            variant.rule[1].settings
+            variant.rule[1].settings,
           )
         ) {
           component = variant.component;
@@ -117,7 +117,7 @@ export function filterComponents(
         if (
           !validator.type.valid(
             getRuleValue(ruleComponent, data, parentData),
-            validator.settings
+            validator.settings,
           )
         ) {
           valid = false;
@@ -150,7 +150,7 @@ export function filterComponents(
  */
 export function filterData(
   components: FormComponentWithName[],
-  data: Record<string, unknown>
+  data: Record<string, unknown>,
 ): Record<string, unknown> {
   const validNames = filterComponents(components, data).map((c) => c.name);
   // Avoid computing a new array if we don't have any rules that failed.
@@ -169,7 +169,7 @@ export function filterData(
 export function getRuleValue(
   name: string,
   data: Record<string, unknown> | Array<Record<string, unknown>>,
-  parentData?: Record<string, unknown>
+  parentData?: Record<string, unknown>,
 ): unknown {
   const parts = name.split(".");
   for (const part of parts) {

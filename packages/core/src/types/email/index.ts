@@ -27,7 +27,7 @@ export const emailFieldType: FormComponentType = {
  * @group Components
  */
 export function emailField(
-  attributes: CreateFormComponentType<string>
+  attributes: CreateFormComponentType<string>,
 ): FormComponent<string> {
   return formComponent({
     settings: undefined,

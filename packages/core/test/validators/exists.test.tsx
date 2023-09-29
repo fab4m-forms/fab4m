@@ -19,7 +19,7 @@ describe("Exists", () => {
       name: "second",
       label: "Second",
       rules: [["first", exists()]],
-    })
+    }),
   );
   const third = textField({
     name: "third",
@@ -46,7 +46,7 @@ describe("Exists", () => {
   test("Form validator", async () => {
     const { findByLabelText } = render(<StatefulFormView form={form} />);
     expect(
-      ((await findByLabelText("Third")) as HTMLInputElement).required
+      ((await findByLabelText("Third")) as HTMLInputElement).required,
     ).toBe(true);
   });
   test("Equals JSON schema", () => {

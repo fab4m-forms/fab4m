@@ -5,7 +5,9 @@ import FormComponentWrapper from "./FormComponentWrapper";
  * @internal
  */
 export default function Input(
-  props: WidgetProps<string, { prefix?: string } | undefined> & { type: string }
+  props: WidgetProps<string, { prefix?: string } | undefined> & {
+    type: string;
+  },
 ): JSX.Element {
   const component = props.component;
   const classes = props.theme.classes;

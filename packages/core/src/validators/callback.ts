@@ -44,7 +44,7 @@ function createCallbackValidator<ValueType>(): CallbackType<ValueType> {
  * @group Validators
  */
 export function callback<ValueType = unknown>(
-  callback: Callback<ValueType>
+  callback: Callback<ValueType>,
 ): Validator<CallbackType<ValueType>, ValueType> {
   return validator<CallbackType<ValueType>, ValueType>({
     type: createCallbackValidator<ValueType>(),

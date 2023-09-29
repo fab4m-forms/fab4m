@@ -38,7 +38,7 @@ export const defaultMultipleWidgetType: MultipleWidgetType<
  * @group Multiple widgets
  */
 export function defaultMultipleWidget(
-  settings: MultipleSettings = {}
+  settings: MultipleSettings = {},
 ): MultipleWidget<any, MultipleSettings> {
   return multipleWidget({
     type: defaultMultipleWidgetType,
@@ -107,7 +107,7 @@ export const tagsWidgetType: MultipleWidgetType<any, TagsSettings | undefined> =
  * @group Widgets
  */
 export function tagsWidget<Value>(
-  settings?: TagsSettings
+  settings?: TagsSettings,
 ): MultipleWidget<Value, TagsSettings | undefined> {
   return multipleWidget<Value, TagsSettings | undefined>({
     type: tagsWidgetType,

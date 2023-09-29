@@ -25,7 +25,7 @@ export default function FormComponentWrapper(
      * Any prefix that should be rendered before the actual form element.
      */
     prefix?: string;
-  }
+  },
 ): JSX.Element {
   const component = props.component;
   const classes = props.theme.classes;

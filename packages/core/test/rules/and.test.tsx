@@ -18,7 +18,7 @@ describe("And", () => {
           ["second", equals("choice2")],
         ]),
       ],
-    })
+    }),
   );
   test("And rule", async () => {
     const data = {
@@ -34,7 +34,7 @@ describe("And", () => {
     const checkChoice = (
       firstChoice: string,
       secondChoice: string,
-      visible: boolean
+      visible: boolean,
     ) => {
       data.first = firstChoice;
       data.second = secondChoice;
@@ -52,14 +52,14 @@ describe("And", () => {
   test("Rule schema validation", () => {
     // Only one of the rule matches, this should be ok.
     expect(validate(form, { first: "choice1", second: "second" }).valid).toBe(
-      true
+      true,
     );
     expect(validate(form, { first: "choice1", second: "choice2" }).valid).toBe(
-      false
+      false,
     );
     // Only one of the rule matches, this should be ok.
     expect(validate(form, { first: "choice3", second: "choice2" }).valid).toBe(
-      true
+      true,
     );
   });
 });

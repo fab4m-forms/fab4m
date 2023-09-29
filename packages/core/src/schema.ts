@@ -152,7 +152,7 @@ function defaultSchema(component: FormComponent): SchemaProperty | undefined {
  * @group JSON Schema
  */
 export function generateComponentSchema(
-  component: FormComponent
+  component: FormComponent,
 ): SchemaProperty | null {
   let componentSchema = component.type.schema
     ? component.type.schema(component, defaultSchema(component))
@@ -234,7 +234,7 @@ export function generateSchema(form: FormDefinition): Schema {
       const required =
         component.required ||
         component.validators.findIndex(
-          (validator) => validator.type.forceRequired
+          (validator) => validator.type.forceRequired,
         ) !== -1;
       if (required) {
         // If this component has rules, then we need to add required only
@@ -257,7 +257,7 @@ export function generateSchema(form: FormDefinition): Schema {
       variant.rule,
       variant.component,
       componentSchemas,
-      true
+      true,
     );
     if (variantSchema) {
       variantSchemas.push(variantSchema);
@@ -269,7 +269,7 @@ export function generateSchema(form: FormDefinition): Schema {
       const ruleSchema = generateComponentRuleSchema(
         rule,
         component,
-        componentSchemas
+        componentSchemas,
       );
       if (!ruleSchema) {
         continue;
@@ -328,7 +328,7 @@ export function generateSchema(form: FormDefinition): Schema {
 function addChildRules(
   component: FormComponentWithParents,
   hasRules: FormComponentWithParents[],
-  parents: string[]
+  parents: string[],
 ) {
   if (!component.components) {
     return;
@@ -346,7 +346,7 @@ function generateComponentRuleSchema(
   rule: AnyRule,
   component: FormComponentWithName,
   componentSchemas: Record<string, SchemaProperty>,
-  withComponent = false
+  withComponent = false,
 ): Partial<Schema> | null {
   if (Array.isArray(rule)) {
     return buildIfStatement(
@@ -354,7 +354,7 @@ function generateComponentRuleSchema(
       rule[1],
       component,
       componentSchemas,
-      withComponent
+      withComponent,
     );
   }
   const groupRules: Array<Partial<Schema>> = [];
@@ -363,7 +363,7 @@ function generateComponentRuleSchema(
       childRule,
       component,
       componentSchemas,
-      withComponent
+      withComponent,
     );
     if (!schema) {
       continue;
@@ -386,7 +386,7 @@ function buildIfStatement(
   validator: Validator,
   component: FormComponentWithParents,
   componentSchemas: Record<string, SchemaProperty>,
-  withComponent = false
+  withComponent = false,
 ): any {
   const ifStatement: Partial<Schema> = {
     if: {
@@ -438,7 +438,7 @@ function buildIfStatement(
   if (ifStatement.if) {
     ifStatement.if.properties[path[path.length - 1]] = validator.type.schema(
       validator.settings,
-      schemaCursor
+      schemaCursor,
     );
   }
   return ifStatement;
@@ -495,7 +495,7 @@ export function schemaMessages(form: FormDefinition): Record<string, string> {
       if (validator.type.schemaErrorMessages) {
         const validatorMessages = validator.type.schemaErrorMessages(
           validator.settings,
-          component
+          component,
         );
         for (const key in validatorMessages) {
           messages[`#/properties/${component.name}/${key}`] =
@@ -517,7 +517,7 @@ export function schemaMessages(form: FormDefinition): Record<string, string> {
  */
 export function errorMessages(
   form: FormDefinition,
-  errors: ErrorObject[]
+  errors: ErrorObject[],
 ): Record<string, string> {
   const messages = schemaMessages(form);
   const errorsToReturn: Record<string, string> = {};

@@ -54,30 +54,29 @@ export interface FormViewProps {
   idPrefix?: string;
 }
 
-export type ComponentDataDefinition =
+export type ComponentDataDefinition = {
+  name: string;
+  type: ComponentDataType;
+} & (
+  | { multiple: false; components?: ComponentDataDefinition[] }
   | {
-      name: string;
-      type: ComponentDataType;
-    } & (
-      | { multiple: false; components?: ComponentDataDefinition[] }
-      | {
-          multiple: true;
-          components?: ComponentDataDefinition[][];
-        }
-    );
+      multiple: true;
+      components?: ComponentDataDefinition[][];
+    }
+);
 
 export function formDataDefinition(form: Form, data: Record<string, unknown>) {
   return formComponentsDefinition(
     filterComponents(form.components, data),
     data,
-    data
+    data,
   );
 }
 
 function formComponentsDefinition(
   components: FormComponentWithName[],
   data: Record<string, unknown>,
-  allData: Record<string, unknown>
+  allData: Record<string, unknown>,
 ) {
   const definition: ComponentDataDefinition[] = [];
   for (const component of components) {
@@ -97,8 +96,8 @@ function formComponentsDefinition(
         formComponentsDefinition(
           filterComponents(components, data, false, value),
           value,
-          allData
-        )
+          allData,
+        ),
       );
     } else if (components && data[component.name]) {
       componentDefinition.components = formComponentsDefinition(
@@ -106,10 +105,10 @@ function formComponentsDefinition(
           components,
           allData,
           false,
-          data[component.name] as Record<string, unknown>
+          data[component.name] as Record<string, unknown>,
         ),
         data[component.name] as Record<string, unknown>,
-        allData
+        allData,
       );
     }
     definition.push(componentDefinition);

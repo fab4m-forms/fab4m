@@ -10,7 +10,7 @@ import { filterComponents } from "../../rule";
 export default function GroupChildren(
   props: WidgetProps<unknown, unknown> & {
     wrapperClass?: string;
-  }
+  },
 ): JSX.Element | null {
   if (!props.component.components) {
     return null;
@@ -27,7 +27,7 @@ export default function GroupChildren(
     props.component.components,
     formData,
     false,
-    value
+    value,
   ).map((component, index) => {
     if (!component.name) {
       return null;

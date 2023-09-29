@@ -134,7 +134,7 @@ export interface ComponentSerializer<SettingsType> {
     componentType: FormComponentType<SettingsType>,
     validators: Validator[],
     rules: AnyRule[],
-    plugins: SerializerPlugins
+    plugins: SerializerPlugins,
   ) => FormComponentWithName | null;
 }
 
@@ -157,7 +157,7 @@ export interface WidgetSerializer<ValueType, SettingsType> {
    */
   unserialize: (
     widget: SerializedWidget,
-    plugins: SerializerPlugins
+    plugins: SerializerPlugins,
   ) => Widget<ValueType, SettingsType> | null;
 }
 /**
@@ -171,7 +171,7 @@ export interface MultipleWidgetSerializer<ValueType, SettingsType> {
    * @return The serialized widget.
    */
   serialize: (
-    widget: MultipleWidget<ValueType, SettingsType>
+    widget: MultipleWidget<ValueType, SettingsType>,
   ) => SerializedWidget;
   /**
    * Unserialize a serialized widget into a widget that can be used on a component.
@@ -181,7 +181,7 @@ export interface MultipleWidgetSerializer<ValueType, SettingsType> {
    */
   unserialize: (
     widget: SerializedWidget,
-    plugins: SerializerPlugins
+    plugins: SerializerPlugins,
   ) => MultipleWidget<ValueType, SettingsType> | null;
 }
 
@@ -211,7 +211,7 @@ export interface SerializedForm {
  * @group Serializer API
  */
 export function serializeRule(
-  rule: AnyRule
+  rule: AnyRule,
 ): SerializedRule | SerializedRuleGroup {
   if (Array.isArray(rule)) {
     return [rule[0], { settings: rule[1].settings, type: rule[1].type.name }];
@@ -223,7 +223,7 @@ export function serializeRule(
 }
 
 export function serializeComponentListItem(
-  item: FormComponent | FormComponentVariant[]
+  item: FormComponent | FormComponentVariant[],
 ): SerializedComponent | SerializedVariant[] {
   if (Array.isArray(item)) {
     return item.map((item): SerializedVariant => {
@@ -243,7 +243,7 @@ export function serializeComponentListItem(
  * @group Serializer API
  */
 export function serializeComponent(
-  component: FormComponent
+  component: FormComponent,
 ): SerializedComponent {
   if (component.type.serializer) {
     return component.type.serializer.serialize(component);
@@ -313,7 +313,7 @@ export function unserialize(
   widgets: WidgetType[] = [],
   multipleWidgets: MultipleWidgetType[] = [],
   validators: ValidatorType[] = [],
-  ruleGroups: RuleGroupType[] = []
+  ruleGroups: RuleGroupType[] = [],
 ): FormDefinition {
   const typeMap: Record<string, FormComponentType> = {};
   const widgetMap: Record<string, WidgetType> = {};
@@ -353,7 +353,7 @@ export function unserialize(
   for (const component of form.components) {
     const unserializedComponent = unserializeComponentListItem(
       component,
-      plugins
+      plugins,
     );
     if (unserializedComponent) {
       components.push(unserializedComponent);
@@ -372,7 +372,7 @@ export function unserialize(
 
 export function unserializeComponentListItem(
   item: SerializedComponent | SerializedVariant[],
-  plugins: SerializerPlugins
+  plugins: SerializerPlugins,
 ): FormComponentWithName | FormComponentVariant[] | null {
   if (Array.isArray(item)) {
     const variants: FormComponentVariant[] = [];
@@ -407,7 +407,7 @@ export function unserializeComponentListItem(
  */
 export function unserializeComponent(
   component: SerializedComponent,
-  plugins: SerializerPlugins
+  plugins: SerializerPlugins,
 ): FormComponentWithName | null {
   if (plugins.types[component.type]) {
     const widget = unserializeWidget(component.widget, plugins);
@@ -440,7 +440,7 @@ export function unserializeComponent(
         componentType,
         validators,
         rules,
-        plugins
+        plugins,
       );
     }
     let components;
@@ -449,7 +449,7 @@ export function unserializeComponent(
       for (const serializedComponent of component.components) {
         const unserializedComponent = unserializeComponentListItem(
           serializedComponent,
-          plugins
+          plugins,
         );
         if (unserializedComponent) {
           components.push(unserializedComponent);
@@ -494,7 +494,7 @@ export function serializeWidget(widget: Widget): SerializedWidget {
  * @group Serializer API
  */
 export function serializeMultipleWidget(
-  widget: MultipleWidget
+  widget: MultipleWidget,
 ): SerializedWidget {
   if (widget.type.serializer) {
     return widget.type.serializer.serialize(widget);
@@ -514,7 +514,7 @@ export function serializeMultipleWidget(
  */
 export function unserializeWidget(
   widget: SerializedWidget,
-  plugins: SerializerPlugins
+  plugins: SerializerPlugins,
 ): Widget | null {
   if (!plugins.widgets[widget.type]) {
     return null;
@@ -538,7 +538,7 @@ export function unserializeWidget(
  */
 export function unserializeMultipleWidget(
   widget: SerializedWidget,
-  plugins: SerializerPlugins
+  plugins: SerializerPlugins,
 ): MultipleWidget | null {
   if (!plugins.multipleWidgets[widget.type]) {
     return null;
@@ -562,7 +562,7 @@ export function unserializeMultipleWidget(
  */
 export function unserializeRule(
   rule: SerializedRule | SerializedRuleGroup,
-  plugins: SerializerPlugins
+  plugins: SerializerPlugins,
 ): AnyRule | null {
   if (Array.isArray(rule) && plugins.validators[rule[1].type]) {
     return [

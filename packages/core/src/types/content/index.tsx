@@ -30,7 +30,7 @@ type ContentWidget<Type> = Widget<unknown, WidgetSettings<Type>>;
  */
 export function content<DataType = Record<string, unknown>>(
   attributes: CreateFormComponentType<unknown>,
-  renderContent: (value: DataType) => ReactNode
+  renderContent: (value: DataType) => ReactNode,
 ): FormComponent<unknown> {
   return formComponent({
     widget: contentWidget<DataType>(renderContent),
@@ -46,7 +46,7 @@ export function content<DataType = Record<string, unknown>>(
  * @group Widgets
  */
 function Content<Type>(
-  props: WidgetProps<unknown, WidgetSettings<Type>>
+  props: WidgetProps<unknown, WidgetSettings<Type>>,
 ): React.ReactElement {
   const data = useFormData() as Type;
   return <>{props.settings(data)}</>;
@@ -71,7 +71,7 @@ export const contentWidgetType: ContentWidgetType<Record<string, unknown>> = {
  * @group Widgets
  */
 export function contentWidget<DataType = Record<string, unknown>>(
-  content: (value: DataType) => ReactNode
+  content: (value: DataType) => ReactNode,
 ): ContentWidget<DataType> {
   return widget<unknown, WidgetSettings<DataType>>({
     type: {

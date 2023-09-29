@@ -32,7 +32,7 @@ export const equalsValidator: EqualsType = {
           path: "",
           message: settings.message.replace(
             "%compare",
-            settings.value.toString()
+            settings.value.toString(),
           ),
         },
       ];
@@ -48,7 +48,7 @@ export const equalsValidator: EqualsType = {
  */
 export function equals(
   value: EqualsValues,
-  message?: string
+  message?: string,
 ): Validator<EqualsType, EqualsSettings> {
   return validator({
     type: equalsValidator,

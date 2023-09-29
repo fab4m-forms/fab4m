@@ -19,14 +19,14 @@ describe("Callback rules", () => {
       name: "second",
       label: "Second",
       rules: [["first", callback((value) => value === "test")]],
-    })
+    }),
   );
   form.add(
     textField({
       name: "third",
       label: "Third",
       rules: [["third", callback(() => id > 0)]],
-    })
+    }),
   );
   form.add(
     textField({
@@ -34,10 +34,10 @@ describe("Callback rules", () => {
       label: "Validated",
       validators: [
         callback((value) =>
-          value !== "message" ? [{ path: "", message: "Not message" }] : []
+          value !== "message" ? [{ path: "", message: "Not message" }] : [],
         ),
       ],
-    })
+    }),
   );
 
   const data = {
@@ -64,7 +64,7 @@ describe("Callback rules", () => {
   });
   test("Form validator", async () => {
     const { findByLabelText, queryByText, container } = render(
-      <StatefulFormView form={form} />
+      <StatefulFormView form={form} />,
     );
     const formElement = getFormElement(container);
     fireEvent.input(await findByLabelText("Validated"), {

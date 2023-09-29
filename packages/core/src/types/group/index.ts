@@ -31,7 +31,7 @@ type GroupWidgetType = WidgetType<Record<string, any>, undefined>;
  */
 export function group<DataType = Record<string, any>>(
   attributes: Omit<CreateFormComponentType<DataType>, "settings">,
-  components: Components<DataType>
+  components: Components<DataType>,
 ): FormComponent<DataType> {
   return formComponent<DataType>({
     widget: groupWidget<DataType>(),
@@ -186,7 +186,7 @@ export const detailsWidgetType: WidgetType<
  * @group Widgets
  */
 export function detailsWidget<DataType = Record<string, any>>(
-  settings: DetailsSettings<DataType> = {}
+  settings: DetailsSettings<DataType> = {},
 ): Widget<DataType, DetailsSettings<DataType>> {
   const widgetType: WidgetType<DataType, DetailsSettings<DataType>> = {
     name: "details",

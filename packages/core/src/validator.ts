@@ -38,7 +38,7 @@ export interface ValidatorInfoProps<ValueType, SettingsType> {
 export interface ValidatorType<
   ValueType = any,
   SettingsType = any,
-  SchemaType = any
+  SchemaType = any,
 > {
   /** The title of the validator */
   title: string;
@@ -56,7 +56,7 @@ export interface ValidatorType<
     validator: Validator<
       ValidatorType<ValueType, SettingsType, SchemaType>,
       SettingsType
-    >
+    >,
   ) => Record<string, number | string | boolean>;
   /** A React component that can show information to the user about the expected data input.*/
   validatorInfo?: ComponentType<ValidatorInfoProps<ValueType, SettingsType>>;
@@ -72,7 +72,7 @@ export interface ValidatorType<
    */
   validate?: (
     value: ValueType,
-    settings: SettingsType
+    settings: SettingsType,
   ) => Promise<ValidationError[]>;
   /**
    * A function to determine if this validation passes or not. This is used
@@ -90,7 +90,7 @@ export interface ValidatorType<
    */
   schema: (
     settings: SettingsType,
-    schema: SchemaProperty
+    schema: SchemaProperty,
   ) => Partial<SchemaType>;
   /**
    * This function can be used to specify custom error messages which can be used instead of the default
@@ -101,7 +101,7 @@ export interface ValidatorType<
    */
   schemaErrorMessages?: (
     settings: SettingsType,
-    component: FormComponent
+    component: FormComponent,
   ) => Record<string, () => string>;
   /**
    * Force this component to be required within the JSON schema If this is set to true.
@@ -125,7 +125,7 @@ export interface ValidatorGroup<SettingsType = any> {
   validate?: (
     data: Record<string, unknown>,
     validators: Validator<any, unknown>,
-    settings: SettingsType
+    settings: SettingsType,
   ) => Promise<ValidationError[]>;
   /**
    * Determine if the validator group is valid.
@@ -135,7 +135,7 @@ export interface ValidatorGroup<SettingsType = any> {
   valid: (
     validators: Validator<any, unknown>,
     data: Record<string, unknown>,
-    settings: SettingsType
+    settings: SettingsType,
   ) => boolean;
 }
 
@@ -147,7 +147,7 @@ export interface ValidatorGroup<SettingsType = any> {
  */
 export interface Validator<
   DefinedValidatorType extends ValidatorType = ValidatorType,
-  SettingsType = any
+  SettingsType = any,
 > {
   type: DefinedValidatorType;
   settings: SettingsType;
@@ -161,9 +161,9 @@ export interface Validator<
  */
 export function validator<
   DefinedValidatorType extends ValidatorType,
-  SettingsType
+  SettingsType,
 >(
-  definition: Validator<DefinedValidatorType, SettingsType>
+  definition: Validator<DefinedValidatorType, SettingsType>,
 ): Validator<DefinedValidatorType, SettingsType> {
   return { ...definition };
 }
@@ -179,14 +179,14 @@ export function validator<
 export async function checkValidators(
   path: string,
   data: unknown,
-  component: FormComponent
+  component: FormComponent,
 ): Promise<ValidationError[]> {
   const errors: ValidationError[] = [];
   for (const validator of component.validators) {
     if (validator.type.validate) {
       const validatorErrors = await validator.type.validate(
         data,
-        validator.settings
+        validator.settings,
       );
       for (const error of validatorErrors) {
         errors.push({ path: `${path}${error.path}`, message: error.message });

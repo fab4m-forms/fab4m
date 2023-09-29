@@ -11,7 +11,7 @@ describe("Multi page", () => {
         previous: "Previous page",
         complete: "Complete form",
       },
-    }
+    },
   );
   form.add(textField({ name: "first", label: "First" }));
   form.add(pageBreak({ label: "First break", name: "first_break" }));
@@ -20,7 +20,7 @@ describe("Multi page", () => {
       name: "second",
       label: "Second",
       rules: [["first", equals("first")]],
-    })
+    }),
   );
   form.add(pageBreak({ label: "Second break", name: "second_break" }));
   form.add(
@@ -33,7 +33,7 @@ describe("Multi page", () => {
           ["second", equals("second")],
         ]),
       ],
-    })
+    }),
   );
   /*test("Complete disabled on last page", async () => {
     const data = {
@@ -179,7 +179,7 @@ describe("Multipage validation", () => {
         data={{ first: "first", second: "second", third: "third" }}
         form={form}
         part={2}
-      />
+      />,
     );
     expect(container.querySelector("button[value='complete']")).toBeNull();
   });

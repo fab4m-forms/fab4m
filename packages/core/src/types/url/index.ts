@@ -28,7 +28,7 @@ export const urlFieldType: FormComponentType = {
  * @group Components
  */
 export function urlField(
-  attributes: CreateFormComponentType<string>
+  attributes: CreateFormComponentType<string>,
 ): FormComponent<string> {
   return formComponent({
     widget: linkFieldWidget(),
@@ -65,7 +65,7 @@ export const linkFieldWidgetType: WidgetType<string, URLFieldWidgetSettings> = {
  * @group Widgets
  */
 export function linkFieldWidget(
-  prefix?: string
+  prefix?: string,
 ): Widget<string, URLFieldWidgetSettings> {
   return widget<string, URLFieldWidgetSettings>({
     type: linkFieldWidgetType,

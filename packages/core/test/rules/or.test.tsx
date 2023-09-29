@@ -17,7 +17,7 @@ describe("Or", () => {
           ["first", equals("choice2")],
         ]),
       ],
-    })
+    }),
   );
   test("Equals rule", async () => {
     const data = {
@@ -45,7 +45,7 @@ describe("Or", () => {
     // The rule does not match.
     expect(validate(form, { first: "choice3" }).valid).toBe(true);
     expect(validate(form, { first: "choice2", second: "match" }).valid).toBe(
-      true
+      true,
     );
   });
 });

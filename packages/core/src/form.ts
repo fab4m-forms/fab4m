@@ -85,7 +85,7 @@ export interface FormDefinition {
  */
 export type SubmitCallback<DataType> = (
   e: React.FormEvent<HTMLFormElement>,
-  data: DataType
+  data: DataType,
 ) => void;
 
 /**
@@ -106,7 +106,7 @@ export type DataChangeCallback<DataType> = (data: Partial<DataType>) => void;
 export type PartValidatorCallback<DataType> = (
   part: number,
   data: Partial<DataType>,
-  e: React.FormEvent<HTMLFormElement>
+  e: React.FormEvent<HTMLFormElement>,
 ) => Promise<ValidationError[] | void>;
 
 /**
@@ -117,7 +117,7 @@ export type PartValidatorCallback<DataType> = (
  */
 export type ComponentChangeCallback<DataType> = (
   name: keyof DataType,
-  value: unknown
+  value: unknown,
 ) => void;
 
 /**
@@ -168,7 +168,7 @@ export class Form<DataType = Record<string, any>> implements FormDefinition {
   public constructor(
     theme: Theme,
     components: Components<DataType> = {},
-    settings?: Partial<FormDefinition>
+    settings?: Partial<FormDefinition>,
   ) {
     this.theme = settings?.theme ? settings.theme : theme;
     this.components = componentsListFromObject<DataType>(components);
@@ -204,9 +204,9 @@ export class Form<DataType = Record<string, any>> implements FormDefinition {
     this.components.push(
       Array.isArray(component)
         ? component[1].map((definition) =>
-            variantFromDefinition(definition, component[0])
+            variantFromDefinition(definition, component[0]),
           )
-        : { name: componentName, ...component }
+        : { name: componentName, ...component },
     );
     return this;
   }
@@ -270,7 +270,7 @@ export class Form<DataType = Record<string, any>> implements FormDefinition {
    */
   onComponentChange(
     callback: ComponentChangeCallback<DataType>,
-    append?: boolean
+    append?: boolean,
   ) {
     if (!append) {
       this.removeComponentChangeListeners();
@@ -350,7 +350,7 @@ export class Form<DataType = Record<string, any>> implements FormDefinition {
   triggerValidatePart: PartValidatorCallback<DataType> = async (
     part,
     data,
-    e
+    e,
   ) => {
     let errors: ValidationError[] = [];
     for (const partValidator of this.partValidators) {
@@ -380,7 +380,7 @@ export class Form<DataType = Record<string, any>> implements FormDefinition {
    * Trigger the change data event.
    */
   triggerChangeData: DataChangeCallback<DataType> = (
-    data: Partial<DataType>
+    data: Partial<DataType>,
   ) => {
     this.dataChangeListeners.forEach((listener) => listener(data));
   };
@@ -403,7 +403,7 @@ export class Form<DataType = Record<string, any>> implements FormDefinition {
 export function createForm<DataType = Record<string, any>>(
   components: Components<DataType> = {},
   settings: Partial<FormDefinition> = {},
-  theme: Theme = defaultTheme
+  theme: Theme = defaultTheme,
 ): Form<DataType> {
   return new Form<DataType>(theme, components, settings);
 }
@@ -414,7 +414,7 @@ export function createForm<DataType = Record<string, any>>(
  * @group Form API
  */
 export function formFromDefinition<DataType = Record<string, any>>(
-  definition: FormDefinition
+  definition: FormDefinition,
 ) {
   const form = new Form<DataType>(definition.theme, {}, { ...definition });
   for (const component of definition.components) {
@@ -436,7 +436,7 @@ type FormPart = FormComponentWithName[];
  */
 export function formParts(
   form: FormDefinition,
-  data: Record<string, unknown>
+  data: Record<string, unknown>,
 ): FormPart[] {
   const parts: FormPart[] = [[]];
   let partIndex = 0;
@@ -459,7 +459,7 @@ export function formParts(
 export function getNextPart(
   parts: FormPart[],
   part: number,
-  data: Record<string, unknown>
+  data: Record<string, unknown>,
 ): number {
   const nextPart = part + 1;
   if (parts.length - 1 < nextPart) {
@@ -480,7 +480,7 @@ export function getNextPart(
 export function getPrevPart(
   parts: FormPart[],
   part: number,
-  data: Record<string, unknown>
+  data: Record<string, unknown>,
 ): number {
   const prevPart = part - 1;
   if (prevPart < 0) {
@@ -505,7 +505,7 @@ export const FormDataContext = createContext({} as Record<string, unknown>);
 export const FormErrorsContext = createContext([] as ValidationError[]);
 
 export function componentsListFromObject<Type>(
-  components: Components<Type>
+  components: Components<Type>,
 ): FormComponentsList {
   const list = [];
   for (const name in components) {
@@ -514,9 +514,9 @@ export function componentsListFromObject<Type>(
       list.push(
         Array.isArray(component)
           ? component.map((definition) =>
-              variantFromDefinition(definition, name)
+              variantFromDefinition(definition, name),
             )
-          : { name, ...component }
+          : { name, ...component },
       );
     }
   }
@@ -525,7 +525,7 @@ export function componentsListFromObject<Type>(
 
 export function variantFromDefinition(
   definition: VariantDefinition,
-  name: string
+  name: string,
 ): FormComponentVariant {
   if (!Array.isArray(definition)) {
     return { component: { name, ...definition } };
@@ -563,7 +563,7 @@ export function useFormErrors(): ValidationError[] {
  */
 export function componentErrors(
   path: string,
-  errors: ValidationError[]
+  errors: ValidationError[],
 ): ValidationError[] {
   return errors
     .filter((e) => e.path.startsWith(path))
@@ -574,17 +574,17 @@ export function componentErrors(
 
 async function validateComponents(
   components: FormComponentsList,
-  data: unknown
+  data: unknown,
 ) {
   let errors: ValidationError[] = [];
   for (const component of filterComponents(
     components,
-    data as Record<string, unknown>
+    data as Record<string, unknown>,
   )) {
     const componentErrors = await validateComponent(
       `/${component.name}`,
       component,
-      data as Record<string, unknown>
+      data as Record<string, unknown>,
     );
     if (componentErrors.length > 0 && component.name) {
       errors = [...errors, ...componentErrors];
@@ -616,7 +616,7 @@ export async function validateFormPart(
   form: Form,
   part: number,
   data: Record<string, unknown>,
-  event: React.FormEvent<HTMLFormElement>
+  event: React.FormEvent<HTMLFormElement>,
 ) {
   const parts = formParts(form, data);
   if (part > parts.length - 1) {
@@ -627,7 +627,7 @@ export async function validateFormPart(
     const callbackErrors = await form.triggerValidatePart(
       part,
       data as Record<string, unknown>,
-      event
+      event,
     );
     if (callbackErrors && callbackErrors.length > 0) {
       errors = [...errors, ...callbackErrors];

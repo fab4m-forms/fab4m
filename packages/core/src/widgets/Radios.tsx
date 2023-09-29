@@ -7,7 +7,7 @@ import { Option, optionValue } from "./options";
  * @group React widgets
  */
 function Radios<OptionsType>(
-  props: WidgetProps<OptionsType, Option<OptionsType>[]>
+  props: WidgetProps<OptionsType, Option<OptionsType>[]>,
 ) {
   const classes = props.theme.classes;
   const options = props.settings.map((option, index) => {

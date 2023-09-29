@@ -70,7 +70,7 @@ describe("Radios", () => {
         onChange={changeData}
         component={numbers}
         value={data}
-      />
+      />,
     );
     const zeroElement = (await findByLabelText("Zero")) as HTMLInputElement;
     const oneElement = (await findByLabelText("One")) as HTMLInputElement;

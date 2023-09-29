@@ -36,13 +36,13 @@ describe("Hooks", () => {
     const { findByLabelText } = render(
       <FormComponent
         data={{ requiredText: "Required text", otherText: "Other text" }}
-      />
+      />,
     );
     const requiredText = (await findByLabelText(
-      "Required text"
+      "Required text",
     )) as HTMLInputElement;
     const otherText = (await findByLabelText(
-      "Other text field"
+      "Other text field",
     )) as HTMLInputElement;
     await waitFor(() => {
       expect(requiredText.value).toBe("Required text");

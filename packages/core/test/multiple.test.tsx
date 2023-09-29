@@ -37,12 +37,12 @@ describe("Multiple fields", () => {
         component={multipleText}
         theme={basic}
         value={data}
-      />
+      />,
     );
     const add = await findByText("Add");
     fireEvent.click(add);
     const fields = (await findAllByLabelText(
-      "Text field 1"
+      "Text field 1",
     )) as HTMLInputElement[];
     expect(fields.length).toBe(2);
     expect(fields[0].name).toBe("field1[0]");
@@ -100,7 +100,7 @@ describe("Multiple fields", () => {
             validators: [
               allowedValues(
                 ["one", "two"],
-                "Not allowed in multiple group text"
+                "Not allowed in multiple group text",
               ),
             ],
           }),
@@ -115,9 +115,9 @@ describe("Multiple fields", () => {
                   allowedValues(["allowed"], "Not allowed in nested"),
                 ],
               }),
-            }
+            },
           ),
-        }
+        },
       ),
     });
     const { findAllByLabelText, findByText, container } = render(
@@ -133,26 +133,26 @@ describe("Multiple fields", () => {
             },
           ],
         }}
-      />
+      />,
     );
     const formElement = getFormElement(container);
     fireEvent.submit(formElement);
     await waitFor(async () => {
       expect(
         (await findAllByLabelText("Multiple"))[1].parentElement?.parentElement
-          ?.parentElement?.innerHTML
+          ?.parentElement?.innerHTML,
       ).toMatch("Not allowed");
       expect(
         (await findByText("In group")).parentElement?.parentElement
-          ?.parentElement?.innerHTML
+          ?.parentElement?.innerHTML,
       ).toMatch("Not allowed in group text");
       expect(
         (await findAllByLabelText("Multiple in group"))[1].parentElement
-          ?.parentElement?.parentElement?.innerHTML
+          ?.parentElement?.parentElement?.innerHTML,
       ).toMatch("Not allowed in multiple group text");
       expect(
         (await findAllByLabelText("Nested"))[1].parentElement?.parentElement
-          ?.parentElement?.innerHTML
+          ?.parentElement?.innerHTML,
       ).toMatch("Not allowed in nested");
     });
   });
@@ -166,7 +166,7 @@ describe("Multiple fields", () => {
       }),
     });
     const { findAllByText } = render(
-      <FormView form={form} data={{ multipleLabels: ["First", "Second"] }} />
+      <FormView form={form} data={{ multipleLabels: ["First", "Second"] }} />,
     );
     expect(await (await findAllByText("Description")).length).toBe(1);
   });
@@ -181,7 +181,7 @@ describe("Multiple fields", () => {
       }),
     });
     const { findAllByText } = render(
-      <FormView form={form} data={{ multipleLabels: ["First", "Second"] }} />
+      <FormView form={form} data={{ multipleLabels: ["First", "Second"] }} />,
     );
     expect(await (await findAllByText("Multiple labels")).length).toBe(2);
   });
@@ -193,14 +193,14 @@ describe("Multiple fields", () => {
       textField({
         label: "Not multiple",
         name: "not_multiple",
-      })
+      }),
     );
     const schema = generateSchema(form);
     expect(schema.properties.not_multiple.type).toBe("string");
     expect(schema.properties.field1.type).toBe("array");
     if (schema.properties.field1.type === "array") {
       expect((schema.properties.field1.items as SchemaProperty).type).toBe(
-        "string"
+        "string",
       );
     }
     const valid = validate(form, {
@@ -221,7 +221,7 @@ describe("Multiple fields", () => {
           onChange={changeData}
           component={multipleText}
           theme={basic}
-        />
+        />,
       );
     const elements = await findAllByLabelText("Text field 1");
     expect(elements).toHaveLength(2);
@@ -249,10 +249,10 @@ describe("Multiple fields", () => {
           multiple: true,
         }),
       },
-      { title: "Multiple form" }
+      { title: "Multiple form" },
     ).onSubmit(submit);
     const { queryByText, findByRole } = render(
-      <StatefulFormView form={form} data={{ multiple: [] }} />
+      <StatefulFormView form={form} data={{ multiple: [] }} />,
     );
     const formElement = await findByRole("form");
     fireEvent.submit(formElement);

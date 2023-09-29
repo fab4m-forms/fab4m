@@ -26,7 +26,7 @@ describe("Rule engine", () => {
       name: "second",
       label: "Second",
       rules: [["first", equals("first")]],
-    })
+    }),
   );
   form.add(
     textField({
@@ -36,7 +36,7 @@ describe("Rule engine", () => {
         ["first", equals("first")],
         ["second", equals("second")],
       ],
-    })
+    }),
   );
   form.add(
     textField({
@@ -46,7 +46,7 @@ describe("Rule engine", () => {
         ["first", equals("first")],
         ["first", equals("second")],
       ],
-    })
+    }),
   );
 
   form.add(
@@ -65,7 +65,7 @@ describe("Rule engine", () => {
           ]),
         ]),
       ],
-    })
+    }),
   );
 
   form.onSubmit((e) => {
@@ -154,7 +154,7 @@ describe("Rule engine", () => {
               ],
             ],
           }),
-        }
+        },
       ),
       dependsOnInGroup: textField({
         label: "Depends on in group",
@@ -168,7 +168,7 @@ describe("Rule engine", () => {
   test("Nested rules", async () => {
     const form = nestedForm();
     const { findByLabelText, queryByLabelText } = render(
-      <StatefulFormView form={form} />
+      <StatefulFormView form={form} />,
     );
     expect(queryByLabelText("Depends on in group")).toBeNull();
     expect(queryByLabelText("Dependent in group")).toBeNull();
@@ -197,7 +197,7 @@ describe("Rule engine", () => {
         data={{
           group: [{ inGroup: "test" }, { inGroup: "In group" }],
         }}
-      />
+      />,
     );
     await waitFor(async () => {
       expect(await findByLabelText("Depends on in group")).toBeVisible();
@@ -212,7 +212,7 @@ describe("Rule engine", () => {
         data={{
           group: [{ inGroup: "test" }, { inGroup: "dependent inside group" }],
         }}
-      />
+      />,
     );
     await waitFor(async () => {
       expect(await findByLabelText("Dependent in group")).toBeVisible();

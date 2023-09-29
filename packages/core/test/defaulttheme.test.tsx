@@ -19,7 +19,7 @@ describe("Default theme", () => {
   });
   test("Different default theme", async () => {
     const { findByLabelText } = render(
-      <FormView form={form} data={{ text: "" }} />
+      <FormView form={form} data={{ text: "" }} />,
     );
     const text = (await findByLabelText("Text field")) as HTMLInputElement;
     await waitFor(() => {
