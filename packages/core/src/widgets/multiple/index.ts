@@ -5,6 +5,7 @@ import {
   MultipleWidgetType,
 } from "../../widget";
 import Multiple from "./Multiple";
+import Table from "./Table";
 import Tags from "./Tags";
 
 /**
@@ -38,7 +39,7 @@ export const defaultMultipleWidgetType: MultipleWidgetType<
  * @group Multiple widgets
  */
 export function defaultMultipleWidget(
-  settings: MultipleSettings = {},
+  settings: MultipleSettings = {}
 ): MultipleWidget<any, MultipleSettings> {
   return multipleWidget({
     type: defaultMultipleWidgetType,
@@ -107,10 +108,26 @@ export const tagsWidgetType: MultipleWidgetType<any, TagsSettings | undefined> =
  * @group Widgets
  */
 export function tagsWidget<Value>(
-  settings?: TagsSettings,
+  settings?: TagsSettings
 ): MultipleWidget<Value, TagsSettings | undefined> {
   return multipleWidget<Value, TagsSettings | undefined>({
     type: tagsWidgetType,
+    settings,
+  });
+}
+
+export const tableWidgetType: MultipleWidgetType<any, MultipleSettings> = {
+  name: "table",
+  title: "Render multiple groups in a table",
+  widget: Table,
+  init: (settings) => tableWidget(settings),
+};
+
+export function tableWidget<Value>(
+  settings: MultipleSettings = {}
+): MultipleWidget<Value, MultipleSettings> {
+  return multipleWidget<Value, MultipleSettings>({
+    type: tableWidgetType,
     settings,
   });
 }

@@ -18,7 +18,8 @@ describe("Table widget", () => {
       {
         label: "Multiple group",
         required: true,
-        widget: tableWidget(),
+        multiple: true,
+        multipleWidget: tableWidget(),
       },
       {
         first: textField({
@@ -40,15 +41,20 @@ describe("Table widget", () => {
         ],
         // This column will either be the third or the foirth column
         fourth: textField({ label: "Fourth" }),
-      },
+      }
     ),
   });
+  /*test("Table label", async () => {
+    const { findByText } = render(<StatefulFormView form={form} />);
+    const text = await findByText("Multiple group");
+    expect(text).toBeDefined();
+  });*/
   test("Table header", async () => {
     const data = { group: [] };
-    const { findByRole, getByRole } = render(
-      <StatefulFormView form={form} data={data} />,
+    const { findByRole, queryByRole } = render(
+      <StatefulFormView form={form} data={data} />
     );
     await findByRole("table");
-    expect(getByRole("row", { name: "Fourth" })).not.toBeNull();
+    expect(queryByRole("row")).toHaveLength(4);
   });
 });
