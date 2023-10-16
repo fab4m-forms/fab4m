@@ -1,5 +1,5 @@
 import * as React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, test, expect } from "vitest";
 import {
   textField,
@@ -60,7 +60,6 @@ describe("Table widget", () => {
     render(<StatefulFormView form={form} data={data} />);
     await screen.findByRole("table");
     expect(screen.queryAllByRole("row")).toHaveLength(2);
-    await screen.findByLabelText("First");
     expect(screen.getByLabelText("First")).toBeInTheDocument();
   });
   test("Conditional field missing", async () => {
@@ -74,5 +73,50 @@ describe("Table widget", () => {
     render(<StatefulFormView form={form} data={data} />);
     await screen.findByRole("table");
     expect(screen.getByLabelText("Third")).toBeInTheDocument();
+  });
+  test("Add a new row to the table", async () => {
+    render(<StatefulFormView form={form} />);
+    const button = await screen.findByRole("button", { name: "Add" });
+    fireEvent.click(button);
+    await screen.findByRole("table");
+    expect(screen.getByLabelText("First")).toBeInTheDocument();
+  });
+  test("Remove a row from the table", async () => {
+    render(
+      <StatefulFormView
+        form={form}
+        data={{
+          group: [
+            { first: "A value" },
+            { first: "Value to remove" },
+            { first: "A third value" },
+          ],
+        }}
+      />,
+    );
+    const buttons = await screen.findAllByRole("button", { name: "Remove" });
+    fireEvent.click(buttons[1]);
+    await waitFor(() => {
+      const inputs = screen.getAllByRole("textbox", { name: "First" });
+      expect(inputs).toHaveLength(2);
+      expect(inputs[0]).toHaveValue("A value");
+      expect(inputs[1]).toHaveValue("A third value");
+    });
+  });
+  test("Data manipulation", async () => {
+    let data: { group: Array<Record<string, unknown>> } = { group: [] };
+    form.onDataChange((newData) => {
+      data = newData;
+    });
+    render(<StatefulFormView form={form} data={data} />);
+    const button = await screen.findByRole("button", { name: "Add" });
+    fireEvent.click(button);
+    const text = await screen.findByRole("textbox", { name: "First" });
+    fireEvent.input(text, { value: "New text" });
+    fireEvent.click(button);
+    await waitFor(() => {
+      expect(data.group).toHaveLength(2);
+      expect(data.group[0].first).toBe("New text");
+    });
   });
 });

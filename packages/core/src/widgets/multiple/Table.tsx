@@ -14,13 +14,14 @@ export default function Table(
 ): JSX.Element | null {
   const items = (props.value ?? []) as Array<Record<string, unknown>>;
   const addItem = () => props.onChange([...items, {}]);
+  const formData = useFormData();
   const itemComponents = items.map((value, index) => {
     const removeValue = () => {
       const newItems = [...items];
       newItems.splice(index, 1);
       props.onChange(newItems);
     };
-    const formData = useFormData();
+
     const components = filterComponents(
       props.component.components ?? [],
       value,
@@ -63,7 +64,7 @@ export default function Table(
               type={"button"}
               onClick={removeValue}
             >
-              {props.settings.removeItemLabel}
+              {props.settings.removeItemLabel ?? "Remove"}
             </button>
           )}
         </td>
@@ -105,7 +106,7 @@ export default function Table(
             id={`${props.id}-add`}
             className={props.theme.classes.addItem}
           >
-            {props.settings.addItemLabel}
+            {props.settings.addItemLabel ?? "Add"}
           </button>
         )}
       {props.component.description && (
