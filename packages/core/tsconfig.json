@@ -20,8 +20,8 @@
     "outDir": "dist",
     "baseUrl": ".",
     "skipLibCheck": true,
-    "types": ["vitest"]
+    "types": ["vitest/globals"]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "test"],
   "exclude": ["node_modules"]
 }

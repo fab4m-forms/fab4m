@@ -2,15 +2,17 @@ import * as React from "react";
 import { MultipleSettings } from ".";
 import { MultipleWidgetProps } from "../../widget";
 import ValidationErrors from "../../components/ValidationErrors";
+import { filterComponents } from "../../rule";
+import { FormComponentView, componentErrors, useFormData } from "../..";
 
 /**
  * The table react widget.
  * @group React multiple widgets
  */
-export default function Table<Value>(
-  props: MultipleWidgetProps<Value, MultipleSettings>
+export default function Table(
+  props: MultipleWidgetProps<unknown, MultipleSettings>,
 ): JSX.Element | null {
-  const items = props.value ?? [];
+  const items = (props.value ?? []) as Array<Record<string, unknown>>;
   const addItem = () => props.onChange([...items, {}]);
   const itemComponents = items.map((value, index) => {
     const removeValue = () => {
@@ -18,9 +20,42 @@ export default function Table<Value>(
       newItems.splice(index, 1);
       props.onChange(newItems);
     };
-    console.log("items", items);
+    const formData = useFormData();
+    const components = filterComponents(
+      props.component.components ?? [],
+      value,
+      false,
+      formData,
+    );
+    const cols = props.component.components?.map((c, i) => {
+      const component = Array.isArray(c) ? c[0].component : c;
+      const match = components.find(
+        (filteredComponent) => filteredComponent.name === component.name,
+      );
+      return (
+        <td key={i}>
+          {match ? (
+            <FormComponentView
+              value={value[match.name]}
+              hideLabel={true}
+              attributes={{ "aria-labelledby": `label-${component.name}` }}
+              name={`${props.name}[${index}][${component.name}]`}
+              index={index}
+              errors={
+                props.errors && componentErrors(`/${index}`, props.errors)
+              }
+              theme={props.theme}
+              ssr={props.ssr}
+              onChange={() => {}}
+              component={match}
+            />
+          ) : null}
+        </td>
+      );
+    });
     return (
       <tr className={props.theme.classes.tr} key={index}>
+        {cols}
         <td>
           {!props.component.disabled && (
             <button
@@ -45,9 +80,18 @@ export default function Table<Value>(
       {itemComponents.length > 0 && (
         <table className={props.theme.classes.addedTags}>
           <thead>
-            {props.component.components?.map((c) => (
-              <th>{Array.isArray(c) ? c[0].component.label : c.label}</th>
-            ))}
+            <tr>
+              {props.component.components?.map((c, i) => (
+                <th
+                  key={i}
+                  id={
+                    "label-" + (Array.isArray(c) ? c[0].component.name : c.name)
+                  }
+                >
+                  {Array.isArray(c) ? c[0].component.label : c.label}
+                </th>
+              ))}
+            </tr>
           </thead>
           <tbody>{itemComponents}</tbody>
         </table>
