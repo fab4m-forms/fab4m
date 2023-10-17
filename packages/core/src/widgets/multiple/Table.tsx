@@ -33,6 +33,14 @@ export default function Table(
       const match = components.find(
         (filteredComponent) => filteredComponent.name === component.name,
       );
+      const changeChildValue = (name: string, newValue: unknown) => {
+        const newItems = [...items];
+        newItems[i] = {
+          ...value,
+          [name]: newValue,
+        };
+        props.onChange(newItems);
+      };
       return (
         <td key={i}>
           {match ? (
@@ -47,7 +55,7 @@ export default function Table(
               }
               theme={props.theme}
               ssr={props.ssr}
-              onChange={() => {}}
+              onChange={(value) => changeChildValue(component.name, value)}
               component={match}
             />
           ) : null}

@@ -104,19 +104,21 @@ describe("Table widget", () => {
     });
   });
   test("Data manipulation", async () => {
-    let data: { group: Array<Record<string, unknown>> } = { group: [] };
+    let group: Array<Record<string, unknown>> = [];
     form.onDataChange((newData) => {
-      data = newData;
+      if (newData.group) {
+        group = newData.group as Array<Record<string, unknown>>;
+      }
     });
-    render(<StatefulFormView form={form} data={data} />);
+    render(<StatefulFormView form={form} />);
     const button = await screen.findByRole("button", { name: "Add" });
     fireEvent.click(button);
     const text = await screen.findByRole("textbox", { name: "First" });
-    fireEvent.input(text, { value: "New text" });
+    fireEvent.input(text, { target: { value: "new text" } });
     fireEvent.click(button);
     await waitFor(() => {
-      expect(data.group).toHaveLength(2);
-      expect(data.group[0].first).toBe("New text");
+      expect(group).toHaveLength(2);
+      expect(group[0].first).toBe("new text");
     });
   });
 });
