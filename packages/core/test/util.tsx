@@ -9,7 +9,7 @@ const changeData = () => {
 
 export function inputElementOk(component: FormComponent, name = ""): void {
   test(`${name} standard element properties`, () => {
-    if (!component.title) {
+    if (!component.label) {
       return;
     }
     const { queryByLabelText } = render(
@@ -20,7 +20,7 @@ export function inputElementOk(component: FormComponent, name = ""): void {
         theme={basic}
       />,
     );
-    const input = queryByLabelText(component.title) as FormElement;
+    const input = queryByLabelText(component.label) as FormElement;
 
     expect(input).not.toBe(null);
     if (input) {
@@ -30,7 +30,7 @@ export function inputElementOk(component: FormComponent, name = ""): void {
     cleanup();
   });
   test(`${name} Custom element id`, async () => {
-    if (!component.title) {
+    if (!component.label) {
       return;
     }
 
@@ -43,11 +43,11 @@ export function inputElementOk(component: FormComponent, name = ""): void {
         id="custom-id"
       />,
     );
-    expect((await findByLabelText(component.title)).id).toBe("custom-id");
+    expect((await findByLabelText(component.label)).id).toBe("custom-id");
     cleanup();
   });
   test(`${name} Custom element name`, async () => {
-    if (!component.title) {
+    if (!component.label) {
       return;
     }
     const { findByLabelText } = render(
@@ -59,14 +59,14 @@ export function inputElementOk(component: FormComponent, name = ""): void {
       />,
     );
     const customNameElement = (await findByLabelText(
-      component.title,
+      component.label,
     )) as FormElement;
     expect(customNameElement.name).toBe("custom-name");
     cleanup();
   });
 
   test(`${name} Hidden element label`, () => {
-    if (!component.title) {
+    if (!component.label) {
       return;
     }
 
@@ -79,11 +79,11 @@ export function inputElementOk(component: FormComponent, name = ""): void {
         hideLabel={true}
       />,
     );
-    expect(queryByLabelText(component.title)).toBe(null);
+    expect(queryByLabelText(component.label)).toBe(null);
     cleanup();
   });
   test("Disabled", async () => {
-    if (!component.title) {
+    if (!component.label) {
       return;
     }
     const disabled = { ...component, disabled: true };
@@ -96,7 +96,7 @@ export function inputElementOk(component: FormComponent, name = ""): void {
       />,
     );
     expect(
-      ((await findByLabelText(component.title)) as HTMLInputElement).disabled,
+      ((await findByLabelText(component.label)) as HTMLInputElement).disabled,
     ).toBe(true);
     cleanup();
   });

@@ -41,7 +41,7 @@ export interface SerializerPlugins {
   ruleGroups: Record<string, RuleGroupType>;
 }
 
-type SerializedRule = [string, SerializedValidator];
+export type SerializedRule = [string, SerializedValidator];
 
 /**
  * A serialized version of a rule.

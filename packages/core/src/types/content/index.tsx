@@ -20,8 +20,8 @@ export const contentType: FormComponentType = {
 };
 
 type WidgetSettings<Type> = (data: Type) => ReactNode;
-type ContentWidgetType<Type> = WidgetType<unknown, WidgetSettings<Type>>;
-type ContentWidget<Type> = Widget<unknown, WidgetSettings<Type>>;
+type ContentWidgetType<Type> = WidgetType<undefined, WidgetSettings<Type>>;
+type ContentWidget<Type> = Widget<undefined, WidgetSettings<Type>>;
 
 /**
  * The content component allows you to add any content as react components
@@ -29,9 +29,9 @@ type ContentWidget<Type> = Widget<unknown, WidgetSettings<Type>>;
  * @group Components
  */
 export function content<DataType = Record<string, unknown>>(
-  attributes: CreateFormComponentType<unknown>,
+  attributes: CreateFormComponentType<undefined>,
   renderContent: (value: DataType) => ReactNode,
-): FormComponent<unknown> {
+): FormComponent<any> {
   return formComponent({
     widget: contentWidget<DataType>(renderContent),
     settings: undefined,
@@ -46,7 +46,7 @@ export function content<DataType = Record<string, unknown>>(
  * @group Widgets
  */
 function Content<Type>(
-  props: WidgetProps<unknown, WidgetSettings<Type>>,
+  props: WidgetProps<undefined, WidgetSettings<Type>>,
 ): React.ReactElement {
   const data = useFormData() as Type;
   return <>{props.settings(data)}</>;
@@ -73,7 +73,7 @@ export const contentWidgetType: ContentWidgetType<Record<string, unknown>> = {
 export function contentWidget<DataType = Record<string, unknown>>(
   content: (value: DataType) => ReactNode,
 ): ContentWidget<DataType> {
-  return widget<unknown, WidgetSettings<DataType>>({
+  return widget<undefined, WidgetSettings<DataType>>({
     type: {
       name: "content",
       title: "Content",

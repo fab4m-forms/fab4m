@@ -51,7 +51,8 @@ describe("Exists", () => {
   });
   test("Equals JSON schema", () => {
     const schema = generateComponentSchema(third);
-    if (schema.type === "string") {
+    expect(schema).toBeDefined();
+    if (schema && schema.type === "string") {
       expect(schema.minLength).toBe(1);
     }
     const fullSchema = generateSchema(form);

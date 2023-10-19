@@ -61,7 +61,7 @@ describe("Equals", () => {
   });
   test("Equals JSON schema", () => {
     const schema = generateComponentSchema(third);
-    if (schema.type === "string") {
+    if (schema && schema.type === "string") {
       expect(schema.const).toBe("third");
     }
   });
