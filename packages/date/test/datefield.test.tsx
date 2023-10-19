@@ -3,9 +3,11 @@ import { render, fireEvent, waitFor } from "@testing-library/react";
 import {
   basic,
   createForm,
+  FormComponent,
   FormComponentView,
   generateSchema,
   serialize,
+  SerializedComponent,
   unserialize,
 } from "@fab4m/fab4m";
 import {
@@ -163,17 +165,14 @@ describe("date field", () => {
   });
 
   it("datepicker settings as a function", () => {
-    const customSettings = {
+    const customSettings: FormComponent = {
       ...date,
-      widget: {
-        ...date.widget,
-        settings: {
-          datePickerProps: (value) => ({
-            inline: true,
-            openToDate: !value ? new Date("1990-01-01") : undefined,
-          }),
-        },
-      },
+      widget: datePickerWidget({
+        datePickerProps: (value) => ({
+          inline: true,
+          openToDate: !value ? new Date("1990-01-01") : undefined,
+        }),
+      }),
     };
     const withoutValue = render(
       <FormComponentView
@@ -218,7 +217,8 @@ describe("date field", () => {
     );
     setLocales([sv, enUS]);
     const serialized = serialize(form);
-    const widget = serialized.components[0].widget;
+    const component = serialized.components[0] as SerializedComponent;
+    const widget = component.widget;
     const settings = widget.settings as Record<string, unknown>;
     expect(widget.type).toBe("datepicker");
     expect(settings.locale).toBe("sv");
@@ -231,8 +231,9 @@ describe("date field", () => {
       [basic],
       [datePickerWidgetType],
     );
-    expect(unserialized.components[0].widget.settings.locale).toBe(sv);
-    expect(unserialized.components[0].widget.settings.locales).toStrictEqual([
+    const unserializedComponent = unserialized.components[0] as FormComponent;
+    expect(unserializedComponent.widget.settings.locale).toBe(sv);
+    expect(unserializedComponent.widget.settings.locales).toStrictEqual([
       sv,
       enUS,
     ]);
