@@ -11,8 +11,9 @@ import {
   FormView,
   fromFormData,
   equals,
+  Components,
 } from "../src";
-import { Components } from "dist";
+
 describe("Form data unpacking", () => {
   const fields: Components<Record<string, any>> = {
     string: textField({

@@ -8,7 +8,7 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "noUnusedLocals": true,
-    "rootDir": ".",
+    "rootDir": "src",
     "strict": true,
     "esModuleInterop": true,
     "declaration": true,
@@ -22,7 +22,6 @@
     "skipLibCheck": true,
     "types": ["vitest/globals"]
   },
-  "lib": ["es2019", "dom", "dom.iterable"],
-    "include": ["src/**/*.ts", "src/**/*.tsx", "test"],
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules"]
 }

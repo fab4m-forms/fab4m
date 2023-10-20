@@ -10,7 +10,8 @@
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc -d && npm run build-browser && npm run build-node && npm run css && rm -rf dist/test",
+    "build": "npm run build-types && npm run build-browser && npm run build-node && npm run css",
+    "build-types": "npx tsc  -d --emitDeclarationOnly --project tsconfig.build.json",
     "build-browser": "esbuild --external:react --external:react-dom --external:react-router --external:react-router-dom --bundle src/index.ts --format=esm --outfile=dist/index.es.js",
     "build-node": "esbuild --platform=node --external:react --external:react-dom --bundle src/index.ts --outfile=dist/index.cjs.js",
     "test": "vitest",
