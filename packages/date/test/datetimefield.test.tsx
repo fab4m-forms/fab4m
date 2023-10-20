@@ -6,6 +6,7 @@ import {
   FormComponentView,
   generateSchema,
   serialize,
+  SerializedComponent,
 } from "@fab4m/fab4m";
 import { dateTimeField, dateTimePickerWidget } from "../src";
 import { format } from "date-fns";
@@ -81,7 +82,7 @@ describe("date time field", () => {
       }),
     );
     const serialized = serialize(form);
-    const widget = serialized.components[0].widget;
+    const widget = (serialized.components[0] as SerializedComponent).widget;
     const settings = widget.settings as Record<string, unknown>;
     expect(widget.type).toBe("dateTimePicker");
     expect(settings.locale).toBe("sv");

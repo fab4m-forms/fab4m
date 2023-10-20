@@ -96,7 +96,6 @@ export default function Autocomplete<
                 {isOpen
                   ? getItems(inputValue).map((item, index) => (
                       <li
-                        className={props.theme.classes.autocompleteItem}
                         {...getItemProps(
                           optionItemProps(
                             item,
@@ -106,6 +105,7 @@ export default function Autocomplete<
                             props.theme.classes,
                           ),
                         )}
+                        className={props.theme.classes.autocompleteItem}
                       >
                         {props.settings.itemElement
                           ? props.settings.itemElement(

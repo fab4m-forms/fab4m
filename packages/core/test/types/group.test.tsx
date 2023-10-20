@@ -19,6 +19,9 @@ import {
   groupWidgetType,
   allowedValues,
   detailsWidget,
+  SerializedComponent,
+  SerializedComponentsList,
+  FormComponent,
 } from "../../src";
 import { getFormElement } from "../util";
 interface GroupedData {
@@ -58,6 +61,12 @@ describe("groups", () => {
   const changeData = (value: unknown) => {
     data = value as GroupedData;
   };
+
+  function getComponents(
+    components: SerializedComponentsList,
+  ): SerializedComponent[] {
+    return components.filter((c) => !Array.isArray(c)) as SerializedComponent[];
+  }
 
   test("grouped items", async () => {
     const { findByLabelText, findAllByLabelText } = render(
@@ -107,13 +116,15 @@ describe("groups", () => {
     const form = createForm();
     form.add(groupItem);
     const serializedForm = serialize(form);
-    expect(serializedForm.components[0].components).toBeDefined();
-    if (serializedForm.components[0].components) {
-      const groupComponents = serializedForm.components[0].components;
+    const components = getComponents(serializedForm.components);
+
+    expect(components[0].components).toBeDefined();
+    if (components[0].components) {
+      const groupComponents = components[0].components as SerializedComponent[];
       expect(groupComponents[0].type).toBe("text");
       expect(groupComponents[0].type).toBe("text");
     }
-    const unserialized = await unserialize(
+    const unserialized = unserialize(
       serializedForm,
       [groupType, textFieldType],
       [basic],
@@ -122,7 +133,9 @@ describe("groups", () => {
       [],
       [],
     );
-    const unserializedComponents = unserialized.components[0].components;
+    const unserializedComponents = !Array.isArray(unserialized.components[0])
+      ? (unserialized.components[0].components as FormComponent[])
+      : [];
     expect(unserializedComponents).toBeDefined();
     if (unserializedComponents) {
       expect(unserializedComponents[0].type.name).toBe("text");
@@ -219,7 +232,7 @@ describe("groups", () => {
   });
   test("Details widget with group content", () => {
     widget.settings = {
-      summary: (data) => <span>label: {data.field1}</span>,
+      summary: (data) => <span>label: {data?.field1}</span>,
     };
     const { queryByText } = render(
       <StatefulFormView

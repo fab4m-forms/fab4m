@@ -37,11 +37,12 @@ describe("Form content", () => {
     );
   });
   test("Form content with data", async () => {
-    const form = createForm({
+    type FormType = { text: string; content: undefined };
+    const form = createForm<FormType>({
       text: textField({
         label: "Text",
       }),
-      content: content<{ text?: string }>({}, (value) => {
+      content: content<FormType>({}, (value) => {
         return <div>{value.text}</div>;
       }),
     });

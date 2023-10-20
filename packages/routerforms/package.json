@@ -24,8 +24,10 @@
     "test:unit": "vitest --run",
     "build-browser": "esbuild --external:react --external:react-dom --external:react-router-dom  --external:@fab4m/fab4m  --bundle src/index.ts --format=esm --outfile=dist/index.es.js",
     "build-node": "esbuild --external:react-router-dom --platform=node --external:react --external:react-dom --external:@fab4m/fab4m --minify --bundle src/index.ts --outfile=dist/index.cjs.js",
-    "build": "npm run build-browser && npm run build-node && tsc -d",
+    "build-types": "npx tsc  -d --emitDeclarationOnly --project tsconfig.build.json",
+    "build": "npm run build-browser && npm run build-node && npm run build-types",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "typecheck": "tsc --noEmit",
     "lint-fix": "eslint --fix . --ext .js,.jsx,.ts,.tsx",
     "prettier-fix": "prettier -w ."
   },

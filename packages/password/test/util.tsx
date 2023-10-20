@@ -1,5 +1,5 @@
 import * as React from "react";
-import { basic, FormComponentView, FormComponent } from "../src";
+import { basic, FormComponentView, FormComponent } from "@fab4m/fab4m";
 import { render, cleanup } from "@testing-library/react";
 type FormElement = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
@@ -100,12 +100,4 @@ export function inputElementOk(component: FormComponent, name = ""): void {
     ).toBe(true);
     cleanup();
   });
-}
-
-export function getFormElement(container: Element): HTMLFormElement {
-  const form = container.querySelector("form");
-  if (!form) {
-    throw new Error("Could not find form");
-  }
-  return form;
 }

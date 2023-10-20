@@ -11,9 +11,11 @@ import {
   FormView,
   fromFormData,
   equals,
+  Components,
 } from "../src";
+
 describe("Form data unpacking", () => {
-  const fields = {
+  const fields: Components<Record<string, any>> = {
     string: textField({
       label: "String",
     }),
@@ -73,9 +75,7 @@ describe("Form data unpacking", () => {
   };
 
   const getFormData = (renderData: Record<string, unknown>) => {
-    const { container } = render(
-      <FormView id="form" form={form} data={renderData} />,
-    );
+    const { container } = render(<FormView form={form} data={renderData} />);
     const element = getFormElement(container);
     return new FormData(element);
   };

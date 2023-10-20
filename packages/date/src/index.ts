@@ -103,7 +103,7 @@ export interface DateFieldWidgetSettings {
   format?: string;
   datePickerProps?:
     | ReactDatePickerProps
-    | ((value?: Date) => ReactDatePickerProps);
+    | ((value?: Date) => Omit<ReactDatePickerProps, "onChange">);
 }
 
 interface SerializedDateFieldSettings {
