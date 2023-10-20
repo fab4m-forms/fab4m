@@ -1,4 +1,6 @@
 import * as React from "react";
+import addFormats from "ajv-formats";
+
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import {
   validPassword,
@@ -17,9 +19,12 @@ import {
   checkValidators,
   StatefulFormView,
   basic,
+  FormDefinition,
+  generateSchema,
+  errorMessages,
 } from "@fab4m/fab4m";
-import { inputElementOk } from "../../core/test/util";
-import { validate } from "../../core/src/schemaValidator";
+import { inputElementOk } from "./util";
+import Ajv from "ajv";
 
 describe("Password field", () => {
   function noOp() {
@@ -323,3 +328,27 @@ describe("Password field", () => {
     "password:",
   );
 });
+
+function validate(form: FormDefinition, data: unknown) {
+  const schema = generateSchema(form);
+  const ajv = new Ajv({ $data: true, allErrors: true });
+  addFormats(ajv as any); //eslint-disable-line
+  const validate = ajv.compile(schema);
+  const status = validate(data);
+  if (status) {
+    return {
+      valid: true,
+      errors: {},
+    };
+  }
+
+  return {
+    valid: false,
+    errors: validate.errors
+      ? errorMessages(
+          form,
+          validate.errors.map((e) => ({ ...e, dataPath: e.instancePath })),
+        )
+      : {},
+  };
+}
