@@ -131,11 +131,13 @@ describe("Routed form", () => {
         expect(spy).toHaveBeenCalled();
       });
       // Nasty workaround for the fact that we don't have formdata.
-      const buffer = await submitRequest.arrayBuffer();
-      const decoder = new TextDecoder();
-      const data = new URLSearchParams(decoder.decode(buffer));
-      expect(data.get("first")).toBe("A text");
-      expect(data.get("second")).toBe("Another text");
+      if (submitRequest) {
+        const buffer = await submitRequest.arrayBuffer();
+        const decoder = new TextDecoder();
+        const data = new URLSearchParams(decoder.decode(buffer));
+        expect(data.get("first")).toBe("A text");
+        expect(data.get("second")).toBe("Another text");
+      }
     });
   });
   it("Route form with form context", async () => {

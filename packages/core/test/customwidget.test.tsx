@@ -8,6 +8,7 @@ import {
   customMultipleWidget,
 } from "../src";
 import { render } from "@testing-library/react";
+import React from "react";
 
 describe("Custom widget", () => {
   const form = createForm({
@@ -46,7 +47,7 @@ describe("Custom widget", () => {
                   id={`${props.id}_${i}`}
                   name={props.name}
                   theme={props.theme}
-                  onChange={props.onChange}
+                  onChange={() => {}}
                 />
               </div>
             ))}

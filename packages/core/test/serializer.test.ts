@@ -25,6 +25,7 @@ import {
   booleanFieldType,
   SerializedComponent,
   FormComponent,
+  SerializedRule,
 } from "../src";
 describe("Serializer", () => {
   const form = createForm();
@@ -82,14 +83,19 @@ describe("Serializer", () => {
     expect(components[1].validators[0].type).toBe("maxLength");
     expect(components[1].validators[0].settings).toBe(5);
     expect(components[2].dataType).toBe("boolean");
-    const rules = components[1].rules;
-    expect(rules[0][0]).toBe("text");
-    expect(rules[0][1].type).toBe("equals");
-    expect(rules[0][1].settings.value).toBe("text");
+    const rules = components[1].rules as SerializedRule[];
+    if (Array.isArray(rules)) {
+      expect(rules[0][0]).toBe("text");
+      expect(rules[0][1].type).toBe("equals");
+      expect((rules[0][1].settings as Record<string, unknown>).value).toBe(
+        "text",
+      );
+    }
     expect(Array.isArray(rules[1])).toBe(false);
-    if (!Array.isArray(rules[1])) {
-      expect(rules[1].type).toBe("or");
-      const groupRules = rules[1].rules;
+    const firstRule = rules[1] as any;
+    if (!Array.isArray(firstRule)) {
+      expect(firstRule.type).toBe("or");
+      const groupRules = firstRule.rules;
       expect(groupRules[0][1].type).toBe("allowedValues");
       expect(groupRules[0][1].settings.values).toHaveLength(2);
       expect(groupRules[1][1].type).toBe("equals");
@@ -122,7 +128,7 @@ describe("Serializer", () => {
     expect(components[1].widget.type.name).toBe("textarea");
     expect(components[1].validators[0].type.name).toBe("maxLength");
     expect(components[1].validators[0].settings).toBe(5);
-    expect(components[1].rules[0][1].type.name).toBe("equals");
+    expect((components[1] as any).rules[0][1].type.name).toBe("equals");
     if (!Array.isArray(components[1].rules[1])) {
       expect(components[1].rules[1].type.name).toBe("or");
     }

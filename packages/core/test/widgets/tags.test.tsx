@@ -41,12 +41,12 @@ describe("Tags", () => {
       }),
     }),
   });
-  const useData = (data: Data): [Data, (newData: Data) => void] => {
+  const useData = (data: Data): [Data, (newData: Partial<Data>) => void] => {
     return [
       data,
-      (newData: Data) => {
-        data.freeText = newData.freeText;
-        data.options = newData.options;
+      (newData: Partial<Data>) => {
+        data.freeText = newData.freeText ?? data.freeText;
+        data.options = newData.options ?? data.options;
       },
     ];
   };

@@ -29,7 +29,7 @@ describe("Hooks", () => {
     }),
   };
   function FormComponent(props: { data: FormData }) {
-    const form = useForm<FormData>(() => createForm(components));
+    const form = useForm<FormData>(() => createForm<FormData>(components));
     return <FormView form={form} data={props.data} />;
   }
   test("Form using hook", async () => {

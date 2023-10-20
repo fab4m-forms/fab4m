@@ -221,6 +221,7 @@ export default function App() {
       }),
       number: integerField({ label: "Number" }),
       email: emailField({ label: "Email" }),
+      another: content({}, () => "ugh"),
       content: content({}, (data: { email?: string }) => (
         <div>
           <h3>Content</h3>
