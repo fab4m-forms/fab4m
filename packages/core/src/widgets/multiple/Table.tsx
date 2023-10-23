@@ -24,9 +24,9 @@ export default function Table(
 
     const components = filterComponents(
       props.component.components ?? [],
-      value,
-      false,
       formData,
+      false,
+      value,
     );
     const cols = props.component.components?.map((c, i) => {
       const component = Array.isArray(c) ? c[0].component : c;

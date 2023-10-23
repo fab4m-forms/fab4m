@@ -32,7 +32,7 @@ describe("Table widget", () => {
         // The header needs to be rendered even though its'
         third: [
           [
-            "first",
+            "group.$.first",
             equals("first"),
             booleanField({
               label: "Third",
