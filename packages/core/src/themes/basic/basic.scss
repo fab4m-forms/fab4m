@@ -37,7 +37,6 @@ $row-bg-alt: #ddd !default;
 $row-bg-dark: #555 !default;
 $row-bg-dark-alt: #444 !default;
 
-
 .fab4m-button {
   appearance: none;
   border: none;
@@ -373,11 +372,11 @@ $row-bg-dark-alt: #444 !default;
 
 .fab4m-col,
 .fab4m-header-col {
-  padding: .5em;
+  padding: 0.5em;
 }
 
 .fab4m-header-row {
-    background: $row-bg-alt;
+  background: $row-bg-alt;
 }
 
 .fab4m-row {
