@@ -17,13 +17,13 @@ describe("Table widget", () => {
     group: group<Record<string, any>>(
       {
         label: "Multiple group",
-        required: true,
         multiple: true,
         multipleWidget: tableWidget(),
       },
       {
         first: textField({
           label: "First",
+          required: true,
         }),
         second: textField({
           label: "Second",
@@ -54,6 +54,14 @@ describe("Table widget", () => {
     render(<StatefulFormView form={form} data={data} />);
     await screen.findByRole("table");
     expect(screen.queryAllByRole("columnheader")).toHaveLength(5);
+  });
+  test("required field in header", async () => {
+    const data = { group: [{}] };
+    render(<StatefulFormView form={form} data={data} />);
+    await screen.findByRole("table");
+    expect(
+      screen.getByRole("columnheader", { name: "First *" }),
+    ).toBeInTheDocument();
   });
   test("Table row", async () => {
     const data = { group: [{}] };

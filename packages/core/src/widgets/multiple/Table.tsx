@@ -3,7 +3,16 @@ import { MultipleSettings } from ".";
 import { MultipleWidgetProps } from "../../widget";
 import ValidationErrors from "../../components/ValidationErrors";
 import { filterComponents } from "../../rule";
-import { FormComponentView, componentErrors, useFormData } from "../..";
+import {
+  FormComponent,
+  FormComponentVariant,
+  FormComponentView,
+  FormComponentWrapper,
+  Labels,
+  Theme,
+  componentErrors,
+  useFormData,
+} from "../..";
 
 /**
  * The table react widget.
@@ -21,7 +30,6 @@ export default function Table(
       newItems.splice(index, 1);
       props.onChange(newItems);
     };
-
     const components = filterComponents(
       props.component.components ?? [],
       formData,
@@ -82,26 +90,18 @@ export default function Table(
     );
   });
   return (
-    <div className={props.theme.classes.componentWrapper}>
-      {props.component.label && (
-        <label className={props.theme.classes.label} htmlFor={props.id}>
-          {props.component.label}
-        </label>
-      )}
+    <FormComponentWrapper {...props}>
       {itemComponents.length > 0 && (
         <table className={props.theme.classes.table}>
           <thead>
             <tr className={props.theme.classes.headTr}>
               {props.component.components?.map((c, i) => (
-                <th
-                  className={props.theme.classes.th}
+                <HeaderCol
+                  theme={props.theme}
+                  labels={props.labels}
+                  component={c}
                   key={i}
-                  id={
-                    "label-" + (Array.isArray(c) ? c[0].component.name : c.name)
-                  }
-                >
-                  {Array.isArray(c) ? c[0].component.label : c.label}
-                </th>
+                />
               ))}
               <th />
             </tr>
@@ -129,6 +129,30 @@ export default function Table(
       {props.errors && (
         <ValidationErrors errors={props.errors} classes={props.theme.classes} />
       )}
-    </div>
+    </FormComponentWrapper>
+  );
+}
+
+function HeaderCol(props: {
+  theme: Theme;
+  labels?: Labels;
+  component: FormComponent | FormComponentVariant[];
+}) {
+  const component = Array.isArray(props.component)
+    ? props.component[0].component
+    : props.component;
+
+  return (
+    <th className={props.theme.classes.th}>
+      <span id={"label-" + component.name}>{component.label}</span>
+      {component.required && (
+        <span
+          className={props.theme.classes.requiredIndicator}
+          aria-label={props.labels?.required}
+        >
+          *
+        </span>
+      )}
+    </th>
   );
 }
