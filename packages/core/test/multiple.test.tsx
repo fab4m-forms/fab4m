@@ -186,6 +186,20 @@ describe("Multiple fields", () => {
     expect(await (await findAllByText("Multiple labels")).length).toBe(2);
   });
 
+  test("Render a default number of multiple items", async () => {
+    const form = createForm({
+      textFields: textField({
+        label: "Text Fields",
+        multiple: true,
+        multipleWidget: defaultMultipleWidget({ defaultNoItems: 2 }),
+      }),
+    });
+    const { findAllByLabelText, debug } = render(
+      <FormView form={form} data={{}} />,
+    );
+    expect(await findAllByLabelText("Text Fields")).toHaveLength(2);
+  });
+
   test("Multiple items schema", async () => {
     const form = createForm();
     form.add(multipleText);

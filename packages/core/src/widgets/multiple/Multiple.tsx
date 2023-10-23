@@ -13,9 +13,9 @@ import { componentErrors } from "../../form";
 function Multiple(
   props: MultipleWidgetProps<unknown, MultipleSettings | undefined>,
 ) {
-  const [items, changeItems] = useState<Array<unknown>>(props.value ?? []);
+  const [items, changeItems] = useState<Array<unknown>>([]);
   useEffect(() => {
-    changeItems(props.value ?? defaultItems(props.component));
+    changeItems(props.value ?? defaultItems(props.component, props.settings));
   }, [props.value]);
   const addItem = () => changeItems([...items, undefined]);
   const itemComponents = items.map((value, index) => {
@@ -111,8 +111,8 @@ function Multiple(
   );
 }
 
-function defaultItems(component: FormComponent) {
-  const noItems = component.minItems ?? 0;
+function defaultItems(component: FormComponent, settings?: MultipleSettings) {
+  const noItems = component.minItems ?? settings?.defaultNoItems ?? 0;
   const values = [];
   for (let i = 0; i < noItems; i++) {
     values.push(undefined);

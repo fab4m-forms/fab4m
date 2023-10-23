@@ -15,6 +15,7 @@ export interface MultipleSettings {
   addItemLabel?: string | ReactNode;
   removeItemLabel?: string | ReactNode;
   multipleLabels?: boolean;
+  defaultNoItems?: number;
 }
 
 /**
