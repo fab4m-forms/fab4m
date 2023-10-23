@@ -39,7 +39,7 @@ export const defaultMultipleWidgetType: MultipleWidgetType<
  * @group Multiple widgets
  */
 export function defaultMultipleWidget(
-  settings: MultipleSettings = {}
+  settings: MultipleSettings = {},
 ): MultipleWidget<any, MultipleSettings> {
   return multipleWidget({
     type: defaultMultipleWidgetType,
@@ -108,7 +108,7 @@ export const tagsWidgetType: MultipleWidgetType<any, TagsSettings | undefined> =
  * @group Widgets
  */
 export function tagsWidget<Value>(
-  settings?: TagsSettings
+  settings?: TagsSettings,
 ): MultipleWidget<Value, TagsSettings | undefined> {
   return multipleWidget<Value, TagsSettings | undefined>({
     type: tagsWidgetType,
@@ -116,17 +116,39 @@ export function tagsWidget<Value>(
   });
 }
 
+/**
+ * The table widget allows you to render multiple group components into
+ * a table where the columns represent the form components of the group.
+ * Each row is a representation of each item in the group.
+ *
+ * :::caution
+ * This widget only works with the group form component!
+ * :::
+ *
+ * @group Widgets
+ */
 export const tableWidgetType: MultipleWidgetType<any, MultipleSettings> = {
   name: "table",
-  title: "Render multiple groups in a table",
+  title: "Table",
   widget: Table,
   init: (settings) => tableWidget(settings),
 };
 
-export function tableWidget<Value>(
-  settings: MultipleSettings = {}
-): MultipleWidget<Value, MultipleSettings> {
-  return multipleWidget<Value, MultipleSettings>({
+/**
+ * The table widget allows you to render multiple group components into
+ * a table where the columns represent the form components of the group.
+ * Each row is a representation of each item in the group.
+ *
+ * :::caution
+ * This widget only works with the group form component!
+ * :::
+ *
+ * @group Widgets
+ */
+export function tableWidget<ValueType = Record<string, any>>(
+  settings: MultipleSettings = {},
+): MultipleWidget<ValueType, MultipleSettings> {
+  return multipleWidget<ValueType, MultipleSettings>({
     type: tableWidgetType,
     settings,
   });

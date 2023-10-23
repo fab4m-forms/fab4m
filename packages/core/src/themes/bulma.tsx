@@ -54,6 +54,8 @@ const bulma: Theme = {
     highlightedAutocompleteItem: "has-background-primary-light",
     selectedAutocompleteItem: "is-bold",
     autocompleteContainer: "autocomplete-container",
+    table: "table is-fullwidth",
+    rowOperations: "flex is-justify-content-center",
   },
 };
 

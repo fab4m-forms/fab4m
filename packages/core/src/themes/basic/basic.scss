@@ -32,6 +32,11 @@ $tag-background: #eee !default;
 $remove-tag-bg: #ab1c1c !default;
 $remove-tag-color: #fff !default;
 $remove-tag-bg-hover: #7b1f1f !default;
+$row-bg: #eee !default;
+$row-bg-alt: #ddd !default;
+$row-bg-dark: #555 !default;
+$row-bg-dark-alt: #444 !default;
+
 
 .fab4m-button {
   appearance: none;
@@ -350,4 +355,49 @@ $remove-tag-bg-hover: #7b1f1f !default;
     background: $input-bg-dark;
     color: $input-color-dark;
   }
+  .fab4m-header-row {
+    background: $row-bg-dark-alt;
+  }
+  .fab4m-row {
+    background: $row-bg-dark;
+    &:nth-child(2n) {
+      background: $row-bg-dark-alt;
+    }
+  }
+}
+
+.fab4m-table {
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.fab4m-col,
+.fab4m-header-col {
+  padding: .5em;
+}
+
+.fab4m-header-row {
+    background: $row-bg-alt;
+}
+
+.fab4m-row {
+  background: $row-bg;
+  &:nth-child(2n) {
+    background: $row-bg-alt;
+  }
+}
+
+.fab4m-row-operations {
+  display: flex;
+  width: 100%;
+  height: 2.5em;
+  button {
+    margin: auto;
+    height: 1.5em;
+    line-height: 1em;
+  }
+}
+
+.fab4m-table .fab4m-component {
+  margin-bottom: 0;
 }

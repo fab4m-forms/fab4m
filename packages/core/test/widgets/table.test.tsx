@@ -14,7 +14,7 @@ import {
 
 describe("Table widget", () => {
   const form = createForm({
-    group: group(
+    group: group<Record<string, any>>(
       {
         label: "Multiple group",
         required: true,
@@ -53,7 +53,7 @@ describe("Table widget", () => {
     const data = { group: [{}] };
     render(<StatefulFormView form={form} data={data} />);
     await screen.findByRole("table");
-    expect(screen.queryAllByRole("columnheader")).toHaveLength(4);
+    expect(screen.queryAllByRole("columnheader")).toHaveLength(5);
   });
   test("Table row", async () => {
     const data = { group: [{}] };
@@ -116,9 +116,17 @@ describe("Table widget", () => {
     const text = await screen.findByRole("textbox", { name: "First" });
     fireEvent.input(text, { target: { value: "new text" } });
     fireEvent.click(button);
+
     await waitFor(() => {
       expect(group).toHaveLength(2);
       expect(group[0].first).toBe("new text");
+      expect(text).toHaveValue("new text");
+    });
+    const texts = await screen.findAllByRole("textbox", { name: "First" });
+    fireEvent.input(texts[1], { target: { value: "other text" } });
+    await waitFor(() => {
+      expect(group[1].first).toBe("other text");
+      expect(texts[1]).toHaveValue("other text");
     });
   });
 });

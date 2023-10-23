@@ -35,14 +35,14 @@ export default function Table(
       );
       const changeChildValue = (name: string, newValue: unknown) => {
         const newItems = [...items];
-        newItems[i] = {
+        newItems[index] = {
           ...value,
           [name]: newValue,
         };
         props.onChange(newItems);
       };
       return (
-        <td key={i}>
+        <td key={i} className={props.theme.classes.td}>
           {match ? (
             <FormComponentView
               value={value[match.name]}
@@ -65,16 +65,18 @@ export default function Table(
     return (
       <tr className={props.theme.classes.tr} key={index}>
         {cols}
-        <td>
-          {!props.component.disabled && (
-            <button
-              className={props.theme.classes.removeTag}
-              type={"button"}
-              onClick={removeValue}
-            >
-              {props.settings.removeItemLabel ?? "Remove"}
-            </button>
-          )}
+        <td className={props.theme.classes.td}>
+          <div className={props.theme.classes.rowOperations}>
+            {!props.component.disabled && (
+              <button
+                className={props.theme.classes.removeItem}
+                type={"button"}
+                onClick={removeValue}
+              >
+                {props.settings.removeItemLabel ?? "Remove"}
+              </button>
+            )}
+          </div>
         </td>
       </tr>
     );
@@ -87,11 +89,12 @@ export default function Table(
         </label>
       )}
       {itemComponents.length > 0 && (
-        <table className={props.theme.classes.addedTags}>
+        <table className={props.theme.classes.table}>
           <thead>
-            <tr>
+            <tr className={props.theme.classes.headTr}>
               {props.component.components?.map((c, i) => (
                 <th
+                  className={props.theme.classes.th}
                   key={i}
                   id={
                     "label-" + (Array.isArray(c) ? c[0].component.name : c.name)
@@ -100,6 +103,7 @@ export default function Table(
                   {Array.isArray(c) ? c[0].component.label : c.label}
                 </th>
               ))}
+              <th />
             </tr>
           </thead>
           <tbody>{itemComponents}</tbody>
