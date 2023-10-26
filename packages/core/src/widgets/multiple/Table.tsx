@@ -1,5 +1,5 @@
 import * as React from "react";
-import { MultipleSettings } from ".";
+import { MultipleSettings, TableSettings } from ".";
 import { MultipleWidgetProps } from "../../widget";
 import ValidationErrors from "../../components/ValidationErrors";
 import { filterComponents } from "../../rule";
@@ -19,7 +19,7 @@ import {
  * @group React multiple widgets
  */
 export default function Table(
-  props: MultipleWidgetProps<unknown, MultipleSettings>,
+  props: MultipleWidgetProps<unknown, TableSettings>,
 ): JSX.Element | null {
   const items = (props.value ?? []) as Array<Record<string, unknown>>;
   const addItem = () => props.onChange([...items, {}]);
@@ -99,11 +99,13 @@ export default function Table(
                 <HeaderCol
                   theme={props.theme}
                   labels={props.labels}
+                  settings={props.settings}
+                  index={i}
                   component={c}
                   key={i}
                 />
               ))}
-              <th />
+              <th className={props.theme.classes.operationsTh} />
             </tr>
           </thead>
           <tbody>{itemComponents}</tbody>
@@ -136,14 +138,15 @@ export default function Table(
 function HeaderCol(props: {
   theme: Theme;
   labels?: Labels;
+  index: number;
+  settings: TableSettings;
   component: FormComponent | FormComponentVariant[];
 }) {
   const component = Array.isArray(props.component)
     ? props.component[0].component
     : props.component;
-
-  return (
-    <th className={props.theme.classes.th}>
+  const content = (
+    <>
       <span id={"label-" + component.name}>{component.label}</span>
       {component.required && (
         <span
@@ -153,6 +156,16 @@ function HeaderCol(props: {
           *
         </span>
       )}
-    </th>
+    </>
+  );
+
+  return props.settings.headerColumn ? (
+    props.settings.headerColumn({
+      props: { className: props.theme.classes.th, children: content },
+      index: props.index,
+      component: component,
+    })
+  ) : (
+    <th className={props.theme.classes.th}>{content}</th>
   );
 }

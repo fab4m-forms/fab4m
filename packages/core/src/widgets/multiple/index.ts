@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, ThHTMLAttributes } from "react";
 import {
   MultipleWidget,
   multipleWidget,
@@ -7,6 +7,7 @@ import {
 import Multiple from "./Multiple";
 import Table from "./Table";
 import Tags from "./Tags";
+import { FormComponent } from "src/component";
 
 /**
  * Settings type definition for multiple widgets
@@ -116,6 +117,16 @@ export function tagsWidget<Value>(
   });
 }
 
+export interface ColumnArgs {
+  props: React.HTMLProps<HTMLTableCellElement>;
+  component: FormComponent;
+  index: number;
+}
+
+export interface TableSettings extends MultipleSettings {
+  headerColumn?: (args: ColumnArgs) => React.ReactNode;
+}
+
 /**
  * The table widget allows you to render multiple group components into
  * a table where the columns represent the form components of the group.
@@ -127,7 +138,7 @@ export function tagsWidget<Value>(
  *
  * @group Widgets
  */
-export const tableWidgetType: MultipleWidgetType<any, MultipleSettings> = {
+export const tableWidgetType: MultipleWidgetType<any, TableSettings> = {
   name: "table",
   title: "Table",
   widget: Table,
@@ -146,9 +157,9 @@ export const tableWidgetType: MultipleWidgetType<any, MultipleSettings> = {
  * @group Widgets
  */
 export function tableWidget<ValueType = Record<string, any>>(
-  settings: MultipleSettings = {},
-): MultipleWidget<ValueType, MultipleSettings> {
-  return multipleWidget<ValueType, MultipleSettings>({
+  settings: TableSettings = {},
+): MultipleWidget<ValueType, TableSettings> {
+  return multipleWidget<ValueType, TableSettings>({
     type: tableWidgetType,
     settings,
   });
