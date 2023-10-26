@@ -11,6 +11,7 @@ import {
   selectWidget,
   tableWidget,
   TableSettings,
+  defaultMultipleWidget,
 } from "../../src";
 
 describe("Table widget", () => {
@@ -39,8 +40,14 @@ describe("Table widget", () => {
           }),
         ],
       ],
-      // This column will either be the third or the foirth column
       fourth: textField({ label: "Fourth" }),
+      multiple: textField({
+        label: "Multiple",
+        multiple: true,
+        multipleWidget: defaultMultipleWidget({
+          addItemLabel: "Add item inside table",
+        }),
+      }),
     },
   );
   const form = createForm({
@@ -55,7 +62,7 @@ describe("Table widget", () => {
     const data = { group: [{}] };
     render(<StatefulFormView form={form} data={data} />);
     await screen.findByRole("table");
-    expect(screen.queryAllByRole("columnheader")).toHaveLength(5);
+    expect(screen.queryAllByRole("columnheader")).toHaveLength(6);
   });
   test("required field in header", async () => {
     const data = { group: [{}] };
@@ -158,5 +165,12 @@ describe("Table widget", () => {
     expect(columns[0]).toHaveTextContent("Other column name");
     expect(columns[1]).toHaveClass("override index-1");
     expect(columns[2]).toHaveClass("override index-2");
+  });
+  test("Multiple field", async () => {
+    render(<StatefulFormView form={form} data={{ group: [{}] }} />);
+    await screen.findByRole("table");
+    expect(
+      screen.getByRole("button", { name: "Add item inside table" }),
+    ).toBeInTheDocument();
   });
 });

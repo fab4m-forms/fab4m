@@ -65,6 +65,7 @@ interface BaseThemeClasses {
   th: string;
   td: string;
   headTr: string;
+  operationsTd: string;
   tr: string;
   /** Any extra classes can be added for custom widgets */
   [name: string]: string;
@@ -149,5 +150,5 @@ export const defaultThemeClasses: ThemeClasses = {
   td: "col",
   headTr: "header-row",
   tr: "row",
-  rowOperations: "row-operations",
+  operationsTd: "operations-col",
 };

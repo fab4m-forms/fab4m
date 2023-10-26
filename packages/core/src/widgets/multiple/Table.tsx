@@ -57,7 +57,6 @@ export default function Table(
               hideLabel={true}
               attributes={{ "aria-labelledby": `label-${component.name}` }}
               name={`${props.name}[${index}][${component.name}]`}
-              index={index}
               errors={
                 props.errors && componentErrors(`/${index}`, props.errors)
               }
@@ -73,18 +72,16 @@ export default function Table(
     return (
       <tr className={props.theme.classes.tr} key={index}>
         {cols}
-        <td className={props.theme.classes.td}>
-          <div className={props.theme.classes.rowOperations}>
-            {!props.component.disabled && (
-              <button
-                className={props.theme.classes.removeItem}
-                type={"button"}
-                onClick={removeValue}
-              >
-                {props.settings.removeItemLabel ?? "Remove"}
-              </button>
-            )}
-          </div>
+        <td className={props.theme.classes.operationsTd}>
+          {!props.component.disabled && (
+            <button
+              className={props.theme.classes.removeItem}
+              type={"button"}
+              onClick={removeValue}
+            >
+              {props.settings.removeItemLabel ?? "Remove"}
+            </button>
+          )}
         </td>
       </tr>
     );

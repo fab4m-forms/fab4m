@@ -106,10 +106,10 @@ export function createTailwindTheme(args: {
       table: "table-auto w-full mb-4 group table",
       tr: "odd:bg-slate-200 odd:dark:bg-slate-900 bg-slate-300 dark:bg-slate-800",
       headTr: "bg-slate-300 dark:bg-slate-800",
-      operationsTh: "p-2 align-top text-center w-4",
-      td: "p-2 align-top text-center",
-      th: "p-2 align-top text-center",
-      rowOperations: "flex h-12 items-right",
+      operationsTh: "p-2 align-middle text-center",
+      td: "p-2 align-middle text-center",
+      th: "p-2 align-middle text-center",
+      operationsTd: "p-2 aling-middle text-center w-4",
     },
   };
 }
