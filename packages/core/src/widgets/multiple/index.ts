@@ -1,4 +1,4 @@
-import { ReactNode, ThHTMLAttributes } from "react";
+import { ReactNode } from "react";
 import {
   MultipleWidget,
   multipleWidget,

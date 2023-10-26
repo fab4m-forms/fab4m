@@ -1,5 +1,5 @@
 import * as React from "react";
-import { MultipleSettings, TableSettings } from ".";
+import { TableSettings } from ".";
 import { MultipleWidgetProps } from "../../widget";
 import ValidationErrors from "../../components/ValidationErrors";
 import { filterComponents } from "../../rule";
