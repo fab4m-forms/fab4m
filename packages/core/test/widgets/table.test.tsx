@@ -166,6 +166,28 @@ describe("Table widget", () => {
     expect(columns[1]).toHaveClass("override index-1");
     expect(columns[2]).toHaveClass("override index-2");
   });
+  test("Row customization", async () => {
+    const settings: TableSettings = {
+      rowColumn: (args) => (
+        <td {...args.props} className={`override index-${args.index}`}>
+          {args.component.name === "first"
+            ? "Not rendering the component"
+            : args.props.children}
+        </td>
+      ),
+    };
+    if (fieldGroup.multipleWidget) {
+      fieldGroup.multipleWidget.settings = settings;
+    }
+    render(<StatefulFormView form={form} data={{ group: [{}] }} />);
+    const columns = await screen.findAllByRole("cell");
+
+    expect(columns[0]).toHaveClass("override index-0");
+    expect(columns[0]).toHaveTextContent("Not rendering the component");
+    expect(columns[1]).toHaveClass("override index-1");
+    expect(columns[2]).toHaveClass("override index-2");
+  });
+
   test("Multiple field", async () => {
     render(<StatefulFormView form={form} data={{ group: [{}] }} />);
     await screen.findByRole("table");

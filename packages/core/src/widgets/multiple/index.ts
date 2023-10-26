@@ -125,6 +125,7 @@ export interface ColumnArgs {
 
 export interface TableSettings extends MultipleSettings {
   headerColumn?: (args: ColumnArgs) => React.ReactNode;
+  rowColumn?: (args: ColumnArgs) => React.ReactNode;
 }
 
 /**
