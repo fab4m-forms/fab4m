@@ -32,7 +32,7 @@ export default function FormElement({
             <span>{label}</span>
           </label>
         )}
-        {required && (
+        {label && required && (
           <span className={requiredClass} aria-label={requiredText}>
             *
           </span>
