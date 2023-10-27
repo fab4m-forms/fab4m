@@ -49,7 +49,7 @@ export function createTailwindTheme(args: {
       description: `text-xs ${s.text}`,
       group: "",
       formPart: "",
-      componentWrapper: "mb-4",
+      componentWrapper: "mb-4 group-[.table]:mb-0",
       prefixedElementWrapper: "flex",
       elementWrapper: "",
       input: `${s.inputBorder} ${s.inputHeight} ${s.inputBg} ${s.inputText} rounded w-full p-2`,
@@ -103,6 +103,13 @@ export function createTailwindTheme(args: {
       highlightedAutocompleteItem: "bg-slate-300",
       selectedAutocompleteItem: "bg-slate-300",
       autocompleteContainer: "autocomplete-container",
+      table: "table-auto w-full mb-4 group table",
+      tr: "odd:bg-slate-200 odd:dark:bg-slate-900 bg-slate-300 dark:bg-slate-800",
+      headTr: "bg-slate-300 dark:bg-slate-800",
+      operationsTh: "p-2 align-middle text-center",
+      td: "p-2 align-middle text-center",
+      th: "p-2 align-middle text-center",
+      operationsTd: "p-2 aling-middle text-center w-4",
     },
   };
 }

@@ -61,6 +61,12 @@ interface BaseThemeClasses {
   details: string;
   summary: string;
   detailsContent: string;
+  table: string;
+  th: string;
+  td: string;
+  headTr: string;
+  operationsTd: string;
+  tr: string;
   /** Any extra classes can be added for custom widgets */
   [name: string]: string;
 }
@@ -139,4 +145,10 @@ export const defaultThemeClasses: ThemeClasses = {
   details: "details",
   summary: "summary",
   detailsContent: "summary-content",
+  table: "table",
+  th: "header-col",
+  td: "col",
+  headTr: "header-row",
+  tr: "row",
+  operationsTd: "operations-col",
 };

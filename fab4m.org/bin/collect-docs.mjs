@@ -95,7 +95,7 @@ function build() {
             plugins[group.name] = new Map();
             for (const id of groupDoc.children) {
                 const fn = docs.children.find(
-                    (child) => id === child.id && child.kindString === "Function"
+                    (child) => id === child.id && child.kind === 64
                 );
                 if (fn) {
                     const info = { title: fn.name };
@@ -111,7 +111,6 @@ function build() {
                         plugins[group.name].set(pluginType.name, info);
                     }
                     else {
-                        console.log("fail", fn.name);
                         plugins[group.name].set(fn.name, info);
                     }
                     info.pluginType = pluginType;

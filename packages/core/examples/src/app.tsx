@@ -31,6 +31,7 @@ import {
   tailwind,
   createTailwindTheme,
   widget,
+  tableWidget,
   FormComponentWrapper,
 } from "../../src/index";
 import "./index.css";
@@ -221,7 +222,6 @@ export default function App() {
       }),
       number: integerField({ label: "Number" }),
       email: emailField({ label: "Email" }),
-      another: content({}, () => "ugh"),
       content: content({}, (data: { email?: string }) => (
         <div>
           <h3>Content</h3>
@@ -359,7 +359,7 @@ export default function App() {
     }),
     number: [
       [
-        "string",
+        "group.$.string",
         equals("asdf"),
         integerField({
           label: "Number",
@@ -367,7 +367,7 @@ export default function App() {
         }),
       ],
       [
-        "string",
+        "group.$.string",
         equals("asdf2"),
         textField({
           label: "Not a number",
@@ -387,17 +387,16 @@ export default function App() {
     }),
   };
 
-  const testForm = createForm({
-    ...fields,
-    /*group: group(
-      { label: "Group" },
-      {
-        //...fields,
-        subgroup: group({ label: "Sub group" }, fields),
-      }
-    ),
-    groups: group({ label: "Groups", multiple: true }, fields),*/
-  }).onSubmit((e) => {
+  const testForm = createForm(
+    {
+      group: group(
+        { label: "Group", multiple: true, multipleWidget: tableWidget() },
+        fields,
+      ),
+    },
+    {},
+    theme,
+  ).onSubmit((e) => {
     const data = new FormData(e.target);
     e.preventDefault();
     const result = fromFormData(testForm, data);
@@ -429,15 +428,6 @@ export default function App() {
           <option value="tailwindDark">Tailwind, dark</option>
         </select>
         <h2 className="title">Form Example</h2>
-        <StatefulFormView
-          form={form}
-          errors={[
-            { path: "/text", message: "This is an error" },
-            { path: "/text", message: "This is another error" },
-          ]}
-        />
-        <h2 className="title">Multistep form</h2>
-        <StatefulFormView form={multistep} />
 
         <h2 className="title">Form for testing</h2>
         <StatefulFormView form={testForm} data={{ multipleNumber: [0, 1] }} />
