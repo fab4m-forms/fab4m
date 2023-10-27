@@ -381,11 +381,10 @@ $row-bg-dark-alt: #444 !default;
   button {
     height: 1.7em;
     line-height: 1.5em;
-    padding: .1em .5em;
-    font-size: .8em;
+    padding: 0.1em 0.5em;
+    font-size: 0.8em;
   }
 }
-
 
 .fab4m-header-row {
   background: $row-bg-alt;
@@ -408,7 +407,6 @@ $row-bg-dark-alt: #444 !default;
     line-height: 1em;
   }
 }
-
 
 .fab4m-table .fab4m-component {
   margin-bottom: 0;
