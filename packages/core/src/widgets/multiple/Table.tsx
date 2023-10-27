@@ -191,7 +191,7 @@ function RowCol(
     props.settings.rowColumn({
       props: { className: props.theme.classes.th, children: content },
       index: props.colIndex,
-      component: component,
+      component: match ?? component,
     })
   ) : (
     <td className={props.theme.classes.td}>{content}</td>

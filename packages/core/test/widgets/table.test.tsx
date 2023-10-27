@@ -12,6 +12,7 @@ import {
   tableWidget,
   TableSettings,
   defaultMultipleWidget,
+  integerField,
 } from "../../src";
 
 describe("Table widget", () => {
@@ -37,6 +38,13 @@ describe("Table widget", () => {
           equals("first"),
           booleanField({
             label: "Third",
+          }),
+        ],
+        [
+          "group.$.first",
+          equals("int"),
+          integerField({
+            label: "Integer field",
           }),
         ],
       ],
@@ -170,7 +178,7 @@ describe("Table widget", () => {
     const settings: TableSettings = {
       rowColumn: (args) => (
         <td {...args.props} className={`override index-${args.index}`}>
-          {args.component.name === "first"
+          {args.component.type.name === "integer"
             ? "Not rendering the component"
             : args.props.children}
         </td>
@@ -179,13 +187,16 @@ describe("Table widget", () => {
     if (fieldGroup.multipleWidget) {
       fieldGroup.multipleWidget.settings = settings;
     }
-    render(<StatefulFormView form={form} data={{ group: [{}] }} />);
+    render(
+      <StatefulFormView form={form} data={{ group: [{ first: "int" }] }} />,
+    );
     const columns = await screen.findAllByRole("cell");
-
     expect(columns[0]).toHaveClass("override index-0");
-    expect(columns[0]).toHaveTextContent("Not rendering the component");
+
     expect(columns[1]).toHaveClass("override index-1");
     expect(columns[2]).toHaveClass("override index-2");
+    // The right component variant should be sent to the rendering function.
+    expect(columns[2]).toHaveTextContent("Not rendering the component");
   });
 
   test("Multiple field", async () => {
