@@ -109,7 +109,7 @@ export function createTailwindTheme(args: {
       operationsTh: "p-2 align-middle text-center",
       td: "p-2 align-middle text-center",
       th: "p-2 align-middle text-center",
-      operationsTd: "p-2 aling-middle text-center w-4",
+      operationsTd: "p-2 align-middle text-center w-4",
     },
   };
 }
