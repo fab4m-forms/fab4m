@@ -7,6 +7,8 @@ import {
   textFieldWidget,
   StatefulFormView,
   equals,
+  generateSchema,
+  group,
 } from "../src";
 
 describe("Variants API", () => {
@@ -102,5 +104,25 @@ describe("Variants API", () => {
     expect(validate(form, { text: "test", dependent: "test2" }).valid).toBe(
       false,
     );
+  });
+
+  test("Nested group with rules", () => {
+    const form = createForm({
+      group: group(
+        {},
+        {
+          one: textField({}),
+          text: [
+            [
+              "one",
+              equals("first"),
+              textField({ label: "Variant 1", required: true }),
+            ],
+            textField({ label: "Variant 2" }),
+          ],
+        },
+      ),
+    });
+    expect(validate(form, { group: { one: "first" } }).valid).toBe(false);
   });
 });
