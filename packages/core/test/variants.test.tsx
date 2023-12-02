@@ -114,7 +114,7 @@ describe("Variants API", () => {
           one: textField({}),
           text: [
             [
-              "one",
+              "group.one",
               equals("first"),
               textField({ label: "Variant 1", required: true }),
             ],
@@ -123,6 +123,7 @@ describe("Variants API", () => {
         },
       ),
     });
+    const schema = generateSchema(form);
     expect(validate(form, { group: { one: "first" } }).valid).toBe(false);
   });
 });

@@ -1,5 +1,14 @@
 import "@testing-library/jest-dom";
-import { textField, createForm, equals, or, exists, not, group } from "../src";
+import {
+  textField,
+  createForm,
+  equals,
+  or,
+  exists,
+  not,
+  group,
+  generateSchema,
+} from "../src";
 import { validate } from "../src/schemaValidator";
 
 describe("Schema Rule engine", () => {
@@ -115,10 +124,24 @@ describe("Schema Rule engine", () => {
   });
 
   test("Dependent rules", () => {
+    const data = {
+      ...validData,
+      field: "text",
+      twoRules: undefined,
+      dependentRules: undefined,
+    };
+    const schema = generateSchema(form);
     // The two rules component is not present, so this should be valid.
+    const ugh = validate(form, {
+      ...validData,
+      field: "text",
+      twoRules: undefined,
+      dependentRules: undefined,
+    });
     expect(
       validate(form, {
         ...validData,
+        field: "text",
         twoRules: undefined,
         dependentRules: undefined,
       }).valid,
