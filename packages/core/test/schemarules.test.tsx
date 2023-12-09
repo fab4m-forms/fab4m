@@ -1,5 +1,14 @@
 import "@testing-library/jest-dom";
-import { textField, createForm, equals, or, exists, not, group } from "../src";
+import {
+  textField,
+  createForm,
+  equals,
+  or,
+  exists,
+  not,
+  group,
+  generateSchema,
+} from "../src";
 import { validate } from "../src/schemaValidator";
 
 describe("Schema Rule engine", () => {
