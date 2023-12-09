@@ -374,7 +374,7 @@ function addSchemaRules(schema: SchemaObject, components: FormComponentsList) {
     if (Array.isArray(component)) {
       continue;
     }
-    if (component.rules.length === 0) {
+    if (component.rules.length === 0 || !component.required) {
       continue;
     }
 
@@ -390,6 +390,9 @@ function addSchemaRules(schema: SchemaObject, components: FormComponentsList) {
         } else {
           dependency.allOf.push(ruleSchema.schema);
         }
+      } else {
+        schema.allOf ??= [];
+        schema.allOf.push(ruleSchema.schema);
       }
     }
   }

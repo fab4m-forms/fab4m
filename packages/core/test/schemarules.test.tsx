@@ -130,14 +130,6 @@ describe("Schema Rule engine", () => {
       twoRules: undefined,
       dependentRules: undefined,
     };
-    const schema = generateSchema(form);
-    // The two rules component is not present, so this should be valid.
-    const ugh = validate(form, {
-      ...validData,
-      field: "text",
-      twoRules: undefined,
-      dependentRules: undefined,
-    });
     expect(
       validate(form, {
         ...validData,
@@ -165,6 +157,7 @@ describe("Schema Rule engine", () => {
 
   test("Or group", () => {
     // If any of rules pass, then the property must exist.
+    const schema = generateSchema(form);
     expect(
       validate(form, {
         field: "test2",
