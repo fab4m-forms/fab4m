@@ -1,7 +1,6 @@
-import { FormComponent, FormComponentWithName } from "./component";
-import { FormComponentVariant, FormDefinition } from "./form";
-import { AnyRule, filterComponents } from "./rule";
-import { Validator } from "./validator";
+import { FormComponent } from "./component";
+import { FormDefinition } from "./form";
+import { filterComponents } from "./rule";
 interface ErrorObject {
   schemaPath: string;
   message?: string;
@@ -121,21 +120,13 @@ function defaultSchema(
       };
     case "object":
       if (component.components) {
-        const componentData =
-          component.name && data[component.name]
-            ? (data[component.name] as Record<string, unknown>)
-            : {};
         for (const child of filterComponents(
           component.components,
           formData,
           false,
-          componentData,
+          data,
         )) {
-          const childSchema = generateComponentSchema(
-            child,
-            formData,
-            componentData,
-          );
+          const childSchema = generateComponentSchema(child, formData, data);
           if (childSchema && child.name) {
             properties[child.name] = childSchema;
             if (child.required) {
@@ -170,25 +161,58 @@ export function generateComponentSchema(
   formData: Record<string, unknown>,
   data: Record<string, unknown>,
 ): SchemaProperty | null {
-  let componentSchema = component.type.schema
-    ? component.type.schema(component, defaultSchema(component, formData, data))
-    : defaultSchema(component, formData, data);
-  if (!componentSchema) {
-    return null;
-  }
-  for (const validator of component.validators) {
-    if (componentSchema && componentSchema.type === "object") {
-      componentSchema.properties = {
-        ...componentSchema.properties,
-        ...validator.type.schema(validator.settings, componentSchema),
-      };
-    } else {
-      componentSchema = {
-        ...componentSchema,
-        ...validator.type.schema(validator.settings, componentSchema),
-      };
+  const generateDataSchema = (childData: Record<string, unknown>) => {
+    let componentSchema = component.type.schema
+      ? component.type.schema(
+          component,
+          defaultSchema(component, formData, childData),
+        )
+      : defaultSchema(component, formData, childData);
+    if (!componentSchema) {
+      return null;
     }
+    for (const validator of component.validators) {
+      if (componentSchema && componentSchema.type === "object") {
+        componentSchema.properties = {
+          ...componentSchema.properties,
+          ...validator.type.schema(validator.settings, componentSchema),
+        };
+      } else {
+        componentSchema = {
+          ...componentSchema,
+          ...validator.type.schema(validator.settings, componentSchema),
+        };
+      }
+    }
+    return componentSchema;
+  };
+  // We need to generate a schema for each row if this is an object, the component is multiple AND there are rules or variants
+  // among the component children
+  if (
+    component.type.dataType === "object" &&
+    component.multiple &&
+    component.components &&
+    component.name &&
+    Array.isArray(data[component.name])
+  ) {
+    const schemas = (
+      data[component.name] as Array<Record<string, unknown>>
+    ).map(generateDataSchema);
+    return {
+      type: "array",
+      description: component.description,
+      title: component.label,
+      items: schemas as SchemaProperty[],
+      minItems: component.required ? component.minItems : 0,
+      maxItems: component.maxItems,
+    };
   }
+  const componentSchema = generateDataSchema(
+    component.type.dataType === "object" && component.name
+      ? (data[component.name] as Record<string, unknown>)
+      : data,
+  );
+
   if (component.multiple && componentSchema) {
     return {
       type: "array",
@@ -212,10 +236,10 @@ function schemaBase(form: FormDefinition): Schema {
   };
 }
 
-type FormComponentWithParents = FormComponentWithName & { parents?: string[] };
 /**
  * Generate a JSON schema for the provided form.
  * @param form The form to generate the schema for.
+ * @param data The data to generate the schema for, if available.
  * @return A JSON schema for the form.
  * @group JSON Schema
  */
@@ -245,17 +269,21 @@ export function generateSchema(
 /**
  * Generate a JSON schema for each form part.
  * @param form The form to generate the part schemas for.
+ * @param data The form data to generate the schema for, if available.
  * @return A list JSON schemas for each part of the form.
  * @group JSON Schema
  */
-export function generatePartSchemas(form: FormDefinition): Schema[] {
+export function generatePartSchemas(
+  form: FormDefinition,
+  data: Record<string, unknown> = {},
+): Schema[] {
   let part = 0;
   const partSchemas = [{ ...schemaBase(form) }];
   for (const component of form.components) {
     if (Array.isArray(component)) {
       continue;
     }
-    const componentSchema = generateComponentSchema(component);
+    const componentSchema = generateComponentSchema(component, data, data);
     if (componentSchema && component.name) {
       partSchemas[part].properties[component.name] = componentSchema;
       if (component.required) {
