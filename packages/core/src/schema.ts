@@ -158,8 +158,8 @@ function defaultSchema(
  */
 export function generateComponentSchema(
   component: FormComponent,
-  formData: Record<string, unknown>,
-  data: Record<string, unknown>,
+  formData: Record<string, unknown> = {},
+  data: Record<string, unknown> = {},
 ): SchemaProperty | null {
   const generateDataSchema = (childData: Record<string, unknown>) => {
     let componentSchema = component.type.schema
