@@ -6,6 +6,8 @@ import BasicRules from '@site/src/components/Guide/rules/BasicRules';
 import BasicRulesSource from '!!raw-loader!@site/src/components/Guide/rules/BasicRules';
 import RuleGroups from '@site/src/components/Guide/rules/RuleGroups';
 import RuleGroupsSource from '!!raw-loader!@site/src/components/Guide/rules/RuleGroups';
+import RuleSchema from '@site/src/components/Guide/rules/RuleSchema';
+import RuleSchemaSource from '!!raw-loader!@site/src/components/Guide/rules/RuleSchema';
 
 # Component Rules
 
@@ -40,6 +42,12 @@ expensive: booleanField({
 
 You can use the callback rule to provide any logic you want for your form.
 
-## Check out the widget library
+## Rules and JSON Schema
+Due to the potential complexity of rules in forms, we generate a unique JSON
+schema depending on the state of the data to keep the schema simple. for example:
+
+<Example source={RuleSchemaSource} example={<RuleSchema />} />
+
+## Check out the rule library
 
 Fab4m comes with several rules, check them out in the *Rule reference*. Also, check the *extension guide* on how to create your own widgets.

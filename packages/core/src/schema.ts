@@ -1,7 +1,6 @@
-import { FormComponent, FormComponentWithName } from "./component";
-import { FormComponentVariant, FormDefinition } from "./form";
-import { AnyRule } from "./rule";
-import { Validator } from "./validator";
+import { FormComponent } from "./component";
+import { FormDefinition } from "./form";
+import { filterComponents } from "./rule";
 interface ErrorObject {
   schemaPath: string;
   message?: string;
@@ -88,7 +87,11 @@ export interface Schema {
 /**
  * Generate a default schema for a component based on it's definition.
  */
-function defaultSchema(component: FormComponent): SchemaProperty | undefined {
+function defaultSchema(
+  component: FormComponent,
+  formData: Record<string, unknown>,
+  data: Record<string, unknown>,
+): SchemaProperty | undefined {
   const properties: Record<string, SchemaProperty> = {};
   const required: string[] = [];
 
@@ -117,14 +120,16 @@ function defaultSchema(component: FormComponent): SchemaProperty | undefined {
       };
     case "object":
       if (component.components) {
-        for (const child of component.components) {
-          if (Array.isArray(child)) {
-            continue;
-          }
-          const childSchema = generateComponentSchema(child);
+        for (const child of filterComponents(
+          component.components,
+          formData,
+          false,
+          data,
+        )) {
+          const childSchema = generateComponentSchema(child, formData, data);
           if (childSchema && child.name) {
             properties[child.name] = childSchema;
-            if (child.required && child.rules && child.rules.length === 0) {
+            if (child.required) {
               required.push(child.name);
             }
           }
@@ -153,26 +158,61 @@ function defaultSchema(component: FormComponent): SchemaProperty | undefined {
  */
 export function generateComponentSchema(
   component: FormComponent,
+  formData: Record<string, unknown> = {},
+  data: Record<string, unknown> = {},
 ): SchemaProperty | null {
-  let componentSchema = component.type.schema
-    ? component.type.schema(component, defaultSchema(component))
-    : defaultSchema(component);
-  if (!componentSchema) {
-    return null;
-  }
-  for (const validator of component.validators) {
-    if (componentSchema && componentSchema.type === "object") {
-      componentSchema.properties = {
-        ...componentSchema.properties,
-        ...validator.type.schema(validator.settings, componentSchema),
-      };
-    } else {
-      componentSchema = {
-        ...componentSchema,
-        ...validator.type.schema(validator.settings, componentSchema),
-      };
+  const generateDataSchema = (childData: Record<string, unknown>) => {
+    let componentSchema = component.type.schema
+      ? component.type.schema(
+          component,
+          defaultSchema(component, formData, childData),
+        )
+      : defaultSchema(component, formData, childData);
+    if (!componentSchema) {
+      return null;
     }
+    for (const validator of component.validators) {
+      if (componentSchema && componentSchema.type === "object") {
+        componentSchema.properties = {
+          ...componentSchema.properties,
+          ...validator.type.schema(validator.settings, componentSchema),
+        };
+      } else {
+        componentSchema = {
+          ...componentSchema,
+          ...validator.type.schema(validator.settings, componentSchema),
+        };
+      }
+    }
+    return componentSchema;
+  };
+  // We need to generate a schema for each row if this is an object, the component is multiple AND there are rules or variants
+  // among the component children
+  if (
+    component.type.dataType === "object" &&
+    component.multiple &&
+    component.components &&
+    component.name &&
+    Array.isArray(data[component.name])
+  ) {
+    const schemas = (
+      data[component.name] as Array<Record<string, unknown>>
+    ).map(generateDataSchema);
+    return {
+      type: "array",
+      description: component.description,
+      title: component.label,
+      items: schemas as SchemaProperty[],
+      minItems: component.required ? component.minItems : 0,
+      maxItems: component.maxItems,
+    };
   }
+  const componentSchema = generateDataSchema(
+    component.type.dataType === "object" && component.name
+      ? (data[component.name] as Record<string, unknown>)
+      : data,
+  );
+
   if (component.multiple && componentSchema) {
     return {
       type: "array",
@@ -196,268 +236,54 @@ function schemaBase(form: FormDefinition): Schema {
   };
 }
 
-type FormComponentWithParents = FormComponentWithName & { parents?: string[] };
 /**
  * Generate a JSON schema for the provided form.
  * @param form The form to generate the schema for.
+ * @param data The data to generate the schema for, if available.
  * @return A JSON schema for the form.
  * @group JSON Schema
  */
-export function generateSchema(form: FormDefinition): Schema {
+export function generateSchema(
+  form: FormDefinition,
+  data: Record<string, unknown> = {},
+): Schema {
   const schema: Schema = schemaBase(form);
-  const componentSchemas: Record<string, SchemaProperty> = {};
-  const hasRules: Array<FormComponentWithParents> = [];
-  const rules: Map<string, Array<Partial<Schema>>> = new Map();
-  const variants: Array<FormComponentVariant> = [];
-  const groupRules = [];
-  for (const component of form.components) {
-    if (Array.isArray(component)) {
-      for (const variant of component) {
-        const variantSchema = generateComponentSchema(variant.component);
-        if (!variantSchema || !variant.component.name) {
-          continue;
-        }
-        if (!variant.rule) {
-          componentSchemas[variant.component.name] = variantSchema;
-          schema.properties[variant.component.name] = variantSchema;
-        } else {
-          variants.push(variant);
-        }
-      }
-    } else {
-      const componentSchema = generateComponentSchema(component);
-      if (!componentSchema || !component.name) {
-        continue;
-      }
-      componentSchemas[component.name] = componentSchema;
-      schema.properties[component.name] = componentSchema;
-      const required =
-        component.required ||
-        component.validators.findIndex(
-          (validator) => validator.type.forceRequired,
-        ) !== -1;
-      if (required) {
-        // If this component has rules, then we need to add required only
-        // when it exists.
-        if (component.rules.length === 0) {
-          schema.required.push(component.name);
-        } else {
-          hasRules.push(component);
-        }
-      }
-      addChildRules(component, hasRules, [component.name]);
-    }
-  }
-  const variantSchemas = [];
-  for (const variant of variants) {
-    if (!variant.rule) {
+  for (const component of filterComponents(form.components, data)) {
+    const componentSchema = generateComponentSchema(component, data, data);
+    if (!componentSchema || !component.name) {
       continue;
     }
-    const variantSchema = generateComponentRuleSchema(
-      variant.rule,
-      variant.component,
-      componentSchemas,
-      true,
-    );
-    if (variantSchema) {
-      variantSchemas.push(variantSchema);
-    }
-  }
-
-  for (const component of hasRules) {
-    for (const rule of component.rules) {
-      const ruleSchema = generateComponentRuleSchema(
-        rule,
-        component,
-        componentSchemas,
-      );
-      if (!ruleSchema) {
-        continue;
-      }
-      if (Array.isArray(rule)) {
-        const dependencyRules = rules.get(rule[0]) ?? [];
-        dependencyRules.push(ruleSchema);
-        rules.set(rule[0], dependencyRules);
-      } else {
-        groupRules.push(ruleSchema);
-      }
-    }
-  }
-  for (const [dependency, dependencyRules] of rules.entries()) {
-    const parts = dependency.split(".");
-    let cursor: SchemaObject | SchemaArray = schema as SchemaObject;
-    while (parts.length > 1) {
-      const part = parts.shift();
-      if (part) {
-        if (
-          part === "$" &&
-          cursor.type === "array" &&
-          !Array.isArray(cursor.items) &&
-          (cursor.items.type === "object" || cursor.items.type === "array")
-        ) {
-          cursor = cursor.items;
-        } else if (cursor.type === "object") {
-          cursor = cursor.properties[part] as SchemaObject | SchemaArray;
-        }
-      }
-    }
-    if (cursor.type === "object") {
-      cursor.dependencies ??= {};
-      cursor.dependencies[parts[0]] = {
-        allOf: dependencyRules,
-      };
-    }
-  }
-  if (groupRules.length > 0) {
-    schema.allOf = [];
-    for (const group of groupRules) {
-      schema.allOf.push(group);
-    }
-  }
-
-  if (variantSchemas.length > 0) {
-    schema.allOf = [];
-    for (const variantSchema of variantSchemas) {
-      variantSchema.else = {};
-      schema.allOf.push(variantSchema);
+    schema.properties[component.name] = componentSchema;
+    const required =
+      component.required ||
+      component.validators.findIndex(
+        (validator) => validator.type.forceRequired,
+      ) !== -1;
+    if (required) {
+      schema.required.push(component.name);
     }
   }
   return schema;
 }
 
-function addChildRules(
-  component: FormComponentWithParents,
-  hasRules: FormComponentWithParents[],
-  parents: string[],
-) {
-  if (!component.components) {
-    return;
-  }
-  for (const child of component.components as FormComponentWithParents[]) {
-    if (child.rules.length > 0) {
-      child.parents = parents;
-      hasRules.push(child);
-    }
-    addChildRules(child, hasRules, [...parents, component.name]);
-  }
-}
-
-function generateComponentRuleSchema(
-  rule: AnyRule,
-  component: FormComponentWithName,
-  componentSchemas: Record<string, SchemaProperty>,
-  withComponent = false,
-): Partial<Schema> | null {
-  if (Array.isArray(rule)) {
-    return buildIfStatement(
-      rule[0].split("."),
-      rule[1],
-      component,
-      componentSchemas,
-      withComponent,
-    );
-  }
-  const groupRules: Array<Partial<Schema>> = [];
-  for (const childRule of rule.rules) {
-    const schema = generateComponentRuleSchema(
-      childRule,
-      component,
-      componentSchemas,
-      withComponent,
-    );
-    if (!schema) {
-      continue;
-    }
-    if (Array.isArray(childRule)) {
-      groupRules.push({ dependencies: { [childRule[0]]: schema } });
-    } else {
-      groupRules.push(schema);
-    }
-  }
-  if (rule.type.schema) {
-    return rule.type.schema(groupRules);
-  } else {
-    return { [rule.type.schemaCompoundKeyword]: groupRules };
-  }
-}
-
-function buildIfStatement(
-  path: string[],
-  validator: Validator,
-  component: FormComponentWithParents,
-  componentSchemas: Record<string, SchemaProperty>,
-  withComponent = false,
-): any {
-  const ifStatement: Partial<Schema> = {
-    if: {
-      properties: {},
-    },
-    then: {},
-  };
-  let thenCursor: Partial<SchemaProperty> =
-    ifStatement.then as Partial<SchemaProperty>;
-  let schemaCursor: SchemaProperty = componentSchemas[path[0]];
-  if (component.parents) {
-    for (let i = 0; i < component.parents.length; i++) {
-      // Exclude parts of our path that is part of the
-      if (path[i] === component.parents[i]) {
-        continue;
-      }
-      const parent = component.parents[i];
-      if (thenCursor.type === "object" || !thenCursor.type) {
-        (thenCursor as SchemaObject).properties = {
-          [parent]: { type: "object", properties: {} },
-        };
-        if ((thenCursor as SchemaObject).properties[parent]) {
-          thenCursor = (thenCursor as SchemaObject).properties[parent];
-        }
-      }
-    }
-  }
-  for (const node of path.slice(1)) {
-    if (
-      node === "$" &&
-      schemaCursor.type === "array" &&
-      schemaCursor.items &&
-      !Array.isArray(schemaCursor.items)
-    ) {
-      schemaCursor = schemaCursor.items;
-    } else if (schemaCursor.type === "object") {
-      schemaCursor = schemaCursor.properties[node];
-    }
-  }
-  (thenCursor as SchemaObject).required = [component.name];
-  if (withComponent) {
-    const componentSchema = generateComponentSchema(component);
-    if (componentSchema) {
-      (thenCursor as SchemaObject).properties = {
-        [component.name]: componentSchema,
-      };
-    }
-  }
-  if (ifStatement.if) {
-    ifStatement.if.properties[path[path.length - 1]] = validator.type.schema(
-      validator.settings,
-      schemaCursor,
-    );
-  }
-  return ifStatement;
-}
-
 /**
  * Generate a JSON schema for each form part.
  * @param form The form to generate the part schemas for.
+ * @param data The form data to generate the schema for, if available.
  * @return A list JSON schemas for each part of the form.
  * @group JSON Schema
  */
-export function generatePartSchemas(form: FormDefinition): Schema[] {
+export function generatePartSchemas(
+  form: FormDefinition,
+  data: Record<string, unknown> = {},
+): Schema[] {
   let part = 0;
   const partSchemas = [{ ...schemaBase(form) }];
   for (const component of form.components) {
     if (Array.isArray(component)) {
       continue;
     }
-    const componentSchema = generateComponentSchema(component);
+    const componentSchema = generateComponentSchema(component, data, data);
     if (componentSchema && component.name) {
       partSchemas[part].properties[component.name] = componentSchema;
       if (component.required) {

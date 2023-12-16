@@ -10,9 +10,9 @@ export interface ValidationStatus {
 
 export function validate(
   form: FormDefinition,
-  data: unknown,
+  data: Record<string, unknown>,
 ): ValidationStatus {
-  const schema = generateSchema(form);
+  const schema = generateSchema(form, data);
   const ajv = new Ajv({ $data: true, allErrors: true });
   addFormats(ajv as any); //eslint-disable-line
   const validate = ajv.compile(schema);

@@ -7,6 +7,8 @@ import RequiredWhenPresent from '@site/src/components/Guide/variants/RequiredWhe
 import RequiredWhenPresentSource from '!!raw-loader!@site/src/components/Guide/variants/RequiredWhenPresent.tsx';
 import VariantSelection from '@site/src/components/Guide/variants/VariantSelection.tsx';
 import VariantSelectionSource from '!!raw-loader!@site/src/components/Guide/variants/VariantSelection.tsx';
+import VariantSchema from '@site/src/components/Guide/variants/VariantSchema.tsx';
+import VariantSchemaSource from '!!raw-loader!@site/src/components/Guide/variants/VariantSchema.tsx';
 
 # Component Variants
 
@@ -14,7 +16,7 @@ Component variants allows you to change all aspects of a form component based
 on the state of the rest of the form.
 
 While rules allows you to show and hide different component based on the form state,
-variants let's you customize everything.
+variants lets you customize everything.
 
 Here's a simple example where we make the form component required or not, depending
 on the form state:
@@ -27,3 +29,9 @@ A variant array is evaluated in order, and the first variant where the rule pass
 is selected. If you provide a component without a rule, it will always be selected.
 
 <Example source={VariantSelectionSource} example={<VariantSelection />} />
+
+## A note about variants and JSON Schema
+When you use variants, you need to provide the data you want to validate when you generate your
+JSON Schema, for example:
+
+<Example source={VariantSchemaSource} example={<VariantSchema />} />
