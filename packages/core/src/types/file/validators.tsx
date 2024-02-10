@@ -113,8 +113,8 @@ export type FileExtensionValidatorType = ValidatorType<
  * @group Validators
  */
 export const acceptsFileValidator: ValidatorType<File, string[], void> = {
-  name: "fileType",
-  title: "Allowed file types",
+  name: "acceptsFile",
+  title: "Accepted file types",
   components: ["file"],
   schema: () => ({}),
   attributes: (validator) => ({
@@ -139,11 +139,11 @@ export function acceptsFile(settings: string[]) {
 }
 
 /**
- * @deprecated
  * This validator is deprecated, use the valid file type validator instead!
  * File extension validator allows you to validate that the file
  * extension matches one of the provided allowed extensions.
  * @group Validators
+ * @deprecated
  */
 export const fileExtensionValidator: FileExtensionValidatorType = {
   name: "fileExtension",
@@ -180,11 +180,11 @@ export const fileExtensionValidator: FileExtensionValidatorType = {
 };
 
 /**
- * @deprecated
  * This validator is deprecated, use the valid file type validator instead!
  * The file extension validator allows you to validate that the file
  * extension matches one of the provided allowed extensions.
  * @group Validators
+ * @deprecated
  */
 export function fileExtension(
   types: string[],
