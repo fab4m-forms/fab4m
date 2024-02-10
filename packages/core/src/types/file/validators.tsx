@@ -106,7 +106,29 @@ export type FileExtensionValidatorType = ValidatorType<
   unknown
 >;
 
+export const acceptsFileValidator: ValidatorType<File, string[], void> = {
+  name: "fileType",
+  title: "Allowed file types",
+  components: ["file"],
+  schema: () => ({}),
+  attributes: (validator) => ({
+    accept: validator.settings.join(","),
+  }),
+  // HTML5 validation takes care of this, so we don't need to do this ourselves.
+  valid: () => true,
+  defaultSettings: [],
+};
+
+export function acceptsFile(settings: string[]) {
+  return {
+    type: acceptsFileValidator,
+    settings,
+  };
+}
+
 /**
+ * @deprecated
+ * This validator is deprecated, use the valid file type validator instead!
  * File extension validator allows you to validate that the file
  * extension matches one of the provided allowed extensions.
  * @group Validators

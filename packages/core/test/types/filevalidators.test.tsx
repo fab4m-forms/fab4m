@@ -7,9 +7,15 @@ import {
   fileExtension,
   FormComponentWithName,
   mimeType,
+  acceptsFile,
 } from "../../src/index";
 import { vi } from "vitest";
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import {
+  findByLabelText,
+  fireEvent,
+  render,
+  waitFor,
+} from "@testing-library/react";
 
 describe("Size validator", () => {
   window.HTMLFormElement.prototype.submit = () => {
@@ -179,4 +185,19 @@ describe("Mime type validator", () => {
       expect(queryByText("The file mimetype is not valid!")).toBeNull();
     });
   });
+});
+
+test("accepts validator", async () => {
+  const form = createForm();
+  form.add(
+    fileField({
+      name: "accepts_validator",
+      label: "Accepts validator",
+      validators: [acceptsFile(["image/jpeg", ".png"])],
+    }),
+  );
+  const { findByLabelText } = render(<FormView form={form} data={{}} />);
+  const input = await findByLabelText("Accepts validator");
+  expect(input).toHaveAttribute("accept");
+  expect(input.getAttribute("accept")).toBe("image/jpeg,.png");
 });
