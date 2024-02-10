@@ -10,11 +10,7 @@ import {
   acceptsFile,
 } from "../../src/index";
 import { vi } from "vitest";
-import {
-  fireEvent,
-  render,
-  waitFor,
-} from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 
 describe("Size validator", () => {
   window.HTMLFormElement.prototype.submit = () => {

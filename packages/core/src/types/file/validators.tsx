@@ -139,7 +139,9 @@ export function acceptsFile(settings: string[]) {
 }
 
 /**
+ * :::warning
  * This validator is deprecated, use the valid file type validator instead!
+ * :::
  * File extension validator allows you to validate that the file
  * extension matches one of the provided allowed extensions.
  * @group Validators
@@ -180,7 +182,9 @@ export const fileExtensionValidator: FileExtensionValidatorType = {
 };
 
 /**
+ * :::warning
  * This validator is deprecated, use the valid file type validator instead!
+ * :::
  * The file extension validator allows you to validate that the file
  * extension matches one of the provided allowed extensions.
  * @group Validators
@@ -215,11 +219,13 @@ export type MimeTypeValidatorType = ValidatorType<
 >;
 
 /**
- * @deprecated
+ * :::warning
  * This validator is deprecated, use the valid file type validator instead!
+ * :::
  * The mime type validator type allows you to validate that the file
  * mime type matches one of the provided mime types.
  * @group Validators
+ * @deprecated
  */
 export const mimeTypeValidator: MimeTypeValidatorType = {
   name: "mimetype",
@@ -241,11 +247,14 @@ export const mimeTypeValidator: MimeTypeValidatorType = {
 };
 
 /**
- * @deprecated
+ * :::warning
+ * This validator is deprecated, use the valid file type validator instead!
+ * :::
  * This validator is deprecated, use the valid file type validator instead!
  * Allows you to validate that the file
  * mime type matches one of the provided mime types.
  * @group Validators
+ * @deprecated
  */
 export function mimeType(
   types: string[],
