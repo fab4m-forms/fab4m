@@ -12,8 +12,8 @@ import { Form } from "./form";
  */
 export function useForm<DataType>(
   creator: () => Form<DataType>,
-  dependencies?: DependencyList,
+  dependencies: DependencyList = [],
 ): Form<DataType> {
   // The form only needs to be created every time any of the inputs change.
-  return useMemo(creator, dependencies ?? []);
+  return useMemo(creator, dependencies);
 }
