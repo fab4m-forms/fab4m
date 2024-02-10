@@ -106,6 +106,12 @@ export type FileExtensionValidatorType = ValidatorType<
   unknown
 >;
 
+/**
+ * This validator adds an "accepts" attribute to the file upload field,
+ * which then let's the browser validate the file types that you allow
+ * to be uploaded.
+ * @group Validators
+ */
 export const acceptsFileValidator: ValidatorType<File, string[], void> = {
   name: "fileType",
   title: "Allowed file types",
@@ -119,6 +125,12 @@ export const acceptsFileValidator: ValidatorType<File, string[], void> = {
   defaultSettings: [],
 };
 
+/**
+ * This validator adds an "accepts" attribute to the file upload field,
+ * which then let's the browser validate the file types that you allow
+ * to be uploaded.
+ * @group Validators
+ */
 export function acceptsFile(settings: string[]) {
   return {
     type: acceptsFileValidator,
@@ -168,6 +180,8 @@ export const fileExtensionValidator: FileExtensionValidatorType = {
 };
 
 /**
+ * @deprecated
+ * This validator is deprecated, use the valid file type validator instead!
  * The file extension validator allows you to validate that the file
  * extension matches one of the provided allowed extensions.
  * @group Validators
@@ -201,6 +215,8 @@ export type MimeTypeValidatorType = ValidatorType<
 >;
 
 /**
+ * @deprecated
+ * This validator is deprecated, use the valid file type validator instead!
  * The mime type validator type allows you to validate that the file
  * mime type matches one of the provided mime types.
  * @group Validators
@@ -225,6 +241,8 @@ export const mimeTypeValidator: MimeTypeValidatorType = {
 };
 
 /**
+ * @deprecated
+ * This validator is deprecated, use the valid file type validator instead!
  * Allows you to validate that the file
  * mime type matches one of the provided mime types.
  * @group Validators

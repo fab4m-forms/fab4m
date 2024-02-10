@@ -11,7 +11,6 @@ import {
 } from "../../src/index";
 import { vi } from "vitest";
 import {
-  findByLabelText,
   fireEvent,
   render,
   waitFor,
