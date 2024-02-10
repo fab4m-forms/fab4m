@@ -114,8 +114,8 @@ export default function Autocomplete<
                               itemContext(item),
                             )
                           : Array.isArray(item)
-                          ? item[0]
-                          : item}
+                            ? item[0]
+                            : item}
                       </li>
                     ))
                   : null}
