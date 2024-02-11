@@ -124,6 +124,21 @@ describe("File extension validator", () => {
       expect(spy).toHaveBeenCalled();
     });
   });
+
+  test("Allowed UC file extension", async () => {
+    const spy = vi.fn();
+    form.onSubmit(spy);
+    data.extension_validator = new File(["png file"], "value.PNG");
+    const { getByText, queryByText } = render(
+      <FormView form={form} data={data} />,
+    );
+    const submit = getByText("Save");
+    fireEvent.click(submit);
+    await waitFor(() => {
+      expect(queryByText(message)).toBeNull();
+      expect(spy).toHaveBeenCalled();
+    });
+  });
 });
 
 describe("Mime type validator", () => {
