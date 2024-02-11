@@ -1,6 +1,6 @@
 {
   "name": "@fab4m/password",
-  "version": "1.0.0-beta18",
+  "version": "1.0.0-beta20",
   "description": "Password components and validators for fab4m",
   "author": "Fabian Sorqvist <fabian@sorqvist.nu>",
   "homepage": "https://github.com/fab4m-forms/fab4m#readme",
