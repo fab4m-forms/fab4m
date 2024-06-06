@@ -1,7 +1,13 @@
 {
   "name": "root",
   "private": false,
-  "license": "MIT",
+    "license": "MIT",
+    "workspaces": [
+        "packages/core",
+        "packages/date",
+        "packages/password",
+        "packages/routerforms"
+    ],
   "devDependencies": {
     "@babel/core": "^7.23.9",
     "@testing-library/jest-dom": "^6.4.2",
@@ -24,7 +30,6 @@
     "eslint-config-prettier": "^9.1.0",
     "jsdom": "^24.0.0",
     "json-beautify": "^1.1.1",
-    "lerna": "^8.1.2",
     "msw": "^2.1.7",
     "npm-check-updates": "^16.14.15",
     "postcss": "^8.4.35",
@@ -40,12 +45,6 @@
     "typescript": "^5.3.3",
     "vite-react-jsx": "^1.1.2",
     "vitest": "^1.2.2"
-  },
-  "dependencies": {
-    "@fab4m/date": "file:packages/date",
-    "@fab4m/fab4m": "file:packages/core",
-    "@fab4m/password": "file:packages/password",
-    "@fab4m/routerforms": "file:packages/routerforms"
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
