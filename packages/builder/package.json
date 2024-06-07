@@ -1,0 +1,12 @@
+{
+  "name": "@fab4m/builder",
+  "version": "1.0.0-beta20",
+  "description": "A form builder UI",
+  "main": "dist/index.cjs.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "vitest"
+  },
+  "author": "Fabian Sörqvist",
+  "license": "GPL-3.0-or-later"
+}
