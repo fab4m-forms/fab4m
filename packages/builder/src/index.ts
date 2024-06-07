@@ -2,11 +2,8 @@ import {
   FormComponentType,
   Components,
   WidgetType,
-  SerializedForm,
-  SerializedComponent,
   ValidatorType,
   FormComponent,
-  Theme,
   SchemaProperty,
 } from "@fab4m/fab4m";
 
@@ -45,3 +42,5 @@ export type Plugins = {
   widgets: WidgetTypePlugin[];
   validators: ValidatorTypePlugin[];
 };
+
+export { default as FormBuilder } from "./components/FormBuilder";

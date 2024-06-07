@@ -1,7 +1,6 @@
 import { SerializedComponent, SerializedForm, Theme } from "@fab4m/fab4m";
 import React, { forwardRef, useState } from "react";
 import t from "../translations";
-import { Plugins } from "..";
 import { draggableItems, findKey } from "../util";
 import styles from "../styles";
 import {
@@ -23,9 +22,7 @@ import SortableItem from "../components/SortableItem";
 import { produce } from "immer";
 
 export type FormBuilderProps = {
-  plugins: Plugins;
   form: SerializedForm;
-  themes: Theme[];
   formChanged: (form: SerializedForm) => void;
 };
 
