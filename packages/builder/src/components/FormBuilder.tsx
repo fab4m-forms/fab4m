@@ -1,5 +1,5 @@
-import { SerializedComponent, SerializedForm, Theme } from "@fab4m/fab4m";
-import React, { forwardRef, useState } from "react";
+import { SerializedComponent, SerializedForm } from "@fab4m/fab4m";
+import React, { ComponentType, forwardRef, useState } from "react";
 import t from "../translations";
 import { draggableItems, findKey } from "../util";
 import styles from "../styles";
@@ -20,9 +20,13 @@ import {
 } from "@dnd-kit/sortable";
 import SortableItem from "../components/SortableItem";
 import { produce } from "immer";
+export type ActionProps = {
+  component: SerializedComponent;
+};
 
 export type FormBuilderProps = {
   form: SerializedForm;
+  actions?: ComponentType<ActionProps>;
   formChanged: (form: SerializedForm) => void;
 };
 
@@ -68,7 +72,12 @@ export default function FormBuilder(props: FormBuilderProps) {
           onDragStart={(e) => setActive(e.active.id)}
           onDragEnd={handleDragEnd}
         >
-          <Components items={items} parent="root:" activeItem={activeItem} />
+          <Components
+            items={items}
+            parent="root:"
+            activeItem={activeItem}
+            actions={props.actions}
+          />
           <DragOverlay>
             {activeItem ? (
               <Item title={items.get(activeItem)?.label ?? ""}></Item>
@@ -83,6 +92,7 @@ export default function FormBuilder(props: FormBuilderProps) {
 interface ComponentsProps {
   parent: string;
   items: Map<string, SerializedComponent>;
+  actions?: ComponentType<ActionProps>;
   selectedComponent?: SerializedComponent;
   activeItem: string | null;
 }
@@ -91,11 +101,15 @@ function Components(props: ComponentsProps) {
   const renderedItems: JSX.Element[] = [];
   for (const [key, component] of props.items.entries()) {
     if (key === `${props.parent}${component.name}`) {
+      const actions = props.actions ? (
+        <props.actions component={component} />
+      ) : null;
       renderedItems.push(
         <React.Fragment key={key}>
           <SortableItem
             name={component.name ?? ""}
             parent={props.parent}
+            actions={actions}
             header={
               <>
                 {component.type !== "pagebreak"
@@ -112,6 +126,7 @@ function Components(props: ComponentsProps) {
                       ? `${props.parent}${component.name}:`
                       : `${component.name}:`
                   }
+                  actions={props.actions}
                   items={props.items}
                   activeItem={props.activeItem}
                 />
