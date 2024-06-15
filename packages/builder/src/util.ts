@@ -15,7 +15,7 @@ export function invariantReturn<Type>(data: Type | undefined | null): Type {
 }
 
 export function findPlugin<
-  PluginType extends Plugin<any, any> & { type: { name: string } }
+  PluginType extends Plugin<any, any> & { type: { name: string } },
 >(typeName: string, plugins: Array<PluginType>): PluginType {
   const pluginType = plugins.find((plugin) => plugin.type.name === typeName);
   return invariantReturn(pluginType);
@@ -23,38 +23,38 @@ export function findPlugin<
 
 export function findComponent(
   form: SerializedForm,
-  name: string
+  name: string,
 ): SerializedComponent {
   const component = form.components.find(
-    (c) => !Array.isArray(c) && c.name === name
+    (c) => !Array.isArray(c) && c.name === name,
   );
   return invariantReturn(component) as SerializedComponent;
 }
 
 export function findComponentWidgets(
   type: string,
-  widgets: WidgetTypePlugin[]
+  widgets: WidgetTypePlugin[],
 ) {
   return widgets.filter(
-    (widget) => widget.type.components.indexOf(type) !== -1
+    (widget) => widget.type.components.indexOf(type) !== -1,
   );
 }
 
 export function findComponentValidators(
   type: string,
-  validators: ValidatorTypePlugin[]
+  validators: ValidatorTypePlugin[],
 ) {
   return validators.filter(
     (validator) =>
       !validator.type.components ||
-      validator.type.components.indexOf(type) !== -1
+      validator.type.components.indexOf(type) !== -1,
   );
 }
 
 export function updateComponent(
   form: SerializedForm,
   key: string,
-  component: SerializedComponent
+  component: SerializedComponent,
 ): SerializedForm {
   return produce(form, (draft) => {
     const [list, index] = findKey(draft.components, key);
@@ -64,10 +64,22 @@ export function updateComponent(
   });
 }
 
+export function removeComponent(
+  form: SerializedForm,
+  key: string,
+): SerializedForm {
+  return produce(form, (draft) => {
+    const [list, index] = findKey(draft.components, key);
+    if (list) {
+      list.splice(index, 1);
+    }
+  });
+}
+
 export function unserializeForm(
   form: SerializedForm,
   plugins: Plugins,
-  themes: Theme[]
+  themes: Theme[],
 ) {
   return unserialize(
     form,
@@ -75,14 +87,14 @@ export function unserializeForm(
     themes,
     plugins.widgets.map((w) => w.type),
     [],
-    plugins.validators.map((v) => v.type)
+    plugins.validators.map((v) => v.type),
   );
 }
 
 export function draggableItems(
   items: SerializedComponentsList,
   parent: string = "root:",
-  result: Map<string, SerializedComponent> = new Map()
+  result: Map<string, SerializedComponent> = new Map(),
 ) {
   for (const item of items) {
     if (!Array.isArray(item) && item) {
@@ -91,7 +103,7 @@ export function draggableItems(
         draggableItems(
           item.components,
           `${parent !== "root:" ? parent : ""}${item.name}:`,
-          result
+          result,
         );
       }
     }
@@ -101,7 +113,7 @@ export function draggableItems(
 
 export function findKey(
   components: SerializedComponentsList,
-  key: string
+  key: string,
 ): [SerializedComponentsList, number] | [null, -1] {
   if (key.startsWith("root:")) {
     key = key.split("root:")[1];
@@ -119,14 +131,14 @@ export function findKey(
     key = parts[parts.length - 1];
   }
   const index = components.findIndex(
-    (c) => !Array.isArray(c) && c.name === key
+    (c) => !Array.isArray(c) && c.name === key,
   );
   return [components, index];
 }
 
 export function findComponentFromKey(
   components: SerializedComponentsList,
-  key: string
+  key: string,
 ): SerializedComponent {
   const [list, index] = findKey(components, key);
   if (!list) {

@@ -21,12 +21,19 @@ npm run build
 npm pack
 popd
 
+pushd ../packages/builder
+npm run build
+npm pack
+popd
+
 
 npm install ../packages/core/fab4m-fab4m-*.tgz
 npm install ../packages/date/fab4m-date-*.tgz
 npm install ../packages/password/fab4m-password-*.tgz
 npm install ../packages/autocomplete/fab4m-autocomplete-*.tgz
+npm install ../packages/builder/fab4m-builder-*.tgz
 rm ../packages/core/fab4m-fab4m-*.tgz
 rm ../packages/date/fab4m-date-*.tgz
 rm ../packages/password/fab4m-password-*.tgz
 rm ../packages/autocomplete/fab4m-autocomplete-*.tgz
+rm ../packages/builder/fab4m-builder-*.tgz

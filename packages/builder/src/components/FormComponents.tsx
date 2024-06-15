@@ -1,4 +1,4 @@
-import { SerializedComponent, SerializedForm } from "@fab4m/fab4m";
+import { SerializedComponent } from "@fab4m/fab4m";
 import React, { ComponentType, forwardRef, useState } from "react";
 import t from "../translations";
 import { draggableItems, findKey } from "../util";
@@ -18,21 +18,25 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import SortableItem from "../components/SortableItem";
+import SortableItem from "./SortableItem";
 import { produce } from "immer";
-export type ActionProps = {
+import { useFormBuilderActions, useFormBuilderForm } from "../context";
+export type ComponentActionProps = {
   component: SerializedComponent;
+  formKey: string;
+  removeComponent: () => void;
+  updateComponent: (component: SerializedComponent) => void;
 };
 
 export type FormBuilderProps = {
-  form: SerializedForm;
-  actions?: ComponentType<ActionProps>;
-  formChanged: (form: SerializedForm) => void;
+  actions?: ComponentType<ComponentActionProps>;
 };
 
-export default function FormBuilder(props: FormBuilderProps) {
+export function FormComponents(props: FormBuilderProps) {
+  const form = useFormBuilderForm();
+  const { changeForm } = useFormBuilderActions();
   const [activeItem, setActiveItem] = useState<string | null>(null);
-  const items = draggableItems(props.form.components);
+  const items = draggableItems(form.components);
   function setActive(id: UniqueIdentifier) {
     setActiveItem(id.toString());
   }
@@ -46,8 +50,8 @@ export default function FormBuilder(props: FormBuilderProps) {
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
     setActiveItem(null);
-    props.formChanged(
-      produce(props.form, (draft) => {
+    changeForm(
+      produce(form, (draft) => {
         if (over && active.id !== over.id) {
           const from = active.id.toString();
           const to = over.id.toString();
@@ -92,17 +96,23 @@ export default function FormBuilder(props: FormBuilderProps) {
 interface ComponentsProps {
   parent: string;
   items: Map<string, SerializedComponent>;
-  actions?: ComponentType<ActionProps>;
+  actions?: ComponentType<ComponentActionProps>;
   selectedComponent?: SerializedComponent;
   activeItem: string | null;
 }
 
 function Components(props: ComponentsProps) {
   const renderedItems: JSX.Element[] = [];
+  const { updateComponent, removeComponent } = useFormBuilderActions();
   for (const [key, component] of props.items.entries()) {
     if (key === `${props.parent}${component.name}`) {
       const actions = props.actions ? (
-        <props.actions component={component} />
+        <props.actions
+          component={component}
+          formKey={key}
+          removeComponent={() => removeComponent(key)}
+          updateComponent={(component) => updateComponent(key, component)}
+        />
       ) : null;
       renderedItems.push(
         <React.Fragment key={key}>

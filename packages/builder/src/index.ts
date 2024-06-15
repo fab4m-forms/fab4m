@@ -43,4 +43,10 @@ export type Plugins = {
   validators: ValidatorTypePlugin[];
 };
 
-export { default as FormBuilder } from "./components/FormBuilder";
+export * from "./components/FormComponents";
+export * from "./components/FormBuilderProvider";
+export {
+  useFormBuilderActions,
+  useFormBuilderForm,
+  FormBuilderActions,
+} from "./context";
