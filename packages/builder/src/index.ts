@@ -19,7 +19,9 @@ export type FormComponentTypePlugin<
   SettingsFormData = Record<string, unknown>,
 > = Plugin<SettingsType, SettingsFormData> & {
   type: FormComponentType<SettingsType>;
-  init: (name: string) => FormComponent;
+  init: (
+    attributes: Partial<FormComponent> & { name: string },
+  ) => FormComponent;
 };
 
 export type WidgetTypePlugin<
@@ -42,8 +44,10 @@ export type Plugins = {
   widgets: WidgetTypePlugin[];
   validators: ValidatorTypePlugin[];
 };
-
+export { allPlugins } from "./allPlugins";
+export * from "./plugins/componentTypes/text";
 export * from "./components/FormComponents";
+export * from "./components/NewComponent";
 export * from "./components/FormBuilderProvider";
 export {
   useFormBuilderActions,

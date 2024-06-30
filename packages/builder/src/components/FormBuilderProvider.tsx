@@ -3,8 +3,7 @@ import { SerializedComponent, SerializedForm } from "@fab4m/fab4m";
 import { FormBuilderActionsContext, FormBuilderFormContext } from "../context";
 import { removeComponent, updateComponent } from "../util";
 
-export type FormBuilderProviderProps = {
-  form: SerializedForm;
+export type FormBuilderProviderProps = FormBuilderFormContext & {
   formChanged: (form: SerializedForm) => void;
   children: React.ReactNode;
 };
@@ -21,7 +20,7 @@ export function FormBuilderProvider(props: FormBuilderProviderProps) {
   };
   return (
     <FormBuilderActionsContext.Provider value={context}>
-      <FormBuilderFormContext.Provider value={props.form}>
+      <FormBuilderFormContext.Provider value={props}>
         {props.children}
       </FormBuilderFormContext.Provider>
     </FormBuilderActionsContext.Provider>

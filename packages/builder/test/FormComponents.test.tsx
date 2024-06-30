@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import "cross-fetch/polyfill";
 import { createForm, textField, group, serialize } from "@fab4m/fab4m";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { FormComponents, FormBuilderProvider } from "../src";
+import { FormComponents, FormBuilderProvider, allPlugins } from "../src";
 import * as React from "react";
 
 describe("Main Form builder component", () => {
@@ -19,7 +19,11 @@ describe("Main Form builder component", () => {
   );
   it("form rendering", async () => {
     render(
-      <FormBuilderProvider form={form} formChanged={() => {}}>
+      <FormBuilderProvider
+        form={form}
+        formChanged={() => {}}
+        plugins={allPlugins}
+      >
         <FormComponents />
       </FormBuilderProvider>,
     );
@@ -31,7 +35,11 @@ describe("Main Form builder component", () => {
     const Component = () => {
       const [draft, changeDraft] = React.useState(form);
       return (
-        <FormBuilderProvider form={draft} formChanged={changeDraft}>
+        <FormBuilderProvider
+          form={draft}
+          formChanged={changeDraft}
+          plugins={allPlugins}
+        >
           <FormComponents
             actions={({
               component,

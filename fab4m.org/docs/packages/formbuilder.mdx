@@ -3,6 +3,9 @@ import FormComponentsExample from "@site/src/components/FormBuilder/FormComponen
 import FormComponentsExampleSource from "!!raw-loader!@site/src/components/FormBuilder/FormComponentsExample";
 import FormActionsExample from "@site/src/components/FormBuilder/FormActionsExample";
 import FormActionsExampleSource from "!!raw-loader!@site/src/components/FormBuilder/FormActionsExample";
+import NewComponentsExample from "@site/src/components/FormBuilder/NewComponentsExample";
+import NewComponentsExampleSource from "!!raw-loader!@site/src/components/FormBuilder/NewComponentsExample";
+
 
 # Form builder
 
@@ -34,11 +37,16 @@ const formToEdit = serialize(
 ```
 
 ## Add the form builder context
-Place any components that should edit the form within the `<FormBuilderContext>` component. This will
-let you use the `useFormBuilder` hook to access and manipulate the form
+Place any components that should edit the form within the `<FormBuilderContext>` component. This will allow you to use the form builder hooks to manipulate the form.
+
+The form builder context takes in **plugins** for the different components, widgets and validators you
+want to be able to work with inside of the form. Plugins for all fab4m core features are provided in the @fab4m/builder package.
+
+an export containing all plugins is provided for convenience.
 
 ```jsx
-<FormBuilderContext form={formToEdit}>
+import { allPlugins, FromBuilderContext } form "@fab4m/builder"
+<FormBuilderContext form={formToEdit} plugins={allPlugins}>
 /* You can use any part of the form builder in here. */
 </FormBuilderContext>
 ```
@@ -58,3 +66,9 @@ to perform actions on them.
 We do this by adding actions to each component:
 
 <Example source={FormActionsExampleSource} example={<FormActionsExample />} />
+
+## Adding new components to the form
+
+The `NewComponent` component can be used to easily provide a gallery of all availbale components that you can add, and offers the user an option to add them:
+
+<Example source={NewComponentsExampleSource} example={<NewComponentsExample />} />

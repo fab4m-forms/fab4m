@@ -1,5 +1,6 @@
 import { SerializedComponent, SerializedForm } from "@fab4m/fab4m";
-import { createContext, useContext } from "react";
+import { ReactNode, createContext, useContext } from "react";
+import { Plugins } from ".";
 
 export type FormBuilderActions = {
   removeComponent: (key: string) => void;
@@ -7,12 +8,17 @@ export type FormBuilderActions = {
   changeForm: (form: SerializedForm) => void;
 };
 
+export type FormBuilderFormContext = {
+  form: SerializedForm;
+  plugins: Plugins;
+  icons?: Record<string, ReactNode>;
+};
+
 export const FormBuilderActionsContext =
   createContext<FormBuilderActions | null>(null);
 
-export const FormBuilderFormContext = createContext<SerializedForm | null>(
-  null,
-);
+export const FormBuilderFormContext =
+  createContext<FormBuilderFormContext | null>(null);
 export function useFormBuilderActions(): FormBuilderActions {
   const context = useContext(FormBuilderActionsContext);
   if (!context) {
@@ -23,7 +29,7 @@ export function useFormBuilderActions(): FormBuilderActions {
   return context;
 }
 
-export function useFormBuilderForm(): SerializedForm {
+export function useFormBuilder(): FormBuilderFormContext {
   const context = useContext(FormBuilderFormContext);
   if (!context) {
     throw new Error(
@@ -31,4 +37,8 @@ export function useFormBuilderForm(): SerializedForm {
     );
   }
   return context;
+}
+
+export function useFormBuilderForm(): SerializedForm {
+  return useFormBuilder().form;
 }
