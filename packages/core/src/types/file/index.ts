@@ -11,7 +11,7 @@ interface FileUploadAdapter {
   upload: (file: File) => Promise<string>;
 }
 
-interface FileUploadSettings {
+export interface FileUploadSettings {
   adapter?: FileUploadAdapter;
 }
 
