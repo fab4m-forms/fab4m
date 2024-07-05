@@ -21,7 +21,7 @@ export let translations = {
   toLabel: "To",
   withTime: "Include time",
   optionalEndDate: "Make end date optional",
-  required: "required",
+  required: "Required",
   complete: "Complete",
   previous: "Previous",
   next: "Next",

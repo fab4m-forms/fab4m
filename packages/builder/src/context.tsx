@@ -8,7 +8,7 @@ export type FormBuilderActions = {
   changeForm: (form: SerializedForm) => void;
 };
 
-export type FormBuilderFormContext = {
+export type FormBuilderFormContextData = {
   form: SerializedForm;
   plugins: Plugins;
   icons?: Record<string, ReactNode>;
@@ -18,7 +18,8 @@ export const FormBuilderActionsContext =
   createContext<FormBuilderActions | null>(null);
 
 export const FormBuilderFormContext =
-  createContext<FormBuilderFormContext | null>(null);
+  createContext<FormBuilderFormContextData | null>(null);
+
 export function useFormBuilderActions(): FormBuilderActions {
   const context = useContext(FormBuilderActionsContext);
   if (!context) {
@@ -29,7 +30,7 @@ export function useFormBuilderActions(): FormBuilderActions {
   return context;
 }
 
-export function useFormBuilder(): FormBuilderFormContext {
+export function useFormBuilder(): FormBuilderFormContextData {
   const context = useContext(FormBuilderFormContext);
   if (!context) {
     throw new Error(

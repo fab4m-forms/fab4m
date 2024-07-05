@@ -49,8 +49,6 @@ export * from "./plugins/componentTypes/text";
 export * from "./components/FormComponents";
 export * from "./components/NewComponent";
 export * from "./components/FormBuilderProvider";
-export {
-  useFormBuilderActions,
-  useFormBuilderForm,
-  FormBuilderActions,
-} from "./context";
+export * from "./components/EditFormComponent";
+export * from "./components/ComponentForm";
+export { useFormBuilderActions, useFormBuilderForm } from "./context";

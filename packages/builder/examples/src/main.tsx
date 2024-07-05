@@ -1,14 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import FormBuilder from "../../src/components/FormBuilder";
-import { Plugins } from "../../src";
-import { basic, createForm, serialize, textField } from "@fab4m/fab4m";
-
-const plugins: Plugins = {
-  types: [],
-  widgets: [],
-  validators: [],
-};
+import { EditFormComponent, FormBuilderProvider, allPlugins } from "../../src";
+import {
+  SerializedComponent,
+  createForm,
+  serialize,
+  textField,
+} from "@fab4m/fab4m";
 
 const form = serialize(
   createForm({
@@ -17,13 +15,23 @@ const form = serialize(
   }),
 );
 
+function FormBuilder() {
+  const [draft, changeDraft] = React.useState(form);
+  return (
+    <FormBuilderProvider
+      plugins={allPlugins}
+      form={draft}
+      formChanged={changeDraft}
+    >
+      <EditFormComponent
+        component={draft.components[0] as SerializedComponent}
+      />
+    </FormBuilderProvider>
+  );
+}
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <FormBuilder
-      plugins={plugins}
-      form={form}
-      themes={[basic]}
-      formChanged={(newForm) => console.log(newForm)}
-    />
+    <FormBuilder />
   </React.StrictMode>,
 );

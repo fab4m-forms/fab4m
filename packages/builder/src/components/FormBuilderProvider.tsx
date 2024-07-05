@@ -1,9 +1,13 @@
 import React from "react";
 import { SerializedComponent, SerializedForm } from "@fab4m/fab4m";
-import { FormBuilderActionsContext, FormBuilderFormContext } from "../context";
+import {
+  FormBuilderActionsContext,
+  FormBuilderFormContext,
+  FormBuilderFormContextData,
+} from "../context";
 import { removeComponent, updateComponent } from "../util";
 
-export type FormBuilderProviderProps = FormBuilderFormContext & {
+export type FormBuilderProviderProps = FormBuilderFormContextData & {
   formChanged: (form: SerializedForm) => void;
   children: React.ReactNode;
 };
