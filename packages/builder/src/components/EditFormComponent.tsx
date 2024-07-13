@@ -5,7 +5,7 @@ import { ComponentForm } from "./ComponentForm";
 
 type EditFormComponentProps = {
   componentKey: string;
-  componentSaved: () => void;
+  componentSaved?: () => void;
 };
 
 export function EditFormComponent(props: EditFormComponentProps) {
@@ -19,7 +19,9 @@ export function EditFormComponent(props: EditFormComponentProps) {
       type={type}
       componentChanged={(component) => {
         updateComponent(props.componentKey, component);
-        props.componentSaved();
+        if (props.componentSaved) {
+          props.componentSaved();
+        }
       }}
     />
   );

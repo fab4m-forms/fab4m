@@ -7,7 +7,8 @@
     "packages/date",
     "packages/password",
     "packages/routerforms",
-    "packages/builder"
+      "packages/builder",
+      "packages/autocomplete"
   ],
   "devDependencies": {
     "@babel/core": "^7.23.9",

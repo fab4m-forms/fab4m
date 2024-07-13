@@ -47,7 +47,6 @@ export function ComponentForm(props: ComponentFormProps) {
               : validator.settings,
           };
         }),
-
         rules: component.rules.map((rule) => {
           if (!Array.isArray(rule)) {
             throw new Error("Unexpected rule");
