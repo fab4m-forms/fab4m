@@ -10,7 +10,6 @@ export default function Example(props: { source: string; example: ReactNode }) {
       <TabItem value="code" label="Code">
         <CodeBlock language="jsx">{props.source}</CodeBlock>
       </TabItem>
-
       <TabItem value="example" label="Example">
         <BrowserOnly>{() => props.example}</BrowserOnly>
       </TabItem>

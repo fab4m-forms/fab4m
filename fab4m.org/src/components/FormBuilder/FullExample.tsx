@@ -25,20 +25,21 @@ export default function FullExample() {
           </button>
         )}
       />
-      <NewComponent
-        attributes={{
-          name: `component_${draft.components.length}`,
-          label: `Component ${draft.components.length + 1}`,
-        }}
-      />
       {currentKey ? (
-        <dialog open={true} className="backdrop:bg-gray-50">
+        <div className="border bg-gray-100 p-4">
           <EditFormComponent
             componentKey={currentKey}
             componentSaved={() => changeCurrentKey(null)}
           />
-        </dialog>
-      ) : null}
+        </div>
+      ) : (
+        <NewComponent
+          attributes={{
+            name: `component_${draft.components.length}`,
+            label: `Component ${draft.components.length + 1}`,
+          }}
+        />
+      )}
     </FormBuilderProvider>
   );
 }
