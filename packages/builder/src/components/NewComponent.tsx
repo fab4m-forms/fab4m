@@ -16,7 +16,7 @@ export function NewComponent(props: NewComponentProps) {
   const { changeForm } = useFormBuilderActions();
   const { plugins, icons, form } = useFormBuilder();
   return (
-    <div className="p-4 mt-4 bg-slate-100 border rounded dark:border-slate-400 dark:bg-slate-700">
+    <div>
       <form className="flex flex-wrap" method="post">
         {plugins.types.map((type, i) => (
           <button
