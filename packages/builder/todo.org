@@ -1,0 +1,5 @@
+* Builder todo
+** TODO Add setting for adding icons
+** DONE Fix dates
+** TODO Validator bug?
+Validator value isn't saved

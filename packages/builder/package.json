@@ -9,8 +9,8 @@
   "scripts": {
     "test": "vitest",
     "test:unit": "vitest --run",
-    "build-browser": "esbuild --external:@dnd-kit/core --external:@dnd-kit/sortable --external:react --external:react-dom --external:react-router-dom  --external:@fab4m/fab4m  --bundle src/index.ts --format=esm --outfile=dist/index.es.js",
-      "build-node": "esbuild  --platform=node --external:@dnd-kit/core --external:@dnd-kit/sortable --external:react --external:react-dom --external:@fab4m/fab4m --minify --bundle src/index.ts --outfile=dist/index.cjs.js",
+    "build-browser": "esbuild --external:@dnd-kit/core --external:@dnd-kit/sortable --external:react --external:react-dom --external:react-router-dom  --external:@fab4m/fab4m --external:react-datepicker  --bundle src/index.ts --format=esm --outfile=dist/index.es.js",
+      "build-node": "esbuild  --platform=node --external:@dnd-kit/core --external:@dnd-kit/sortable --external:react --external:react-dom --external:@fab4m/fab4m --external:react-datepicker --minify --bundle src/index.ts --outfile=dist/index.cjs.js",
     "build-types": "npx tsc  -d --emitDeclarationOnly --project tsconfig.build.json",
     "build": "npm run build-browser && npm run build-node && npm run build-types",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",

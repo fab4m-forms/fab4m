@@ -66,5 +66,6 @@ export * from "./components/NewComponent";
 export * from "./components/FormBuilderProvider";
 export * from "./components/EditFormComponent";
 export * from "./components/ComponentForm";
+export * from "./defaultIcons";
 
 export { useFormBuilderActions, useFormBuilderForm } from "./context";

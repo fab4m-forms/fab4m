@@ -7,6 +7,7 @@ import {
   FormComponents,
   NewComponent,
   allPlugins,
+  defaultIcons,
 } from "../../src";
 import {
   SerializedComponent,
@@ -32,6 +33,7 @@ function FormBuilder() {
         plugins={allPlugins}
         form={draft}
         formChanged={changeDraft}
+        icons={defaultIcons}
       >
         <FormComponents
           actions={(props) => (

@@ -63,15 +63,23 @@ import {
   allowedValuesValidatorPlugin,
   disallowedValuesValidatorPlugin,
 } from "./plugins/validators/values";
+import {
+  dateFieldPlugin,
+  datePickerWidgetPlugin,
+  dateRangeFieldPlugin,
+  dateRangePickerWidgetPlugin,
+  dateTimeFieldPlugin,
+  dateTimePickerWidgetPlugin,
+} from "./plugins/componentTypes/date";
 
 export const allPlugins: Plugins = {
   types: [
     textFieldPlugin,
     booleanFieldPlugin,
     contentPlugin,
-    /*dateFieldPlugin,
+    dateFieldPlugin,
     dateTimeFieldPlugin,
-    dateRangeFieldPlugin,*/
+    dateRangeFieldPlugin,
     emailFieldPlugin,
     fileFieldPlugin,
     groupPlugin,
@@ -85,9 +93,9 @@ export const allPlugins: Plugins = {
     textAreaWidgetPlugin,
     checkboxWidgetPlugin,
     contentWidgetPlugin,
-    /*datePickerWidgetPlugin,
+    datePickerWidgetPlugin,
     dateRangePickerWidgetPlugin,
-    dateTimePickerWidgetPlugin,*/
+    dateTimePickerWidgetPlugin,
     emailFieldWidgetPlugin,
     fileUploadWidgetPlugin,
     groupWidgetPlugin,

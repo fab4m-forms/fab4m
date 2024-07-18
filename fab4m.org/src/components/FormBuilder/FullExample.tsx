@@ -26,19 +26,21 @@ export default function FullExample() {
         )}
       />
       {currentKey ? (
-        <div className="border bg-gray-100 p-4">
+        <div className="border bg-slate-100 p-4">
           <EditFormComponent
             componentKey={currentKey}
             componentSaved={() => changeCurrentKey(null)}
           />
         </div>
       ) : (
-        <NewComponent
-          attributes={{
-            name: `component_${draft.components.length}`,
-            label: `Component ${draft.components.length + 1}`,
-          }}
-        />
+        <div className="border bg-slate-100 p-4">
+          <NewComponent
+            attributes={{
+              name: `component_${draft.components.length}`,
+              label: `Component ${draft.components.length + 1}`,
+            }}
+          />
+        </div>
       )}
     </FormBuilderProvider>
   );
