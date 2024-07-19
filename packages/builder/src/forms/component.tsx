@@ -86,10 +86,11 @@ export function componentFromFormData(
         type: plugin.type.name,
         settings: plugin.settingsFromForm
           ? plugin.settingsFromForm(rule.settings)
-          : undefined,
+          : rule.settings,
       },
     ];
   });
+  console.log(serializedComponent);
   return serializedComponent;
 }
 
