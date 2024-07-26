@@ -9,12 +9,8 @@ import {
   allPlugins,
   defaultIcons,
 } from "../../src";
-import {
-  SerializedComponent,
-  createForm,
-  serialize,
-  textField,
-} from "@fab4m/fab4m";
+import { createForm, serialize, textField } from "@fab4m/fab4m";
+import { unserializeForm } from "../../src/util";
 
 const form = serialize(
   createForm({

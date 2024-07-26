@@ -12,6 +12,7 @@ import {
   Link,
   Group,
   CheckSquare,
+  Square,
 } from "lucide-react";
 
 export const defaultIcons = {
@@ -27,4 +28,5 @@ export const defaultIcons = {
   url: <Link />,
   group: <Group />,
   boolean: <CheckSquare />,
+  content: <Square />,
 };
