@@ -6,7 +6,7 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x]
-        package: ["core", "password", "date", "routerforms", "autocomplete"]
+        package: ["core", "password", "date", "routerforms", "autocomplete", "builder"]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
