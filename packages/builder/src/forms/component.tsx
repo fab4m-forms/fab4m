@@ -90,7 +90,6 @@ export function componentFromFormData(
       },
     ];
   });
-  console.log(serializedComponent);
   return serializedComponent;
 }
 
