@@ -1,6 +1,6 @@
 {
   "name": "@fab4m/builder",
-  "version": "1.0.0-beta20",
+  "version": "1.0.0-alpha1",
   "description": "A form builder UI",
   "module": "dist/index.es.js",
   "main": "dist/index.cjs.js",

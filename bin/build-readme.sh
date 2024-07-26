@@ -40,3 +40,9 @@ sed -i '1,7d' packages/autocomplete/README.md
 sed -i 's|Autocomplete|@fab4m/autocomplete|g' packages/autocomplete/README.md
 cat .readme-license.md >> packages/autocomplete/README.md
 cp LICENSE packages/autocomplete/.
+
+# Builder readme
+node bin/example-to-md.js fab4m.org/docs/packages/formbuilder.mdx packages/builder/README.md
+sed -i '1,13d' packages/builder/README.md
+sed -i 's|Builder|@fab4m/builder|g' packages/builder/README.md
+cat .gpl-license.md >> packages/builder/README.md
