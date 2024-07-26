@@ -10,7 +10,6 @@ import {
   defaultIcons,
 } from "../../src";
 import { createForm, serialize, textField } from "@fab4m/fab4m";
-import { unserializeForm } from "../../src/util";
 
 const form = serialize(
   createForm({
