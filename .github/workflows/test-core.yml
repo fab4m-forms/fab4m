@@ -20,3 +20,25 @@ jobs:
       - run: cd packages/${{matrix.package}} && npx prettier --check .
       - run: cd packages/${{matrix.package}} && npx eslint . --ext .js,.jsx,.ts,.tsx
       - run: cd packages/${{matrix.package}} && npm run test:unit
+    test-builder:
+      strategy:
+        matrix:
+          node-version: [18.x]
+          package: ["builder"]
+          runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+        - name: Use Node.js ${{ matrix.node-version }}
+        - uses: actions/setup-node@v3
+        - with:
+            node-version: ${{ matrix.node-version }}
+            cache: "npm"
+        - run: npm ci
+        - run: cd packages/core && npm run build
+        - run: cd packages/password && npm run build
+        - run: cd packages/date && npm run build
+        - run: cd packages/routerforms && npm run build
+        - run: cd packages/autocomplete && npm run build
+        - run: cd packages/${{matrix.package}} && npx prettier --check .
+        - run: cd packages/${{matrix.package}} && npx eslint . --ext .js,.jsx,.ts,.tsx
+        - run: cd packages/${{matrix.package}} && npm run test:unit

@@ -106,7 +106,7 @@ export interface DateFieldWidgetSettings {
     | ((value?: Date) => Omit<ReactDatePickerProps, "onChange">);
 }
 
-interface SerializedDateFieldSettings {
+export interface SerializedDateFieldSettings {
   locale?: string;
   locales?: string[];
   useBrowserLocale?: boolean;
@@ -120,7 +120,8 @@ export interface DateRangeWidgetSettings extends DateFieldWidgetSettings {
   withTime?: boolean;
 }
 
-interface SerializedDateRangeSettings extends SerializedDateFieldSettings {
+export interface SerializedDateRangeSettings
+  extends SerializedDateFieldSettings {
   fromLabel: string;
   toLabel: string;
   optionalEndDate?: boolean;

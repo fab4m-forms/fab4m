@@ -69,12 +69,12 @@ export default function Multiple() {
         required: true,
         validators: [min(0)],
       }),
-    })
+    }),
   ).onDataChange(changeMultipleOptions);
   const form = useForm(() =>
     createForm({
       foods,
-    })
+    }),
   );
   return (
     <div className="feature-large">

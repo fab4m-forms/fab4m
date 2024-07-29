@@ -1,0 +1,89 @@
+import Example from "@site/src/components/Example";
+import FormComponentsExample from "@site/src/components/FormBuilder/FormComponentsExample";
+import FormComponentsExampleSource from "!!raw-loader!@site/src/components/FormBuilder/FormComponentsExample";
+import FormActionsExample from "@site/src/components/FormBuilder/FormActionsExample";
+import FormActionsExampleSource from "!!raw-loader!@site/src/components/FormBuilder/FormActionsExample";
+import NewComponentsExample from "@site/src/components/FormBuilder/NewComponentsExample";
+import NewComponentsExampleSource from "!!raw-loader!@site/src/components/FormBuilder/NewComponentsExample";
+import EditComponentFormExample from "@site/src/components/FormBuilder/EditComponentFormExample";
+import EditComponentFormExampleSource from "!!raw-loader!@site/src/components/FormBuilder/EditComponentFormExample";
+import FullExample from "@site/src/components/FormBuilder/FullExample";
+import FullExampleSource from "!!raw-loader!@site/src/components/FormBuilder/FullExample";
+
+
+# Form builder
+
+The `@fab4m/builder` package provides the basic building blocks to create a visual
+form builder UI capable of constructing fab4m forms.
+
+## Installing
+
+Install `@fab4m/builder` package.
+
+```bash
+npm install --save @fab4m/builder
+```
+
+The form builder is built using tailwind css, so you will need to have that installed as well.
+Refer to their [documentation page](https://tailwindcss.com/docs/installation) for information on how to do that.
+
+## Set up the form you want to edit
+The form builder works with any [serialized](/guide/serializing) fab4m form, for example:
+
+```jsx
+import { crateForm, serialize, textField } from "@fab4m/fab4m";
+const formToEdit = serialize(
+  createForm({
+    component: textField({ label: "First component" }),
+    second: textField({ label: "Second component" }),
+  }),
+);
+```
+
+## Add the form builder context
+Place any components that should edit the form within the `<FormBuilderContext>` component. This will allow you to use the form builder hooks to manipulate the form.
+
+The form builder context takes in **plugins** for the different components, widgets and validators you
+want to be able to work with inside of the form. Plugins for all fab4m core features are provided in the @fab4m/builder package.
+
+an export containing all plugins is provided for convenience.
+
+```jsx
+import { allPlugins, FromBuilderContext } form "@fab4m/builder"
+<FormBuilderContext form={formToEdit} plugins={allPlugins}>
+/* You can use any part of the form builder in here. */
+</FormBuilderContext>
+```
+
+## The FormComponents component
+
+Start by adding the `<FormComponents>` component. This will give you a drag and drop interface
+where you can drag your components around.
+
+<Example source={FormComponentsExampleSource} example={<FormComponentsExample />} />
+
+## Adding actions to each component
+
+In the first step we're just able to drag the components around. The next step is to be able
+to perform actions on them.
+
+We do this by adding actions to each component:
+
+<Example source={FormActionsExampleSource} example={<FormActionsExample />} />
+
+## Adding new components to the form
+
+The `NewComponent` component can be used to easily provide a gallery of all availbale components that you can add, and offers the user an option to add them:
+
+<Example source={NewComponentsExampleSource} example={<NewComponentsExample />} />
+
+## Editing components
+
+You can use the `EditFormComponent` to be able to edit any component in the form:
+
+<Example source={EditComponentFormExampleSource} example={<EditComponentFormExample />} />
+
+## Full example
+The example below combines all the bits below to make a complete form builder.
+
+<Example source={FullExampleSource} example={<FullExample />} />

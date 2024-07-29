@@ -61,6 +61,7 @@ export const contentWidgetType: ContentWidgetType<Record<string, unknown>> = {
   title: "Content",
   components: ["content"],
   widget: Content,
+  init: () => contentWidget(() => ""),
 };
 
 /**

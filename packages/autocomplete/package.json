@@ -41,7 +41,7 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "downshift": "^7.0"
+    "downshift": "^8.0"
   },
   "bugs": {
     "url": "https://github.com/fab4m-forms/fab4m/issues"

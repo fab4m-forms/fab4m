@@ -15,10 +15,13 @@
     "compile-docs": "node bin/collect-docs.mjs"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.1.0",
+    "@dnd-kit/sortable": "^8.0.0",
     "@docusaurus/core": "^3.4.0",
     "@docusaurus/preset-classic": "^3.4.0",
     "@docusaurus/theme-live-codeblock": "^3.4.0",
     "@fab4m/autocomplete": "file:../packages/autocomplete/fab4m-autocomplete-1.0.0-beta20.tgz",
+    "@fab4m/builder": "file:../packages/builder/fab4m-builder-1.0.0-beta20.tgz",
     "@fab4m/date": "file:../packages/date/fab4m-date-1.0.0-beta20.tgz",
     "@fab4m/fab4m": "file:../packages/core/fab4m-fab4m-1.0.0-beta20.tgz",
     "@fab4m/password": "file:../packages/password/fab4m-password-1.0.0-beta20.tgz",
@@ -33,7 +36,10 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.4.0",
     "@docusaurus/types": "^3.4.0",
-    "showdown": "^2.1.0"
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.39",
+    "showdown": "^2.1.0",
+    "tailwindcss": "^3.4.6"
   },
   "browserslist": {
     "production": [
