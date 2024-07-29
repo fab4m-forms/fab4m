@@ -15,6 +15,7 @@ The form builder is built using tailwind css, so you will need to have that inst
 Refer to their [documentation page](https://tailwindcss.com/docs/installation) for information on how to do that.
 
 ## Set up the form you want to edit
+
 The form builder works with any [serialized](/guide/serializing) fab4m form, for example:
 
 ```jsx
@@ -28,6 +29,7 @@ const formToEdit = serialize(
 ```
 
 ## Add the form builder context
+
 Place any components that should edit the form within the `<Form@fab4m/builderContext>` component. This will allow you to use the form builder hooks to manipulate the form.
 
 The form builder context takes in **plugins** for the different components, widgets and validators you
@@ -214,6 +216,7 @@ export default function NewComponentsExample() {
 ```
 
 ## Full example
+
 The example below combines all the bits below to make a complete form builder.
 
 ```jsx
