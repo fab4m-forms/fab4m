@@ -51,4 +51,5 @@ extra packages:
 
 # License
 
-All the code is licensed under the [MIT License.](LICENSE)
+The code is licensed under the [MIT License.](LICENSE), except for the form builder package, which
+is licensed under the [GPL License](https://www.gnu.org/licenses/gpl-3.0.txt)a
