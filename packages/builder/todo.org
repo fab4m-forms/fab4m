@@ -3,3 +3,5 @@
 ** DONE Fix dates
 ** DONE Rule bug?
 Validator value isn't saved
+** TODO Add preview component
+** TODO Dark theme overview
