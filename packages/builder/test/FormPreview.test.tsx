@@ -8,23 +8,23 @@ import {
   tailwind,
 } from "@fab4m/fab4m";
 import { render, screen } from "@testing-library/react";
-import { FormBuilderProvider, allPlugins, ExampleForm } from "../src";
+import { FormBuilderProvider, allPlugins, FormPreview } from "../src";
 import * as React from "react";
 
-describe("Example form", () => {
+describe("Form preview", () => {
   const form = serialize(
     createForm({
       first: textField({ label: "First component" }),
     }),
   );
-  it("Render example form", async () => {
+  it("Render form preview", async () => {
     render(
       <FormBuilderProvider
         form={form}
         formChanged={() => {}}
         plugins={allPlugins}
       >
-        <ExampleForm theme={basic} />
+        <FormPreview theme={basic} />
       </FormBuilderProvider>,
     );
     expect(screen.getByLabelText("First component")).toBeVisible();
@@ -32,14 +32,14 @@ describe("Example form", () => {
     expect(screen.queryByText("Save")).toBeNull();
   });
 
-  it("Render example form, not with current theme", async () => {
+  it("Render form preview, not with current theme", async () => {
     render(
       <FormBuilderProvider
         form={form}
         formChanged={() => {}}
         plugins={allPlugins}
       >
-        <ExampleForm theme={tailwind} />
+        <FormPreview theme={tailwind} />
       </FormBuilderProvider>,
     );
     expect(screen.getByLabelText("First component")).toBeVisible();

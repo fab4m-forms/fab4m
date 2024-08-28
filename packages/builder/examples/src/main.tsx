@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import {
   EditFormComponent,
-  ExampleForm,
+  FormPreview,
   FormBuilderProvider,
   FormComponents,
   NewComponent,
@@ -63,7 +63,7 @@ function FormBuilder() {
           </div>
           <div className="col-span-2">
             <div className="bg-slate-100 border p-4">
-              <ExampleForm theme={tailwind} />
+              <FormPreview theme={tailwind} />
             </div>
           </div>
         </div>

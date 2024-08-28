@@ -3,11 +3,11 @@ import { unserializeForm } from "../util";
 import { useFormBuilder } from "../context";
 import { StatefulFormView, Theme } from "@fab4m/fab4m";
 
-export type ExampleFormProps = {
+export type FormPreviewProps = {
   theme: Theme;
 };
 
-export function ExampleForm(props: ExampleFormProps) {
+export function FormPreview(props: FormPreviewProps) {
   const { plugins, form } = useFormBuilder();
   const unserializedForm = unserializeForm(
     { ...form, theme: props.theme.name },
