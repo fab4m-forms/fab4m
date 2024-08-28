@@ -6,6 +6,7 @@ import {
   FormComponent,
   SchemaProperty,
 } from "@fab4m/fab4m";
+import styles from "./styles";
 
 export type Plugin<SettingsType, SettingsFormData> = {
   editForm?: () => Components<SettingsFormData>;
@@ -44,6 +45,7 @@ export type Plugins = {
   widgets: WidgetTypePlugin[];
   validators: ValidatorTypePlugin[];
 };
+export { styles };
 export { allPlugins } from "./allPlugins";
 export * from "./plugins/componentTypes/file";
 export * from "./plugins/componentTypes/boolean";
@@ -66,6 +68,7 @@ export * from "./components/NewComponent";
 export * from "./components/FormBuilderProvider";
 export * from "./components/EditFormComponent";
 export * from "./components/ComponentForm";
+export * from "./components/ExampleForm";
 export * from "./defaultIcons";
 
 export { useFormBuilderActions, useFormBuilderForm } from "./context";
