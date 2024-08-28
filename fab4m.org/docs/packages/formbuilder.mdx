@@ -7,6 +7,9 @@ import NewComponentsExample from "@site/src/components/FormBuilder/NewComponents
 import NewComponentsExampleSource from "!!raw-loader!@site/src/components/FormBuilder/NewComponentsExample";
 import EditComponentFormExample from "@site/src/components/FormBuilder/EditComponentFormExample";
 import EditComponentFormExampleSource from "!!raw-loader!@site/src/components/FormBuilder/EditComponentFormExample";
+import FormPreviewExample from "@site/src/components/FormBuilder/FormPreviewExample";
+import FormPreviewExampleSource from "!!raw-loader!@site/src/components/FormBuilder/FormPreviewExample";
+
 import FullExample from "@site/src/components/FormBuilder/FullExample";
 import FullExampleSource from "!!raw-loader!@site/src/components/FormBuilder/FullExample";
 
@@ -40,8 +43,8 @@ const formToEdit = serialize(
 );
 ```
 
-## Add the form builder context
-Place any components that should edit the form within the `<FormBuilderContext>` component. This will allow you to use the form builder hooks to manipulate the form.
+## Add the form builder provider context
+Place any components that should edit the form within the `<FormBuilderProvider>` component. This will allow you to use the form builder hooks to manipulate the form.
 
 The form builder context takes in **plugins** for the different components, widgets and validators you
 want to be able to work with inside of the form. Plugins for all fab4m core features are provided in the @fab4m/builder package.
@@ -50,9 +53,9 @@ an export containing all plugins is provided for convenience.
 
 ```jsx
 import { allPlugins, FromBuilderContext } form "@fab4m/builder"
-<FormBuilderContext form={formToEdit} plugins={allPlugins}>
+<FormBuilderProvider form={formToEdit} plugins={allPlugins}>
 /* You can use any part of the form builder in here. */
-</FormBuilderContext>
+</FormBuilderProvider>
 ```
 
 ## The FormComponents component
@@ -82,6 +85,13 @@ The `NewComponent` component can be used to easily provide a gallery of all avai
 You can use the `EditFormComponent` to be able to edit any component in the form:
 
 <Example source={EditComponentFormExampleSource} example={<EditComponentFormExample />} />
+
+## Preview the form
+
+The form builder package provides a `FormPreview` component that can be used to easily preview the form:
+
+<Example source={FormPreviewExampleSource} example={<FormPreviewExample />} />
+
 
 ## Full example
 The example below combines all the bits below to make a complete form builder.
