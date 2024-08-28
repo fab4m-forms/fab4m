@@ -3,13 +3,14 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import {
   EditFormComponent,
+  ExampleForm,
   FormBuilderProvider,
   FormComponents,
   NewComponent,
   allPlugins,
   defaultIcons,
 } from "../../src";
-import { createForm, serialize, textField } from "@fab4m/fab4m";
+import { createForm, serialize, tailwind, textField } from "@fab4m/fab4m";
 
 const form = serialize(
   createForm({
@@ -30,33 +31,42 @@ function FormBuilder() {
         formChanged={changeDraft}
         icons={defaultIcons}
       >
-        <FormComponents
-          actions={(props) => (
-            <button
-              type="button"
-              onClick={() => changeCurrentKey(props.formKey)}
-            >
-              Edit
-            </button>
-          )}
-        />
-        {currentKey ? (
-          <div className="border bg-slate-100 p-4">
-            <EditFormComponent
-              componentKey={currentKey}
-              componentSaved={() => changeCurrentKey(null)}
+        <div className="grid grid-cols-6 gap-4">
+          <div className="col-span-4">
+            <FormComponents
+              actions={(props) => (
+                <button
+                  type="button"
+                  onClick={() => changeCurrentKey(props.formKey)}
+                >
+                  Edit
+                </button>
+              )}
             />
+            {currentKey ? (
+              <div className="border bg-slate-100 p-4">
+                <EditFormComponent
+                  componentKey={currentKey}
+                  componentSaved={() => changeCurrentKey(null)}
+                />
+              </div>
+            ) : (
+              <div className="border bg-slate-100 p-4">
+                <NewComponent
+                  attributes={{
+                    name: `component_${draft.components.length}`,
+                    label: `Component ${draft.components.length + 1}`,
+                  }}
+                />
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="border bg-slate-100 p-4">
-            <NewComponent
-              attributes={{
-                name: `component_${draft.components.length}`,
-                label: `Component ${draft.components.length + 1}`,
-              }}
-            />
+          <div className="col-span-2">
+            <div className="bg-slate-100 border p-4">
+              <ExampleForm theme={tailwind} />
+            </div>
           </div>
-        )}
+        </div>
       </FormBuilderProvider>
     </div>
   );
