@@ -70,5 +70,5 @@ export * from "./components/EditFormComponent";
 export * from "./components/ComponentForm";
 export * from "./components/FormPreview";
 export * from "./defaultIcons";
-
+export { unserializeForm as unserializeBuilderForm } from "./util";
 export { useFormBuilderActions, useFormBuilderForm } from "./context";
