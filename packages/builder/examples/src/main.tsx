@@ -9,8 +9,11 @@ import {
   NewComponent,
   allPlugins,
   defaultIcons,
+  styles,
 } from "../../src";
 import { createForm, serialize, tailwind, textField } from "@fab4m/fab4m";
+
+styles.item = styles.item.replace("bg-slate-100", "bg-red-300");
 
 const form = serialize(
   createForm({

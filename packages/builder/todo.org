@@ -3,5 +3,10 @@
 ** DONE Fix dates
 ** DONE Rule bug?
 Validator value isn't saved
-** TODO Add preview component
+** DONE Add preview component
 ** TODO Dark theme overview
+** TODO Better options for styling actions
+** TODO min-width on buttons for adding components
+** TODO Option to render something together with a component.
+** TODO Icon on each component
+** TODO Unserialize builder form util fn
