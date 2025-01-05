@@ -33,7 +33,7 @@
     "prettier-fix": "prettier -w ."
   },
   "peerDependencies": {
-    "react-datepicker": "^4.2"
+    "react-datepicker": "^7"
   },
   "gitHead": "d07ff4934399152b5c403dd81d77534d985997e4"
 }
