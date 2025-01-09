@@ -123,7 +123,7 @@ function Components(props: ComponentsProps) {
             header={
               <>
                 {component.type !== "pagebreak"
-                  ? (component.label ?? component.name)
+                  ? component.label ?? component.name
                   : t("pageBreak")}
               </>
             }
