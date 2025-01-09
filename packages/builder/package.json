@@ -1,7 +1,7 @@
 {
   "name": "@fab4m/builder",
   "version": "1.0.0-alpha3",
-    "description": "A form builder UI",
+  "description": "A form builder UI",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
