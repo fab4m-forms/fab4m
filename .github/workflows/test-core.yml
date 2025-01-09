@@ -30,10 +30,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
-      - uses: actions/setup-node@v3
-      - with:
-            node-version: ${{ matrix.node-version }}
-            cache: "npm"
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
       - run: npm ci
       - run: cd packages/core && npm run build
       - run: cd packages/password && npm run build
