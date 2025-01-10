@@ -6,7 +6,7 @@ import { RouterFormViewProps } from "./RouterFormView";
 
 export function StaticRouterFormView(
   props: RouterFormViewProps & { location: string },
-): JSX.Element {
+): React.JSX.Element {
   return (
     <StaticRouter basename={props.basename} location={props.location}>
       <Routes>

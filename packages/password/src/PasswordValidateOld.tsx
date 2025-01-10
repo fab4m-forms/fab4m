@@ -9,7 +9,7 @@ import { PasswordValidateOldSettings, PasswordValidateOldData } from ".";
  */
 export default function PasswordValidateOld(
   props: WidgetProps<PasswordValidateOldData, PasswordValidateOldSettings>,
-): JSX.Element {
+): React.JSX.Element {
   const component = props.component;
   const confirmName = `${props.id}_confirm`;
   const confirmTitle = props.settings.confirmTitle

@@ -10,7 +10,7 @@ import GroupChildren from "./GroupChildren";
  */
 export default function Details<DataType = Record<string, any>>(
   props: WidgetProps<DataType, DetailsSettings<DataType>>,
-): JSX.Element | null {
+): React.JSX.Element | null {
   if (!props.component.components) {
     return null;
   }

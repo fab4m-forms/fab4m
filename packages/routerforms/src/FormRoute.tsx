@@ -20,7 +20,9 @@ export interface FormRouteProps extends FormViewProps {
   useRouteAction?: boolean;
 }
 
-export default function FormRoute(props: FormRouteProps): JSX.Element | null {
+export default function FormRoute(
+  props: FormRouteProps,
+): React.JSX.Element | null {
   const params = useParams<{ part?: string }>();
   if (props.useRouteAction) {
     const submit = useSubmit();

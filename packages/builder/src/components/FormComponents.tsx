@@ -102,7 +102,7 @@ interface ComponentsProps {
 }
 
 function Components(props: ComponentsProps) {
-  const renderedItems: JSX.Element[] = [];
+  const renderedItems: React.JSX.Element[] = [];
   const { updateComponent, removeComponent } = useFormBuilderActions();
   for (const [key, component] of props.items.entries()) {
     if (key === `${props.parent}${component.name}`) {
@@ -123,7 +123,7 @@ function Components(props: ComponentsProps) {
             header={
               <>
                 {component.type !== "pagebreak"
-                  ? component.label ?? component.name
+                  ? (component.label ?? component.name)
                   : t("pageBreak")}
               </>
             }

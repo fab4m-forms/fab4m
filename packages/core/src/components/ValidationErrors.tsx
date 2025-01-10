@@ -9,7 +9,7 @@ import { ValidationError } from "../validator";
 export default function ValidationErrors(props: {
   errors: ValidationError[];
   classes: ThemeClasses;
-}): JSX.Element {
+}): React.JSX.Element {
   const info = props.errors.map((e, i) => (
     <li key={i} className={props.classes.errorItem}>
       {e.message}

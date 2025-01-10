@@ -9,7 +9,7 @@ function PasswordRule(props: {
   value: string;
   pattern: RegExp;
   description: string;
-}): JSX.Element {
+}): React.JSX.Element {
   const valid = props.pattern.test(props.value);
   return (
     <li className={`password-rule ${valid ? "valid" : "invalid"}}`}>
@@ -26,7 +26,7 @@ function PasswordRule(props: {
 export default function PasswordStrength(props: {
   value: string;
   settings: ValidationSettings;
-}): JSX.Element {
+}): React.JSX.Element {
   const rules = [];
   if (props.settings.minLength > 0) {
     rules.push(

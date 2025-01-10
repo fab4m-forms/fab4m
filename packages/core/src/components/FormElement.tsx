@@ -23,7 +23,7 @@ export default function FormElement({
   labelWrapperClass: string;
   childrenClass?: string;
   requiredClass?: string;
-}): JSX.Element {
+}): React.JSX.Element {
   return (
     <>
       <div className={labelWrapperClass}>

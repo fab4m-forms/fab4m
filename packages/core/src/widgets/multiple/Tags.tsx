@@ -17,7 +17,7 @@ import ValidationErrors from "../../components/ValidationErrors";
  */
 export default function Tags<Value>(
   props: MultipleWidgetProps<Value, TagsSettings | undefined>,
-): JSX.Element | null {
+): React.JSX.Element | null {
   const addItem = (value: Value) => props.onChange([...items, value]);
   const items = props.value ?? [];
   const settings = allSettings(props.settings);

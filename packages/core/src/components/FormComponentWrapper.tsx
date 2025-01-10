@@ -26,13 +26,13 @@ export default function FormComponentWrapper(
      */
     prefix?: string;
   },
-): JSX.Element {
+): React.JSX.Element {
   const component = props.component;
   const classes = props.theme.classes;
   return (
     <FormElement
       id={props.id ? props.id : props.name}
-      label={!props.hideLabel ? props.label ?? component.label : undefined}
+      label={!props.hideLabel ? (props.label ?? component.label) : undefined}
       childrenClass={
         props.prefix ? classes.prefixedElementWrapper : classes.elementWrapper
       }

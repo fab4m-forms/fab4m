@@ -9,6 +9,6 @@ import Input from "../../components/Input";
  */
 export default function URLField(
   props: WidgetProps<string, URLFieldWidgetSettings>,
-): JSX.Element {
+): React.JSX.Element {
   return <Input {...props} type="url" />;
 }
