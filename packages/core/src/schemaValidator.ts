@@ -14,7 +14,7 @@ export function validate(
 ): ValidationStatus {
   const schema = generateSchema(form, data);
   const ajv = new Ajv({ $data: true, allErrors: true });
-  addFormats(ajv as any);  
+  addFormats(ajv as any);
   const validate = ajv.compile(schema);
   const status = validate(data);
   if (status) {
