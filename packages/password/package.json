@@ -30,7 +30,7 @@
     "build": "npm run build-browser && npm run build-node && npm run build-types",
     "build-types": "npx tsc  -d --emitDeclarationOnly --project tsconfig.build.json",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint . -c src/**/*.js|jsx|ts|tsx",
     "lint-fix": "eslint --fix . --ext .js,.jsx,.ts,.tsx",
     "prettier-fix": "prettier -w ."
   },
