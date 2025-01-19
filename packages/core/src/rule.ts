@@ -5,7 +5,7 @@ import { Validator } from "./validator";
 /**
  * @group Rule API
  */
-export type AnyRule = Rule | RuleGroup; // eslint-disable-line
+export type AnyRule = Rule | RuleGroup;  
 
 /**
  * Defines a type of rule group that can be used in components.
