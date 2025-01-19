@@ -170,3 +170,4 @@ export const Item = forwardRef<HTMLDivElement, { title: string }>(
     );
   },
 );
+Item.displayName = "Item";
