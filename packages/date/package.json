@@ -28,8 +28,8 @@
     "build-types": "npx tsc  -d --emitDeclarationOnly --project tsconfig.build.json",
     "build": "npm run build-browser && npm run build-node && npm run build-types",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint-fix": "eslint --fix . --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint",
+    "lint-fix": "eslint --fix",
     "prettier-fix": "prettier -w ."
   },
   "peerDependencies": {
