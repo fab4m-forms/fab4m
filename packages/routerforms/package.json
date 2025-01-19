@@ -26,9 +26,9 @@
     "build-node": "esbuild --external:react-router-dom --platform=node --external:react --external:react-dom --external:@fab4m/fab4m --minify --bundle src/index.ts --outfile=dist/index.cjs.js",
     "build-types": "npx tsc  -d --emitDeclarationOnly --project tsconfig.build.json",
     "build": "npm run build-browser && npm run build-node && npm run build-types",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "lint-fix": "eslint --fix . --ext .js,.jsx,.ts,.tsx",
+    "lint-fix": "eslint --fix",
     "prettier-fix": "prettier -w ."
   },
   "peerDependencies": {
