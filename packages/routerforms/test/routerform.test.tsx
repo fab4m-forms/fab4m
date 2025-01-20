@@ -17,7 +17,6 @@ import {
   Route,
   Routes,
 } from "react-router";
-import { RouterProvider } from "react-router/dom";
 
 describe("Routed form", () => {
   const MemoryRouterFormView = (props: FormRouteProps & { path: string }) => (
