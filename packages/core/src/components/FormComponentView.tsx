@@ -61,7 +61,7 @@ export default function FormComponentView(props: {
   hideDescription?: boolean;
   /**The Component that should be rendered.*/
   component: FormComponent;
-}): JSX.Element {
+}): React.JSX.Element {
   const widgetAttributes = {
     ...(props.attributes ?? {}),
     ...attributes(props.component),

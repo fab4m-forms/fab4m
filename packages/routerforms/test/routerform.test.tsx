@@ -12,12 +12,12 @@ import { vi } from "vitest";
 import * as React from "react";
 import {
   ActionFunction,
-  createMemoryRouter,
+  createRoutesStub,
   MemoryRouter,
   Route,
-  RouterProvider,
   Routes,
-} from "react-router-dom";
+} from "react-router";
+
 describe("Routed form", () => {
   const MemoryRouterFormView = (props: FormRouteProps & { path: string }) => (
     <MemoryRouter initialEntries={[props.path]}>
@@ -97,21 +97,22 @@ describe("Routed form", () => {
     };
     const spy = vi.fn().mockImplementation(action);
     function Route() {
-      const router = createMemoryRouter(
-        [
-          {
-            path: "/:part",
-            action: spy,
-            element: <StatefulFormRoute useRouteAction={true} form={form} />,
-          },
-          {
-            path: "*",
-            element: <StatefulFormRoute useRouteAction={true} form={form} />,
-          },
-        ],
-        { initialEntries: ["/0"] },
-      );
-      return <RouterProvider router={router} />;
+      const Stub = createRoutesStub([
+        {
+          path: "/:part",
+          action: spy,
+          Component: () => (
+            <StatefulFormRoute useRouteAction={true} form={form} />
+          ),
+        },
+        {
+          path: "*",
+          Component: () => (
+            <StatefulFormRoute useRouteAction={true} form={form} />
+          ),
+        },
+      ]);
+      return <Stub initialEntries={["/0"]} />;
     }
 
     const { findByText, findByLabelText } = render(<Route />);

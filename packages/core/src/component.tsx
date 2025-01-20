@@ -112,11 +112,11 @@ export interface FormComponent<ValueType = any, SettingsType = any> {
   /**
    * The widget to use for this component. The component will be rendered using this widget.
    */
-  widget: Widget<ValueType, any>; // eslint-disable-line
+  widget: Widget<ValueType, any>;
   /**
    * The widget to use for this component when it's set to be multiple.
    */
-  multipleWidget?: MultipleWidget<ValueType, any>; // eslint-disable-line
+  multipleWidget?: MultipleWidget<ValueType, any>;
   /**
    * Component-specific settings. Check each component to know what settings are available.
    */

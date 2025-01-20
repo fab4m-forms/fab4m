@@ -9,7 +9,7 @@ import FormComponentWrapper from "../../components/FormComponentWrapper";
  */
 export default function NumberField(
   props: WidgetProps<number, NumberWidgetSettings>,
-): JSX.Element {
+): React.JSX.Element {
   const classes = props.theme.classes;
   const component = props.component;
   const convertValue = (value: string) => {

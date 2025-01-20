@@ -8,6 +8,6 @@ import Input from "../../components/Input";
  */
 export default function TextField(
   props: WidgetProps<string, TextFieldWidgetSettings>,
-): JSX.Element {
+): React.JSX.Element {
   return <Input {...props} type="text" />;
 }

@@ -10,7 +10,7 @@ export default function StatefulFormView(
   props: Omit<FormViewProps, "data"> & {
     data?: unknown;
   },
-): JSX.Element {
+): React.JSX.Element {
   const [data, changeData] = React.useState(props.data ?? {});
   // We keep track of the current indices where our listeners are.
   const listenerIndices = React.useRef([-1, -1]);

@@ -7,7 +7,7 @@ import { WidgetProps } from "../../widget";
  */
 export default function EmailField(
   props: WidgetProps<string, unknown | undefined>,
-): JSX.Element {
+): React.JSX.Element {
   const inputProps = {
     ...props,
     settings: undefined,

@@ -8,7 +8,7 @@ import { PasswordSettings, PasswordVerifyData } from ".";
  */
 export default function PasswordVerify(
   props: WidgetProps<PasswordVerifyData, PasswordSettings>,
-): JSX.Element {
+): React.JSX.Element {
   const component = props.component;
   const confirmName = `${props.id}_confirm`;
   const confirmTitle = props.settings.confirmTitle

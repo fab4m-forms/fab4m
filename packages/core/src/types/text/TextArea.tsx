@@ -7,7 +7,7 @@ import FormComponentWrapper from "../../components/FormComponentWrapper";
  */
 export default function TextArea(
   props: WidgetProps<string, unknown>,
-): JSX.Element {
+): React.JSX.Element {
   const component = props.component;
   return (
     <FormComponentWrapper {...props}>

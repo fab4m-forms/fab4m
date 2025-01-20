@@ -11,7 +11,7 @@ import { Theme, ValidatorInfoProps } from "@fab4m/fab4m";
  */
 export default function PasswordValidatorInfo(
   props: ValidatorInfoProps<PasswordVerifyData | string, ValidationSettings>,
-): JSX.Element | null {
+): React.JSX.Element | null {
   const rules = [];
   if (!props.value) {
     return null;

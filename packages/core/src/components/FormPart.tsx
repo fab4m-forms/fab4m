@@ -25,7 +25,7 @@ export default function FormPart(props: {
   ssr: boolean;
   /** A list of components within the form part to render*/
   components: FormComponentWithName[];
-}): JSX.Element {
+}): React.JSX.Element {
   const changeComponent = (name: string, value: unknown) => {
     const newData = { ...props.data, [name]: value };
     const filteredData = filterData(props.components, newData);

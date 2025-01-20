@@ -8,7 +8,7 @@ export default function Input(
   props: WidgetProps<string, { prefix?: string } | undefined> & {
     type: string;
   },
-): JSX.Element {
+): React.JSX.Element {
   const component = props.component;
   const classes = props.theme.classes;
   return (

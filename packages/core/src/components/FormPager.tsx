@@ -30,7 +30,7 @@ export default function FormPager(props: {
   back?: React.ComponentType<{
     goBack: () => void;
   }>;
-}): JSX.Element | null {
+}): React.JSX.Element | null {
   const classes = props.theme.classes;
   if (props.noParts === 1) {
     if (props.hideSubmit) {
@@ -88,7 +88,7 @@ export default function FormPager(props: {
 export function ElementWrapper(props: {
   children: React.ReactNode;
   theme: Theme;
-}): JSX.Element {
+}): React.JSX.Element {
   return (
     <div className={props.theme.classes.componentWrapper}>
       <div className={props.theme.classes.elementWrapper}>{props.children}</div>

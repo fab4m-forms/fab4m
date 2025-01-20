@@ -35,13 +35,13 @@
     "build-node": "esbuild --platform=node --external:react --external:react-dom --external:downshift --external:@fab4m/fab4m --minify --bundle src/index.tsx --outfile=dist/index.cjs.js",
     "build-types": "npx tsc  -d --emitDeclarationOnly --project tsconfig.build.json",
     "build": "npm run build-browser && npm run build-node && npm run build-types",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint-fix": "eslint --fix . --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint",
+    "lint-fix": "eslint --fix",
     "prettier-fix": "prettier -w .",
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "downshift": "^8.0"
+    "downshift": "^9.0"
   },
   "bugs": {
     "url": "https://github.com/fab4m-forms/fab4m/issues"

@@ -17,7 +17,7 @@ import FormWrapper from "./FormWrapper";
  * This component is used to render any form with the provided data.
  * @group React API
  */
-export default function FormView(props: FormViewProps): JSX.Element {
+export default function FormView(props: FormViewProps): React.JSX.Element {
   const [formErrors, setFormErrors] = initFormErrors(
     props.errors,
     props.errorsChanged,

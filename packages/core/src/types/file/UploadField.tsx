@@ -7,7 +7,7 @@ import { WidgetProps } from "../../widget";
  */
 export default function UploadField(
   props: WidgetProps<File, unknown | undefined>,
-): JSX.Element {
+): React.JSX.Element {
   const component = props.component;
   const classes = props.theme.classes;
 
