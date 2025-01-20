@@ -1,6 +1,5 @@
 import * as React from "react";
-import { StaticRouter } from "react-router-dom/server";
-import { Routes, Route } from "react-router-dom";
+import { StaticRouter, Routes, Route } from "react-router-dom";
 import FormRoute from "./FormRoute";
 import { RouterFormViewProps } from "./RouterFormView";
 
