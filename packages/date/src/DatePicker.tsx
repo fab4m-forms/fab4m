@@ -6,8 +6,12 @@ import {
   DateRange,
   DateRangeWidgetSettings,
 } from "./index";
-import ReactDatePicker, { registerLocale } from "react-datepicker";
+import ReactDatePicker, {
+  DatePickerProps,
+  registerLocale,
+} from "react-datepicker";
 import { Locale } from "date-fns";
+import { DateNumberType } from "react-datepicker/dist/date_utils";
 
 export function DatePicker(
   props: WidgetProps<Date, DateFieldWidgetSettings> & { withTime?: boolean },
@@ -21,6 +25,14 @@ export function DatePicker(
     locale = useLocale(props.settings.locale);
     if (!locale) {
       return null;
+    }
+  }
+  let datePickerProps: DatePickerProps = {};
+  if (props.settings.datePickerProps) {
+    if (typeof props.settings.datePickerProps === "function") {
+      datePickerProps = props.settings.datePickerProps(props.value);
+    } else {
+      datePickerProps = props.settings.datePickerProps;
     }
   }
   return (
@@ -51,13 +63,13 @@ export function DatePicker(
           />
           <ReactDatePicker
             {...props.attributes}
-            {...(typeof props.settings.datePickerProps === "function"
-              ? props.settings.datePickerProps(props.value)
-              : props.settings.datePickerProps)}
+            {
+              ...(datePickerProps as any) /*The type definition is really messed up for react datepicker, with many versions for onchange*/
+            }
             id={pickerId}
             dateFormat={dateFormat(props.settings, props.withTime)}
             locale={locale?.locale}
-            calendarStartDay={locale?.weekStartDay}
+            calendarStartDay={locale?.weekStartDay as DateNumberType}
             className={theme.classes.input}
             showTimeSelect={props.withTime}
             selected={props.value}

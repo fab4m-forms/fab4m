@@ -101,9 +101,7 @@ export interface DateFieldWidgetSettings {
   locales?: Locale[];
   useBrowserLocale?: boolean;
   format?: string;
-  datePickerProps?:
-    | DatePickerProps
-    | ((value?: Date) => Omit<DatePickerProps, "onChange">);
+  datePickerProps?: DatePickerProps | ((value?: Date) => DatePickerProps);
 }
 
 export interface SerializedDateFieldSettings {
