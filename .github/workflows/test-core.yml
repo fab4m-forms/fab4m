@@ -20,6 +20,7 @@ jobs:
       - run: cd packages/${{matrix.package}} && npx prettier --check .
       - run: cd packages/${{matrix.package}} && npx eslint
       - run: cd packages/${{matrix.package}} && npm run test:unit
+      - run: cd packages/${{matrix.package}} && npm run build
   test-builder:
     strategy:
       matrix:
@@ -43,3 +44,4 @@ jobs:
       - run: cd packages/${{matrix.package}} && npx prettier --check .
       - run: cd packages/${{matrix.package}} && npx eslint
       - run: cd packages/${{matrix.package}} && npm run test:unit
+      - run: cd packages/${{matrix.package}} && npm run build
