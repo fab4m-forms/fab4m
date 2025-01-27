@@ -105,6 +105,7 @@ export default function Autocomplete<
                             props.theme.classes,
                           ),
                         )}
+                        key={index}
                         className={props.theme.classes.autocompleteItem}
                       >
                         {props.settings.itemElement

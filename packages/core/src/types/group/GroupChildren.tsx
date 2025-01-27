@@ -11,7 +11,7 @@ export default function GroupChildren(
   props: WidgetProps<unknown, unknown> & {
     wrapperClass?: string;
   },
-): JSX.Element | null {
+): React.JSX.Element | null {
   if (!props.component.components) {
     return null;
   }

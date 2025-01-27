@@ -9,7 +9,7 @@ import {
   Widget,
   WidgetSerializer,
 } from "@fab4m/fab4m";
-import { ReactDatePickerProps } from "react-datepicker";
+import { DatePickerProps } from "react-datepicker";
 
 export interface DateRange {
   from: Date;
@@ -101,9 +101,7 @@ export interface DateFieldWidgetSettings {
   locales?: Locale[];
   useBrowserLocale?: boolean;
   format?: string;
-  datePickerProps?:
-    | ReactDatePickerProps
-    | ((value?: Date) => Omit<ReactDatePickerProps, "onChange">);
+  datePickerProps?: DatePickerProps | ((value?: Date) => DatePickerProps);
 }
 
 export interface SerializedDateFieldSettings {

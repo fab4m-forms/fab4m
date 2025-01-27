@@ -3,7 +3,9 @@ import * as React from "react";
  * The check icon renders a checkmark icon.
  * @group Iocns
  */
-export default function CheckIcon(props: { className: string }): JSX.Element {
+export default function CheckIcon(props: {
+  className: string;
+}): React.JSX.Element {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

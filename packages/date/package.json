@@ -28,12 +28,12 @@
     "build-types": "npx tsc  -d --emitDeclarationOnly --project tsconfig.build.json",
     "build": "npm run build-browser && npm run build-node && npm run build-types",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint-fix": "eslint --fix . --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint",
+    "lint-fix": "eslint --fix",
     "prettier-fix": "prettier -w ."
   },
   "peerDependencies": {
-    "react-datepicker": "^4.2"
+    "react-datepicker": "^7.6"
   },
   "gitHead": "d07ff4934399152b5c403dd81d77534d985997e4"
 }

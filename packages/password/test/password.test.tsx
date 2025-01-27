@@ -332,7 +332,7 @@ describe("Password field", () => {
 function validate(form: FormDefinition, data: unknown) {
   const schema = generateSchema(form);
   const ajv = new Ajv({ $data: true, allErrors: true });
-  addFormats(ajv as any); //eslint-disable-line
+  addFormats(ajv as any);
   const validate = ajv.compile(schema);
   const status = validate(data);
   if (status) {

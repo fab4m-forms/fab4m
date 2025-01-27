@@ -8,7 +8,7 @@ import GroupChildren from "./GroupChildren";
  */
 export default function Fieldset<DataType = Record<string, unknown>>(
   props: WidgetProps<DataType, unknown>,
-): JSX.Element | null {
+): React.JSX.Element | null {
   if (!props.component.components) {
     return null;
   }

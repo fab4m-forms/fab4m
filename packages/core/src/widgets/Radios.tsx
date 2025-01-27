@@ -6,7 +6,7 @@ import { Option, optionValue } from "./options";
  * The Radios widget renders a series of radio input widget for each option.
  * @group React widgets
  */
-function Radios<OptionsType>(
+function Radios<OptionsType extends string | number | React.ReactElement>(
   props: WidgetProps<OptionsType, Option<OptionsType>[]>,
 ) {
   const classes = props.theme.classes;

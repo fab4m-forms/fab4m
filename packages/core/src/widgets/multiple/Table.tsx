@@ -21,7 +21,7 @@ import {
  */
 export default function Table(
   props: MultipleWidgetProps<unknown, TableSettings>,
-): JSX.Element | null {
+): React.JSX.Element | null {
   const items = (props.value ?? []) as Array<Record<string, unknown>>;
   const addItem = () => props.onChange([...items, {}]);
   const formData = useFormData();

@@ -9,7 +9,7 @@ export default function ValidatorInfo(props: {
   value: unknown;
   component: FormComponent;
   theme: Theme;
-}): JSX.Element | null {
+}): React.JSX.Element | null {
   const info = props.component.validators
     .filter((v) => v.type.validatorInfo)
     .map((v, i) =>

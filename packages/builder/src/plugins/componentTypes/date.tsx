@@ -27,6 +27,7 @@ import {
 } from "@fab4m/fab4m";
 import t from "../../translations";
 import { invariantReturn } from "../../util";
+import { Locale } from "date-fns";
 
 export const dateFieldPlugin: FormComponentTypePlugin = {
   type: dateFieldType,

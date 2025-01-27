@@ -18,14 +18,14 @@ export default function FormWrapper(
     setPart: (part: number) => void;
     setFormErrors: (errors: ValidationError[]) => void;
   },
-): JSX.Element {
+): React.JSX.Element {
   const formRef = React.useRef<HTMLFormElement>(null);
 
   // This ref keeps track on if we completed the submission process.
   // Normally browsers don't seem to execute the submit handlers
   // when calling submit() directly on the form, but jsDOM does it
   // and should any other browser do it we need to handle that gracefully.
-  const submitted = React.useRef<boolean>();
+  const submitted = React.useRef<boolean>(null);
   const data = props.data as Record<string, unknown>;
   let formProps: React.FormHTMLAttributes<HTMLFormElement> = {
     className: "form",

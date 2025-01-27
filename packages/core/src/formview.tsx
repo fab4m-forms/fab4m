@@ -8,7 +8,7 @@ import { ValidationError } from "./validator";
  */
 export interface FormViewProps {
   /**The form to render*/
-  form: Form<any>; // eslint-disable-line
+  form: Form<any>;
   /**The form data*/
   data: unknown;
   /**
