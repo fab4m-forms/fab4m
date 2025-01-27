@@ -1,6 +1,6 @@
 {
   "name": "@fab4m/builder",
-    "version": "1.0.0-alpha4",
+  "version": "1.0.0-alpha4",
   "description": "A form builder UI",
   "publishConfig": {
     "access": "public",
