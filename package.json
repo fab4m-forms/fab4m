@@ -56,10 +56,5 @@
     "typescript-eslint": "^8.20.0",
     "vite-react-jsx": "^1.1.2",
     "vitest": "^2.1.8"
-  },
-  "scripts": {
-    "bootstrap": "lerna bootstrap",
-    "build": "lerna run build",
-    "test": "lerna run test:unit"
   }
 }
