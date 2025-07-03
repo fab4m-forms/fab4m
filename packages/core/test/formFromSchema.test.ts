@@ -78,7 +78,7 @@ describe("Form from schema", () => {
       string: textField,
       integer: integerField,
       boolean: booleanField,
-      object: group,
+      object: (attributes) => group(attributes, {}),
     },
     validators: {
       minLength: minLengthFromSchema,
