@@ -4,10 +4,15 @@ import {
   FormComponentsList,
   group,
   integerField,
+  maxLength,
+  maxLengthValidator,
+  min,
+  minLength,
+  minLengthValidator,
   Schema,
   textField,
 } from "../src";
-import { formFromSchema } from "../src/formFromSchema";
+import { formFromSchema, ValidatorFn } from "../src/formFromSchema";
 
 describe("Form from schema", () => {
   const schema: Schema = {
@@ -59,12 +64,25 @@ describe("Form from schema", () => {
     },
     required: ["name", "age"],
   };
+
+  const minLengthFromSchema: ValidatorFn<"string"> = (c, p) => {
+    c.validators?.push(minLength(p.minLength));
+  };
+
+  const minimumFromSchema: ValidatorFn<"number"> = (c, p) => {
+    c.validators?.push(min(p.minimum ?? 0));
+  };
+
   const form: Form = formFromSchema(schema, {
     types: {
       string: textField,
       integer: integerField,
       boolean: booleanField,
       object: group,
+    },
+    validators: {
+      minLength: minLengthFromSchema,
+      minimum: minimumFromSchema,
     },
   });
   it("Basic types should be mapped properly", () => {
@@ -86,6 +104,21 @@ describe("Form from schema", () => {
     if (component?.components) {
       expect(findComponent("street", component.components)).toBeDefined();
       expect(findComponent("city", component.components)).toBeDefined();
+    }
+  });
+
+  it("Validators should be applied", () => {
+    const validator = findComponent("name")?.validators[0];
+    expect(validator).toBeDefined();
+    if (validator) {
+      expect(validator.type.name).toBe("minLength");
+      expect(validator.settings).toBe(3);
+    }
+    const minValidator = findComponent("age")?.validators[0];
+    expect(minValidator).toBeDefined();
+    if (minValidator) {
+      expect(minValidator.type.name).toBe("min");
+      expect(minValidator.settings).toBe(18);
     }
   });
 

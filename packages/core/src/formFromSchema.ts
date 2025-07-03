@@ -7,11 +7,14 @@ import {
 import { createForm, Form } from "./form";
 import { Schema, SchemaProperty } from "./schema";
 
-type ComponentFn = (
-  attributes: CreateFormComponentType<unknown>,
-) => FormComponent;
+type ComponentFn = (attributes: CreateFormComponentType<any>) => FormComponent;
+export type ValidatorFn<Type extends SchemaProperty["type"]> = (
+  component: FormComponent,
+  property: SchemaProperty & { type: Type },
+) => void;
 export type FromSchemaConfig = {
   types: Record<string, ComponentFn>;
+  validators: Record<string, ValidatorFn<any>>;
 };
 
 export function formFromSchema(schema: Schema, config: FromSchemaConfig): Form {
@@ -43,7 +46,7 @@ function componentsFromSchema(
       componentType = config.types[property.type];
     }
     if (componentType) {
-      const component = componentType({
+      let component = componentType({
         multiple: property.type === "array",
       });
       if (property.type === "object") {
@@ -52,8 +55,23 @@ function componentsFromSchema(
           config,
         );
       }
+      component.validators = [];
+      component = addValidators(component, property, config);
       components.push({ ...component, name });
     }
   }
   return components;
+}
+
+function addValidators(
+  component: FormComponent,
+  property: SchemaProperty,
+  config: FromSchemaConfig,
+) {
+  for (const [prop, validator] of Object.entries(config.validators)) {
+    if (property[prop]) {
+      validator(component, property);
+    }
+  }
+  return component;
 }
