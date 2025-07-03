@@ -4,7 +4,7 @@ import {
   FormComponent,
   FormComponentWithName,
 } from "./component";
-import { createForm, Form } from "./form";
+import { Form } from "./form";
 import { Schema, SchemaProperty } from "./schema";
 
 type ComponentFn = (attributes: CreateFormComponentType<any>) => FormComponent;
