@@ -2,11 +2,7 @@ import "@testing-library/jest-dom";
 import "cross-fetch/polyfill";
 import { createForm, textField, pageBreak, content, Form } from "@fab4m/fab4m";
 import { fireEvent, render, waitFor } from "@testing-library/react";
-import {
-  FormRouteProps,
-  StatefulFormRoute,
-  RouterFormView,
-} from "../src";
+import { FormRouteProps, StatefulFormRoute, RouterFormView } from "../src";
 import { vi } from "vitest";
 import * as React from "react";
 import {
