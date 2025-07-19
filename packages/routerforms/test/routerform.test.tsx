@@ -9,6 +9,7 @@ import {
   ActionFunction,
   createMemoryRouter,
   RouterProvider,
+  useActionData,
 } from "react-router-dom";
 
 describe("Routed form", () => {
@@ -26,7 +27,7 @@ describe("Routed form", () => {
   };
 
   const MemoryRouterFormView = (
-    props: Omit<FormRouteProps, "form"> & {
+    props: Omit<FormRouteProps, "form" | "data"> & {
       path: string;
       form: Form;
     },
@@ -100,26 +101,33 @@ describe("Routed form", () => {
     let submitRequest: Request | null = null;
     const action: ActionFunction = async ({ request }) => {
       submitRequest = request;
-      return null;
+      return "done";
     };
     const spy = vi.fn().mockImplementation(action);
+    const FormComponent = () => {
+      const action = useActionData();
+      if (action) {
+        return <div>All done</div>;
+      }
+      return <StatefulFormRoute useRouteAction={true} form={form} />;
+    };
+
     const router = createMemoryRouter(
       [
         {
           path: "/:part",
           action: spy,
-          element: <StatefulFormRoute useRouteAction={true} form={form} />,
+          element: <FormComponent />,
         },
         {
           path: "*",
           action: spy,
-          element: <StatefulFormRoute useRouteAction={true} form={form} />,
+          element: <FormComponent />,
         },
       ],
       { initialEntries: ["/0"] },
     );
-
-    const { findByText, findByLabelText } = render(
+    const { findByText, findByLabelText, getByText } = render(
       <RouterProvider router={router} />,
     );
     fireEvent.input(await findByLabelText("Before page break"), {
@@ -132,15 +140,14 @@ describe("Routed form", () => {
 
     fireEvent.click(await findByText("Complete"));
     await waitFor(async () => {
-      expect(spy).toHaveBeenCalled();
+      expect(getByText("All done")).toBeDefined();
     });
+    expect(spy).toHaveBeenCalled();
 
     if (submitRequest) {
       const formData = await submitRequest.formData();
       expect(formData.get("first")).toBe("A text");
       expect(formData.get("second")).toBe("Another text");
-    } else {
-      fail("submitRequest was not set");
     }
   });
 
