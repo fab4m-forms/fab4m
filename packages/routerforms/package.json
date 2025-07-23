@@ -34,5 +34,10 @@
   "peerDependencies": {
     "react-router-dom": ">6"
   },
-  "gitHead": "d07ff4934399152b5c403dd81d77534d985997e4"
+  "gitHead": "d07ff4934399152b5c403dd81d77534d985997e4",
+  "devDependencies": {
+    "@vitest/browser": "^3.2.4",
+    "playwright": "^1.54.1",
+    "vitest": "^3.2.4"
+  }
 }
