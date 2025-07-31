@@ -7,7 +7,12 @@ export default defineConfig({
   root: process.env.VITEST ? undefined : "examples",
   test: {
     globals: true,
-    environment: "jsdom",
-    setupFiles: "./test/setup.ts",
+    browser: {
+      provider: "playwright", // or 'webdriverio'
+      enabled: true,
+      // at least one instance is required
+      instances: [{ browser: "chromium" }],
+      headless: true,
+    },
   },
 });
