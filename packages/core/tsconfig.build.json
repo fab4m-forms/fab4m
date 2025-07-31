@@ -19,6 +19,7 @@
     "sourceMap": true,
     "outDir": "dist",
     "baseUrl": ".",
+    "lib": ["es2016", "dom", "dom.iterable"],
     "skipLibCheck": true,
     "types": ["vitest/globals"]
   },

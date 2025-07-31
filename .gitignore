@@ -3,3 +3,4 @@ node_modules
 .idea
 *.tgz
 lerna-debug.log
+.aider*
