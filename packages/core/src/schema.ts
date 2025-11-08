@@ -182,7 +182,7 @@ export function generateComponentSchema(
           ...(componentSchema as SchemaObject).properties, // Cast to SchemaObject to access properties
           ...validator.type.schema(validator.settings, componentSchema),
         };
-      } else {
+      } else if ("type" in componentSchema) {
         componentSchema = {
           ...componentSchema,
           ...validator.type.schema(validator.settings, componentSchema),

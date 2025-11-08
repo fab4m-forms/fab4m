@@ -1,6 +1,6 @@
 import { ComponentType } from "react";
 import { FormComponent } from "./component";
-import { SchemaProperty } from "./schema";
+import { SchemaEntry } from "./schema";
 import { Theme } from "./theme";
 /**
  * A validation error that occurred somewhere within the form.
@@ -88,10 +88,7 @@ export interface ValidatorType<
    * @param schema The current schema for the component.
    * @return The alterations you wish to make to the component schema. The alterations will be merged with the default schema provided.
    */
-  schema: (
-    settings: SettingsType,
-    schema: SchemaProperty,
-  ) => Partial<SchemaType>;
+  schema: (settings: SettingsType, schema: SchemaEntry) => Partial<SchemaType>;
   /**
    * This function can be used to specify custom error messages which can be used instead of the default
    * JSON schema messages.

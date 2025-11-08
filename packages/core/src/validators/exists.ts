@@ -1,11 +1,11 @@
-import { SchemaProperty } from "../schema";
+import { SchemaEntry } from "../schema";
 import { Validator, ValidatorType, validator } from "../validator";
 
 /**
  * Exists validator type.
  * @group Validators
  */
-type ExistsType = ValidatorType<unknown, null, SchemaProperty>;
+type ExistsType = ValidatorType<unknown, null, SchemaEntry>;
 
 /**
  * This validator let's you ensure that a value exists.
