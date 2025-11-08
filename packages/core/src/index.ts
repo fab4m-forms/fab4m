@@ -43,7 +43,7 @@ export * from "./formview";
 export * from "./formdata";
 export * from "./widgets/hidden";
 export * from "./widgets/custom";
-export * from "./formFromSchema.ts";
+export * from "./formFromSchema";
 let defaultTheme: Theme = basic;
 export { defaultTheme, basic, basicDark };
 

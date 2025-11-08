@@ -189,7 +189,10 @@ describe("Form from schema", () => {
       expect(minValidator.type.name).toBe("min");
       expect(minValidator.settings).toBe(18);
     }
-    const productPriceValidator = findComponent("price", findComponent("singleProduct")?.components)?.validators[0];
+    const productPriceValidator = findComponent(
+      "price",
+      findComponent("singleProduct")?.components,
+    )?.validators[0];
     expect(productPriceValidator).toBeDefined();
     if (productPriceValidator) {
       expect(productPriceValidator.type.name).toBe("min");
