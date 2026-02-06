@@ -8,7 +8,7 @@ import { Form } from "./form";
 import { Schema, SchemaEntry, SchemaProperty } from "./schema";
 
 type ComponentFn = (attributes: CreateFormComponentType<any>) => FormComponent;
-// Changed Type to string as SchemaProperty["type"] can be problematic with $ref
+
 export type ValidatorFn<Type extends string> = (
   component: FormComponent,
   property: SchemaEntry & { type: Type },

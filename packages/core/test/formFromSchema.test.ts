@@ -4,11 +4,8 @@ import {
   FormComponentsList,
   group,
   integerField,
-  maxLength,
-  maxLengthValidator,
   min,
   minLength,
-  minLengthValidator,
   Schema,
   textField,
 } from "../src";
