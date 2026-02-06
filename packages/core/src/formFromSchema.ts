@@ -39,7 +39,7 @@ function componentsFromSchema(
 ) {
   const components: FormComponentWithName[] = [];
   for (const [name, property] of Object.entries(properties)) {
-    let currentProperty = property;
+    const currentProperty = property;
 
     // After resolveAllRefs, currentProperty should not have $ref, but it might not have 'type'
     // if it's a complex object without a direct type or if resolution failed.
@@ -132,7 +132,7 @@ function resolveAllRefs(schema: Schema): Schema {
     }
 
     for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
         if (key === "$ref" && typeof obj[key] === "string") {
           const resolved = resolveRef(obj[key], schema);
           if (resolved) {
