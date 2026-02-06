@@ -24,11 +24,8 @@ interface SchemaArray {
   minItems?: number;
   maxItems?: number;
 }
-/**
- * Definition of a JSON schema property.
- * @group JSON Schema
- */
-export type SchemaProperty =
+
+export type SchemaEntry =
   | {
       type: "string" | "integer" | "number";
       description?: string;
@@ -59,6 +56,12 @@ export type SchemaProperty =
   | SchemaObject
   | SchemaArray;
 
+/**
+ * Definition of a JSON schema property.
+ * @group JSON Schema
+ */
+export type SchemaProperty = { $ref: string } | SchemaEntry;
+
 interface PartialProperties {
   properties: Record<string, Partial<SchemaProperty>>;
 }
@@ -82,6 +85,7 @@ export interface Schema {
   if?: PartialProperties;
   then?: Partial<Schema>;
   else?: Partial<Schema>;
+  $defs: Record<string, SchemaProperty>;
 }
 
 /**
@@ -172,12 +176,13 @@ export function generateComponentSchema(
       return null;
     }
     for (const validator of component.validators) {
-      if (componentSchema && componentSchema.type === "object") {
+      // Ensure componentSchema is not a $ref before accessing type/properties
+      if ("type" in componentSchema && componentSchema.type === "object") {
         componentSchema.properties = {
-          ...componentSchema.properties,
+          ...(componentSchema as SchemaObject).properties, // Cast to SchemaObject to access properties
           ...validator.type.schema(validator.settings, componentSchema),
         };
-      } else {
+      } else if ("type" in componentSchema) {
         componentSchema = {
           ...componentSchema,
           ...validator.type.schema(validator.settings, componentSchema),
@@ -233,6 +238,7 @@ function schemaBase(form: FormDefinition): Schema {
     type: "object",
     properties: {},
     required: [],
+    $defs: {}, // Ensure $defs is always present
   };
 }
 
