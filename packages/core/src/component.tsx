@@ -2,7 +2,6 @@
  * Group API definitions and helpers.
  * @module Component API
  */
-import { FormHTMLAttributes } from "react";
 import { FormComponentsList } from "./form";
 import { AnyRule, filterComponents } from "./rule";
 import { SchemaProperty } from "./schema";
@@ -63,9 +62,10 @@ export interface FormComponentType<SettingsType = unknown> {
    * the form should have the encType multipart/formdata.
    */
   formProps?: (
-    props: FormHTMLAttributes<HTMLFormElement>,
+    props: Record<string, unknown>,
     component: FormComponent<unknown, SettingsType>,
-  ) => FormHTMLAttributes<HTMLFormElement>;
+  ) => Record<string, unknown>;
+
   /**
    * This allows you to specify a custom error message for this component or parts of it.
    */

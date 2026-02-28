@@ -1,4 +1,3 @@
-import { ComponentType } from "react";
 import { FormComponent } from "./component";
 import { SchemaEntry } from "./schema";
 import { Theme } from "./theme";
@@ -58,8 +57,6 @@ export interface ValidatorType<
       SettingsType
     >,
   ) => Record<string, number | string | boolean>;
-  /** A React component that can show information to the user about the expected data input.*/
-  validatorInfo?: ComponentType<ValidatorInfoProps<ValueType, SettingsType>>;
   /** The default settings that should be applied to the validator. */
   defaultSettings: SettingsType;
   /**

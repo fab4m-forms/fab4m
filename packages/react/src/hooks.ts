@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { DependencyList } from "react";
-import { Form } from "./form";
+import { Form } from "@fab4m/fab4m";
 
 /**
  * This hook is useful if you need to recreate your form inside of a react component.

@@ -1,4 +1,3 @@
-import Checkbox from "./Checkbox";
 import {
   FormComponentType,
   FormComponent,
@@ -6,6 +5,7 @@ import {
   formComponent,
 } from "../../component";
 import { Widget, widget, WidgetType } from "../../widget";
+import Checkbox from "@fab4m/react/src/widgets/Checkbox";
 
 /**
  * The boolean field types allows users to provide boolean values.

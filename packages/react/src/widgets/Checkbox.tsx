@@ -1,5 +1,5 @@
 import * as React from "react";
-import { WidgetProps } from "../../widget";
+import { WidgetProps } from "@fab4m/fab4m";
 /**
  * A checkbox react component.
  * @group React widgets

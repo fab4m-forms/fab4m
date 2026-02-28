@@ -1,5 +1,4 @@
 import { ValidationError } from "./validator";
-import { ComponentType } from "react";
 import { FormComponent } from "./component";
 import { MultipleWidgetSerializer, WidgetSerializer } from "./serializer";
 import { Theme } from "./theme";
@@ -129,8 +128,6 @@ export interface WidgetType<ValueType = any, SettingsType = any> {
   title: string;
   /** A serializer to serialize and unserialize the widget.*/
   serializer?: WidgetSerializer<ValueType, SettingsType>;
-  /** A React component to render the widget. */
-  widget: ComponentType<WidgetProps<ValueType, SettingsType>>;
   /**
    * A function that can create a widget of this type
    * @param settings the settings for this widget.
@@ -166,8 +163,6 @@ export interface MultipleWidgetType<ValueType = any, SettingsType = any> {
   title: string;
   /** A serializer to serialize and unserialize the widget.*/
   serializer?: MultipleWidgetSerializer<ValueType, SettingsType>;
-  /** A React component to render the widget. */
-  widget: ComponentType<MultipleWidgetProps<ValueType, SettingsType>>;
   /**
    * A function that can create a widget of this type
    * @param settings the settings for this widget.
@@ -192,9 +187,7 @@ export interface MultipleWidget<ValueType = any, SettingsType = any> {
  * to create a widget.
  */
 type CreateWidget<ValueType = any, SettingsType = undefined> = {
-  type: Exclude<Partial<WidgetType<ValueType, SettingsType>>, "widget"> & {
-    widget: ComponentType<WidgetProps<ValueType, SettingsType>>;
-  };
+  type: Exclude<Partial<WidgetType<ValueType, SettingsType>>, "widget">;
 } & (SettingsType extends undefined
   ? { settings?: SettingsType }
   : { settings: SettingsType });
@@ -211,8 +204,8 @@ export function widget<ValueType = any, SettingsType = undefined>(
   return {
     ...args,
     type: {
-      name: args.type.widget.displayName ?? "",
-      title: args.type.widget.displayName ?? "",
+      name: args.type.name ?? "",
+      title: args.type.title ?? "",
       components: [],
       ...args.type,
     },
@@ -221,12 +214,7 @@ export function widget<ValueType = any, SettingsType = undefined>(
 }
 
 type CreateMultipleWidget<ValueType = any, SettingsType = undefined> = {
-  type: Exclude<
-    Partial<MultipleWidgetType<ValueType, SettingsType>>,
-    "widget"
-  > & {
-    widget: ComponentType<MultipleWidgetProps<ValueType, SettingsType>>;
-  };
+  type: Exclude<Partial<MultipleWidgetType<ValueType, SettingsType>>, "widget">;
 } & (SettingsType extends undefined
   ? { settings?: SettingsType }
   : { settings: SettingsType });
@@ -243,8 +231,8 @@ export function multipleWidget<ValueType, SettingsType>(
   return {
     ...args,
     type: {
-      name: args.type.widget.displayName ?? "",
-      title: args.type.widget.displayName ?? "",
+      name: args.type.name ?? "",
+      title: args.type.title ?? "",
       ...args.type,
     },
   };

@@ -83,10 +83,7 @@ export interface FormDefinition {
  * @typeParam DataType the type of data that is submitted.
  * @group Form API
  */
-export type SubmitCallback<DataType> = (
-  e: React.FormEvent<HTMLFormElement>,
-  data: DataType,
-) => void;
+export type SubmitCallback<DataType> = (e: Event, data: DataType) => void;
 
 /**
  * @param data The changed data.
@@ -106,7 +103,7 @@ export type DataChangeCallback<DataType> = (data: Partial<DataType>) => void;
 export type PartValidatorCallback<DataType> = (
   part: number,
   data: Partial<DataType>,
-  e: React.FormEvent<HTMLFormElement>,
+  e: Event,
 ) => Promise<ValidationError[] | void>;
 
 /**
@@ -616,7 +613,7 @@ export async function validateFormPart(
   form: Form,
   part: number,
   data: Record<string, unknown>,
-  event: React.FormEvent<HTMLFormElement>,
+  event: Event,
 ) {
   const parts = formParts(form, data);
   if (part > parts.length - 1) {
