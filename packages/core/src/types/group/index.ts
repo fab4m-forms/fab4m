@@ -6,11 +6,6 @@ import {
   FormComponent,
 } from "../../component";
 import { Widget, widget, WidgetType } from "../../widget";
-import Fieldset from "./Fieldset";
-import Group from "./Group";
-import HorizontalGroup from "./HorizontalGroup";
-
-import Details from "./Details";
 
 /**
  * The group form component type allows you to group components together.
@@ -50,7 +45,6 @@ export const fieldsetWidgetType: GroupWidgetType = {
   name: "fieldset",
   components: ["group"],
   title: "Fieldset",
-  widget: Fieldset,
   init: fieldsetWidget,
 };
 
@@ -66,7 +60,6 @@ export function fieldsetWidget<DataType = Record<string, any>>(): Widget<
     name: "fieldset",
     components: ["group"],
     title: "Fieldset",
-    widget: Fieldset,
     init: fieldsetWidget,
   };
   return widget({
@@ -84,7 +77,6 @@ export const groupWidgetType: GroupWidgetType = {
   name: "group",
   components: ["group"],
   title: "Group",
-  widget: Group,
   init: groupWidget,
 };
 
@@ -104,7 +96,6 @@ export function groupWidget<DataType = Record<string, any>>(): Widget<
     name: "group",
     components: ["group"],
     title: "Group",
-    widget: Group,
     init: groupWidget,
   };
   return widget<DataType, undefined>({
@@ -121,7 +112,6 @@ export const horizontalGroupWidgetType: GroupWidgetType = {
   name: "horizontal_group",
   components: ["group"],
   title: "Horizontal Group",
-  widget: HorizontalGroup,
   init: horizontalGroupWidget,
 };
 
@@ -137,7 +127,6 @@ export function horizontalGroupWidget<DataType = Record<string, any>>(): Widget<
     name: "horizontal_group",
     components: ["group"],
     title: "Horizontal Group",
-    widget: HorizontalGroup,
     init: horizontalGroupWidget,
   };
   return widget<DataType, undefined>({
@@ -176,7 +165,6 @@ export const detailsWidgetType: WidgetType<
   name: "details",
   components: ["group"],
   title: "Details",
-  widget: Details,
   init: detailsWidget,
 };
 
@@ -192,7 +180,6 @@ export function detailsWidget<DataType = Record<string, any>>(
     name: "details",
     components: ["group"],
     title: "Details",
-    widget: Details,
     init: detailsWidget,
   };
   return widget<DataType, DetailsSettings<DataType>>({
