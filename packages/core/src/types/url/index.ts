@@ -5,7 +5,7 @@ import {
   formComponent,
 } from "../../component";
 import { Widget, widget, WidgetType } from "../../widget";
-import URLField from "./URLField";
+
 /**
  * The url component type handles url inputs
  * @group Components
@@ -53,7 +53,6 @@ export const linkFieldWidgetType: WidgetType<string, URLFieldWidgetSettings> = {
   name: "linkfield",
   title: "Link",
   components: ["url"],
-  widget: URLField,
   init: (settings) => linkFieldWidget(settings?.prefix),
 };
 
