@@ -5,7 +5,6 @@ import {
   FormComponentType,
 } from "../../component";
 import { Widget, widget, WidgetType } from "../../widget";
-import EmailField from "./EmailField";
 
 /**
  * Let users input email adresses.
@@ -45,7 +44,6 @@ export const emailWidgetType: WidgetType<string, undefined> = {
   name: "email",
   components: ["email"],
   title: "Email field",
-  widget: EmailField,
   init: emailWidget,
 };
 

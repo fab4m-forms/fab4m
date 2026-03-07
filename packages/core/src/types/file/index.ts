@@ -1,4 +1,3 @@
-import UploadField from "./UploadField";
 import {
   FormComponentType,
   FormComponent,
@@ -52,7 +51,6 @@ export const fileUploadWidgetType: WidgetType<File, undefined> = {
   name: "file",
   title: "Upload field",
   components: ["file"],
-  widget: UploadField,
   init: fileUploadWidget,
 };
 
