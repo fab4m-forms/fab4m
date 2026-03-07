@@ -38,7 +38,6 @@ export const customWidgetType: WidgetType<any, CustomWidget<any>> = {
   name: "custom",
   title: "Custom",
   components: [],
-  widget: (props) => <props.settings {...props} />,
   init: () => customWidget(() => null),
 };
 
@@ -79,7 +78,6 @@ export const customMultipleWidgetType: MultipleWidgetType<
 > = {
   name: "custom",
   title: "Custom",
-  widget: (props) => <props.settings {...props} />,
   init: () => customMultipleWidget(() => null),
 };
 
