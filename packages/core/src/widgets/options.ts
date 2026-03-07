@@ -1,6 +1,4 @@
-import Radios from "./Radios";
 import { Widget, widget, WidgetType } from "../widget";
-import Select from "./Select";
 /**
  * Type definition for a selectable option in the options widget.
  * @group Widgets
@@ -46,7 +44,6 @@ export const radiosWidgetType: WidgetType<any, Option<any>[]> = {
   name: "radios",
   title: "Radios",
   components: ["text", "integer", "float"],
-  widget: Radios,
   init: (options) => radiosWidget(options ? options : []),
 };
 
@@ -67,7 +64,6 @@ export const selectWidgetType: WidgetType<any, SelectWidgetSettings<any>> = {
   name: "select",
   title: "Select",
   components: ["text", "integer", "float"],
-  widget: Select,
   init: (settings) =>
     selectWidget(
       settings?.options,
