@@ -1,5 +1,3 @@
-import TextField from "./TextField";
-import TextArea from "./TextArea";
 import {
   FormComponentType,
   FormComponent,
@@ -87,7 +85,6 @@ export const textFieldWidgetType: WidgetType<string, TextFieldWidgetSettings> =
     name: "textfield",
     title: "Text field",
     components: ["text"],
-    widget: TextField,
     init: (settings) => textFieldWidget(settings?.prefix),
   };
 
@@ -113,7 +110,6 @@ export const textAreaWidgetType: WidgetType<string, unknown> = {
   name: "textarea",
   title: "Text area",
   components: ["text"],
-  widget: TextArea,
   init: textAreaWidget,
 };
 
