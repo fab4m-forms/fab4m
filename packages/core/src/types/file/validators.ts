@@ -1,10 +1,9 @@
 import { Validator, ValidatorType } from "../../validator";
-import React from "react";
 
 /**
  * @internal
  */
-interface FileSizeSettings {
+export interface FileSizeSettings {
   size: number;
   message: string;
   maxSizeInfo: string;
@@ -55,14 +54,6 @@ export const fileSizeValidator: FileSizeValidatorType = {
     maxSizeInfo: "Max file size: %size",
   },
   components: ["file"],
-  validatorInfo: (props) => (
-    <div className={"validator-info"}>
-      {props.settings.maxSizeInfo.replace(
-        "%size",
-        humanSize(props.settings.size),
-      )}
-    </div>
-  ),
   validate: async (value, settings) => {
     return value?.size > settings.size
       ? [
@@ -92,7 +83,7 @@ export function fileSize(
   };
 }
 
-interface FileExtensionValidatorSettings {
+export interface FileExtensionValidatorSettings {
   extensions: string[];
   message: string;
 }
@@ -116,11 +107,6 @@ export const fileExtensionValidator: FileExtensionValidatorType = {
   title: "Allowed file extensions",
   components: ["file"],
   schema: () => ({}),
-  validatorInfo: (props) => (
-    <div className={"validator-info"}>
-      Allowed extensions: {props.settings.extensions.join(", ")}
-    </div>
-  ),
   defaultSettings: {
     extensions: [],
     message: "The file type is not allowed.",
