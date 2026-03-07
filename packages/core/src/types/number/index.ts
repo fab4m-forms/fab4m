@@ -1,4 +1,3 @@
-import NumberField from "./NumberField";
 import {
   FormComponentType,
   CreateFormComponentType,
@@ -71,7 +70,6 @@ export const numberFieldWidgetType: WidgetType<number, NumberWidgetSettings> = {
   name: "numberfield",
   title: "Number field",
   components: ["integer", "float"],
-  widget: NumberField,
   init: (settings) => numberFieldWidget(settings?.prefix),
 };
 
