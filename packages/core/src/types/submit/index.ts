@@ -1,11 +1,10 @@
-import * as React from "react";
 import {
   FormComponentType,
   CreateFormComponentType,
   formComponent,
   FormComponent,
 } from "../../component";
-import { Widget, widget, WidgetProps, WidgetType } from "../../widget";
+import { Widget, widget, WidgetType } from "../../widget";
 
 /**
  * Settings for the submit widget.
@@ -47,18 +46,6 @@ export function submit(
 /**
  * @group React widgets
  */
-function Submit(
-  props: WidgetProps<unknown, SubmitWidgetSettings>,
-): React.ReactElement {
-  return (
-    <input
-      className={props.theme.classes.submitButton}
-      type="submit"
-      value={props.settings.title}
-      name={props.name}
-    />
-  );
-}
 
 /**
  * The submit widget type renders a submit input element.
@@ -68,7 +55,6 @@ export const submitWidgetType: SubmitWidgetType = {
   name: "submit",
   title: "Submit button",
   components: ["submit"],
-  widget: Submit,
 };
 
 /**
@@ -84,7 +70,6 @@ export function submitWidget(settings: SubmitWidgetSettings): SubmitWidget {
       name: "content",
       title: "Content",
       components: ["content"],
-      widget: Submit,
     },
     settings: settings,
   });
