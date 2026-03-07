@@ -41,7 +41,6 @@ export const pageBreakWidgetType: WidgetType<unknown, undefined> = {
   name: "pagebreak",
   title: "Page break",
   components: ["pagebreak"],
-  widget: () => null,
   init: pageBreakWidget,
 };
 
