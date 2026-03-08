@@ -3,14 +3,14 @@ import { FormComponentWithName } from "../component";
 import { componentErrors, Form } from "../form";
 import { filterComponents, filterData } from "../rule";
 import { ValidationError } from "../validator";
-import FormComponentView from "./FormComponentView";
+import { FormComponentView } from "./FormComponentView";
 /**
  * Render a specific form part.
  * This component is mostly used internally, but it's useful if you need to create a custom
  * Form view component.
  * @group React form rendering internals
  */
-export default function FormPart(props: {
+export function FormPart(props: {
   /** The form to render */
   form: Form;
   /** The whole part will be rendered with `display: none` if this is set to true*/

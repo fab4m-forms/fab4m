@@ -1,12 +1,12 @@
 import * as React from "react";
 import { FormViewProps } from "src/formview";
-import FormView from "./FormView";
+import { FormView } from "./FormView";
 
 /**
  * Use this component to render a form which manages the form state internally,
  * @group React API
  */
-export default function StatefulFormView(
+export function StatefulFormView(
   props: Omit<FormViewProps, "data"> & {
     data?: unknown;
   },

@@ -9,7 +9,7 @@ import { formDataDefinition, FormViewProps } from "../formview";
  * but it might be useful if you are creating a custom form view component.
  * @group React form rendering internals
  */
-export default function FormWrapper(
+export function FormWrapper(
   props: FormViewProps & {
     part: number;
     children: React.ReactNode;

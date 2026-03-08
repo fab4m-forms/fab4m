@@ -1,13 +1,13 @@
 import * as React from "react";
 import { WidgetProps } from "../widget";
-import FormElement from "./FormElement";
+import { FormElement } from "./FormElement";
 
 /**
  * A general purpose component wrapper. This component can be used to make sure
  * all widgets renders form elements in a similar way.
  * @group React API
  */
-export default function FormComponentWrapper(
+export function FormComponentWrapper(
   props: Omit<WidgetProps<any, any>, "onChange"> & {
     /**
      * The actual form widget contents.

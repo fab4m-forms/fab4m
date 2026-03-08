@@ -7,7 +7,7 @@ import { FormDefinition } from "../form";
  * Form view component.
  * @group React API
  */
-export default function FormPager(props: {
+export function FormPager(props: {
   /** The current form part. */
   part: number;
   /** The total number of for parts. */

@@ -5,7 +5,7 @@ import { Theme } from "../theme";
  * Render Validatior information for a specific component.
  * @group React widget API.
  */
-export default function ValidatorInfo(props: {
+export function ValidatorInfo(props: {
   value: unknown;
   component: FormComponent;
   theme: Theme;

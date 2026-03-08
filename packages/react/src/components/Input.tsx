@@ -1,10 +1,10 @@
 import * as React from "react";
 import { WidgetProps } from "../widget";
-import FormComponentWrapper from "./FormComponentWrapper";
+import { FormComponentWrapper } from "./FormComponentWrapper";
 /**
  * @internal
  */
-export default function Input(
+export function Input(
   props: WidgetProps<string, { prefix?: string } | undefined> & {
     type: string;
   },

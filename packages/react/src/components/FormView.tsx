@@ -8,16 +8,16 @@ import {
   getPrevPart,
 } from "../form";
 import { FormViewProps } from "../formview";
-import FormPager from "./FormPager";
+import { FormPager } from "./FormPager";
 import { ValidationError } from "../validator";
-import FormPart from "./FormPart";
-import FormWrapper from "./FormWrapper";
+import { FormPart } from "./FormPart";
+import { FormWrapper } from "./FormWrapper";
 
 /**
  * This component is used to render any form with the provided data.
  * @group React API
  */
-export default function FormView(props: FormViewProps): React.JSX.Element {
+export function FormView(props: FormViewProps): React.JSX.Element {
   const [formErrors, setFormErrors] = initFormErrors(
     props.errors,
     props.errorsChanged,

@@ -1,7 +1,7 @@
 import * as React from "react";
-import ValidatorInfo from "./ValidatorInfo";
+import { ValidatorInfo } from "./ValidatorInfo";
 import { attributes, FormComponent } from "../component";
-import ValidationErrors from "./ValidationErrors";
+import { ValidationErrors } from "./ValidationErrors";
 import { Theme } from "../theme";
 import Multiple from "../widgets/multiple/Multiple";
 import { ValidationError } from "../validator";
@@ -11,7 +11,7 @@ import { Labels } from "../form";
  * @parma propps the component properties.
  * @group React API
  */
-export default function FormComponentView(props: {
+export function FormComponentView(props: {
   /** The current component value. */
   value?: unknown;
   /**

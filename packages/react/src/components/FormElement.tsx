@@ -2,7 +2,7 @@ import * as React from "react";
 /**
  * @internal
  */
-export default function FormElement({
+export function FormElement({
   id,
   label,
   children,

@@ -6,7 +6,7 @@ import { ValidationError } from "../validator";
  * Render a list of validation errors.
  * @group React widget API
  */
-export default function ValidationErrors(props: {
+export function ValidationErrors(props: {
   errors: ValidationError[];
   classes: ThemeClasses;
 }): React.JSX.Element {
