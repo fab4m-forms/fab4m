@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FormViewProps } from "src/formview";
+import { FormViewProps } from "@fab4m/fab4m";
 import { FormView } from "./FormView";
 
 /**

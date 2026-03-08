@@ -1,15 +1,14 @@
 import * as React from "react";
 import {
   Form,
-  FormDataContext,
-  FormErrorsContext,
   formParts,
+  FormViewProps,
   getNextPart,
   getPrevPart,
-} from "../form";
-import { FormViewProps } from "../formview";
+  ValidationError,
+} from "@fab4m/fab4m";
+import { FormDataContext, FormErrorsContext } from "../context";
 import { FormPager } from "./FormPager";
-import { ValidationError } from "../validator";
 import { FormPart } from "./FormPart";
 import { FormWrapper } from "./FormWrapper";
 

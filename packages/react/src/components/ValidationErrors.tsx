@@ -1,6 +1,5 @@
 import * as React from "react";
-import { ThemeClasses } from "../theme";
-import { ValidationError } from "../validator";
+import { ThemeClasses, ValidationError } from "@fab4m/fab4m";
 
 /**
  * Render a list of validation errors.

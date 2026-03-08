@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Theme } from "../theme";
-import { FormDefinition } from "../form";
+import { FormDefinition, Theme } from "@fab4m/fab4m";
 /**
  * Renders the pager for multipage forms.
  * This component is mostly used internally, but it's useful if you need to create a custom

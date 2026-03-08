@@ -1,6 +1,5 @@
 import * as React from "react";
-import { FormComponent } from "../component";
-import { Theme } from "../theme";
+import { FormComponent, Theme } from "@fab4m/fab4m";
 /**
  * Render Validatior information for a specific component.
  * @group React widget API.

@@ -1,8 +1,12 @@
 import React from "react";
-import { FormComponentWithName } from "../component";
-import { componentErrors, Form } from "../form";
-import { filterComponents, filterData } from "../rule";
-import { ValidationError } from "../validator";
+import {
+  componentErrors,
+  filterComponents,
+  filterData,
+  Form,
+  FormComponentWithName,
+  ValidationError,
+} from "@fab4m/fab4m";
 import { FormComponentView } from "./FormComponentView";
 /**
  * Render a specific form part.

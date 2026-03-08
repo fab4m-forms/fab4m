@@ -1,8 +1,12 @@
 import React from "react";
-import { FormComponentWithName } from "../component";
-import { getNextPart, validateFormPart } from "../form";
-import { ValidationError } from "../validator";
-import { formDataDefinition, FormViewProps } from "../formview";
+import {
+  FormComponentWithName,
+  FormViewProps,
+  formDataDefinition,
+  getNextPart,
+  validateFormPart,
+  ValidationError,
+} from "@fab4m/fab4m";
 /**
  * This form wrapper component does a lot of heavy lifting with
  * managing the form and it's state. It's mostly for internal use,
@@ -25,7 +29,7 @@ export function FormWrapper(
   // Normally browsers don't seem to execute the submit handlers
   // when calling submit() directly on the form, but jsDOM does it
   // and should any other browser do it we need to handle that gracefully.
-  const submitted = React.useRef<boolean>(null);
+  const submitted = React.useRef(false);
   const data = props.data as Record<string, unknown>;
   let formProps: React.FormHTMLAttributes<HTMLFormElement> = {
     className: "form",
@@ -39,7 +43,7 @@ export function FormWrapper(
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     const next = getNextPart(props.parts, props.part, data);
     if (next === -1) {
-      props.form.triggerSubmit(e, data);
+      props.form.triggerSubmit(e.nativeEvent, data);
     } else {
       e.preventDefault();
       props.setPart(next);
@@ -68,7 +72,7 @@ export function FormWrapper(
       props.form,
       props.part,
       props.data as Record<string, unknown>,
-      e,
+      e.nativeEvent,
     );
     if (errors.length === 0) {
       if (props.errors && props.errors?.length > 0) {
@@ -79,7 +83,7 @@ export function FormWrapper(
         submitted.current = true;
         formRef.current?.submit();
       } else if (next === -1) {
-        props.form.triggerAfterSubmit(e, data);
+        props.form.triggerAfterSubmit(e.nativeEvent, data);
       }
     } else {
       props.setFormErrors(errors);

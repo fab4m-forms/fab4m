@@ -1,11 +1,14 @@
 import * as React from "react";
 import { ValidatorInfo } from "./ValidatorInfo";
-import { attributes, FormComponent } from "../component";
+import {
+  attributes,
+  FormComponent,
+  Labels,
+  Theme,
+  ValidationError,
+} from "@fab4m/fab4m";
 import { ValidationErrors } from "./ValidationErrors";
-import { Theme } from "../theme";
 import Multiple from "../widgets/multiple/Multiple";
-import { ValidationError } from "../validator";
-import { Labels } from "../form";
 /**
  * Render a stand-alone component.
  * @parma propps the component properties.
