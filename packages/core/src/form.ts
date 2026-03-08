@@ -3,7 +3,6 @@
  * @group Form API
  */
 
-import { createContext, useContext } from "react";
 import {
   FormComponent,
   FormComponentWithName,
@@ -489,18 +488,6 @@ export function getPrevPart(
   return getPrevPart(parts, prevPart, data);
 }
 
-/**
- * The form data react context stores the form data so it can be accessed across the whole form.
- * @group React widget API
- */
-export const FormDataContext = createContext({} as Record<string, unknown>);
-
-/**
- * The form errros react context stores the form errors, so it can be access across the whole form.
- * @group React widget API
- */
-export const FormErrorsContext = createContext([] as ValidationError[]);
-
 export function componentsListFromObject<Type>(
   components: Components<Type>,
 ): FormComponentsList {
@@ -537,21 +524,6 @@ export function variantFromDefinition(
     rule: definition[0],
     component: { name, ...definition[1] },
   };
-}
-/**
- * This hook can be used by form widgets to access all of the form data.
- *  @group React widget API
- */
-export function useFormData(): Record<string, unknown> {
-  return useContext(FormDataContext);
-}
-
-/**
- * This hook can be used by form widgets to access all of the form errors.
- *  @group React widget API
- */
-export function useFormErrors(): ValidationError[] {
-  return useContext(FormErrorsContext);
 }
 
 /**
