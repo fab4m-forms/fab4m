@@ -1,18 +1,19 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { MultipleSettings } from ".";
-import FormComponentView from "../../components/FormComponentView";
-import { MultipleWidgetProps } from "../../widget";
-import { FormComponent } from "../../component";
-import ValidationErrors from "../../components/ValidationErrors";
-import { componentErrors } from "../../form";
+import {
+  componentErrors,
+  MultipleSettings,
+  MultipleWidgetProps,
+} from "@fab4m/fab4m";
+import { FormComponentView } from "../../components/FormComponentView";
+import { ValidationErrors } from "../../components/ValidationErrors";
 /**
  * The default Multiple widget.
  * @group React multiple widgets
  */
-function Multiple(
+export default function Multiple(
   props: MultipleWidgetProps<unknown, MultipleSettings | undefined>,
-) {
+): React.JSX.Element {
   const [items, changeItems] = useState<Array<unknown>>(props.value ?? []);
   useEffect(() => {
     changeItems(props.value ?? defaultItems(props.component));
@@ -36,7 +37,7 @@ function Multiple(
         <div className={props.theme.classes.multipleItemWrapper}>
           <FormComponentView
             theme={props.theme}
-            component={props.component as FormComponent}
+            component={props.component}
             value={value}
             index={index}
             errors={props.errors && componentErrors(`/${index}`, props.errors)}
@@ -67,7 +68,7 @@ function Multiple(
           <div className={props.theme.classes.multipleActions}>
             <button
               className={props.theme.classes.removeItem}
-              type={"button"}
+              type="button"
               onClick={removeValue}
             >
               {props.settings?.removeItemLabel ?? "Remove"}
@@ -111,13 +112,11 @@ function Multiple(
   );
 }
 
-function defaultItems(component: FormComponent) {
+function defaultItems(component: { minItems?: number }): unknown[] {
   const noItems = component.minItems ?? 0;
-  const values = [];
+  const values: unknown[] = [];
   for (let i = 0; i < noItems; i++) {
     values.push(undefined);
   }
   return values;
 }
-
-export default Multiple as React.FC;

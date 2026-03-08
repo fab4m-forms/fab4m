@@ -1,16 +1,15 @@
 import * as React from "react";
 import { useState } from "react";
-import { FormComponent } from "../../component";
-import { TagsSettings } from ".";
-import FormComponentView from "../../components/FormComponentView";
-import { MultipleWidgetProps } from "../../widget";
 import {
   findOption,
   isOptionGroup,
+  MultipleWidgetProps,
   optionValue,
   SelectWidgetSettings,
-} from "../options";
-import ValidationErrors from "../../components/ValidationErrors";
+  TagsSettings,
+} from "@fab4m/fab4m";
+import { FormComponentView } from "../../components/FormComponentView";
+import { ValidationErrors } from "../../components/ValidationErrors";
 /**
  * The Tags react widget.
  * @group React multiple widgets
@@ -54,7 +53,7 @@ export default function Tags<Value>(
         {!props.component.disabled && (
           <button
             className={props.theme.classes.removeTag}
-            type={"button"}
+            type="button"
             onClick={removeValue}
           >
             {settings.removeItemLabel}
@@ -84,9 +83,7 @@ export default function Tags<Value>(
               hideLabel={true}
               name={props.name}
               theme={props.theme}
-              component={
-                alterComponent(props.component, props.value) as FormComponent
-              }
+              component={alterComponent(props.component, props.value)}
             />
             {!settings.addOnChange && (
               <button
@@ -114,11 +111,15 @@ export default function Tags<Value>(
 }
 
 function getDisplayValue<Value>(
-  component: FormComponent<Value>,
+  component: {
+    widget: { type: { name: string }; settings: any };
+  },
   value: Value,
 ): string | number | React.ReactNode | undefined {
-  const validValue = (value: Value) =>
-    typeof value === "number" || typeof value === "string" ? value : undefined;
+  const validValue = (valueToValidate: Value) =>
+    typeof valueToValidate === "number" || typeof valueToValidate === "string"
+      ? valueToValidate
+      : undefined;
   if (component.widget.type.name !== "select") {
     return validValue(value);
   }
@@ -131,9 +132,9 @@ function getDisplayValue<Value>(
 }
 
 function alterComponent<Value>(
-  component: FormComponent<Value>,
+  component: any,
   values: Value[] | undefined,
-): FormComponent<Value> {
+): any {
   // We need to clone the relevant bits so that we don't break the
   // original objects.
   const alteredComponent = {

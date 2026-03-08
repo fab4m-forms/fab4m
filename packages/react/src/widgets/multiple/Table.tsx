@@ -1,19 +1,18 @@
 import * as React from "react";
-import { TableSettings } from ".";
-import { MultipleWidgetProps } from "../../widget";
-import ValidationErrors from "../../components/ValidationErrors";
-import { filterComponents } from "../../rule";
 import {
-  FormComponent,
-  FormComponentVariant,
-  FormComponentView,
-  FormComponentWithName,
-  FormComponentWrapper,
-  Labels,
-  Theme,
   componentErrors,
-  useFormData,
-} from "../..";
+  filterComponents,
+  FormComponentVariant,
+  Labels,
+  MultipleWidgetProps,
+  TableSettings,
+  Theme,
+  FormComponent,
+} from "@fab4m/fab4m";
+import { FormComponentView } from "../../components/FormComponentView";
+import { FormComponentWrapper } from "../../components/FormComponentWrapper";
+import { ValidationErrors } from "../../components/ValidationErrors";
+import { useFormData } from "../../hooks";
 
 /**
  * The table react widget.
@@ -37,7 +36,7 @@ export default function Table(
       false,
       value,
     );
-    const cols = props.component.components?.map((c, i) => {
+    const cols = props.component.components?.map((component, i) => {
       return (
         <RowCol
           {...props}
@@ -47,7 +46,7 @@ export default function Table(
           index={index}
           colIndex={i}
           value={value}
-          component={c}
+          component={component}
         />
       );
     });
@@ -58,7 +57,7 @@ export default function Table(
           {!props.component.disabled && (
             <button
               className={props.theme.classes.removeItem}
-              type={"button"}
+              type="button"
               onClick={removeValue}
             >
               {props.settings.removeItemLabel ?? "Remove"}
@@ -74,13 +73,13 @@ export default function Table(
         <table className={props.theme.classes.table}>
           <thead>
             <tr className={props.theme.classes.headTr}>
-              {props.component.components?.map((c, i) => (
+              {props.component.components?.map((component, i) => (
                 <HeaderCol
                   theme={props.theme}
                   labels={props.labels}
                   settings={props.settings}
                   index={i}
-                  component={c}
+                  component={component}
                   key={i}
                 />
               ))}
@@ -120,13 +119,13 @@ function HeaderCol(props: {
   index: number;
   settings: TableSettings;
   component: FormComponent | FormComponentVariant[];
-}) {
+}): React.JSX.Element {
   const component = Array.isArray(props.component)
     ? props.component[0].component
     : props.component;
   const content = (
     <>
-      <span id={"label-" + component.name}>{component.label}</span>
+      <span id={`label-${component.name}`}>{component.label}</span>
       {component.required && (
         <span
           className={props.theme.classes.requiredIndicator}
@@ -139,27 +138,32 @@ function HeaderCol(props: {
   );
 
   return props.settings.headerColumn ? (
-    props.settings.headerColumn({
-      props: { className: props.theme.classes.th, children: content },
-      index: props.index,
-      component: component,
-    })
+    <>
+      {props.settings.headerColumn({
+        props: { className: props.theme.classes.th, children: content },
+        index: props.index,
+        component: component as never,
+      })}
+    </>
   ) : (
     <th className={props.theme.classes.th}>{content}</th>
   );
 }
 
 function RowCol(
-  props: Omit<MultipleWidgetProps, "value" | "component"> & {
+  props: Omit<
+    MultipleWidgetProps<unknown, TableSettings>,
+    "value" | "component"
+  > & {
     index: number;
     colIndex: number;
     settings: TableSettings;
-    component: FormComponentVariant[] | FormComponent;
-    components: FormComponentWithName[];
+    component: any;
+    components: Array<{ name: string }>;
     items: Array<Record<string, unknown>>;
     value: Record<string, unknown>;
   },
-) {
+): React.JSX.Element {
   const component = Array.isArray(props.component)
     ? props.component[0].component
     : props.component;
@@ -183,16 +187,20 @@ function RowCol(
       errors={props.errors && componentErrors(`/${props.index}`, props.errors)}
       theme={props.theme}
       ssr={props.ssr}
-      onChange={(value) => changeChildValue(component.name ?? "", value)}
-      component={match}
+      onChange={(value: unknown) =>
+        changeChildValue(component.name ?? "", value)
+      }
+      component={match as never}
     />
   ) : null;
   return props.settings.rowColumn ? (
-    props.settings.rowColumn({
-      props: { className: props.theme.classes.th, children: content },
-      index: props.colIndex,
-      component: match ?? component,
-    })
+    <>
+      {props.settings.rowColumn({
+        props: { className: props.theme.classes.th, children: content },
+        index: props.colIndex,
+        component: (match ?? component) as never,
+      })}
+    </>
   ) : (
     <td className={props.theme.classes.td}>{content}</td>
   );
