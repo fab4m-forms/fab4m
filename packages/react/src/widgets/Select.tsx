@@ -1,22 +1,25 @@
 import * as React from "react";
-import FormComponentWrapper from "../components/FormComponentWrapper";
-import { WidgetProps } from "../widget";
 import {
   Option,
   OptionGroup,
   SelectWidgetSettings,
   isOptionGroup,
   optionValue,
-} from "./options";
-type OptionsValue = "string" | "number";
+  WidgetProps,
+} from "@fab4m/fab4m";
+import { FormComponentWrapper } from "../components/FormComponentWrapper";
 
-function renderOption<OptionsType extends OptionsValue>(
+type OptionValue = string | number;
+
+function renderOption<OptionsType extends OptionValue>(
   option: Option<OptionsType> | OptionGroup<OptionsType>,
   index: number,
-) {
+): React.JSX.Element {
   return isOptionGroup(option) ? (
     <optgroup key={index} label={option[0]}>
-      {option[1].map(renderOption)}
+      {option[1].map((childOption, childIndex) =>
+        renderOption(childOption, childIndex),
+      )}
     </optgroup>
   ) : (
     <option key={index} value={optionValue(option)}>
@@ -28,24 +31,26 @@ function renderOption<OptionsType extends OptionsValue>(
  * Renders a select html element with the options provided.
  * @group React widgets
  */
-function Select<OptionsType extends OptionsValue>(
+export function Select<OptionsType extends OptionValue>(
   props: WidgetProps<OptionsType, SelectWidgetSettings<OptionsType>>,
-) {
+): React.JSX.Element {
   const classes = props.theme.classes;
-  const options = props.settings.options.map(renderOption);
+  const options = props.settings.options.map((option, index) =>
+    renderOption(option, index),
+  );
   const change = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    let value;
+    let value: OptionsType;
     switch (props.component.type.dataType) {
       case "integer":
-        value = parseInt(e.target.value, 10);
+        value = parseInt(e.target.value, 10) as OptionsType;
         break;
       case "float":
-        value = parseFloat(e.target.value);
+        value = parseFloat(e.target.value) as OptionsType;
         break;
       default:
-        value = e.target.value;
+        value = e.target.value as OptionsType;
     }
-    props.onChange(value as OptionsType);
+    props.onChange(value);
   };
   return (
     <FormComponentWrapper {...props}>
@@ -69,5 +74,3 @@ function Select<OptionsType extends OptionsValue>(
     </FormComponentWrapper>
   );
 }
-
-export default Select as React.FC;

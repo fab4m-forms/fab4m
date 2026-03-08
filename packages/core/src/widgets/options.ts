@@ -32,7 +32,7 @@ export function isOptionGroup<OptionsType>(
  * Get the option value from an option.
  * @group Internal React API
  */
-export function optionValue(option: Option<unknown>) {
+export function optionValue<Value>(option: Option<Value>): Value {
   return Array.isArray(option) ? option[1] : option;
 }
 
