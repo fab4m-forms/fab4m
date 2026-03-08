@@ -10,6 +10,8 @@ export * from "./types/pagebreak";
 export * from "./types/file";
 export * from "./types/submit";
 export * from "./schema";
+export * from "./component";
+export * from "./formview";
 export * from "./widget";
 export * from "./theme";
 export * from "./validator";
