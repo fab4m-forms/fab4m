@@ -4,7 +4,7 @@ import {
   multipleWidget,
   MultipleWidgetType,
 } from "../../widget";
-import { FormComponent } from "src/component";
+import { FormComponent } from "../../component";
 
 /**
  * Settings type definition for multiple widgets
