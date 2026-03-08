@@ -1,3 +1,6 @@
+import TextArea from "./widgets/TextArea";
+import TextField from "./widgets/TextField";
+
 export { FormComponentView } from "./components/FormComponentView";
 export { FormComponentWrapper } from "./components/FormComponentWrapper";
 export { FormElement } from "./components/FormElement";

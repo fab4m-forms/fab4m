@@ -6,9 +6,9 @@ import {
   textAreaWidget,
   basic,
   textAreaField,
-} from "../../src";
+} from "@fab4m/fab4m";
 import { inputElementOk } from "../util";
-import FormComponentView from "../../src/components/FormComponentView";
+import { FormComponentView } from "../../src/components/FormComponentView";
 
 describe("text field", () => {
   const textfield = textField({

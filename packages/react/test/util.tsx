@@ -1,6 +1,7 @@
 import * as React from "react";
-import { basic, FormComponentView, FormComponent } from "../src";
+import { basic, FormComponent } from "@fab4m/fab4m";
 import { render, cleanup } from "@testing-library/react";
+import { FormComponentView } from "../src";
 type FormElement = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
 const changeData = () => {

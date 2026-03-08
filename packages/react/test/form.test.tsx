@@ -8,9 +8,9 @@ import {
   textFieldWidget,
   fileField,
   group,
-  FormView,
   ValidationError,
-} from "../src";
+} from "@fab4m/fab4m";
+import { FormView } from "../src";
 
 describe("Form", () => {
   window.HTMLFormElement.prototype.submit = () => {

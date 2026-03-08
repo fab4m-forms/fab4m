@@ -9,6 +9,8 @@ import {
 } from "@fab4m/fab4m";
 import { ValidationErrors } from "./ValidationErrors";
 import Multiple from "../widgets/multiple/Multiple";
+import { widgetComponents } from "../widgetComponents";
+
 /**
  * Render a stand-alone component.
  * @parma propps the component properties.
@@ -69,8 +71,10 @@ export function FormComponentView(props: {
     ...(props.attributes ?? {}),
     ...attributes(props.component),
   };
+
   const id = props.id ?? props.name;
   if (props.component.multiple && typeof props.index === "undefined") {
+    return null;
     const MultipleWidget = props.component.multipleWidget
       ? props.component.multipleWidget.type.widget
       : Multiple;
@@ -91,9 +95,15 @@ export function FormComponentView(props: {
       />
     );
   }
+  if (!widgetComponents[props.component.widget.type.name]) {
+    throw new Error(
+      `No component for widget ${props.component.widget.type.name}`,
+    );
+  }
+  const Widget = widgetComponents[props.component.widget.type.name];
   return (
     <div className={props.theme.classes.componentWrapper}>
-      <props.component.widget.type.widget
+      <Widget
         component={props.component}
         value={props.value}
         settings={props.component.widget.settings}
