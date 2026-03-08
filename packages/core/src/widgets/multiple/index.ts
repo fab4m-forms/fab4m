@@ -4,9 +4,6 @@ import {
   multipleWidget,
   MultipleWidgetType,
 } from "../../widget";
-import Multiple from "./Multiple";
-import Table from "./Table";
-import Tags from "./Tags";
 import { FormComponent } from "src/component";
 
 /**
@@ -30,7 +27,6 @@ export const defaultMultipleWidgetType: MultipleWidgetType<
 > = {
   name: "multiple",
   title: "Multiple values",
-  widget: Multiple,
   init: (settings) => defaultMultipleWidget(settings),
 };
 
@@ -100,7 +96,6 @@ export const tagsWidgetType: MultipleWidgetType<any, TagsSettings | undefined> =
   {
     name: "tags",
     title: "Multiple items as tags",
-    widget: Tags,
     init: (settings) => tagsWidget(settings),
   };
 
@@ -142,7 +137,6 @@ export interface TableSettings extends MultipleSettings {
 export const tableWidgetType: MultipleWidgetType<any, TableSettings> = {
   name: "table",
   title: "Table",
-  widget: Table,
   init: (settings) => tableWidget(settings),
 };
 

@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { DependencyList } from "react";
 import { Form } from "@fab4m/fab4m";
+import { FormDataContext, FormErrorsContext } from "./context";
 
 /**
  * This hook is useful if you need to recreate your form inside of a react component.
@@ -16,4 +17,20 @@ export function useForm<DataType>(
 ): Form<DataType> {
   // The form only needs to be created every time any of the inputs change.
   return useMemo(creator, dependencies);
+}
+
+/**
+ * This hook can be used by form widgets to access all of the form data.
+ *  @group React widget API
+ */
+export function useFormData(): Record<string, unknown> {
+  return useContext(FormDataContext);
+}
+
+/**
+ * This hook can be used by form widgets to access all of the form errors.
+ *  @group React widget API
+ */
+export function useFormErrors(): ValidationError[] {
+  return useContext(FormErrorsContext);
 }
