@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Input, WidgetProps } from "@fab4m/fab4m";
-import { URLFieldWidgetSettings } from "@fab4m/fab4m";
+import { URLFieldWidgetSettings, WidgetProps } from "@fab4m/fab4m";
+import { Input } from "../components/Input";
 
 /**
  * Link componrent that renders a HTML input with the type url.

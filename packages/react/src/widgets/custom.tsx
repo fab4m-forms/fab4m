@@ -1,12 +1,12 @@
 import * as React from "react";
 import {
-  multipleWidget,
   MultipleWidgetProps,
   MultipleWidgetType,
-  widget,
+  multipleWidget,
   WidgetProps,
   WidgetType,
-} from "../widget";
+  widget,
+} from "@fab4m/fab4m";
 
 type CustomWidget<ValueType> = React.FunctionComponent<
   WidgetProps<ValueType, CustomWidget<ValueType>>

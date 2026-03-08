@@ -1,5 +1,6 @@
 import * as React from "react";
-import { FormComponentWrapper, WidgetProps } from "@fab4m/fab4m";
+import { WidgetProps } from "@fab4m/fab4m";
+import { FormComponentWrapper } from "../components/FormComponentWrapper";
 
 /**
  * A react component that renders an input with the type "file".

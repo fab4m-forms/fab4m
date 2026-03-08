@@ -1,3 +1,4 @@
+import * as React from "react";
 import { WidgetProps } from "@fab4m/fab4m";
 
 /**
@@ -6,7 +7,7 @@ import { WidgetProps } from "@fab4m/fab4m";
  */
 export default function HiddenField(
   props: WidgetProps<string | number, undefined>,
-) {
+): React.JSX.Element {
   const component = props.component;
   return (
     <input

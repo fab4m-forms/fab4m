@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ChangeEvent, useEffect, useState } from "react";
-import { FormComponentWrapper, WidgetProps } from "@fab4m/fab4m";
-import { NumberWidgetSettings } from "@fab4m/fab4m";
+import { NumberWidgetSettings, WidgetProps } from "@fab4m/fab4m";
+import { FormComponentWrapper } from "../components/FormComponentWrapper";
 
 /**
  * The number field widget component renders a number input.

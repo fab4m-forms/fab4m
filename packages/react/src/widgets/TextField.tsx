@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Input, WidgetProps } from "@fab4m/fab4m";
-import { TextFieldWidgetSettings } from "@fab4m/fab4m";
+import { TextFieldWidgetSettings, WidgetProps } from "@fab4m/fab4m";
+import { Input } from "../components/Input";
 
 /**
  * The text field widget component renders a text input.
