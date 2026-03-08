@@ -1,12 +1,12 @@
 import * as React from "react";
 import {
   componentErrors,
-  FormDataContext,
-  FormComponentView,
-  useFormData,
+  filterComponents,
   WidgetProps,
 } from "@fab4m/fab4m";
-import { filterComponents } from "@fab4m/fab4m";
+import { FormDataContext } from "../context";
+import { useFormData } from "../hooks";
+import { FormComponentView } from "../components/FormComponentView";
 
 /**
  * Helper react component to render children of a component.
@@ -49,8 +49,8 @@ export default function GroupChildren(
         errors={
           props.errors && componentErrors(`/${component.name}`, props.errors)
         }
-        onChange={(value) =>
-          component.name && changeChildValue(component.name, value)
+        onChange={(changedValue: unknown) =>
+          component.name && changeChildValue(component.name, changedValue)
         }
         theme={props.theme}
       />
