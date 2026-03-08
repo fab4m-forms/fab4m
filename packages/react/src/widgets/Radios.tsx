@@ -1,18 +1,20 @@
 import * as React from "react";
-import FormComponentWrapper from "../components/FormComponentWrapper";
-import { WidgetProps } from "../widget";
-import { Option, optionValue } from "./options";
+import { Option, optionValue, WidgetProps } from "@fab4m/fab4m";
+import { FormComponentWrapper } from "../components/FormComponentWrapper";
+
 /**
  * The Radios widget renders a series of radio input widget for each option.
  * @group React widgets
  */
-function Radios<OptionsType extends string | number | React.ReactElement>(
+export default function Radios<
+  OptionsType extends string | number | React.ReactElement,
+>(
   props: WidgetProps<OptionsType, Option<OptionsType>[]>,
-) {
+): React.JSX.Element {
   const classes = props.theme.classes;
-  const options = props.settings.map((option, index) => {
+  const options = props.settings.map((option: Option<OptionsType>, index) => {
     const id = `${props.id}-${index}`;
-    const value = optionValue(option);
+    const value = optionValue(option) as OptionsType;
     let elementValue: string | number | undefined;
     if (typeof value === "string" || typeof value === "number") {
       elementValue = value;
@@ -39,5 +41,3 @@ function Radios<OptionsType extends string | number | React.ReactElement>(
     </FormComponentWrapper>
   );
 }
-
-export default Radios as React.FC;
