@@ -67,9 +67,9 @@ export const submitWidgetType: SubmitWidgetType = {
 export function submitWidget(settings: SubmitWidgetSettings): SubmitWidget {
   return widget<unknown, SubmitWidgetSettings>({
     type: {
-      name: "content",
-      title: "Content",
-      components: ["content"],
+      name: "submit",
+      title: "Submit",
+      components: ["submit"],
     },
     settings: settings,
   });
