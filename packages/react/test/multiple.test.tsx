@@ -1,22 +1,23 @@
 import * as React from "react";
 import "@testing-library/jest-dom";
-import { vi } from "vitest";
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import {
+  vi } from "vitest";
+import { fireEvent,
+  waitFor,
+} from "@testing-library/react";
 import {
   textField,
   basic,
   FormComponentView,
   createForm,
-  generateSchema,
-  SchemaProperty,
   allowedValues,
   FormView,
   group,
   defaultMultipleWidget,
   StatefulFormView,
 } from "../src";
-import { getFormElement } from "./util";
-import { validate } from "../src/schemaValidator";
+import { getFormElement, renderWithProvider } from "./util";
+
 
 describe("Multiple fields", () => {
   const multipleText = textField({
@@ -30,7 +31,7 @@ describe("Multiple fields", () => {
     data = value as string[];
   };
   test("Multiple items", async () => {
-    const { findByText, findAllByLabelText, findAllByText } = render(
+    const { findByText, findAllByLabelText, findAllByText } = renderWithProvider(
       <FormComponentView
         name="field1"
         onChange={changeData}
@@ -120,7 +121,7 @@ describe("Multiple fields", () => {
         },
       ),
     });
-    const { findAllByLabelText, findByText, container } = render(
+    const { findAllByLabelText, findByText, container } = renderWithProvider(
       <FormView
         form={form}
         data={{
@@ -165,7 +166,7 @@ describe("Multiple fields", () => {
         multiple: true,
       }),
     });
-    const { findAllByText } = render(
+    const { findAllByText } = renderWithProvider(
       <FormView form={form} data={{ multipleLabels: ["First", "Second"] }} />,
     );
     expect(await (await findAllByText("Description")).length).toBe(1);
@@ -180,42 +181,17 @@ describe("Multiple fields", () => {
         multipleWidget: defaultMultipleWidget({ multipleLabels: true }),
       }),
     });
-    const { findAllByText } = render(
+    const { findAllByText } = renderWithProvider(
       <FormView form={form} data={{ multipleLabels: ["First", "Second"] }} />,
     );
     expect(await (await findAllByText("Multiple labels")).length).toBe(2);
   });
 
-  test("Multiple items schema", async () => {
-    const form = createForm();
-    form.add(multipleText);
-    form.add(
-      textField({
-        label: "Not multiple",
-        name: "not_multiple",
-      }),
-    );
-    const schema = generateSchema(form);
-    expect(schema.properties.not_multiple.type).toBe("string");
-    expect(schema.properties.field1.type).toBe("array");
-    if (schema.properties.field1.type === "array") {
-      expect((schema.properties.field1.items as SchemaProperty).type).toBe(
-        "string",
-      );
-    }
-    const valid = validate(form, {
-      field1: ["One", "Two", "Three"],
-      not_multiple: "Text",
-    });
-    const invalid = validate(form, { field1: "wat", not_multiple: "Text" });
-    expect(valid.valid).toBe(true);
-    expect(invalid.valid).toBe(false);
-  });
   test("Min and max items in widget", async () => {
     multipleText.minItems = 2;
     multipleText.maxItems = 4;
     const { findByText, findAllByLabelText, queryByText, queryAllByText } =
-      render(
+      renderWithProvider(
         <FormComponentView
           name="field1"
           onChange={changeData}
@@ -251,7 +227,7 @@ describe("Multiple fields", () => {
       },
       { title: "Multiple form" },
     ).onSubmit(submit);
-    const { queryByText, findByRole } = render(
+    const { queryByText, findByRole } = renderWithProvider(
       <StatefulFormView form={form} data={{ multiple: [] }} />,
     );
     const formElement = await findByRole("form");
@@ -260,19 +236,5 @@ describe("Multiple fields", () => {
       expect(submit).toHaveBeenCalled();
       expect(queryByText("must have at least")).toBeNull();
     });
-  });
-  test("Min and max items schema", () => {
-    multipleText.minItems = 2;
-    multipleText.maxItems = 4;
-    const form = createForm();
-    form.add(multipleText);
-    const tooFew = validate(form, { field1: ["one"] });
-    const tooMany = validate(form, {
-      field1: ["one", "two", "three", "four", "five"],
-    });
-    const valid = validate(form, { field1: ["one", "two"] });
-    expect(tooFew.valid).toBe(false);
-    expect(tooMany.valid).toBe(false);
-    expect(valid.valid).toBe(true);
   });
 });

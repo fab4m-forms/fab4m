@@ -7,8 +7,9 @@ import {
   customWidget,
   customMultipleWidget,
 } from "../src";
-import { render } from "@testing-library/react";
 import React from "react";
+import { renderWithProvider } from "./util";
+
 
 describe("Custom widget", () => {
   const form = createForm({
@@ -57,7 +58,7 @@ describe("Custom widget", () => {
     }),
   });
   test("Custom widget", async () => {
-    const { findByLabelText, findByText } = render(
+    const { findByLabelText, findByText } = renderWithProvider(
       <StatefulFormView form={form} />,
     );
     expect(await findByLabelText("Field")).toHaveAttribute("id", "field");
@@ -69,7 +70,7 @@ describe("Custom widget", () => {
       field: "Test",
       multipleField: ["Test 1", "Test 2"],
     };
-    const { findByLabelText, findByText } = render(
+    const { findByLabelText, findByText } = renderWithProvider(
       <StatefulFormView form={form} data={value} />,
     );
     expect(await findByText("Custom multiple text")).toBeVisible();

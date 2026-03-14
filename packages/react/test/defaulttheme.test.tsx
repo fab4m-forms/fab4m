@@ -1,5 +1,5 @@
 import * as React from "react";
-import { render, waitFor } from "@testing-library/react";
+import { waitFor } from "@testing-library/react";
 import {
   textField,
   FormView,
@@ -7,6 +7,8 @@ import {
   setDefaultTheme,
   createForm,
 } from "../src";
+import { renderWithProvider } from "./util";
+
 
 describe("Default theme", () => {
   setDefaultTheme(bulma);
@@ -18,7 +20,7 @@ describe("Default theme", () => {
     }),
   });
   test("Different default theme", async () => {
-    const { findByLabelText } = render(
+    const { findByLabelText } = renderWithProvider(
       <FormView form={form} data={{ text: "" }} />,
     );
     const text = (await findByLabelText("Text field")) as HTMLInputElement;

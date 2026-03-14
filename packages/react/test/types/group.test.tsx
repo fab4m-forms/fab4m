@@ -1,29 +1,20 @@
 import * as React from "react";
 
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor } from "@testing-library/react";
 import {
   textField,
   basic,
   group,
   FormComponentView,
   createForm,
-  serialize,
-  unserialize,
-  textFieldType,
-  groupType,
   fieldsetWidget,
   equals,
   StatefulFormView,
-  textFieldWidgetType,
-  fieldsetWidgetType,
-  groupWidgetType,
   allowedValues,
   detailsWidget,
-  SerializedComponent,
-  SerializedComponentsList,
-  FormComponent,
 } from "../../src";
-import { getFormElement } from "../util";
+import { getFormElement, renderWithProvider } from "../util";
+
 interface GroupedData {
   field1: string;
   field2: string;
@@ -62,14 +53,8 @@ describe("groups", () => {
     data = value as GroupedData;
   };
 
-  function getComponents(
-    components: SerializedComponentsList,
-  ): SerializedComponent[] {
-    return components.filter((c) => !Array.isArray(c)) as SerializedComponent[];
-  }
-
   test("grouped items", async () => {
-    const { findByLabelText, findAllByLabelText } = render(
+    const { findByLabelText, findAllByLabelText } = renderWithProvider(
       <FormComponentView
         name="group"
         onChange={changeData}
@@ -95,7 +80,7 @@ describe("groups", () => {
 
   test("fieldset widget", async () => {
     groupItem.widget = fieldsetWidget();
-    const { findByLabelText, findByText } = render(
+    const { findByLabelText, findByText } = renderWithProvider(
       <FormComponentView
         name="group"
         onChange={changeData}
@@ -110,37 +95,6 @@ describe("groups", () => {
     expect(legend).toContainHTML("Group with fields");
     expect(field1.value).toBe("Text");
     expect(field2.value).toBe("Other text");
-  });
-
-  test("serialized group field form", async () => {
-    const form = createForm();
-    form.add(groupItem);
-    const serializedForm = serialize(form);
-    const components = getComponents(serializedForm.components);
-
-    expect(components[0].components).toBeDefined();
-    if (components[0].components) {
-      const groupComponents = components[0].components as SerializedComponent[];
-      expect(groupComponents[0].type).toBe("text");
-      expect(groupComponents[0].type).toBe("text");
-    }
-    const unserialized = unserialize(
-      serializedForm,
-      [groupType, textFieldType],
-      [basic],
-      [fieldsetWidgetType, groupWidgetType, textFieldWidgetType],
-      [],
-      [],
-      [],
-    );
-    const unserializedComponents = !Array.isArray(unserialized.components[0])
-      ? (unserialized.components[0].components as FormComponent[])
-      : [];
-    expect(unserializedComponents).toBeDefined();
-    if (unserializedComponents) {
-      expect(unserializedComponents[0].type.name).toBe("text");
-      expect(unserializedComponents[1].type.name).toBe("text");
-    }
   });
 
   test("Rules in grouped components", async () => {
@@ -160,7 +114,7 @@ describe("groups", () => {
         }),
       ]),
     );
-    const { queryByLabelText, findByLabelText } = render(
+    const { queryByLabelText, findByLabelText } = renderWithProvider(
       <StatefulFormView form={form} />,
     );
     expect(queryByLabelText("Inside group")).toBe(null);
@@ -186,7 +140,7 @@ describe("groups", () => {
         }),
       ]),
     );
-    const { queryByText, findByLabelText, container } = render(
+    const { queryByText, findByLabelText, container } = renderWithProvider(
       <StatefulFormView form={form} />,
     );
     const formElement = getFormElement(container);
@@ -215,7 +169,7 @@ describe("groups", () => {
     ),
   });
   test("Details widget", async () => {
-    const { queryByText, findByLabelText } = render(
+    const { queryByText, findByLabelText } = renderWithProvider(
       <StatefulFormView form={detailsForm} />,
     );
     expect(queryByText("Details label")).not.toBe(null);
@@ -224,7 +178,7 @@ describe("groups", () => {
   });
   test("Details widget with html summary", () => {
     widget.settings = { summary: <span data-testid="details-span"></span> };
-    const { queryByText, queryByTestId } = render(
+    const { queryByText, queryByTestId } = renderWithProvider(
       <StatefulFormView form={detailsForm} />,
     );
     expect(queryByText("Details label")).toBe(null);
@@ -234,7 +188,7 @@ describe("groups", () => {
     widget.settings = {
       summary: (data) => <span>label: {data?.field1}</span>,
     };
-    const { queryByText } = render(
+    const { queryByText } = renderWithProvider(
       <StatefulFormView
         form={detailsForm}
         data={{ group: { field1: "Value" } }}
@@ -246,7 +200,7 @@ describe("groups", () => {
     widget.settings = {
       open: true,
     };
-    const { findByLabelText } = render(
+    const { findByLabelText } = renderWithProvider(
       <StatefulFormView
         form={detailsForm}
         data={{ group: { field1: "Value" } }}

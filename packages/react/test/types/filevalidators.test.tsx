@@ -7,9 +7,13 @@ import {
   fileExtension,
   FormComponentWithName,
   mimeType,
-} from "../../src/index";
+  } from "../../src/index";
 import { vi } from "vitest";
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import { fireEvent,
+  waitFor,
+} from "@testing-library/react";
+import { renderWithProvider } from "../util";
+
 
 describe("Size validator", () => {
   window.HTMLFormElement.prototype.submit = () => {
@@ -30,7 +34,7 @@ describe("Size validator", () => {
 
   const data: Record<string, unknown> = {};
   test("undefined value", async () => {
-    const { getByText, queryByText } = render(
+    const { getByText, queryByText } = renderWithProvider(
       <FormView form={form} data={{}} />,
     );
     const submit = getByText("Save");
@@ -41,13 +45,13 @@ describe("Size validator", () => {
   });
   test("File size validator info", async () => {
     validator.settings.size = 5242880;
-    const { queryByText } = render(<FormView form={form} data={{}} />);
+    const { queryByText } = renderWithProvider(<FormView form={form} data={{}} />);
     expect(queryByText("Size: 5MB")).not.toBe(null);
     validator.settings.size = 5;
   });
   test("Large files arent allowed", async () => {
     data.size_validator = new File(["It's too long to handle"], "value.png");
-    const { getByText, queryByText } = render(
+    const { getByText, queryByText } = renderWithProvider(
       <FormView form={form} data={data} />,
     );
     const submit = getByText("Save");
@@ -58,7 +62,7 @@ describe("Size validator", () => {
   });
   test("Small files passes", async () => {
     data.size_validator = new File(["I"], "value.png");
-    const { getByText, queryByText } = render(
+    const { getByText, queryByText } = renderWithProvider(
       <FormView form={form} data={data} />,
     );
     const submit = getByText("Save");
@@ -88,7 +92,7 @@ describe("File extension validator", () => {
   );
   const data: Record<string, unknown> = {};
   test("undefined value", async () => {
-    const { getByText, queryByText } = render(
+    const { getByText, queryByText } = renderWithProvider(
       <FormView form={form} data={{}} />,
     );
     const submit = getByText("Save");
@@ -100,7 +104,7 @@ describe("File extension validator", () => {
 
   test("Disallowed file extension", async () => {
     data.extension_validator = new File(["exe file"], "value.exe");
-    const { getByText, queryByText } = render(
+    const { getByText, queryByText } = renderWithProvider(
       <FormView form={form} data={data} />,
     );
     const submit = getByText("Save");
@@ -114,7 +118,7 @@ describe("File extension validator", () => {
     const spy = vi.fn();
     form.onSubmit(spy);
     data.extension_validator = new File(["png file"], "value.png");
-    const { getByText, queryByText } = render(
+    const { getByText, queryByText } = renderWithProvider(
       <FormView form={form} data={data} />,
     );
     const submit = getByText("Save");
@@ -129,7 +133,7 @@ describe("File extension validator", () => {
     const spy = vi.fn();
     form.onSubmit(spy);
     data.extension_validator = new File(["png file"], "value.PNG");
-    const { getByText, queryByText } = render(
+    const { getByText, queryByText } = renderWithProvider(
       <FormView form={form} data={data} />,
     );
     const submit = getByText("Save");
@@ -159,7 +163,7 @@ describe("Mime type validator", () => {
   );
   const data: Record<string, unknown> = {};
   test("undefined value", async () => {
-    const { getByText, queryByText } = render(
+    const { getByText, queryByText } = renderWithProvider(
       <FormView form={form} data={{}} />,
     );
     const submit = getByText("Save");
@@ -172,7 +176,7 @@ describe("Mime type validator", () => {
     data.mime_validator = new File(["exe file"], "value.exe", {
       type: "application/vnd.microsoft.portable-executable.",
     });
-    const { getByText, queryByText } = render(
+    const { getByText, queryByText } = renderWithProvider(
       <FormView form={form} data={data} />,
     );
     const submit = getByText("Save");
@@ -185,7 +189,7 @@ describe("Mime type validator", () => {
     data.mime_validator = new File(["png file"], "value.png", {
       type: "image/png",
     });
-    const { getByText, queryByText } = render(
+    const { getByText, queryByText } = renderWithProvider(
       <FormView form={form} data={data} />,
     );
     const submit = getByText("Save");

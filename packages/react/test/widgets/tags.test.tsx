@@ -1,5 +1,5 @@
 import * as React from "react";
-import { render, fireEvent, waitFor, cleanup } from "@testing-library/react";
+import { fireEvent, waitFor, cleanup } from "@testing-library/react";
 import {
   basic,
   textField,
@@ -9,6 +9,8 @@ import {
   FormView,
   FormComponentView,
 } from "../../src";
+import { renderWithProvider } from "../util";
+
 
 describe("Tags", () => {
   afterEach(cleanup);
@@ -54,7 +56,7 @@ describe("Tags", () => {
   afterEach(() => form.removeEventListeners());
 
   const renderForm = async (data: unknown) => {
-    const { findByLabelText, queryByText, queryByLabelText } = render(
+    const { findByLabelText, queryByText, queryByLabelText } = renderWithProvider(
       <FormView data={data} form={form} />,
     );
     const optionsElement = (await findByLabelText(
@@ -143,7 +145,7 @@ describe("Tags", () => {
     const noOp = () => {
       // No-op
     };
-    const { queryByText, queryByLabelText } = render(
+    const { queryByText, queryByLabelText } = renderWithProvider(
       <FormComponentView
         theme={basic}
         name="options"

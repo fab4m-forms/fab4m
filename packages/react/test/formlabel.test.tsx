@@ -1,6 +1,7 @@
 import React from "react";
 import { screen, render } from "@testing-library/react";
-import { FormComponentView, textField, basic, FormComponent } from "../src";
+import { textField, basic, FormComponent } from "@fab4m/fab4m"
+import {FormComponentView} from "../src";
 
 test("Form label", async () => {
   const field = textField({ label: "My label" });

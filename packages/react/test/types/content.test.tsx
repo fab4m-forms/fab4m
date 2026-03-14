@@ -1,5 +1,5 @@
 import * as React from "react";
-import { render } from "@testing-library/react";
+
 import {
   basic,
   content,
@@ -9,6 +9,8 @@ import {
   textField,
 } from "../../src";
 import FormComponentView from "../../src/components/FormComponentView";
+import { renderWithProvider } from "../util";
+
 
 describe("Form content", () => {
   const field = content(
@@ -23,7 +25,7 @@ describe("Form content", () => {
     const changeData = (value: unknown) => {
       data = value as Record<string, unknown>;
     };
-    const { queryByText } = render(
+    const { queryByText } = renderWithProvider(
       <FormComponentView
         name="content"
         theme={basic}
@@ -47,7 +49,7 @@ describe("Form content", () => {
       }),
     });
     const data = { text: "Hello world" };
-    const { queryByText } = render(
+    const { queryByText } = renderWithProvider(
       <StatefulFormView form={form} data={data} />,
     );
     expect(queryByText("Hello world")).not.toBe(null);
@@ -65,7 +67,7 @@ describe("Form content", () => {
     const fn = () => {
       // no-op
     };
-    const { queryByText } = render(
+    const { queryByText } = renderWithProvider(
       <FormComponentView
         theme={basic}
         onChange={fn}

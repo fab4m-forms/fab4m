@@ -1,5 +1,5 @@
 import * as React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor } from "@testing-library/react";
 import {
   basic,
   textField,
@@ -10,7 +10,8 @@ import {
   FormComponentView,
   FormComponentWithName,
 } from "../../src";
-import { inputElementOk } from "../util";
+import { inputElementOk, renderWithProvider } from "../util";
+
 
 describe("Select", () => {
   const texts = textField({
@@ -34,7 +35,7 @@ describe("Select", () => {
     data = value;
   });
   test("Select choices", async () => {
-    const { findByLabelText, findByText } = render(
+    const { findByLabelText, findByText } = renderWithProvider(
       <FormView form={form} data={data} />,
     );
     const textElement = (await findByLabelText("Texts")) as HTMLSelectElement;
@@ -53,7 +54,7 @@ describe("Select", () => {
   });
 
   test("Custom not selected label", () => {
-    const { queryByText } = render(<FormView form={form} data={data} />);
+    const { queryByText } = renderWithProvider(<FormView form={form} data={data} />);
     expect(queryByText("- Pick one -")).not.toBeNull();
   });
 
@@ -69,7 +70,7 @@ describe("Select", () => {
     const noOp = () => {
       // No-op.
     };
-    const { container } = render(
+    const { container } = renderWithProvider(
       <FormComponentView
         name="groups"
         theme={basic}

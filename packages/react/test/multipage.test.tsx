@@ -1,6 +1,8 @@
 import * as React from "react";
-import { render } from "@testing-library/react";
+
 import { textField, createForm, equals, pageBreak, FormView, or } from "../src";
+import { renderWithProvider } from "./util";
+
 
 describe("Multi page", () => {
   const form = createForm(
@@ -39,7 +41,7 @@ describe("Multi page", () => {
     const data = {
       first: "wat",
     };
-    const { findByText } = render(
+    const { findByText } = renderWithProvider(
       <FormView disabled={true} data={data} form={form} />
     );
     const complete = (await findByText("Complete form")) as HTMLButtonElement;
@@ -49,7 +51,7 @@ describe("Multi page", () => {
     const data = {
       first: "first",
     };
-    const { findByText } = render(
+    const { findByText } = renderWithProvider(
       <FormView disabled={true} data={data} form={form} />
     );
     const complete = (await findByText("Next page")) as HTMLButtonElement;
@@ -63,7 +65,7 @@ describe("Multi page", () => {
     form.onSubmit((e) => {
       e.preventDefault();
     });
-    const screen = render(<StatefulFormView data={data} form={form} />);
+    const screen = renderWithProvider(<StatefulFormView data={data} form={form} />);
     fireEvent.click(screen.getByText("Next page"));
     await waitFor(() => {
       expect(screen.queryByLabelText("Second")).not.toBeNull();
@@ -114,7 +116,7 @@ describe("Multipage validation", () => {
   });
   test("Step-wise validation", async () => {
     const { findByLabelText, queryByLabelText, queryByText, container } =
-      render(<StatefulFormView data={{ before: "not_before" }} form={form} />);
+      renderWithProvider(<StatefulFormView data={{ before: "not_before" }} form={form} />);
     const formElement = getFormElement(container);
     fireEvent.submit(formElement);
     await waitFor(() => {
@@ -142,7 +144,7 @@ describe("Multipage validation", () => {
       }
       return [];
     });
-    const { queryByText, container, findByLabelText } = render(
+    const { queryByText, container, findByLabelText } = renderWithProvider(
       <StatefulFormView form={form} />
     );
     const formElement = getFormElement(container);
@@ -173,7 +175,7 @@ describe("Multipage validation", () => {
   });*/
 
   test("Hide submit", () => {
-    const { container } = render(
+    const { container } = renderWithProvider(
       <FormView
         hideSubmit={true}
         data={{ first: "first", second: "second", third: "third" }}

@@ -2,7 +2,6 @@ import * as React from "react";
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import { getFormElement } from "./util";
 import {
-  generateSchema,
   createForm,
   textField,
   textFieldWidget,
@@ -80,60 +79,6 @@ describe("Form", () => {
       },
     ),
   );
-
-  it("Form error when adding component with the same name", () => {
-    const testForm = createForm({});
-    const field = textField({
-      name: "otherfield",
-      label: "other field",
-    });
-    testForm.add(field);
-    expect(() => testForm.add(field)).toThrowError(
-      "A component with the same name already exists.",
-    );
-  });
-
-  it("Form shema", () => {
-    const schema = generateSchema(form);
-    expect(schema.description).toBe("description");
-    expect(schema.title).toBe("title");
-    expect(schema.properties).toHaveProperty("required_text");
-    expect(schema.properties.required_text.type).toBe("string");
-    expect(schema.properties.other_text.type).toBe("string");
-    expect(schema.properties).not.toHaveProperty("field_without_schema");
-    expect(schema.properties).toHaveProperty("group");
-    if (schema.properties.group && schema.properties.group.type === "object") {
-      expect(schema.properties.group.properties).not.toHaveProperty(
-        "required_field_without_schema",
-      );
-      expect(schema.properties.group.properties).toHaveProperty(
-        "required_group_text_field",
-      );
-      expect(schema.properties.group.type).toBe("object");
-
-      expect(schema.properties.group.required).toContain(
-        "required_group_text_field",
-      );
-
-      expect(schema.properties.group.required).not.toContain(
-        "group_field_without_schema",
-      );
-    }
-    expect(schema.properties).toHaveProperty("multiple");
-    if (schema.properties.multiple) {
-      expect(schema.properties.multiple.type).toBe("array");
-      if (schema.properties.multiple.type === "array") {
-        expect(schema.properties.multiple.minItems).toBe(2);
-        expect(schema.properties.multiple.maxItems).toBe(3);
-        if (!Array.isArray(schema.properties.multiple.items)) {
-          expect(schema.properties.multiple.items.type).toBe("string");
-        }
-      }
-    }
-    expect(schema.required).toContain("required_text");
-    expect(schema.required).not.toContain("other_text");
-    expect(schema.required).not.toContain("field_without_schema");
-  });
 
   it("Form rendering", () => {
     const { container, queryByText } = render(

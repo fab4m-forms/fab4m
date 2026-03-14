@@ -1,6 +1,5 @@
 import * as React from "react";
-import { getFormElement } from "./util";
-import { render } from "@testing-library/react";
+import { getFormElement, renderWithProvider } from "./util";
 
 import {
   booleanField,
@@ -13,6 +12,7 @@ import {
   equals,
   Components,
 } from "../src";
+
 
 describe("Form data unpacking", () => {
   const fields: Components<Record<string, any>> = {
@@ -75,7 +75,7 @@ describe("Form data unpacking", () => {
   };
 
   const getFormData = (renderData: Record<string, unknown>) => {
-    const { container } = render(<FormView form={form} data={renderData} />);
+    const { container } = renderWithProvider(<FormView form={form} data={renderData} />);
     const element = getFormElement(container);
     return new FormData(element);
   };

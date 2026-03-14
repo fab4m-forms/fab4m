@@ -1,5 +1,5 @@
 import * as React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor } from "@testing-library/react";
 import { vi } from "vitest";
 import {
   createForm,
@@ -7,6 +7,8 @@ import {
   textFieldWidget,
   StatefulFormView,
 } from "../src";
+import { renderWithProvider } from "./util";
+
 
 describe("Stateful Form", () => {
   interface FormData {
@@ -31,7 +33,7 @@ describe("Stateful Form", () => {
     const formSubmit = vi.fn(() => {
       // No-op.
     });
-    const { findByLabelText, container } = render(
+    const { findByLabelText, container } = renderWithProvider(
       <StatefulFormView form={form} />
     );
     const requiredText = (await findByLabelText(
@@ -71,7 +73,7 @@ describe("Stateful Form", () => {
     });
   });
   test("Form cleanup", async () => {
-    const { findByLabelText, container } = render(
+    const { findByLabelText, container } = renderWithProvider(
       <StatefulFormView form={form} />
     );
     const requiredText = (await findByLabelText(
@@ -95,7 +97,7 @@ describe("Stateful Form", () => {
   test("Stateful form view with on data change", async () => {
     const spy = vi.fn();
     form.onDataChange(spy);
-    const { findByLabelText } = render(<StatefulFormView form={form} />);
+    const { findByLabelText } = renderWithProvider(<StatefulFormView form={form} />);
     const element = (await findByLabelText(
       "Required text",
     )) as HTMLInputElement;

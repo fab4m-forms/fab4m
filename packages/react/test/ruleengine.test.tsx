@@ -16,6 +16,8 @@ import {
   group,
   StatefulFormView,
 } from "../src";
+import { renderWithProvider } from "./util";
+
 
 describe("Rule engine", () => {
   const form = createForm();
@@ -77,7 +79,7 @@ describe("Rule engine", () => {
       if (screen) {
         screen.unmount();
       }
-      return render(<FormView data={data} form={form} />);
+      return renderWithProvider(<FormView data={data} form={form} />);
     };
     const data = {
       first: "",
@@ -111,7 +113,7 @@ describe("Rule engine", () => {
     form.onDataChange((newData) => {
       data = newData;
     });
-    const screen = render(<FormView data={data} form={form} />);
+    const screen = renderWithProvider(<FormView data={data} form={form} />);
     const element = await screen.findByLabelText("First");
     fireEvent.input(element, {
       value: "some other text",
@@ -131,11 +133,11 @@ describe("Rule engine", () => {
       unreachable: "",
       complex: "",
     };
-    let screen = render(<FormView data={data} form={form} />);
+    let screen = renderWithProvider(<FormView data={data} form={form} />);
     expect(screen.queryByText("Complex")).toBeNull();
     data.second = "second";
     screen.unmount();
-    screen = render(<FormView data={data} form={form} />);
+    screen = renderWithProvider(<FormView data={data} form={form} />);
     expect(screen.queryByText("Complex")).not.toBeNull();
   });
 
@@ -167,7 +169,7 @@ describe("Rule engine", () => {
 
   test("Nested rules", async () => {
     const form = nestedForm();
-    const { findByLabelText, queryByLabelText } = render(
+    const { findByLabelText, queryByLabelText } = renderWithProvider(
       <StatefulFormView form={form} />,
     );
     expect(queryByLabelText("Depends on in group")).toBeNull();
@@ -191,7 +193,7 @@ describe("Rule engine", () => {
 
   test("Nested array rules", async () => {
     const form = nestedForm(true);
-    const { findByLabelText } = render(
+    const { findByLabelText } = renderWithProvider(
       <FormView
         form={form}
         data={{
@@ -206,7 +208,7 @@ describe("Rule engine", () => {
 
   test("Rule inside of multiple group", async () => {
     const form = nestedForm(true);
-    const { findByLabelText } = render(
+    const { findByLabelText } = renderWithProvider(
       <FormView
         form={form}
         data={{

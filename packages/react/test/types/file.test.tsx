@@ -1,5 +1,5 @@
 import * as React from "react";
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor } from "@testing-library/react";
 import {
   basic,
   createForm,
@@ -7,8 +7,9 @@ import {
   FormComponentWithName,
   StatefulFormView,
 } from "../../src";
-import { inputElementOk } from "../util";
+import { inputElementOk, renderWithProvider } from "../util";
 import FormComponentView from "../../src/components/FormComponentView";
+
 
 describe("upload field", () => {
   const field = fileField({
@@ -23,7 +24,7 @@ describe("upload field", () => {
     const changeData = (value: unknown) => {
       changedFile = value as File;
     };
-    const { getByLabelText } = render(
+    const { getByLabelText } = renderWithProvider(
       <FormComponentView
         name="file"
         theme={basic}
@@ -41,7 +42,7 @@ describe("upload field", () => {
   test("enctype on form", async () => {
     const form = createForm();
     form.add(field as FormComponentWithName);
-    const { container } = render(
+    const { container } = renderWithProvider(
       <StatefulFormView form={form}></StatefulFormView>,
     );
     expect(container.querySelector("form")?.getAttribute("enctype")).toBe(

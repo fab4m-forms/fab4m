@@ -1,5 +1,5 @@
 import * as React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, test, expect } from "vitest";
 import {
   textField,
@@ -14,6 +14,8 @@ import {
   defaultMultipleWidget,
   integerField,
 } from "../../src";
+import { renderWithProvider } from "../util";
+
 
 describe("Table widget", () => {
   const fieldGroup = group<Record<string, any>>(
@@ -62,19 +64,19 @@ describe("Table widget", () => {
     group: fieldGroup,
   });
   test("Table label", async () => {
-    render(<StatefulFormView form={form} />);
+    renderWithProvider(<StatefulFormView form={form} />);
     const text = await screen.findByText("Multiple group");
     expect(text).toBeDefined();
   });
   test("Table header", async () => {
     const data = { group: [{}] };
-    render(<StatefulFormView form={form} data={data} />);
+    renderWithProvider(<StatefulFormView form={form} data={data} />);
     await screen.findByRole("table");
     expect(screen.queryAllByRole("columnheader")).toHaveLength(6);
   });
   test("required field in header", async () => {
     const data = { group: [{}] };
-    render(<StatefulFormView form={form} data={data} />);
+    renderWithProvider(<StatefulFormView form={form} data={data} />);
     await screen.findByRole("table");
     expect(
       screen.getByRole("columnheader", { name: "First *" }),
@@ -82,32 +84,32 @@ describe("Table widget", () => {
   });
   test("Table row", async () => {
     const data = { group: [{}] };
-    render(<StatefulFormView form={form} data={data} />);
+    renderWithProvider(<StatefulFormView form={form} data={data} />);
     await screen.findByRole("table");
     expect(screen.queryAllByRole("row")).toHaveLength(2);
     expect(screen.getByLabelText("First")).toBeInTheDocument();
   });
   test("Conditional field missing", async () => {
     const data = { group: [{}] };
-    render(<StatefulFormView form={form} data={data} />);
+    renderWithProvider(<StatefulFormView form={form} data={data} />);
     await screen.findByRole("table");
     expect(screen.queryByLabelText("Third")).toBeNull();
   });
   test("Conditional field exists", async () => {
     const data = { group: [{ first: "first" }] };
-    render(<StatefulFormView form={form} data={data} />);
+    renderWithProvider(<StatefulFormView form={form} data={data} />);
     await screen.findByRole("table");
     expect(screen.getByLabelText("Third")).toBeInTheDocument();
   });
   test("Add a new row to the table", async () => {
-    render(<StatefulFormView form={form} />);
+    renderWithProvider(<StatefulFormView form={form} />);
     const button = await screen.findByRole("button", { name: "Add" });
     fireEvent.click(button);
     await screen.findByRole("table");
     expect(screen.getByLabelText("First")).toBeInTheDocument();
   });
   test("Remove a row from the table", async () => {
-    render(
+    renderWithProvider(
       <StatefulFormView
         form={form}
         data={{
@@ -135,7 +137,7 @@ describe("Table widget", () => {
         group = newData.group as Array<Record<string, unknown>>;
       }
     });
-    render(<StatefulFormView form={form} />);
+    renderWithProvider(<StatefulFormView form={form} />);
     const button = await screen.findByRole("button", { name: "Add" });
     fireEvent.click(button);
     const text = await screen.findByRole("textbox", { name: "First" });
@@ -167,7 +169,7 @@ describe("Table widget", () => {
     if (fieldGroup.multipleWidget) {
       fieldGroup.multipleWidget.settings = settings;
     }
-    render(<StatefulFormView form={form} data={{ group: [{}] }} />);
+    renderWithProvider(<StatefulFormView form={form} data={{ group: [{}] }} />);
     const columns = await screen.findAllByRole("columnheader");
     expect(columns[0]).toHaveClass("override index-0");
     expect(columns[0]).toHaveTextContent("Other column name");
@@ -187,7 +189,7 @@ describe("Table widget", () => {
     if (fieldGroup.multipleWidget) {
       fieldGroup.multipleWidget.settings = settings;
     }
-    render(
+    renderWithProvider(
       <StatefulFormView form={form} data={{ group: [{ first: "int" }] }} />,
     );
     const columns = await screen.findAllByRole("cell");
@@ -200,7 +202,7 @@ describe("Table widget", () => {
   });
 
   test("Multiple field", async () => {
-    render(<StatefulFormView form={form} data={{ group: [{}] }} />);
+    renderWithProvider(<StatefulFormView form={form} data={{ group: [{}] }} />);
     await screen.findByRole("table");
     expect(
       screen.getByRole("button", { name: "Add item inside table" }),

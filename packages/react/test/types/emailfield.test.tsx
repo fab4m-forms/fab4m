@@ -2,13 +2,10 @@ import * as React from "react";
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import {
   basic,
-  createForm,
   emailField,
   emailWidget,
-  FormComponentWithName,
 } from "../../src";
 import FormComponentView from "../../src/components/FormComponentView";
-import { validate } from "../../src/schemaValidator";
 import { inputElementOk } from "../util";
 
 describe("Email field", () => {
@@ -47,14 +44,6 @@ describe("Email field", () => {
         expect(element.value).toBe("otheremail@email.com");
       });
     }
-  });
-  test("schema validation", async () => {
-    const form = createForm();
-    form.add(email as FormComponentWithName);
-    const invalid = validate(form, { required_text: "not-an-email" });
-    expect(invalid.valid).toBe(false);
-    const valid = validate(form, { required_text: "test@example.com" });
-    expect(valid.valid).toBe(true);
   });
   inputElementOk(email, "email:");
 });

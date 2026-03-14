@@ -1,15 +1,14 @@
 import * as React from "react";
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor } from "@testing-library/react";
 import {
   textField,
   createForm,
   equals,
   FormView,
-  generateComponentSchema,
   StatefulFormView,
 } from "../../src";
-import { validate } from "../../src/schemaValidator";
-import { getFormElement } from "../util";
+import { getFormElement, renderWithProvider } from "../util";
+
 
 describe("Equals", () => {
   const form = createForm();
@@ -38,16 +37,16 @@ describe("Equals", () => {
     form.onSubmit((e) => {
       e.preventDefault();
     });
-    let screen = render(<FormView data={data} form={form} />);
+    let screen = renderWithProvider(<FormView data={data} form={form} />);
     expect(screen.queryByText("Second")).toBeNull();
     data.first = "first";
     screen.unmount();
-    screen = render(<FormView data={data} form={form} />);
+    screen = renderWithProvider(<FormView data={data} form={form} />);
     expect(screen.queryByText("Second")).not.toBeNull();
   });
 
   test("Form validator", async () => {
-    const { findByLabelText, queryByText, container } = render(
+    const { findByLabelText, queryByText, container } = renderWithProvider(
       <StatefulFormView form={form} />,
     );
     const formElement = getFormElement(container);
@@ -58,22 +57,5 @@ describe("Equals", () => {
     await waitFor(() => {
       expect(queryByText("Custom message with third")).not.toBeNull();
     });
-  });
-  test("Equals JSON schema", () => {
-    const schema = generateComponentSchema(third);
-    if (schema && schema.type === "string") {
-      expect(schema.const).toBe("third");
-    }
-  });
-  test("Equals JSON schema validation", () => {
-    const invalidData = { third: "nope" };
-    const validData = { third: "third" };
-    const conditionallyInvalidData = { first: "first", third: "third" };
-    const validResult = validate(form, validData);
-    const invalidResult = validate(form, invalidData);
-    const conditionallyInvalidResult = validate(form, conditionallyInvalidData);
-    expect(validResult.valid).toBe(true);
-    expect(invalidResult.valid).toBe(false);
-    expect(conditionallyInvalidResult.valid).toBe(false);
   });
 });

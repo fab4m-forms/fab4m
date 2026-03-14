@@ -1,5 +1,5 @@
 import * as React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor } from "@testing-library/react";
 import {
   textField,
   pageBreak,
@@ -7,6 +7,8 @@ import {
   StatefulFormView,
   generatePartSchemas,
 } from "../../src";
+import { renderWithProvider } from "../util";
+
 
 describe("Page break", () => {
   const form = createForm();
@@ -22,7 +24,7 @@ describe("Page break", () => {
     completed = false;
   });
   test("Interactive page break form", async () => {
-    const { queryByText, queryByLabelText, findByText } = render(
+    const { queryByText, queryByLabelText, findByText } = renderWithProvider(
       <StatefulFormView form={form} />,
     );
     expect(queryByText("Before page break")).toBeVisible();
@@ -50,12 +52,12 @@ describe("Page break", () => {
     });
   });
   test("Render form part", () => {
-    let screen = render(<StatefulFormView form={form} part={0} />);
+    let screen = renderWithProvider(<StatefulFormView form={form} part={0} />);
     expect(screen.queryByText("Before page break")).toBeVisible();
     expect(screen.queryByLabelText("After page break")).toBeNull();
     expect(screen.queryByText("Previous")).toBeNull();
     screen.unmount();
-    screen = render(<StatefulFormView form={form} part={1} />);
+    screen = renderWithProvider(<StatefulFormView form={form} part={1} />);
     expect(screen.queryByText("Before page break")).toBeNull();
     expect(screen.queryByLabelText("After page break")).toBeVisible();
     expect(screen.queryByText("Previous")).toBeVisible();

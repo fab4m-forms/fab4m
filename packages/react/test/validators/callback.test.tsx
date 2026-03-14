@@ -1,5 +1,5 @@
 import * as React from "react";
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor } from "@testing-library/react";
 import {
   textField,
   createForm,
@@ -7,7 +7,8 @@ import {
   FormView,
   StatefulFormView,
 } from "../../src";
-import { getFormElement } from "../util";
+import { getFormElement, renderWithProvider } from "../util";
+
 
 describe("Callback rules", () => {
   const form = createForm();
@@ -46,24 +47,24 @@ describe("Callback rules", () => {
   };
 
   test("Callback rule from value", async () => {
-    let screen = render(<FormView data={data} form={form} />);
+    let screen = renderWithProvider(<FormView data={data} form={form} />);
     expect(screen.queryByText("Second")).toBeNull();
     data.first = "test";
     screen.unmount();
-    screen = render(<FormView data={data} form={form} />);
+    screen = renderWithProvider(<FormView data={data} form={form} />);
     expect(screen.queryByText("Second")).not.toBeNull();
   });
 
   test("Callback rule without value", async () => {
-    let screen = render(<FormView data={data} form={form} />);
+    let screen = renderWithProvider(<FormView data={data} form={form} />);
     expect(screen.queryByText("Third")).toBeNull();
     screen.unmount();
     id = 1;
-    screen = render(<FormView data={data} form={form} />);
+    screen = renderWithProvider(<FormView data={data} form={form} />);
     expect(screen.queryByText("Third")).not.toBeNull();
   });
   test("Form validator", async () => {
-    const { findByLabelText, queryByText, container } = render(
+    const { findByLabelText, queryByText, container } = renderWithProvider(
       <StatefulFormView form={form} />,
     );
     const formElement = getFormElement(container);

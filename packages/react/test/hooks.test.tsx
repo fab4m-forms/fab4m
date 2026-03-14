@@ -1,5 +1,5 @@
 import * as React from "react";
-import { render, waitFor } from "@testing-library/react";
+import { waitFor } from "@testing-library/react";
 import {
   textField,
   textFieldWidget,
@@ -7,6 +7,8 @@ import {
   createForm,
   FormView,
 } from "../src";
+import { renderWithProvider } from "./util";
+
 
 describe("Hooks", () => {
   interface FormData {
@@ -33,7 +35,7 @@ describe("Hooks", () => {
     return <FormView form={form} data={props.data} />;
   }
   test("Form using hook", async () => {
-    const { findByLabelText } = render(
+    const { findByLabelText } = renderWithProvider(
       <FormComponent
         data={{ requiredText: "Required text", otherText: "Other text" }}
       />,

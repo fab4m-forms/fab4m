@@ -2,6 +2,8 @@ import * as React from "react";
 import { basic, FormComponent } from "@fab4m/fab4m";
 import { render, cleanup } from "@testing-library/react";
 import { FormComponentView } from "../src";
+import { allWidgetsRenderer } from "../src/allwidgets";
+import { FormProvider } from "../src/components/FormProvider";
 type FormElement = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
 const changeData = () => {
@@ -102,6 +104,13 @@ export function inputElementOk(component: FormComponent, name = ""): void {
     cleanup();
   });
 }
+
+export const renderWithProvider = (ui: JSX.Element) =>
+  render(
+    <FormProvider renderer={allWidgetsRenderer}>
+      {ui}
+    </FormProvider>,
+  );
 
 export function getFormElement(container: Element): HTMLFormElement {
   const form = container.querySelector("form");
