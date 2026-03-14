@@ -4,12 +4,13 @@ import {
   attributes,
   FormComponent,
   Labels,
+  MultipleWidgetProps,
   Theme,
   ValidationError,
 } from "@fab4m/fab4m";
 import { ValidationErrors } from "./ValidationErrors";
 import Multiple from "../widgets/multiple/Multiple";
-import { widgetComponents } from "../widgetComponents";
+import { useFormRendererContext } from "../formrenderer";
 
 /**
  * Render a stand-alone component.
@@ -71,14 +72,21 @@ export function FormComponentView(props: {
     ...(props.attributes ?? {}),
     ...attributes(props.component),
   };
+  const { widgetComponents, multipleWidgetComponents } = useFormRendererContext();
 
   const id = props.id ?? props.name;
   if (props.component.multiple && typeof props.index === "undefined") {
-    return null;
-    const MultipleWidget = props.component.multipleWidget
-      ? props.component.multipleWidget.type.widget
-      : Multiple;
-
+    let MultipleWidget: React.ComponentType<MultipleWidgetProps<any, any>> =
+      Multiple;
+    if (props.component.multipleWidget) {
+      if (!multipleWidgetComponents[props.component.multipleWidget.type.name]) {
+        throw new Error(
+          `No component for widget ${props.component.widget.type.name}`,
+        );
+      }
+      MultipleWidget =
+        multipleWidgetComponents[props.component.multipleWidget.type.name];
+    }
     return (
       <MultipleWidget
         component={props.component}

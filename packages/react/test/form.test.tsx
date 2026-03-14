@@ -11,6 +11,11 @@ import {
   ValidationError,
 } from "@fab4m/fab4m";
 import { FormView } from "../src";
+import { FormProvider } from "../src/components/FormProvider";
+import { createFormRenderer } from "../src/formrenderer";
+import TextField from "../src/widgets/TextField";
+import UploadField from "../src/widgets/UploadField";
+import Group from "../src/widgets/Group";
 
 describe("Form", () => {
   window.HTMLFormElement.prototype.submit = () => {
@@ -132,7 +137,9 @@ describe("Form", () => {
 
   it("Form rendering", () => {
     const { container, queryByText } = render(
-      <FormView form={form} data={{}} className="custom-form-class" />,
+      <Provider>
+        <FormView form={form} data={{}} className="custom-form-class" />
+      </Provider>,
     );
     expect(container.querySelector(".custom-form-class")).not.toBeNull();
     // The submit label should be "Save this form"
@@ -147,13 +154,17 @@ describe("Form", () => {
       container.querySelector("label[for='other_text']")?.innerHTML,
     ).toContain("Other text field");
   });
+
   it("Disabled submit", async () => {
     const { findByText } = render(
-      <FormView disabled={true} form={form} data={{}} />,
+      <Provider>
+        <FormView disabled={true} form={form} data={{}} />
+      </Provider>,
     );
     const submit = (await findByText("Save this form")) as HTMLInputElement;
     expect(submit.disabled).toBe(true);
   });
+
   it("Form validation", async () => {
     let data: Record<string, unknown> = {
       required_text: "text",
@@ -164,7 +175,11 @@ describe("Form", () => {
       data = { ...data, [key]: value };
     });
 
-    let screen = render(<FormView form={form} data={data} />);
+    let screen = render(
+      <Provider>
+        <FormView form={form} data={data} />
+      </Provider>,
+    );
     let formElement = screen.container.querySelector("form");
     if (formElement) {
       fireEvent.submit(formElement);
@@ -174,9 +189,14 @@ describe("Form", () => {
         screen.queryByText("Multiple field must have at least 2 items."),
       ).not.toBeNull();
     });
+
     screen.unmount();
     data.multiple = ["one", "two", "three", "four"];
-    screen = render(<FormView form={form} data={data} />);
+    screen = render(
+      <Provider>
+        <FormView form={form} data={data} />
+      </Provider>,
+    );
     formElement = screen.container.querySelector("form");
     if (formElement) {
       fireEvent.submit(formElement);
@@ -187,6 +207,7 @@ describe("Form", () => {
       ).not.toBeNull();
     });
   });
+
   it("Event handlers", () => {
     const first = vi.fn();
     const second = vi.fn();
@@ -200,27 +221,38 @@ describe("Form", () => {
     eventForm.onDataChange(second);
     eventForm.onSubmit(first);
     eventForm.onSubmit(second);
-    const { container } = render(<FormView form={eventForm} data={{}} />);
+
+    const { container } = render(
+      <Provider>
+        <FormView form={eventForm} data={{}} />
+      </Provider>,
+    );
     const element = getFormElement(container);
     fireEvent.submit(element);
+
     // By default we overwrite the handlers.
     waitFor(() => {
       expect(first).not.toHaveBeenCalled();
       expect(second).toHaveBeenCalled();
     });
+
     first.mockReset();
     second.mockReset();
     eventForm.onSubmit(first, true);
     fireEvent.submit(element);
+
     // By default we overwrite the handlers.
     waitFor(() => {
       expect(first).toHaveBeenCalled();
       expect(second).toHaveBeenCalled();
     });
   });
+
   it("Extra info", () => {
     const { container } = render(
-      <FormView data={{}} form={form} extra={{ test: "test", test2: 1 }} />,
+      <Provider>
+        <FormView data={{}} form={form} extra={{ test: "test", test2: 1 }} />
+      </Provider>,
     );
     expect(
       (container.querySelector("input[name='test']") as HTMLInputElement | null)
@@ -234,46 +266,55 @@ describe("Form", () => {
       )?.value,
     ).toBe("1");
   });
+
   it("Form custom errors", () => {
     const errors: ValidationError[] = [
       { path: "/required_text", message: "This is a custom error" },
     ];
 
     const { queryByText } = render(
-      <FormView
-        data={{ required_text: "hello" }}
-        form={form}
-        errors={errors}
-      />,
+      <Provider>
+        <FormView
+          data={{ required_text: "hello" }}
+          form={form}
+          errors={errors}
+        />
+      </Provider>,
     );
     expect(queryByText("This is a custom error")).not.toBeNull();
   });
 
   it("No form error classes if no errors are present", () => {
     const { container } = render(
-      <FormView data={{ required_text: "hello" }} form={form} />,
+      <Provider>
+        <FormView data={{ required_text: "hello" }} form={form} />
+      </Provider>,
     );
     expect(container.querySelectorAll(".fab4m-error-list").length).toBe(0);
   });
 
   it("Hide submit", () => {
     const { container } = render(
-      <FormView
-        hideSubmit={true}
-        data={{ required_text: "hello" }}
-        form={form}
-      />,
+      <Provider>
+        <FormView
+          hideSubmit={true}
+          data={{ required_text: "hello" }}
+          form={form}
+        />
+      </Provider>,
     );
     expect(container.querySelector("input[type='submit']")).toBeNull();
   });
 
   it("ID Prefix", () => {
     const { container } = render(
-      <FormView
-        idPrefix="prefix_"
-        data={{ required_text: "hello" }}
-        form={form}
-      />,
+      <Provider>
+        <FormView
+          idPrefix="prefix_"
+          data={{ required_text: "hello" }}
+          form={form}
+        />
+      </Provider>,
     );
     expect(container.querySelector("#prefix_required_text")).not.toBe(null);
     expect(container.querySelector("#prefix_multiple-0")).not.toBe(null);
@@ -282,4 +323,15 @@ describe("Form", () => {
       container.querySelector("#prefix_group_required_group_text_field"),
     ).not.toBe(null);
   });
+
+  function Provider(props: { children: JSX.Element }) {
+    const renderer = createFormRenderer({
+      widgetComponents: {
+        textfield: TextField,
+        file: UploadField,
+        group: Group,
+      },
+    });
+    return <FormProvider renderer={renderer}>{props.children}</FormProvider>;
+  }
 });
