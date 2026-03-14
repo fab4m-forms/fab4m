@@ -1,8 +1,10 @@
 import * as React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor } from "@testing-library/react";
 import { basic, urlField, createForm } from "@fab4m/fab4m";
-import { inputElementOk } from "../util";
+import { inputElementOk, renderWithProvider } from "../util";
 import { FormComponentView } from "../../src";
+import { FormProvider } from "../../src/components/FormProvider";
+import { allWidgetsRenderer } from "../../src/allwidgets";
 
 describe("url field", () => {
   const url = urlField({
@@ -25,7 +27,7 @@ describe("url field", () => {
         value={data}
       />
     );
-    const { findByLabelText, rerender } = render(component());
+    const { findByLabelText, rerender } = renderWithProvider(component());
     const element = (await findByLabelText("URL")) as HTMLInputElement;
     if (element) {
       expect(element.value).toBe("https://example.com/");
@@ -35,7 +37,9 @@ describe("url field", () => {
         target: { value: "https://otherexample.com/" },
       });
       await waitFor(() => {
-        rerender(component());
+        rerender(
+          <FormProvider renderer={allWidgetsRenderer}>{component()}</FormProvider>,
+        );
         expect(data).toBe("https://otherexample.com/");
         expect(element.value).toBe("https://otherexample.com/");
       });

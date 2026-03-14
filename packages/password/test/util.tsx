@@ -1,11 +1,20 @@
 import * as React from "react";
 import { basic, FormComponentView, FormComponent } from "@fab4m/fab4m";
 import { render, cleanup } from "@testing-library/react";
+import { allWidgetsRenderer } from "../../react/src/allwidgets";
+import { FormProvider } from "../../react/src/components/FormProvider";
 type FormElement = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
 const changeData = () => {
   // No-op.
 };
+
+export const renderWithProvider = (ui: JSX.Element) =>
+  render(
+    <FormProvider renderer={allWidgetsRenderer}>
+      {ui}
+    </FormProvider>,
+  );
 
 export function inputElementOk(component: FormComponent, name = ""): void {
   test(`${name} standard element properties`, () => {
