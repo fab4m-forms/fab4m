@@ -1,17 +1,17 @@
 import * as React from "react";
 import { getFormElement, renderWithProvider } from "./util";
 
+import { FormView } from "../src";
 import {
   booleanField,
   createForm,
   integerField,
   textField,
   group,
-  FormView,
   fromFormData,
   equals,
   Components,
-} from "../src";
+} from "@fab4m/fab4m";
 
 
 describe("Form data unpacking", () => {
