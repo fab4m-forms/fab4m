@@ -1,12 +1,7 @@
 import * as React from "react";
 
-import {
-  textField,
-  createForm,
-  FormView,
-  exists,
-  StatefulFormView,
-} from "../../src";
+import { FormView, StatefulFormView } from "../../src";
+import { textField, createForm, exists } from "@fab4m/fab4m";
 import { renderWithProvider } from "../util";
 
 

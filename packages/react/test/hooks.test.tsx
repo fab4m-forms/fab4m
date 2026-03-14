@@ -1,12 +1,8 @@
 import * as React from "react";
 import { waitFor } from "@testing-library/react";
-import {
-  textField,
-  textFieldWidget,
-  useForm,
-  createForm,
-  FormView,
-} from "../src";
+import { FormView } from "../src";
+import { useForm } from "../src/hooks";
+import { textField, textFieldWidget, createForm } from "@fab4m/fab4m";
 import { renderWithProvider } from "./util";
 
 

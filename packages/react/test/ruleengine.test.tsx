@@ -6,16 +6,15 @@ import {
   RenderResult,
   waitFor,
 } from "@testing-library/react";
+import { FormView, StatefulFormView } from "../src";
 import {
   textField,
   createForm,
   equals,
-  FormView,
   and,
   or,
   group,
-  StatefulFormView,
-} from "../src";
+} from "@fab4m/fab4m";
 import { renderWithProvider } from "./util";
 
 

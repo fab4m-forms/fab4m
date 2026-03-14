@@ -1,12 +1,12 @@
 import * as React from "react";
 import { fireEvent, waitFor } from "@testing-library/react";
+import { StatefulFormView } from "../src";
 import {
   allowedValues,
   createForm,
   disallowedValues,
-  StatefulFormView,
   textField,
-} from "../src";
+} from "@fab4m/fab4m";
 import { renderWithProvider } from "./util";
 
 

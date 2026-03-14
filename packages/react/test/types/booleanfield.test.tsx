@@ -1,8 +1,10 @@
 import * as React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react";
-import { basic, booleanField, checkboxWidget } from "../../src";
-import { inputElementOk } from "../util";
-import FormComponentView from "../../src/components/FormComponentView";
+import { fireEvent, waitFor } from "@testing-library/react";
+import { basic, booleanField, checkboxWidget } from "@fab4m/fab4m";
+import { inputElementOk, renderWithProvider } from "../util";
+import { FormComponentView } from "../../src/components/FormComponentView";
+import { FormProvider } from "../../src/components/FormProvider";
+import { allWidgetsRenderer } from "../../src/allwidgets";
 
 describe("Boolean field", () => {
   const field = booleanField({
@@ -26,7 +28,7 @@ describe("Boolean field", () => {
         value={data}
       />
     );
-    const { container, rerender } = render(component());
+    const { container, rerender } = renderWithProvider(component());
     const element = container.querySelector("input");
     if (element) {
       expect(element.checked).toBe(false);
@@ -34,7 +36,9 @@ describe("Boolean field", () => {
       fireEvent.click(element);
       await waitFor(() => {
         expect(data).toBe(true);
-        rerender(component());
+        rerender(
+          <FormProvider renderer={allWidgetsRenderer}>{component()}</FormProvider>,
+        );
         expect(element.checked).toBe(true);
       });
     }

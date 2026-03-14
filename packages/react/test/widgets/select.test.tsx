@@ -1,15 +1,14 @@
 import * as React from "react";
 import { fireEvent, waitFor } from "@testing-library/react";
+import { FormView, FormComponentView } from "../../src";
 import {
   basic,
   textField,
   selectWidget,
   integerField,
   createForm,
-  FormView,
-  FormComponentView,
   FormComponentWithName,
-} from "../../src";
+} from "@fab4m/fab4m";
 import { inputElementOk, renderWithProvider } from "../util";
 
 

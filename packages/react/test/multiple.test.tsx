@@ -5,17 +5,15 @@ import {
 import { fireEvent,
   waitFor,
 } from "@testing-library/react";
+import { FormComponentView, FormView, StatefulFormView } from "../src";
 import {
   textField,
   basic,
-  FormComponentView,
   createForm,
   allowedValues,
-  FormView,
   group,
   defaultMultipleWidget,
-  StatefulFormView,
-} from "../src";
+} from "@fab4m/fab4m";
 import { getFormElement, renderWithProvider } from "./util";
 
 

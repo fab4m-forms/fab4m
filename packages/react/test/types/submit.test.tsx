@@ -1,7 +1,7 @@
 import * as React from "react";
-import { render } from "@testing-library/react";
-import { basic, submit } from "../../src";
-import FormComponentView from "../../src/components/FormComponentView";
+import { basic, submit } from "@fab4m/fab4m";
+import { FormComponentView } from "../../src/components/FormComponentView";
+import { renderWithProvider } from "../util";
 
 describe("Submit button", () => {
   const field = submit(
@@ -15,7 +15,7 @@ describe("Submit button", () => {
     const changeData = () => {
       // No-op.
     };
-    const { queryByText } = render(
+    const { queryByText } = renderWithProvider(
       <FormComponentView
         name="content"
         theme={basic}

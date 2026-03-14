@@ -1,11 +1,11 @@
 import * as React from "react";
 import { screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, test, expect } from "vitest";
+import { StatefulFormView } from "../../src";
 import {
   textField,
   createForm,
   group,
-  StatefulFormView,
   equals,
   booleanField,
   selectWidget,
@@ -13,7 +13,7 @@ import {
   TableSettings,
   defaultMultipleWidget,
   integerField,
-} from "../../src";
+} from "@fab4m/fab4m";
 import { renderWithProvider } from "../util";
 
 

@@ -1,12 +1,10 @@
 import * as React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react";
-import {
-  basic,
-  emailField,
-  emailWidget,
-} from "../../src";
-import FormComponentView from "../../src/components/FormComponentView";
-import { inputElementOk } from "../util";
+import { fireEvent, waitFor } from "@testing-library/react";
+import { basic, emailField, emailWidget } from "@fab4m/fab4m";
+import { FormComponentView } from "../../src/components/FormComponentView";
+import { inputElementOk, renderWithProvider } from "../util";
+import { FormProvider } from "../../src/components/FormProvider";
+import { allWidgetsRenderer } from "../../src/allwidgets";
 
 describe("Email field", () => {
   const email = emailField({
@@ -30,7 +28,7 @@ describe("Email field", () => {
         value={data}
       />
     );
-    const { container, rerender } = render(component());
+    const { container, rerender } = renderWithProvider(component());
     const element = container.querySelector("input");
     if (element) {
       expect(element.value).toBe("email@email.com");
@@ -40,7 +38,9 @@ describe("Email field", () => {
       });
       await waitFor(() => {
         expect(data).toBe("otheremail@email.com");
-        rerender(component());
+        rerender(
+          <FormProvider renderer={allWidgetsRenderer}>{component()}</FormProvider>,
+        );
         expect(element.value).toBe("otheremail@email.com");
       });
     }

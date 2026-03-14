@@ -1,12 +1,7 @@
 import * as React from "react";
 
-import {
-  createForm,
-  StatefulFormView,
-  integerField,
-  min,
-  max,
-} from "../../src";
+import { StatefulFormView } from "../../src";
+import { createForm, integerField, min, max } from "@fab4m/fab4m";
 import { renderWithProvider } from "../util";
 
 

@@ -1,12 +1,8 @@
 import * as React from "react";
 import { fireEvent, waitFor } from "@testing-library/react";
 import { vi } from "vitest";
-import {
-  createForm,
-  textField,
-  textFieldWidget,
-  StatefulFormView,
-} from "../src";
+import { StatefulFormView } from "../src";
+import { createForm, textField, textFieldWidget } from "@fab4m/fab4m";
 import { renderWithProvider } from "./util";
 
 

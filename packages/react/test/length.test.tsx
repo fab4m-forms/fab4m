@@ -1,14 +1,14 @@
 import * as React from "react";
 
+import { StatefulFormView } from "../src";
 import {
   createForm,
   maxLength,
   minLength,
-  StatefulFormView,
   textAreaWidget,
   textField,
   textFieldWidget,
-} from "../src";
+} from "@fab4m/fab4m";
 import { renderWithProvider } from "./util";
 
 

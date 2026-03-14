@@ -1,6 +1,7 @@
 import * as React from "react";
 
-import { textField, createForm, equals, and, FormView } from "../../src";
+import { FormView } from "../../src";
+import { textField, createForm, equals, and } from "@fab4m/fab4m";
 import { renderWithProvider } from "../util";
 
 

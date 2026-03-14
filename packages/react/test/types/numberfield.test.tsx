@@ -1,13 +1,13 @@
 import * as React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor } from "@testing-library/react";
 import {
   integerField,
   /*floatField,*/ numberFieldWidget,
   basic,
   floatField,
-} from "../../src";
-import { inputElementOk } from "../util";
-import FormComponentView from "../../src/components/FormComponentView";
+} from "@fab4m/fab4m";
+import { inputElementOk, renderWithProvider } from "../util";
+import { FormComponentView } from "../../src/components/FormComponentView";
 
 describe("number field", () => {
   const integer = integerField({
@@ -30,7 +30,7 @@ describe("number field", () => {
     const changeData = (value: unknown) => {
       data = value as number;
     };
-    const { findByLabelText } = render(
+    const { findByLabelText } = renderWithProvider(
       <FormComponentView
         name="integer"
         onChange={changeData}
@@ -64,7 +64,7 @@ describe("number field", () => {
     const changeData = (value: unknown) => {
       data = value as number;
     };
-    const { findByLabelText } = render(
+    const { findByLabelText } = renderWithProvider(
       <FormComponentView
         name="float"
         onChange={changeData}

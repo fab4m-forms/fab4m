@@ -1,13 +1,13 @@
 import * as React from "react";
+import { FormView } from "../../src";
 import {
   createForm,
   fileSize,
   fileField,
-  FormView,
   fileExtension,
   FormComponentWithName,
   mimeType,
-  } from "../../src/index";
+} from "@fab4m/fab4m";
 import { vi } from "vitest";
 import { fireEvent,
   waitFor,

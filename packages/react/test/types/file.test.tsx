@@ -1,14 +1,14 @@
 import * as React from "react";
 import { fireEvent, waitFor } from "@testing-library/react";
+import { StatefulFormView } from "../../src";
 import {
   basic,
   createForm,
   fileField,
   FormComponentWithName,
-  StatefulFormView,
-} from "../../src";
+} from "@fab4m/fab4m";
 import { inputElementOk, renderWithProvider } from "../util";
-import FormComponentView from "../../src/components/FormComponentView";
+import { FormComponentView } from "../../src/components/FormComponentView";
 
 
 describe("upload field", () => {

@@ -1,18 +1,17 @@
 import * as React from "react";
 
 import { fireEvent, waitFor } from "@testing-library/react";
+import { FormComponentView, StatefulFormView } from "../../src";
 import {
   textField,
   basic,
   group,
-  FormComponentView,
   createForm,
   fieldsetWidget,
   equals,
-  StatefulFormView,
   allowedValues,
   detailsWidget,
-} from "../../src";
+} from "@fab4m/fab4m";
 import { getFormElement, renderWithProvider } from "../util";
 
 interface GroupedData {

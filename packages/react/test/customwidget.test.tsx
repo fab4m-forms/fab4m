@@ -1,12 +1,7 @@
 import "@testing-library/jest-dom";
-import {
-  textField,
-  createForm,
-  StatefulFormView,
-  FormComponentView,
-  customWidget,
-  customMultipleWidget,
-} from "../src";
+import { StatefulFormView, FormComponentView } from "../src";
+import { textField, createForm } from "@fab4m/fab4m";
+import { customWidget, customMultipleWidget } from "../src/widgets/custom";
 import React from "react";
 import { renderWithProvider } from "./util";
 

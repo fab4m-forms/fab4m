@@ -1,12 +1,7 @@
 import * as React from "react";
 import { fireEvent, waitFor } from "@testing-library/react";
-import {
-  textField,
-  createForm,
-  callback,
-  FormView,
-  StatefulFormView,
-} from "../../src";
+import { FormView, StatefulFormView } from "../../src";
+import { textField, createForm, callback } from "@fab4m/fab4m";
 import { getFormElement, renderWithProvider } from "../util";
 
 

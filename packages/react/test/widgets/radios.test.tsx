@@ -1,7 +1,10 @@
 import * as React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react";
-import { basic, textField, radiosWidget, integerField } from "../../src";
-import FormComponentView from "../../src/components/FormComponentView";
+import { fireEvent, waitFor } from "@testing-library/react";
+import { basic, textField, radiosWidget, integerField } from "@fab4m/fab4m";
+import { FormComponentView } from "../../src/components/FormComponentView";
+import { FormProvider } from "../../src/components/FormProvider";
+import { allWidgetsRenderer } from "../../src/allwidgets";
+import { renderWithProvider } from "../util";
 
 describe("Radios", () => {
   const field = textField({
@@ -33,7 +36,7 @@ describe("Radios", () => {
       />
     );
 
-    const { findByLabelText, rerender } = render(component());
+    const { findByLabelText, rerender } = renderWithProvider(component());
     const firstElement = (await findByLabelText("One")) as HTMLInputElement;
     const secondElement = (await findByLabelText("Two")) as HTMLInputElement;
     const thirdElement = (await findByLabelText("three")) as HTMLInputElement;
@@ -41,20 +44,26 @@ describe("Radios", () => {
     fireEvent.click(firstElement);
     await waitFor(() => {
       expect(data).toBe("one");
-      rerender(component());
+      rerender(
+        <FormProvider renderer={allWidgetsRenderer}>{component()}</FormProvider>,
+      );
       expect(firstElement.checked).toBe(true);
     });
     fireEvent.click(secondElement);
     await waitFor(() => {
       expect(data).toBe("two");
-      rerender(component());
+      rerender(
+        <FormProvider renderer={allWidgetsRenderer}>{component()}</FormProvider>,
+      );
       expect(firstElement.checked).toBe(false);
       expect(secondElement.checked).toBe(true);
     });
     fireEvent.click(thirdElement);
     await waitFor(() => {
       expect(data).toBe("three");
-      rerender(component());
+      rerender(
+        <FormProvider renderer={allWidgetsRenderer}>{component()}</FormProvider>,
+      );
       expect(thirdElement.checked).toBe(true);
     });
   });
@@ -63,7 +72,7 @@ describe("Radios", () => {
     const changeData = (value: unknown) => {
       data = value as number;
     };
-    const { findByLabelText } = render(
+    const { findByLabelText } = renderWithProvider(
       <FormComponentView
         name="numbers"
         theme={basic}

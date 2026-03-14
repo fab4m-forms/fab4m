@@ -4,10 +4,13 @@ import {
   CreateFormComponentType,
   formComponent,
   FormComponent,
-} from "../../component";
-import { Widget, widget, WidgetProps, WidgetType } from "../../widget";
+  Widget,
+  widget,
+  WidgetProps,
+  WidgetType,
+} from "@fab4m/fab4m";
 import { ReactNode } from "react";
-import { useFormData } from "../../form";
+import { useFormData } from "../hooks";
 /**
  * The content component type allows you to add any content as react components
  * to the form.
