@@ -1,7 +1,4 @@
-import {
-  MultipleWidgetProps,
-  WidgetProps,
-} from "@fab4m/fab4m";
+import { MultipleWidgetProps, WidgetProps } from "@fab4m/fab4m";
 import { ComponentType, createElement } from "react";
 import { createFormRenderer } from "./formrenderer";
 import Checkbox from "./widgets/Checkbox";
@@ -29,9 +26,7 @@ const CustomWidget = (props: WidgetProps<any, any>) => {
 };
 
 const CustomMultipleWidget = (props: MultipleWidgetProps<any, any>) => {
-  const Widget = props.settings as ComponentType<
-    MultipleWidgetProps<any, any>
-  >;
+  const Widget = props.settings as ComponentType<MultipleWidgetProps<any, any>>;
   return Widget ? createElement(Widget, props) : null;
 };
 
@@ -54,6 +49,7 @@ export const allWidgetsRenderer = createFormRenderer({
     submit: Submit,
     textarea: TextArea,
     textfield: TextField,
+    pagebreak: () => null,
   },
   multipleWidgetComponents: {
     custom: CustomMultipleWidget,
