@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { StatefulFormView } from "../../src";
 import { basic, createForm, group, textField } from "@fab4m/fab4m";
-import { content } from "../../src/content";
+import { content } from "../../src/types/content";
 import { FormComponentView } from "../../src/components/FormComponentView";
 import { renderWithProvider } from "../util";
 

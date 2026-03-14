@@ -19,6 +19,7 @@ import UploadField from "./widgets/UploadField";
 import Multiple from "./widgets/multiple/Multiple";
 import Table from "./widgets/multiple/Table";
 import Tags from "./widgets/multiple/Tags";
+import {Content} from "./types/content";
 
 const CustomWidget = (props: WidgetProps<any, any>) => {
   const Widget = props.settings as ComponentType<WidgetProps<any, any>>;
@@ -33,7 +34,7 @@ const CustomMultipleWidget = (props: MultipleWidgetProps<any, any>) => {
 export const allWidgetsRenderer = createFormRenderer({
   widgetComponents: {
     checkbox: Checkbox,
-    content: CustomWidget,
+    content: Content,
     custom: CustomWidget,
     details: Details,
     email: EmailField,

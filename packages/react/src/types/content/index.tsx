@@ -10,7 +10,7 @@ import {
   WidgetType,
 } from "@fab4m/fab4m";
 import { ReactNode } from "react";
-import { useFormData } from "../hooks";
+import { useFormData } from "../../hooks";
 /**
  * The content component type allows you to add any content as react components
  * to the form.
@@ -48,7 +48,7 @@ export function content<DataType = Record<string, unknown>>(
  *
  * @group Widgets
  */
-function Content<Type>(
+export function Content<Type>(
   props: WidgetProps<undefined, WidgetSettings<Type>>,
 ): React.ReactElement {
   const data = useFormData() as Type;
@@ -63,7 +63,6 @@ export const contentWidgetType: ContentWidgetType<Record<string, unknown>> = {
   name: "content",
   title: "Content",
   components: ["content"],
-  widget: Content,
   init: () => contentWidget(() => ""),
 };
 
@@ -82,7 +81,6 @@ export function contentWidget<DataType = Record<string, unknown>>(
       name: "content",
       title: "Content",
       components: ["content"],
-      widget: Content,
     },
     settings: content,
   });
