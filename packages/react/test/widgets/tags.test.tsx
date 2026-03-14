@@ -1,14 +1,13 @@
 import * as React from "react";
 import { fireEvent, waitFor, cleanup } from "@testing-library/react";
+import { FormView, FormComponentView } from "../../src";
 import {
   basic,
   textField,
   selectWidget,
   tagsWidget,
   createForm,
-  FormView,
-  FormComponentView,
-} from "../../src";
+} from "@fab4m/fab4m";
 import { renderWithProvider } from "../util";
 
 
