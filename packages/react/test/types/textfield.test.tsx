@@ -1,5 +1,5 @@
 import * as React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor } from "@testing-library/react";
 import {
   textField,
   textFieldWidget,
@@ -7,8 +7,10 @@ import {
   basic,
   textAreaField,
 } from "@fab4m/fab4m";
-import { inputElementOk } from "../util";
+import { inputElementOk, renderWithProvider } from "../util";
 import { FormComponentView } from "../../src/components/FormComponentView";
+import { FormProvider } from "../../src/components/FormProvider";
+import { allWidgetsRenderer } from "../../src/allwidgets";
 
 describe("text field", () => {
   const textfield = textField({
@@ -40,7 +42,7 @@ describe("text field", () => {
         value={data}
       />
     );
-    const { container, findByText, rerender } = render(component());
+    const { container, findByText, rerender } = renderWithProvider(component());
     const element = container.querySelector("input");
     if (element) {
       expect(element.value).toBe("some text");
@@ -48,7 +50,9 @@ describe("text field", () => {
         value: "some other text",
         target: { value: "some other text" },
       });
-      rerender(component());
+      rerender(
+        <FormProvider renderer={allWidgetsRenderer}>{component()}</FormProvider>,
+      );
       await waitFor(async () => {
         expect(data).toBe("some other text");
         expect(element.value).toBe("some other text");
@@ -70,7 +74,7 @@ describe("text field", () => {
         value={data}
       />
     );
-    const { container, rerender } = render(component());
+    const { container, rerender } = renderWithProvider(component());
     const element = container.querySelector("textarea");
     if (element) {
       expect(element.value).toBe("some text");
@@ -78,7 +82,9 @@ describe("text field", () => {
         value: "some other text",
         target: { value: "some other text" },
       });
-      rerender(component());
+      rerender(
+        <FormProvider renderer={allWidgetsRenderer}>{component()}</FormProvider>,
+      );
       await waitFor(() => {
         expect(data).toBe("some other text");
         expect(element.value).toBe("some other text");
@@ -90,7 +96,7 @@ describe("text field", () => {
     const noOp = () => {
       // No-op.
     };
-    const { container } = render(
+    const { container } = renderWithProvider(
       <FormComponentView
         onChange={noOp}
         name="textarea"

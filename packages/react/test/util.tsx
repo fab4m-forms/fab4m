@@ -15,7 +15,7 @@ export function inputElementOk(component: FormComponent, name = ""): void {
     if (!component.label) {
       return;
     }
-    const { queryByLabelText } = render(
+    const { queryByLabelText } = renderWithProvider(
       <FormComponentView
         name={component.name ?? ""}
         onChange={changeData}
@@ -37,7 +37,7 @@ export function inputElementOk(component: FormComponent, name = ""): void {
       return;
     }
 
-    const { findByLabelText } = render(
+    const { findByLabelText } = renderWithProvider(
       <FormComponentView
         name={component.name ?? ""}
         onChange={changeData}
@@ -53,7 +53,7 @@ export function inputElementOk(component: FormComponent, name = ""): void {
     if (!component.label) {
       return;
     }
-    const { findByLabelText } = render(
+    const { findByLabelText } = renderWithProvider(
       <FormComponentView
         onChange={changeData}
         component={component}
@@ -73,7 +73,7 @@ export function inputElementOk(component: FormComponent, name = ""): void {
       return;
     }
 
-    const { queryByLabelText } = render(
+    const { queryByLabelText } = renderWithProvider(
       <FormComponentView
         name={component.name ?? ""}
         onChange={changeData}
@@ -90,7 +90,7 @@ export function inputElementOk(component: FormComponent, name = ""): void {
       return;
     }
     const disabled = { ...component, disabled: true };
-    const { findByLabelText } = render(
+    const { findByLabelText } = renderWithProvider(
       <FormComponentView
         onChange={changeData}
         name="choice"
