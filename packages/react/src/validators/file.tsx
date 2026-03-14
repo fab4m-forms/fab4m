@@ -1,8 +1,9 @@
+import * as React from "react";
 import {
   FileExtensionValidatorSettings,
   FileSizeSettings,
   ValidatorInfoProps,
-} from "../../../core/src";
+} from "@fab4m/fab4m";
 
 export function FileSizeInfo(
   props: ValidatorInfoProps<File, FileSizeSettings>,

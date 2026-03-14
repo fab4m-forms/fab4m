@@ -1,4 +1,8 @@
-import { MultipleWidgetProps, WidgetProps } from "@fab4m/fab4m";
+import {
+  MultipleWidgetProps,
+  ValidatorInfoProps,
+  WidgetProps,
+} from "@fab4m/fab4m";
 import { ComponentType, createContext, useContext } from "react";
 
 export type FormRenderer = {
@@ -7,23 +11,15 @@ export type FormRenderer = {
     string,
     ComponentType<MultipleWidgetProps<any, any>>
   >;
-};
-
-export type ResolvedFormContextSettings = {
-  widgetComponents: Record<string, ComponentType<WidgetProps<any, any>>>;
-  multipleWidgetComponents: Record<
+  validatorComponents?: Record<
     string,
-    ComponentType<MultipleWidgetProps<any, any>>
+    ComponentType<ValidatorInfoProps<any, any>>
   >;
 };
 
-export const FormRendererContext = createContext<FormRenderer | null>(
-  null,
-);
+export const FormRendererContext = createContext<FormRenderer | null>(null);
 
-export function createFormRenderer(
-  args: FormRenderer,
-): FormRenderer {
+export function createFormRenderer(args: FormRenderer): FormRenderer {
   return args;
 }
 

@@ -1,5 +1,6 @@
 import * as React from "react";
 import { FormComponent, Theme } from "@fab4m/fab4m";
+import { useFormRendererContext } from "../formrenderer";
 /**
  * Render Validatior information for a specific component.
  * @group React widget API.
@@ -9,17 +10,23 @@ export function ValidatorInfo(props: {
   component: FormComponent;
   theme: Theme;
 }): React.JSX.Element | null {
-  const info = props.component.validators
-    .filter((v) => v.type.validatorInfo)
-    .map((v, i) =>
-      v.type.validatorInfo ? (
-        <v.type.validatorInfo
-          key={i}
+  const { validatorComponents } = useFormRendererContext();
+  if (!validatorComponents) {
+    return null;
+  }
+  const info = [];
+  for (const v of props.component.validators) {
+    if (validatorComponents[v.type.name]) {
+      const Validator = validatorComponents[v.type.name];
+      info.push(
+        <Validator
+          key={info.length}
           theme={props.theme}
           value={props.value}
           settings={v.settings}
-        />
-      ) : null,
-    );
+        />,
+      );
+    }
+  }
   return info.length > 0 ? <div>{info}</div> : null;
 }
