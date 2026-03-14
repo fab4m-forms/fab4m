@@ -1,7 +1,8 @@
 import React from "react";
-import { screen, render } from "@testing-library/react";
-import { textField, basic, FormComponent } from "@fab4m/fab4m"
-import {FormComponentView} from "../src";
+import { screen } from "@testing-library/react";
+import { textField, basic, FormComponent } from "@fab4m/fab4m";
+import { FormComponentView } from "../src";
+import { renderWithProvider } from "./util";
 
 test("Form label", async () => {
   const field = textField({ label: "My label" });
@@ -25,7 +26,7 @@ test("Hidden form label", async () => {
 });
 
 function renderField(field: FormComponent, hideLabel?: boolean) {
-  render(
+  renderWithProvider(
     <FormComponentView
       onChange={() => {}}
       component={field}
