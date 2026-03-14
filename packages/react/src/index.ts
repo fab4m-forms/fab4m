@@ -12,3 +12,4 @@ export { Input } from "./components/Input";
 export { StatefulFormView } from "./components/StatefulFormView";
 export { ValidationErrors } from "./components/ValidationErrors";
 export { ValidatorInfo } from "./components/ValidatorInfo";
+export { allWidgetsRenderer } from "./allwidgets";
