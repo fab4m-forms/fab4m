@@ -6,7 +6,7 @@ import { FormComponentWrapper } from "../components/FormComponentWrapper";
  * A react component that renders an input with the type "file".
  * @group React widgets
  */
-export default function UploadField(
+export function UploadField(
   props: WidgetProps<File, unknown | undefined>,
 ): React.JSX.Element {
   const component = props.component;

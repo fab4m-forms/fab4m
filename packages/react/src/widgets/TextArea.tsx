@@ -6,7 +6,7 @@ import { FormComponentWrapper } from "../components/FormComponentWrapper";
  * The text area widget allows you to render a textarea html element.
  * @group React widgets
  */
-export default function TextArea(
+export function TextArea(
   props: WidgetProps<string, unknown>,
 ): React.JSX.Element {
   const component = props.component;

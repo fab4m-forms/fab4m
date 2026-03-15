@@ -9,7 +9,7 @@ import {
   ValidationError,
 } from "@fab4m/fab4m";
 import { ValidationErrors } from "./ValidationErrors";
-import Multiple from "../widgets/multiple/Multiple";
+import { Multiple } from "../widgets/multiple/Multiple";
 import { useFormRendererContext } from "../formrenderer";
 
 /**

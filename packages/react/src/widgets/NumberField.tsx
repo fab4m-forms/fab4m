@@ -7,7 +7,7 @@ import { FormComponentWrapper } from "../components/FormComponentWrapper";
  * The number field widget component renders a number input.
  * @group React widgets
  */
-export default function NumberField(
+export function NumberField(
   props: WidgetProps<number, NumberWidgetSettings>,
 ): React.JSX.Element {
   const classes = props.theme.classes;

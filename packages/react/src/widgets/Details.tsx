@@ -1,6 +1,6 @@
 import * as React from "react";
 import { DetailsSettings, WidgetProps } from "@fab4m/fab4m";
-import GroupChildren from "./GroupChildren";
+import { GroupChildren } from "./GroupChildren";
 
 /**
  * Render a details widget with the group of fields.
@@ -8,7 +8,7 @@ import GroupChildren from "./GroupChildren";
  * in the form of react components.
  * @group React widgets
  */
-export default function Details<DataType = Record<string, any>>(
+export function Details<DataType = Record<string, any>>(
   props: WidgetProps<DataType, DetailsSettings<DataType>>,
 ): React.JSX.Element | null {
   if (!props.component.components) {

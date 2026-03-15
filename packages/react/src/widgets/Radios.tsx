@@ -6,7 +6,7 @@ import { FormComponentWrapper } from "../components/FormComponentWrapper";
  * The Radios widget renders a series of radio input widget for each option.
  * @group React widgets
  */
-export default function Radios<
+export function Radios<
   OptionsType extends string | number | React.ReactElement,
 >(
   props: WidgetProps<OptionsType, Option<OptionsType>[]>,

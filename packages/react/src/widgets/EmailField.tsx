@@ -6,7 +6,7 @@ import { Input } from "../components/Input";
  * An email field widget.
  * @group React widgets
  */
-export default function EmailField(
+export function EmailField(
   props: WidgetProps<string, unknown | undefined>,
 ): React.JSX.Element {
   const inputProps = {

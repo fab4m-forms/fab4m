@@ -2,9 +2,9 @@ import * as React from "react";
 import { fireEvent, waitFor } from "@testing-library/react";
 import { basic, booleanField, checkboxWidget } from "@fab4m/fab4m";
 import { inputElementOk, renderWithProvider } from "../util";
-import { FormComponentView } from "../../src/components/FormComponentView";
-import { FormProvider } from "../../src/components/FormProvider";
-import { allWidgetsRenderer } from "../../src/allwidgets";
+import { FormComponentView } from "../../src/index";
+import { FormProvider } from "../../src/index";
+import { allWidgetsRenderer } from "../../src/index";
 
 describe("Boolean field", () => {
   const field = booleanField({

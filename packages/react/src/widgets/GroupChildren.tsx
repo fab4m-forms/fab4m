@@ -12,7 +12,7 @@ import { FormComponentView } from "../components/FormComponentView";
  * Helper react component to render children of a component.
  * @group React Widget API
  */
-export default function GroupChildren(
+export function GroupChildren(
   props: WidgetProps<unknown, unknown> & {
     wrapperClass?: string;
   },

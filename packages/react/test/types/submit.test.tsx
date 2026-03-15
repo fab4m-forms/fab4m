@@ -1,6 +1,6 @@
 import * as React from "react";
 import { basic, submit } from "@fab4m/fab4m";
-import { FormComponentView } from "../../src/components/FormComponentView";
+import { FormComponentView } from "../../src/index";
 import { renderWithProvider } from "../util";
 
 describe("Submit button", () => {

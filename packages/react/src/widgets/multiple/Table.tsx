@@ -18,7 +18,7 @@ import { useFormData } from "../../hooks";
  * The table react widget.
  * @group React multiple widgets
  */
-export default function Table(
+export function Table(
   props: MultipleWidgetProps<unknown, TableSettings>,
 ): React.JSX.Element | null {
   const items = (props.value ?? []) as Array<Record<string, unknown>>;

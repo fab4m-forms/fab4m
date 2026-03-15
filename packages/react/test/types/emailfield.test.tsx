@@ -1,10 +1,10 @@
 import * as React from "react";
 import { fireEvent, waitFor } from "@testing-library/react";
 import { basic, emailField, emailWidget } from "@fab4m/fab4m";
-import { FormComponentView } from "../../src/components/FormComponentView";
+import { FormComponentView } from "../../src/index";
 import { inputElementOk, renderWithProvider } from "../util";
-import { FormProvider } from "../../src/components/FormProvider";
-import { allWidgetsRenderer } from "../../src/allwidgets";
+import { FormProvider } from "../../src/index";
+import { allWidgetsRenderer } from "../../src/index";
 
 describe("Email field", () => {
   const email = emailField({

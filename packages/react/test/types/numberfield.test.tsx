@@ -7,7 +7,7 @@ import {
   floatField,
 } from "@fab4m/fab4m";
 import { inputElementOk, renderWithProvider } from "../util";
-import { FormComponentView } from "../../src/components/FormComponentView";
+import { FormComponentView } from "../../src/index";
 
 describe("number field", () => {
   const integer = integerField({

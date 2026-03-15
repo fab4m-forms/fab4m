@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import { StatefulFormView } from "../../src";
+import { StatefulFormView } from "../../src/index";
 import { basic, createForm, group, textField } from "@fab4m/fab4m";
-import { content } from "../../src/types/content";
-import { FormComponentView } from "../../src/components/FormComponentView";
+import { content } from "../../src/index";
+import { FormComponentView } from "../../src/index";
 import { renderWithProvider } from "../util";
 
 

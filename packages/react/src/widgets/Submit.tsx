@@ -5,7 +5,7 @@ import { SubmitWidgetSettings } from "@fab4m/fab4m";
 /**
  * @group React widgets
  */
-export default function Submit(
+export function Submit(
   props: WidgetProps<unknown, SubmitWidgetSettings>,
 ): React.ReactElement {
   return (

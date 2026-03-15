@@ -1,9 +1,9 @@
 import * as React from "react";
 import { fireEvent, waitFor } from "@testing-library/react";
 import { basic, textField, radiosWidget, integerField } from "@fab4m/fab4m";
-import { FormComponentView } from "../../src/components/FormComponentView";
-import { FormProvider } from "../../src/components/FormProvider";
-import { allWidgetsRenderer } from "../../src/allwidgets";
+import { FormComponentView } from "../../src/index";
+import { FormProvider } from "../../src/index";
+import { allWidgetsRenderer } from "../../src/index";
 import { renderWithProvider } from "../util";
 
 describe("Radios", () => {

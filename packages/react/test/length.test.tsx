@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { StatefulFormView } from "../src";
+import { StatefulFormView } from "../src/index";
 import {
   createForm,
   maxLength,

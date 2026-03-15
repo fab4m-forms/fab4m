@@ -1,12 +1,12 @@
 import * as React from "react";
 import { WidgetProps } from "@fab4m/fab4m";
-import GroupChildren from "./GroupChildren";
+import { GroupChildren } from "./GroupChildren";
 
 /**
  * Render a group of components horizontally.
  * @group React widgets
  */
-export default function HorizontalGroup<DataType>(
+export function HorizontalGroup<DataType>(
   props: WidgetProps<DataType, unknown>,
 ): React.JSX.Element | null {
   if (!props.component.components) {

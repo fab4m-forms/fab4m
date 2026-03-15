@@ -9,12 +9,14 @@ import {
   group,
   ValidationError,
 } from "@fab4m/fab4m";
-import { FormView } from "../src";
-import { FormProvider } from "../src/components/FormProvider";
-import { createFormRenderer } from "../src/formrenderer";
-import TextField from "../src/widgets/TextField";
-import UploadField from "../src/widgets/UploadField";
-import Group from "../src/widgets/Group";
+import {
+  FormView,
+  FormProvider,
+  createFormRenderer,
+  TextField,
+  UploadField,
+  Group,
+} from "../src/index";
 
 describe("Form", () => {
   window.HTMLFormElement.prototype.submit = () => {

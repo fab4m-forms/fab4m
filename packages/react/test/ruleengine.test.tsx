@@ -6,7 +6,7 @@ import {
   RenderResult,
   waitFor,
 } from "@testing-library/react";
-import { FormView, StatefulFormView } from "../src";
+import { FormView, StatefulFormView } from "../src/index";
 import {
   textField,
   createForm,

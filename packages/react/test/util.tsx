@@ -1,9 +1,9 @@
 import * as React from "react";
 import { basic, FormComponent } from "@fab4m/fab4m";
 import { render, cleanup } from "@testing-library/react";
-import { FormComponentView } from "../src";
-import { allWidgetsRenderer } from "../src/allwidgets";
-import { FormProvider } from "../src/components/FormProvider";
+import { FormComponentView } from "../src/index";
+import { allWidgetsRenderer } from "../src/index";
+import { FormProvider } from "../src/index";
 type FormElement = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
 const changeData = () => {

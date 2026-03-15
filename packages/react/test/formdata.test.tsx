@@ -1,7 +1,7 @@
 import * as React from "react";
 import { getFormElement, renderWithProvider } from "./util";
 
-import { FormView } from "../src";
+import { FormView } from "../src/index";
 import {
   booleanField,
   createForm,

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FormView } from "../../src";
+import { FormView } from "../../src/index";
 import {
   createForm,
   fileSize,

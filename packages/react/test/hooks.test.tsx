@@ -1,7 +1,7 @@
 import * as React from "react";
 import { waitFor } from "@testing-library/react";
-import { FormView } from "../src";
-import { useForm } from "../src/hooks";
+import { FormView } from "../src/index";
+import { useForm } from "../src/index";
 import { textField, textFieldWidget, createForm } from "@fab4m/fab4m";
 import { renderWithProvider } from "./util";
 

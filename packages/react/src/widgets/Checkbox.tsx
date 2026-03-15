@@ -28,4 +28,4 @@ function Checkbox(props: WidgetProps<boolean, undefined>) {
   );
 }
 
-export default Checkbox as React.FC;
+export { Checkbox };

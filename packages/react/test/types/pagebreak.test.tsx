@@ -1,6 +1,6 @@
 import * as React from "react";
 import { fireEvent, waitFor } from "@testing-library/react";
-import { StatefulFormView } from "../../src";
+import { StatefulFormView } from "../../src/index";
 import {
   textField,
   pageBreak,

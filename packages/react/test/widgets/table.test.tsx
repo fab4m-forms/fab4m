@@ -1,7 +1,7 @@
 import * as React from "react";
 import { screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, test, expect } from "vitest";
-import { StatefulFormView } from "../../src";
+import { StatefulFormView } from "../../src/index";
 import {
   textField,
   createForm,

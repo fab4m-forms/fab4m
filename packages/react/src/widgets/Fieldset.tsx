@@ -1,12 +1,12 @@
 import * as React from "react";
 import { WidgetProps } from "@fab4m/fab4m";
-import GroupChildren from "./GroupChildren";
+import { GroupChildren } from "./GroupChildren";
 
 /**
  * Render a group of components in a HTML fieldset element.
  * @group React widgets
  */
-export default function Fieldset<DataType = Record<string, unknown>>(
+export function Fieldset<DataType = Record<string, unknown>>(
   props: WidgetProps<DataType, unknown>,
 ): React.JSX.Element | null {
   if (!props.component.components) {

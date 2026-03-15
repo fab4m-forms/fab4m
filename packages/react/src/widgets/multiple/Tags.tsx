@@ -14,7 +14,7 @@ import { ValidationErrors } from "../../components/ValidationErrors";
  * The Tags react widget.
  * @group React multiple widgets
  */
-export default function Tags<Value>(
+export function Tags<Value>(
   props: MultipleWidgetProps<Value, TagsSettings | undefined>,
 ): React.JSX.Element | null {
   const addItem = (value: Value) => props.onChange([...items, value]);

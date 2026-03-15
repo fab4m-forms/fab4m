@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { fireEvent, waitFor } from "@testing-library/react";
-import { FormComponentView, StatefulFormView } from "../../src";
+import { FormComponentView, StatefulFormView } from "../../src/index";
 import {
   textField,
   basic,

@@ -5,7 +5,7 @@ import { WidgetProps } from "@fab4m/fab4m";
  * The Hidden widget renders a hidden input field.
  * @group React widgets
  */
-export default function HiddenField(
+export function HiddenField(
   props: WidgetProps<string | number, undefined>,
 ): React.JSX.Element {
   const component = props.component;

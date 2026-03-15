@@ -1,7 +1,7 @@
 import React from "react";
 import { screen } from "@testing-library/react";
 import { textField, basic, FormComponent } from "@fab4m/fab4m";
-import { FormComponentView } from "../src";
+import { FormComponentView } from "../src/index";
 import { renderWithProvider } from "./util";
 
 test("Form label", async () => {

@@ -11,7 +11,7 @@ import { ValidationErrors } from "../../components/ValidationErrors";
  * The default Multiple widget.
  * @group React multiple widgets
  */
-export default function Multiple(
+export function Multiple(
   props: MultipleWidgetProps<unknown, MultipleSettings | undefined>,
 ): React.JSX.Element {
   const [items, changeItems] = useState<Array<unknown>>(props.value ?? []);

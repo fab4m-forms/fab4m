@@ -5,7 +5,7 @@ import {
 import { fireEvent,
   waitFor,
 } from "@testing-library/react";
-import { FormComponentView, FormView, StatefulFormView } from "../src";
+import { FormComponentView, FormView, StatefulFormView } from "../src/index";
 import {
   textField,
   basic,
