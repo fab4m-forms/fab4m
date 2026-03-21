@@ -72,14 +72,18 @@ export function FormComponentView(props: {
     ...(props.attributes ?? {}),
     ...attributes(props.component),
   };
-  const { widgetComponents, multipleWidgetComponents } = useFormRendererContext();
+  const { widgetComponents, multipleWidgetComponents } =
+    useFormRendererContext();
 
   const id = props.id ?? props.name;
   if (props.component.multiple && typeof props.index === "undefined") {
     let MultipleWidget: React.ComponentType<MultipleWidgetProps<any, any>> =
       Multiple;
     if (props.component.multipleWidget) {
-      if (!multipleWidgetComponents[props.component.multipleWidget.type.name]) {
+      if (
+        !multipleWidgetComponents ||
+        !multipleWidgetComponents[props.component.multipleWidget.type.name]
+      ) {
         throw new Error(
           `No component for widget ${props.component.widget.type.name}`,
         );

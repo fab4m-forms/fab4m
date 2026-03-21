@@ -27,7 +27,7 @@ export function useFormRendererContext(): FormRenderer {
   const context = useContext(FormRendererContext);
   if (!context) {
     throw new Error(
-      "You used the useFormContext() hook used outside of a <FormProvider />",
+      "You used the useFormRendererContext() hook used outside of a <FormProvider />",
     );
   }
   return context;

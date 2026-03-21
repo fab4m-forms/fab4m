@@ -1,4 +1,4 @@
-import { fileExtension, MultipleWidgetProps, WidgetProps } from "@fab4m/fab4m";
+import { MultipleWidgetProps, WidgetProps } from "@fab4m/fab4m";
 import { ComponentType, createElement } from "react";
 import { createFormRenderer } from "./formrenderer";
 import { Checkbox } from "./widgets/Checkbox";

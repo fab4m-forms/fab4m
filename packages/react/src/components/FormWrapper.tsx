@@ -31,7 +31,7 @@ export function FormWrapper(
   // and should any other browser do it we need to handle that gracefully.
   const submitted = React.useRef(false);
   const data = props.data as Record<string, unknown>;
-  let formProps: React.FormHTMLAttributes<HTMLFormElement> = {
+  let formProps: Record<string, unknown> = {
     className: "form",
   };
   const definition = JSON.stringify(formDataDefinition(props.form, data));
