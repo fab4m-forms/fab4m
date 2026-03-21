@@ -3,7 +3,7 @@ import data from "../../../packages/core/docs.json";
 import { Converter } from "showdown";
 const converter = new Converter();
 const FormComponent = data.children.find(
-  (child) => child.name === "FormComponent"
+  (child) => child.name === "FormComponent",
 );
 export default function AttributesTable() {
   if (!FormComponent) {
@@ -30,7 +30,7 @@ export default function AttributesTable() {
             <td
               dangerouslySetInnerHTML={{
                 __html: converter.makeHtml(
-                  child.comment.summary.map((s) => s.text).join("")
+                  child.comment.summary.map((s) => s.text).join(""),
                 ),
               }}
             />

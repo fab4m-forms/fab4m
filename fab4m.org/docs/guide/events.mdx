@@ -1,19 +1,20 @@
 ---
 sidebar_position: 4
 ---
+
 import Example from "@site/src/components/Example";
 // On change
 import { OnChangeExample } from "@site/src/components/Guide/events/FormChange";
 import OnChangeExampleSource from "!!raw-loader!@site/src/components/Guide/events/FormChange";
 // On component change
 import { OnComponentChangeExample } from "@site/src/components/Guide/events/ComponentChange";
-import OnComponentChangeSource from '!!raw-loader!@site/src/components/Guide/events/ComponentChange';
+import OnComponentChangeSource from "!!raw-loader!@site/src/components/Guide/events/ComponentChange";
 // Submit
 import { OnSubmitExample } from "@site/src/components/Guide/events/SubmitEvent";
-import SubmitExampleSource from '!!raw-loader!@site/src/components/Guide/events/SubmitEvent';
+import SubmitExampleSource from "!!raw-loader!@site/src/components/Guide/events/SubmitEvent";
 // Part validate
 import { OnPartValidateForm } from "@site/src/components/Guide/events/PartValidator";
-import OnPartValidateSource from '!!raw-loader!@site/src/components/Guide/events/PartValidator';
+import OnPartValidateSource from "!!raw-loader!@site/src/components/Guide/events/PartValidator";
 
 # Form events
 
@@ -36,7 +37,10 @@ using the `onComponentChange` event.
 
 ### Example
 
-<Example source={OnComponentChangeSource} example={<OnComponentChangeExample />} />
+<Example
+  source={OnComponentChangeSource}
+  example={<OnComponentChangeExample />}
+/>
 
 ## Handling form submits
 
@@ -81,11 +85,11 @@ See the documentation on how to create your own component validators.
 ### Example
 
 The example below performs validation on each of the form parts:
-* On part 1, we ensure that the provided age is over 18 and that the name doesn't contain "sam"
-* On part 2, We encourage the user to switch profession, if the name provided in part 1 contains "Fabian" and the text "Computer science" is part of the bio.
+
+- On part 1, we ensure that the provided age is over 18 and that the name doesn't contain "sam"
+- On part 2, We encourage the user to switch profession, if the name provided in part 1 contains "Fabian" and the text "Computer science" is part of the bio.
 
 <Example source={OnPartValidateSource} example={<OnPartValidateForm />} />
-
 
 ## Adding multiple form listeners to the same event
 
@@ -96,9 +100,11 @@ inside of a React component, and we want to provide the current event handler fu
 If you want to use multiple events you can do that by telling the form to append the event:
 
 ```jsx
-form.onChange(() => {
-  // Listener one.
-}, true).onChange(() => {
-  // Listener two.
-}, true)
+form
+  .onChange(() => {
+    // Listener one.
+  }, true)
+  .onChange(() => {
+    // Listener two.
+  }, true);
 ```

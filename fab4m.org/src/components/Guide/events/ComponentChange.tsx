@@ -1,5 +1,10 @@
-import { createForm, integerField, StatefulFormView } from "@fab4m/fab4m";
+import { createForm, integerField } from "@fab4m/fab4m";
 import React, { useState } from "react";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const ageForm = createForm({
   age: integerField({ label: "Age" }),
@@ -17,7 +22,9 @@ export function OnComponentChangeExample() {
   // Render our form, and print out our current age when it's available.
   return (
     <>
-      <StatefulFormView form={ageForm} hideSubmit={true} />
+      <FormProvider renderer={allWidgetsRenderer}>
+        <StatefulFormView form={ageForm} hideSubmit={true} />
+      </FormProvider>
       {age && <p style={{ fontWeight: "bold" }}>You are {age} years old</p>}
     </>
   );

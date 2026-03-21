@@ -1,6 +1,11 @@
 import * as React from "react";
-import { createForm, StatefulFormView } from "@fab4m/fab4m";
+import { createForm } from "@fab4m/fab4m";
 import { passwordValidateOldField, validOldPassword } from "@fab4m/password";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   passwordValidate: passwordValidateOldField({
@@ -15,5 +20,9 @@ const form = createForm({
 }).onSubmit((e) => e.preventDefault());
 
 export default function PasswordFields() {
-  return <StatefulFormView form={form} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} />
+    </FormProvider>
+  );
 }

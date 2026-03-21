@@ -1,5 +1,10 @@
 import React from "react";
-import { createForm, textField, StatefulFormView } from "@fab4m/fab4m";
+import { createForm, textField } from "@fab4m/fab4m";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm(
   {
@@ -8,12 +13,16 @@ const form = createForm(
       required: true,
     }),
   },
-  { labels: { submit: "Enter your name" } }
+  { labels: { submit: "Enter your name" } },
 );
 
 export default function PageBreaks() {
   form.onSubmit((e) => {
     e.preventDefault();
   });
-  return <StatefulFormView form={form} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} />
+    </FormProvider>
+  );
 }

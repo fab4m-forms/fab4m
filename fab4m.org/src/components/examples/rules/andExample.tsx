@@ -4,13 +4,17 @@ import {
   and,
   integerField,
   booleanField,
-  StatefulFormView,
   min,
   max,
   equals,
   or,
 } from "@fab4m/fab4m";
 import "@fab4m/fab4m/css/basic/basic.css";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   age: integerField({
@@ -34,5 +38,9 @@ const form = createForm({
 });
 
 export default function AndExample() {
-  return <StatefulFormView form={form} hideSubmit={true} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} hideSubmit={true} />
+    </FormProvider>
+  );
 }

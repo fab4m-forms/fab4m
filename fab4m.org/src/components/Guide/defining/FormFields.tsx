@@ -6,8 +6,12 @@ import {
   emailField,
   fileField,
   urlField,
-  StatefulFormView,
 } from "@fab4m/fab4m";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   name: textField({
@@ -51,7 +55,9 @@ export default function FormFields() {
   });
   return (
     <div>
-      <StatefulFormView form={form} />
+      <FormProvider renderer={allWidgetsRenderer}>
+        <StatefulFormView form={form} />
+      </FormProvider>
       {profile && (
         <div className="card">
           <div className="card__header">

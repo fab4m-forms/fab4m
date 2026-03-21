@@ -6,9 +6,13 @@ import {
   equals,
   max,
   createForm,
-  StatefulFormView,
   or,
 } from "@fab4m/fab4m";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   city: textField({ label: "City" }),
@@ -27,5 +31,9 @@ const form = createForm({
 });
 
 export default function BasicRules() {
-  return <StatefulFormView form={form} hideSubmit={true} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} hideSubmit={true} />
+    </FormProvider>
+  );
 }

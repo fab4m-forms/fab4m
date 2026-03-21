@@ -27,7 +27,7 @@ const form = createForm({
     {
       workplace: textField({ label: "Workplace" }),
       label: textField({ label: "Title" }),
-    }
+    },
   ),
 });
 

@@ -1,6 +1,11 @@
 import React from "react";
-import { createForm, booleanField, StatefulFormView } from "@fab4m/fab4m";
+import { createForm, booleanField } from "@fab4m/fab4m";
 import "@fab4m/fab4m/css/basic/basic.css";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   name: booleanField({
@@ -9,5 +14,9 @@ const form = createForm({
 });
 
 export default function BooleanFieldExample() {
-  return <StatefulFormView form={form} hideSubmit={true} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} hideSubmit={true} />
+    </FormProvider>
+  );
 }

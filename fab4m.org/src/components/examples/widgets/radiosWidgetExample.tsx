@@ -1,11 +1,11 @@
 import React from "react";
-import {
-  createForm,
-  textField,
-  StatefulFormView,
-  radiosWidget,
-} from "@fab4m/fab4m";
+import { createForm, textField, radiosWidget } from "@fab4m/fab4m";
 import "@fab4m/fab4m/css/basic/basic.css";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   city: textField({
@@ -22,5 +22,9 @@ const form = createForm({
 });
 
 export default function selectExample() {
-  return <StatefulFormView form={form} hideSubmit={true} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} hideSubmit={true} />
+    </FormProvider>
+  );
 }

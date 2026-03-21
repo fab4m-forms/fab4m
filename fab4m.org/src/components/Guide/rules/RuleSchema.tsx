@@ -3,11 +3,15 @@ import * as beautify from "json-beautify";
 import {
   textField,
   equals,
-  StatefulFormView,
   generateSchema,
   createForm,
   booleanField,
 } from "@fab4m/fab4m";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   city: textField({ label: "City" }),
@@ -25,7 +29,9 @@ export default function RuleSchema() {
   });
   return (
     <div>
-      <StatefulFormView form={form} hideSubmit={true} />
+      <FormProvider renderer={allWidgetsRenderer}>
+        <StatefulFormView form={form} hideSubmit={true} />
+      </FormProvider>
       <h4>Here's the schema:</h4>
       <pre>{beautify.default(schema, null, 2, 80)}</pre>
     </div>

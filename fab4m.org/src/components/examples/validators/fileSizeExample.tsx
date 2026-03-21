@@ -1,13 +1,12 @@
 import React from "react";
+import { createForm, pageBreak, fileField, fileSize } from "@fab4m/fab4m";
+import "@fab4m/fab4m/css/basic/basic.css";
 import {
-  createForm,
-  pageBreak,
-  fileField,
   StatefulFormView,
   content,
-  fileSize,
-} from "@fab4m/fab4m";
-import "@fab4m/fab4m/css/basic/basic.css";
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   file: fileField({
@@ -25,5 +24,9 @@ const form = createForm({
 });
 
 export default function FileExtensionExample() {
-  return <StatefulFormView form={form} hideSubmit={true} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} hideSubmit={true} />
+    </FormProvider>
+  );
 }

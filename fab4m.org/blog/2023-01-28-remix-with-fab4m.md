@@ -2,6 +2,7 @@
 title: Remix and fab4m
 description: Remix and fab4m work great together thanks to it's compatibility with react router. Let's dive in!
 ---
+
 # Remix and fab4m
 
 [Remix](https://remix.run/) is a great node framework to render react components server side. It

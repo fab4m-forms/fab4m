@@ -1,13 +1,11 @@
 import React from "react";
-import {
-  createForm,
-  integerField,
-  booleanField,
-  StatefulFormView,
-  max,
-  not,
-} from "@fab4m/fab4m";
+import { createForm, integerField, booleanField, max, not } from "@fab4m/fab4m";
 import "@fab4m/fab4m/css/basic/basic.css";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   age: integerField({
@@ -20,5 +18,9 @@ const form = createForm({
 });
 
 export default function OrExample() {
-  return <StatefulFormView form={form} hideSubmit={true} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} hideSubmit={true} />
+    </FormProvider>
+  );
 }

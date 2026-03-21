@@ -6,11 +6,15 @@ import {
   integerField,
   textAreaWidget,
   minLength,
-  useForm,
   createForm,
+} from "@fab4m/fab4m";
+import {
+  useForm,
   FormView,
   StatefulFormView,
-} from "@fab4m/fab4m";
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const validatorTemplate = (length: number) => `
 text: textField({
@@ -36,14 +40,14 @@ export default function Validators() {
         label: "Change the required length in the form:",
         required: true,
       }),
-    })
+    }),
   ).onDataChange((data) => {
     changeLength(data.length);
   });
   const form = useForm(() =>
     createForm({
       text: field,
-    })
+    }),
   );
   return (
     <div className="feature-large">
@@ -58,10 +62,18 @@ export default function Validators() {
         </Link>
       </div>
       <div className="example">
-        <FormView form={widgetSelectForm} data={{ length }} hideSubmit={true} />
+        <FormProvider renderer={allWidgetsRenderer}>
+          <FormView
+            form={widgetSelectForm}
+            data={{ length }}
+            hideSubmit={true}
+          />
+        </FormProvider>
         <CodeBlock language="jsx">{validatorTemplate(length)}</CodeBlock>
         <div className="feature-box">
-          <StatefulFormView form={form} hideSubmit={true} />
+          <FormProvider renderer={allWidgetsRenderer}>
+            <StatefulFormView form={form} hideSubmit={true} />
+          </FormProvider>
         </div>
       </div>
     </div>

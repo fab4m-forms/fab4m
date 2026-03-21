@@ -1,10 +1,10 @@
 import React from "react";
+import { createForm, booleanField, checkboxWidget } from "@fab4m/fab4m";
 import {
-  createForm,
-  booleanField,
-  checkboxWidget,
   StatefulFormView,
-} from "@fab4m/fab4m";
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   agree: booleanField({
@@ -15,5 +15,9 @@ const form = createForm({
 });
 
 export default function Example() {
-  return <StatefulFormView form={form} hideSubmit={true} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} hideSubmit={true} />
+    </FormProvider>
+  );
 }

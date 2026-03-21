@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { useForm, textField, basic } from "@fab4m/fab4m";
+import { textField, basic } from "@fab4m/fab4m";
 import { definitions } from "./form";
 import clsx from "clsx";
 import Structure from "./Structure";
 import Complex from "./Complex";
 import styles from "./styles.module.css";
 import Link from "@docusaurus/Link";
+import { useForm } from "@fab4m/react";
 
 const FeatureList = [
   {
@@ -81,7 +82,7 @@ export default function HomepageFeatures() {
       theme: basic,
       components: formComponents,
     }),
-    [components.join(",")]
+    [components.join(",")],
   );
 
   return (

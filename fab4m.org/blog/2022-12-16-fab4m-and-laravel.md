@@ -29,7 +29,7 @@ This will get you started with a blank laravel project.
 ## Getting everything in place with docker
 
 I usually work with docker to get things like mysql and other related services going.
-    Luckily laravel provides us with an easy way to do that called [laravel sail](https://laravel.com/docs/9.x/sail):
+Luckily laravel provides us with an easy way to do that called [laravel sail](https://laravel.com/docs/9.x/sail):
 
 ```bash
 composer require laravel/sail --dev
@@ -88,9 +88,10 @@ npm install --save @fab4m/fab4m
 Laravel provides us with a nice way of generating a lot of boilerplate code.
 
 The following command creates:
-* A [Laravel model](https://laravel.com/docs/9.x/eloquent) for our diary posts
-* A [Laravel migration](https://laravel.com/docs/9.x/migrations) for setting up the diary schema
-* A [Laravel resource controller](https://laravel.com/docs/9.x/controllers#resource-controllers) for handling our CRUD operations.
+
+- A [Laravel model](https://laravel.com/docs/9.x/eloquent) for our diary posts
+- A [Laravel migration](https://laravel.com/docs/9.x/migrations) for setting up the diary schema
+- A [Laravel resource controller](https://laravel.com/docs/9.x/controllers#resource-controllers) for handling our CRUD operations.
 
 ```bash
 php artisan make:model Diary -c -m -r
@@ -155,24 +156,24 @@ Let's start with creating a fab4m form, create a file in resources/js/Forms/Diar
 
 ```jsx
 import {
-    createForm,
-    textField,
-    textAreaWidget,
-    tagsWidget,
+  createForm,
+  textField,
+  textAreaWidget,
+  tagsWidget,
 } from "@fab4m/fab4m";
 
 export default createForm({
-    title: textField({ label: "Title", required: true }),
-    body: textField({
-        label: "Body",
-        required: true,
-        widget: textAreaWidget(),
-    }),
-    tags: textField({
-        label: "Tags",
-        multiple: true,
-        multipleWidget: tagsWidget(),
-    }),
+  title: textField({ label: "Title", required: true }),
+  body: textField({
+    label: "Body",
+    required: true,
+    widget: textAreaWidget(),
+  }),
+  tags: textField({
+    label: "Tags",
+    multiple: true,
+    multipleWidget: tagsWidget(),
+  }),
 });
 ```
 
@@ -190,23 +191,23 @@ import form from "../../Forms/Diary";
 import { StatefulFormView } from "@fab4m/fab4m";
 
 export default function Create() {
-    form.onSubmit((e, data) => {
-        e.preventDefault();
-        Inertia.post(route("diaries.store"), data);
-    });
-    return (
-        <GuestLayout>
-            <Head title="Create new diary" />
-            <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                Create new diary
-            </h2>
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                    <StatefulFormView form={form} />
-                </div>
-            </div>
-        </GuestLayout>
-    );
+  form.onSubmit((e, data) => {
+    e.preventDefault();
+    Inertia.post(route("diaries.store"), data);
+  });
+  return (
+    <GuestLayout>
+      <Head title="Create new diary" />
+      <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+        Create new diary
+      </h2>
+      <div className="py-12">
+        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+          <StatefulFormView form={form} />
+        </div>
+      </div>
+    </GuestLayout>
+  );
 }
 ```
 
@@ -262,32 +263,32 @@ import { Inertia } from "@inertiajs/inertia";
 import { Head, Link } from "@inertiajs/inertia-react";
 
 export default function Show({ diary }) {
-    return (
-        <GuestLayout>
-            <Head title={diary.title} />
-            <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                Diary: {diary.title}
-            </h2>
-            <div className="py-12">
-                <article className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                    <h3 class="font-bold">Entry</h3>
-                    <p className="mb-4">{diary.body}</p>
-                    <h3 class="font-bold">Tags</h3>
-                    <ul className="list-disc ml-8 mt-1">
-                        {diary.tags.map((tag, i) => (
-                            <li key={i}>{tag}</li>
-                        ))}
-                    </ul>
-                    <Link
-                        className="text-blue-700"
-                        href={route("diaries.edit", [diary.id])}
-                    >
-                        Edit
-                    </Link>
-                </article>
-            </div>
-        </GuestLayout>
-    );
+  return (
+    <GuestLayout>
+      <Head title={diary.title} />
+      <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+        Diary: {diary.title}
+      </h2>
+      <div className="py-12">
+        <article className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+          <h3 class="font-bold">Entry</h3>
+          <p className="mb-4">{diary.body}</p>
+          <h3 class="font-bold">Tags</h3>
+          <ul className="list-disc ml-8 mt-1">
+            {diary.tags.map((tag, i) => (
+              <li key={i}>{tag}</li>
+            ))}
+          </ul>
+          <Link
+            className="text-blue-700"
+            href={route("diaries.edit", [diary.id])}
+          >
+            Edit
+          </Link>
+        </article>
+      </div>
+    </GuestLayout>
+  );
 }
 ```
 
@@ -308,6 +309,7 @@ console.log(JSON.stringify(generateSchema(form)));
 The output from this function will be the json schema that you can use to validate your form anywhere.
 
 Add the schema to your function:
+
 ```php
 class DiaryController extends Controller
 {

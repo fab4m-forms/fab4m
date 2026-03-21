@@ -1,9 +1,19 @@
 import * as React from "react";
-import { textField, StatefulFormView, useForm, createForm } from "@fab4m/fab4m";
+import { textField, createForm } from "@fab4m/fab4m";
+import {
+  StatefulFormView,
+  useForm,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 export default function HookExample() {
   const form = useForm(() =>
-    createForm({ text: textField({ label: "text field" }) })
+    createForm({ text: textField({ label: "text field" }) }),
   );
-  return <StatefulFormView form={form} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} />
+    </FormProvider>
+  );
 }

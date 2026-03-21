@@ -20,7 +20,7 @@ Instead of working directly with markup, you structure your form using a javascr
 ```jsx
 import { createForm } from "@fab4m/fab4m";
 const form = createForm({
-    title: textField({ label: "Title" }),
+  title: textField({ label: "Title" }),
 });
 ```
 
@@ -35,7 +35,6 @@ const form = createForm({
     title: textField({ label: "Title", widget: optionsWidget({}, ["one", "two"] }),
 });
 ```
-
 
 In addition to this there's also [validators](/docs/guide/validators) and visibility rules to make it easy to validate your form.
 

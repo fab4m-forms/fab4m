@@ -5,9 +5,13 @@ import {
   integerField,
   booleanField,
   textAreaWidget,
-  StatefulFormView,
   pageBreak,
 } from "@fab4m/fab4m";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const partValidateForm = createForm({
   name: textField({ label: "Name" }),
@@ -48,6 +52,8 @@ export function OnPartValidateForm() {
   return completed ? (
     <p>Welcome, you're the right person for the job!</p>
   ) : (
-    <StatefulFormView form={partValidateForm} />
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={partValidateForm} />
+    </FormProvider>
   );
 }

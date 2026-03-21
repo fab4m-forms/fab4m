@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import Link from "@docusaurus/Link";
 import CodeBlock from "@theme/CodeBlock";
+import { createForm, emailField, exists, booleanField } from "@fab4m/fab4m";
 import {
   useForm,
-  createForm,
   StatefulFormView,
-  emailField,
-  exists,
-  booleanField,
-} from "@fab4m/fab4m";
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const template = `newsletter: booleanField({
     label: "Sign up for our newsletter",
@@ -28,7 +27,7 @@ export default function Rules() {
         label: "Your email",
         rules: [["newsletter", exists()]],
       }),
-    })
+    }),
   );
 
   return (
@@ -46,7 +45,9 @@ export default function Rules() {
       <div className="example">
         <CodeBlock language="jsx">{template}</CodeBlock>
         <div className="feature-box">
-          <StatefulFormView form={form} hideSubmit={true} />
+          <FormProvider renderer={allWidgetsRenderer}>
+            <StatefulFormView form={form} hideSubmit={true} />
+          </FormProvider>
         </div>
       </div>
     </div>

@@ -83,41 +83,41 @@ in fab4m:
 
 ```jsx
 import {
-    createForm,
-    textFieldType,
-    textField,
-    booleanField,
-    textFieldWidgetType,
-    textAreaWidgetType,
-    integerFieldType,
-    booleanFieldType,
-    selectWidget,
-    group,
+  createForm,
+  textFieldType,
+  textField,
+  booleanField,
+  textFieldWidgetType,
+  textAreaWidgetType,
+  integerFieldType,
+  booleanFieldType,
+  selectWidget,
+  group,
 } from "@fab4m/fab4m";
 
 const fieldTypes = [textFieldType, integerFieldType, booleanFieldType];
 export default createForm({
-    title: textField({ label: "Title", required: true }),
-    fields: group(
-        {
-            label: "Fields",
-            minItems: 1,
-            multiple: true,
-        },
-        {
-            name: textField({ label: "Field name", required: true }),
-            label: textField({ label: "Label", required: true }),
-            field: textField({
-                label: "Field type",
-                required: true,
-                widget: selectWidget(
-                    fieldTypes.map((field) => [field.name, field.title])
-                ),
-            }),
-            required: booleanField({ label: "Required" }),
-            multiple: booleanField({ label: "Multiple" }),
-        }
-    ),
+  title: textField({ label: "Title", required: true }),
+  fields: group(
+    {
+      label: "Fields",
+      minItems: 1,
+      multiple: true,
+    },
+    {
+      name: textField({ label: "Field name", required: true }),
+      label: textField({ label: "Label", required: true }),
+      field: textField({
+        label: "Field type",
+        required: true,
+        widget: selectWidget(
+          fieldTypes.map((field) => [field.name, field.title]),
+        ),
+      }),
+      required: booleanField({ label: "Required" }),
+      multiple: booleanField({ label: "Multiple" }),
+    },
+  ),
 });
 ```
 
@@ -129,7 +129,7 @@ the hood. We're going to use these definitions to build our final forms.
 
 We then proceed with creating our form based on these component types. We
 define a fab4m group field which represents each field in the form we
-are creating.  Each field has a name, label field type and options for
+are creating. Each field has a name, label field type and options for
 if the field is required and multiple.
 
 Let's get back to our Inertia view (`resources/js/Pages/Form/Create.jsx`):
@@ -143,22 +143,22 @@ import form from "../../Forms/Form";
 import { StatefulFormView } from "@fab4m/fab4m";
 
 export default function Create() {
-    form.onSubmit((e, data) => {
-        e.preventDefault();
-    });
-    return (
-        <GuestLayout>
-            <Head title="Create new diary" />
-            <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                Create a new form
-            </h2>
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                    <StatefulFormView form={form} />
-                </div>
-            </div>
-        </GuestLayout>
-    );
+  form.onSubmit((e, data) => {
+    e.preventDefault();
+  });
+  return (
+    <GuestLayout>
+      <Head title="Create new diary" />
+      <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+        Create a new form
+      </h2>
+      <div className="py-12">
+        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+          <StatefulFormView form={form} />
+        </div>
+      </div>
+    </GuestLayout>
+  );
 }
 ```
 
@@ -177,22 +177,20 @@ our data into a full fab4m form:
 
 ```jsx
 export function fab4mFromData(data) {
-    const form = createForm();
-    for (const field of data.fields) {
-        const fieldType = fieldTypes.find(
-            (type) => type.name === field.fieldType
-        );
-        form.add(
-            formComponent({
-                type: fieldType,
-                name: `field_${form.components.length}`,
-                label: field.label,
-                required: field.required,
-                widget: widgets[fieldType.name](),
-            })
-        );
-    }
-    return serialize(form);
+  const form = createForm();
+  for (const field of data.fields) {
+    const fieldType = fieldTypes.find((type) => type.name === field.fieldType);
+    form.add(
+      formComponent({
+        type: fieldType,
+        name: `field_${form.components.length}`,
+        label: field.label,
+        required: field.required,
+        widget: widgets[fieldType.name](),
+      }),
+    );
+  }
+  return serialize(form);
 }
 ```
 
@@ -223,10 +221,10 @@ export default function Create() {
 
 Note that we generate the JSON schema here and send it along to the backend. Note the following:
 
-* We are generating the schema for the form above so that it can be
+- We are generating the schema for the form above so that it can be
   used for validation later.
-* We use the serialize() function to serialize the form into something that can be
-stored as a JSON object.
+- We use the serialize() function to serialize the form into something that can be
+  stored as a JSON object.
 
 Let's implement the store function in `app/Http/Controllers/FormController.php` to handle our request:
 
@@ -266,15 +264,15 @@ Before we dive into our Page component, let's add a new helper function to the F
 
 ```jsx
 export async function unserializeForm(form) {
-    return await unserialize(
-        form,
-        [textFieldType, booleanFieldType, integerFieldType],
-        [basic],
-        [textFieldWidgetType, checkboxWidgetType, numberFieldWidgetType],
-        [],
-        [],
-        []
-    );
+  return await unserialize(
+    form,
+    [textFieldType, booleanFieldType, integerFieldType],
+    [basic],
+    [textFieldWidgetType, checkboxWidgetType, numberFieldWidgetType],
+    [],
+    [],
+    [],
+  );
 }
 ```
 
@@ -290,31 +288,29 @@ import { unserializeForm } from "../../Forms/Form";
 import { StatefulFormView, useForm } from "@fab4m/fab4m";
 
 export default function Show({ form }) {
-    const [unserializedForm, changeUnserializedForm] = useState(null);
-    useEffect(() => {
-        unserializeForm(form.form).then(changeUnserializedForm);
-    }, []);
-    return (
-        <GuestLayout>
-            <Head title="Show form" />
-            <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                Create a new form
-            </h2>
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                    {unserializedForm && (
-                        <StatefulFormView form={unserializedForm} />
-                    )}
-                </div>
-            </div>
-        </GuestLayout>
-    );
+  const [unserializedForm, changeUnserializedForm] = useState(null);
+  useEffect(() => {
+    unserializeForm(form.form).then(changeUnserializedForm);
+  }, []);
+  return (
+    <GuestLayout>
+      <Head title="Show form" />
+      <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+        Create a new form
+      </h2>
+      <div className="py-12">
+        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+          {unserializedForm && <StatefulFormView form={unserializedForm} />}
+        </div>
+      </div>
+    </GuestLayout>
+  );
 }
 ```
 
 Normally you wouldn't want to unserialize the form within the
- component, but since this is the entry point for inertia I don't
- think we have a choice.
+component, but since this is the entry point for inertia I don't
+think we have a choice.
 
 Now, if you head over to
 [http://localhost/forms/create](http://localhost/forms/create) and
@@ -431,26 +427,26 @@ import { Inertia } from "@inertiajs/inertia";
 import { Head, Link } from "@inertiajs/inertia-react";
 
 export default function Show({ submission }) {
-    const data = [];
-    for (const key in submission.submission) {
-        data.push(
-            <li key={key}>
-                <strong>{`${key}: `}</strong>
-                {submission.submission[key]}
-            </li>
-        );
-    }
-    return (
-        <GuestLayout>
-            <Head title="Submission" />
-            <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                Submission
-            </h2>
-            <div className="py-12">
-                <ul>{data}</ul>
-            </div>
-        </GuestLayout>
+  const data = [];
+  for (const key in submission.submission) {
+    data.push(
+      <li key={key}>
+        <strong>{`${key}: `}</strong>
+        {submission.submission[key]}
+      </li>,
     );
+  }
+  return (
+    <GuestLayout>
+      <Head title="Submission" />
+      <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+        Submission
+      </h2>
+      <div className="py-12">
+        <ul>{data}</ul>
+      </div>
+    </GuestLayout>
+  );
 }
 ```
 
@@ -460,8 +456,8 @@ This will render the data that was just submitted!
 
 That was a long post! But we accomplished a lot:
 
-* We made it possible to create any form and save it along with a schema to validate it.
-* We made it possible to save submissions for that form.
+- We made it possible to create any form and save it along with a schema to validate it.
+- We made it possible to save submissions for that form.
 
 There are of course tons of features we didn't expose here, but it's still a nice
 demo of how to construct any form you'd like and validate easily.

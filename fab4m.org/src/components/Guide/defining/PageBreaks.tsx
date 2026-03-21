@@ -5,10 +5,14 @@ import {
   booleanField,
   integerField,
   emailField,
-  content,
   pageBreak,
-  StatefulFormView,
 } from "@fab4m/fab4m";
+import {
+  content,
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   name: textField({
@@ -36,5 +40,9 @@ export default function PageBreaks() {
   form.onSubmit((e) => {
     e.preventDefault();
   });
-  return <StatefulFormView form={form} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} />
+    </FormProvider>
+  );
 }

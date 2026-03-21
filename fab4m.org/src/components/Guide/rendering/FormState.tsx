@@ -1,5 +1,6 @@
 import * as React from "react";
-import { textField, createForm, FormView } from "@fab4m/fab4m";
+import { textField, createForm } from "@fab4m/fab4m";
+import { FormView, FormProvider, allWidgetsRenderer } from "@fab4m/react";
 
 const form = createForm({
   text: textField({ label: "Text field" }),
@@ -10,7 +11,9 @@ export default function FormViewExampleWithHook() {
   form.onDataChange(changeData);
   return (
     <div>
-      <FormView form={form} data={data} hideSubmit={true} />
+      <FormProvider renderer={allWidgetsRenderer}>
+        <FormView form={form} data={data} hideSubmit={true} />
+      </FormProvider>
       <p>{data.text}</p>
     </div>
   );

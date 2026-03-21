@@ -1,6 +1,11 @@
 import React from "react";
-import { createForm, group, textField, StatefulFormView } from "@fab4m/fab4m";
+import { createForm, group, textField } from "@fab4m/fab4m";
 import "@fab4m/fab4m/css/basic/basic.css";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   groupOfFields: group(
@@ -16,10 +21,14 @@ const form = createForm({
       capital: textField({
         label: "Capital",
       }),
-    }
+    },
   ),
 });
 
 export default function TextFieldExample() {
-  return <StatefulFormView form={form} hideSubmit={true} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} hideSubmit={true} />
+    </FormProvider>
+  );
 }

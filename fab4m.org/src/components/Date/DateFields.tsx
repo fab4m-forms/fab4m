@@ -1,6 +1,11 @@
 import * as React from "react";
 import { dateField, dateTimeField, dateRangeField } from "@fab4m/date";
-import { StatefulFormView, createForm } from "@fab4m/fab4m";
+import { createForm } from "@fab4m/fab4m";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 import "react-datepicker/dist/react-datepicker.css";
 
 const form = createForm({
@@ -23,7 +28,9 @@ export default function DateExamples() {
   });
   return (
     <div>
-      <StatefulFormView form={form} />
+      <FormProvider renderer={allWidgetsRenderer}>
+        <StatefulFormView form={form} />
+      </FormProvider>
       {/* The data that comes out of the form are dates. */}
       {result && (
         <dl>

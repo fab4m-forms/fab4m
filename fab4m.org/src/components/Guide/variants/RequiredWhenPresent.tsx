@@ -1,11 +1,10 @@
 import * as React from "react";
+import { textAreaField, booleanField, exists, createForm } from "@fab4m/fab4m";
 import {
-  textAreaField,
-  booleanField,
-  exists,
-  createForm,
   StatefulFormView,
-} from "@fab4m/fab4m";
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   likeBio: booleanField({ label: "Do you like to talk about yourself?" }),
@@ -27,5 +26,9 @@ const form = createForm({
 });
 
 export default function RequiredWhenPresent() {
-  return <StatefulFormView form={form} hideSubmit={true} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} hideSubmit={true} />
+    </FormProvider>
+  );
 }

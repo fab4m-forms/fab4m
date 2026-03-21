@@ -3,11 +3,15 @@ import {
   booleanField,
   textField,
   equals,
-  content,
   createForm,
-  StatefulFormView,
   selectWidget,
 } from "@fab4m/fab4m";
+import {
+  content,
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   city: textField({
@@ -43,11 +47,15 @@ const form = createForm({
     ],
     content(
       {},
-      () => "Select a city to tell us if you visited a popular attraction!"
+      () => "Select a city to tell us if you visited a popular attraction!",
     ),
   ],
 });
 
 export default function VariantSelection() {
-  return <StatefulFormView form={form} hideSubmit={true} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} hideSubmit={true} />
+    </FormProvider>
+  );
 }

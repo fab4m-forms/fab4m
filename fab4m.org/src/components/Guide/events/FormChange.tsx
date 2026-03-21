@@ -2,10 +2,10 @@ import {
   createForm,
   textField,
   integerField,
-  FormView,
   textAreaWidget,
 } from "@fab4m/fab4m";
 import React, { useState } from "react";
+import { FormView, FormProvider, allWidgetsRenderer } from "@fab4m/react";
 
 const form = createForm({
   name: textField({ label: "Name" }),
@@ -30,7 +30,9 @@ export function OnChangeExample() {
   // information that is changed by the form on the fly.
   return (
     <>
-      <FormView form={form} data={data} hideSubmit={true} />
+      <FormProvider renderer={allWidgetsRenderer}>
+        <FormView form={form} data={data} hideSubmit={true} />
+      </FormProvider>
       <div>
         <dl>
           <dt>Name</dt>

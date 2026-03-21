@@ -1,6 +1,11 @@
 import React from "react";
-import { createForm, textField, StatefulFormView, submit } from "@fab4m/fab4m";
+import { createForm, textField, submit } from "@fab4m/fab4m";
 import "@fab4m/fab4m/css/basic/basic.css";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   name: textField({
@@ -12,7 +17,7 @@ const form = createForm({
     {
       label: "My submit button",
     },
-    { title: "button text" }
+    { title: "button text" },
   ),
   otherField: textField({
     label: "This field comes after the buttton",
@@ -20,5 +25,9 @@ const form = createForm({
 }).onSubmit((e) => e.preventDefault());
 
 export default function SubmitExample() {
-  return <StatefulFormView form={form} hideSubmit={true} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} hideSubmit={true} />
+    </FormProvider>
+  );
 }

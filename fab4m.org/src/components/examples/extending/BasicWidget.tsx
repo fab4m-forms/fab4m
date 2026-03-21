@@ -1,6 +1,11 @@
 import React from "react";
-import { createForm, textField, StatefulFormView, widget } from "@fab4m/fab4m";
+import { createForm, textField, widget } from "@fab4m/fab4m";
 import "@fab4m/fab4m/css/basic/basic.css";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const customTextFieldWidget = widget({
   type: {
@@ -32,5 +37,9 @@ const form = createForm({
 });
 
 export default function CustomWidgetExample() {
-  return <StatefulFormView form={form} hideSubmit={true} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} hideSubmit={true} />
+    </FormProvider>
+  );
 }

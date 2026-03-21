@@ -15,7 +15,6 @@ import CustomFormatSource from "!!raw-loader!@site/src/components/Date/CustomFor
 import DatePickerProps from "@site/src/components/Date/DatePickerProps";
 import DatePickerPropsSource from "!!raw-loader!@site/src/components/Date/DatePickerProps";
 
-
 # Date and time
 
 The `@fab4m/date` packages provides date and datetime components using the popular
@@ -75,15 +74,16 @@ react-datepicker supports many options and you might want to customize them acco
 Properties passed to react datepicker aren't serialized with your form, since we can't
 possibly support serializing all of the possible configurations!
 :::
+
 # The date range widget
 
 The date range widget is used with the date range field. It supports all settings from the date picker
 widget above and the following additional settings:
 
-* **fromLabel**: The text that is displayed inside of the from input field.
-* **toLabel**: The text that is is displayed inside of the to input field.
-* **optionalEndDate**: This makes the end date optional.
-* **withTime**: If this is true, then you get the option to specify the time in the date range, not just the dates.
+- **fromLabel**: The text that is displayed inside of the from input field.
+- **toLabel**: The text that is is displayed inside of the to input field.
+- **optionalEndDate**: This makes the end date optional.
+- **withTime**: If this is true, then you get the option to specify the time in the date range, not just the dates.
 
 # Unserializing date widget settings
 
@@ -94,7 +94,7 @@ This is done by calling the `setLocales()` function before unserializing:
 
 ```jsx
 import { enUS, sv } from "date-fns/locale";
-import { setLocales } from "@fab4m/date"
+import { setLocales } from "@fab4m/date";
 setLocales([enUS, sv]);
 ```
 

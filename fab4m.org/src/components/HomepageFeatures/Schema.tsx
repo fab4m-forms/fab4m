@@ -3,13 +3,13 @@ import Link from "@docusaurus/Link";
 import CodeBlock from "@theme/CodeBlock";
 import * as beautify from "json-beautify";
 import {
-  useForm,
   createForm,
   emailField,
   min,
   integerField,
   generateSchema,
 } from "@fab4m/fab4m";
+import { useForm } from "@fab4m/react";
 
 const template = `email: emailField({
   label: "Your email",
@@ -33,7 +33,7 @@ export default function Schema() {
         required: true,
         validators: [min(18)],
       }),
-    })
+    }),
   );
 
   return (

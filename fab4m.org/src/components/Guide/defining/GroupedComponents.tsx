@@ -1,11 +1,10 @@
 import React, { useState } from "react";
+import { createForm, textField, integerField, group } from "@fab4m/fab4m";
 import {
-  createForm,
-  textField,
-  integerField,
-  group,
   StatefulFormView,
-} from "@fab4m/fab4m";
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   name: textField({ label: "Band name" }),
@@ -21,7 +20,7 @@ const form = createForm({
         label: "Active since",
         description: "Enter the year from which the band has been active",
       }),
-    }
+    },
   ),
   // Groups can be multiple.
   performances: group(
@@ -36,7 +35,7 @@ const form = createForm({
         label: "People in the audience",
         required: true,
       }),
-    }
+    },
   ),
 });
 
@@ -48,7 +47,9 @@ export default function GroupedFields() {
   });
   return (
     <div>
-      <StatefulFormView form={form} />
+      <FormProvider renderer={allWidgetsRenderer}>
+        <StatefulFormView form={form} />
+      </FormProvider>
       {band && (
         <>
           <h4>{band.name}</h4>

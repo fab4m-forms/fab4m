@@ -1,10 +1,10 @@
 import React from "react";
+import { createForm, textField, tagsWidget } from "@fab4m/fab4m";
 import {
-  createForm,
-  textField,
   StatefulFormView,
-  tagsWidget,
-} from "@fab4m/fab4m";
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   tags: textField({
@@ -15,5 +15,9 @@ const form = createForm({
 });
 
 export default function MultipleWidgetExample() {
-  return <StatefulFormView form={form} hideSubmit={true} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} hideSubmit={true} />
+    </FormProvider>
+  );
 }

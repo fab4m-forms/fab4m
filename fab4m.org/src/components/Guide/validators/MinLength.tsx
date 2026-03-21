@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import { createForm, textField, minLength } from "@fab4m/fab4m";
 import {
-  createForm,
-  textField,
-  minLength,
   StatefulFormView,
-} from "@fab4m/fab4m";
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   longtext: textField({
@@ -21,7 +21,9 @@ export default function MinLengthExample() {
   });
   return (
     <div>
-      <StatefulFormView form={form} />
+      <FormProvider renderer={allWidgetsRenderer}>
+        <StatefulFormView form={form} />
+      </FormProvider>
       {longText && (
         <div>
           <strong>Your long text:</strong> {longText}

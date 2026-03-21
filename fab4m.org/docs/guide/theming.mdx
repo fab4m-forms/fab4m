@@ -71,14 +71,14 @@ If you have existing CSS you probably want to define your own theme.
 Fab4m provides an object with the defined classes for all elements.
 
 ```jsx
-import { defaultThemeClasses } from "@fab4m/fab4m"
+import { defaultThemeClasses } from "@fab4m/fab4m";
 const yourTheme = {
   name: "your theme",
   module: "yourmodule",
   classes: {
-    ...defaultThemeClasses
-  }
-}
+    ...defaultThemeClasses,
+  },
+};
 ```
 
 This is all you need to define your theme. You can now override any default classes
@@ -119,8 +119,8 @@ const yourTheme = {
   classes: {
     ...basic.classes,
     input: "my-input-class",
-  }
-}
+  },
+};
 setDefaultTheme(yourTheme);
 ```
 
@@ -142,7 +142,7 @@ const yourTheme = createTailwindTheme({
     inputBg: "bg-white dark:bg-slate-700",
     inputText: "text-white dark:text-slate-100",
     inputHeight: "h-10",
-  }
+  },
 });
 setDefaultTheme(yourTheme);
 ```

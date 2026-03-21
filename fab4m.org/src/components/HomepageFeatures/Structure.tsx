@@ -3,13 +3,12 @@ import Arrow from "./Arrow";
 import { definitions } from "./form";
 import CodeBlock from "@theme/CodeBlock";
 import {
-  createForm,
-  textField,
   StatefulFormView,
-  selectWidget,
   useForm,
-  Form,
-} from "@fab4m/fab4m";
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
+import { createForm, textField, selectWidget, Form } from "@fab4m/fab4m";
 import "@fab4m/fab4m/css/basic/basic.css";
 
 function componentTemplate(component: string) {
@@ -33,12 +32,12 @@ export default function Structure(props: {
               .map(([name, component]) => {
                 return [component.component.label ?? "", name];
               })
-              .filter((option) => props.components.indexOf(option[1]) === -1)
+              .filter((option) => props.components.indexOf(option[1]) === -1),
           ),
         }),
       },
-      { labels: { submit: "Add component" } }
-    )
+      { labels: { submit: "Add component" } },
+    ),
   );
 
   const form = useForm(() => {
@@ -75,7 +74,9 @@ export default function Structure(props: {
               Add a component from the list, and see the fab4m structure in
               action.
             </p>
-            <StatefulFormView form={addForm} />
+            <FormProvider renderer={allWidgetsRenderer}>
+              <StatefulFormView form={addForm} />
+            </FormProvider>
           </div>
         </div>
         <Arrow />
@@ -111,7 +112,9 @@ export default function Structure(props: {
   hideSubmit={true}
 />`}</CodeBlock>
             }
-            <StatefulFormView form={form} hideSubmit={true} />
+            <FormProvider renderer={allWidgetsRenderer}>
+              <StatefulFormView form={form} hideSubmit={true} />
+            </FormProvider>
           </div>
         </div>
       </div>

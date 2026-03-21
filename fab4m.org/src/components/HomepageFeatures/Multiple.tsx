@@ -5,14 +5,18 @@ import {
   textField,
   integerField,
   selectWidget,
-  useForm,
   createForm,
   defaultMultipleWidget,
   tagsWidget,
   min,
+} from "@fab4m/fab4m";
+import {
+  useForm,
   FormView,
   StatefulFormView,
-} from "@fab4m/fab4m";
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 interface MultipleOptions {
   widget: string;
@@ -89,14 +93,18 @@ export default function Multiple() {
         </Link>
       </div>
       <div className="example">
-        <FormView
-          form={multipleForm}
-          data={multipleOptions}
-          hideSubmit={true}
-        />
+        <FormProvider renderer={allWidgetsRenderer}>
+          <FormView
+            form={multipleForm}
+            data={multipleOptions}
+            hideSubmit={true}
+          />
+        </FormProvider>
         <CodeBlock language="jsx">{template(multipleOptions)}</CodeBlock>
         <div className="feature-box">
-          <StatefulFormView form={form} hideSubmit={true} />
+          <FormProvider renderer={allWidgetsRenderer}>
+            <StatefulFormView form={form} hideSubmit={true} />
+          </FormProvider>
         </div>
       </div>
     </div>

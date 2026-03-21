@@ -1,6 +1,12 @@
 import React from "react";
-import { createForm, StatefulFormView, textField, content } from "@fab4m/fab4m";
+import { createForm, textField } from "@fab4m/fab4m";
 import "@fab4m/fab4m/css/basic/basic.css";
+import {
+  StatefulFormView,
+  content,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   name: textField({
@@ -20,5 +26,9 @@ const form = createForm({
 });
 
 export default function ContentExample() {
-  return <StatefulFormView form={form} hideSubmit={true} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} hideSubmit={true} />
+    </FormProvider>
+  );
 }

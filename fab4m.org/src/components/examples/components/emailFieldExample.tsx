@@ -1,6 +1,11 @@
 import React from "react";
-import { createForm, emailField, StatefulFormView } from "@fab4m/fab4m";
+import { createForm, emailField } from "@fab4m/fab4m";
 import "@fab4m/fab4m/css/basic/basic.css";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   name: emailField({
@@ -11,5 +16,9 @@ const form = createForm({
 });
 
 export default function EmailFieldExample() {
-  return <StatefulFormView form={form} hideSubmit={true} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} hideSubmit={true} />
+    </FormProvider>
+  );
 }

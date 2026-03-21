@@ -1,13 +1,12 @@
 import React from "react";
+import { createForm, pageBreak, integerField, max } from "@fab4m/fab4m";
+import "@fab4m/fab4m/css/basic/basic.css";
 import {
-  createForm,
-  pageBreak,
-  integerField,
   StatefulFormView,
   content,
-  max,
-} from "@fab4m/fab4m";
-import "@fab4m/fab4m/css/basic/basic.css";
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   maxValue: integerField({
@@ -20,5 +19,9 @@ const form = createForm({
 });
 
 export default function TextFieldExample() {
-  return <StatefulFormView form={form} hideSubmit={true} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} hideSubmit={true} />
+    </FormProvider>
+  );
 }

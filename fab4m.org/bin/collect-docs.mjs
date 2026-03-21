@@ -5,34 +5,41 @@ const docs = JSON.parse(data);
 import * as fab4m from "@fab4m/fab4m";
 
 const ExampleImport = (info) =>
-      info.example ? `import Example from "@site/src/components/Example";
+  info.example
+    ? `import Example from "@site/src/components/Example";
 import ExampleComponent from "${info.example}";
 import ExampleComponentSource from "!!raw-loader!${info.example}";
-` : '';
+`
+    : "";
 
-const RenderExample = (info) => info.example ? `## Example
-<Example source={ExampleComponentSource} example={<ExampleComponent />} />` : ``;
+const RenderExample = (info) =>
+  info.example
+    ? `## Example
+<Example source={ExampleComponentSource} example={<ExampleComponent />} />`
+    : ``;
 
 const componentLinks = (info, plugins) => {
+  return info.pluginType?.components
+    ? info.pluginType.components
+        .map((name) => {
+          return `* [${plugins.components.get(name).title}](/docs/components/${name})`;
+        })
+        .join("\n")
+    : "";
+};
 
-    return info.pluginType?.components
-      ? info.pluginType.components.map(
-          (name) => {
-              return `* [${plugins.components.get(name).title}](/docs/components/${name})`;
-          }).join("\n")
-          : '';
-
-}
-
-const widgetLinks = (info, plugins) => info
-      ? [...plugins.widgets.values()].filter(
-          (widget) => widget.pluginType?.components?.includes(info.pluginType?.name)
-      ).map(
+const widgetLinks = (info, plugins) =>
+  info
+    ? [...plugins.widgets.values()]
+        .filter((widget) =>
+          widget.pluginType?.components?.includes(info.pluginType?.name),
+        )
+        .map(
           (widget) =>
-              `* [${widget.title ?? ""}](/docs/widgets/${widget.pluginType?.name})`
-      ).join("\n")
-      : '';
-
+            `* [${widget.title ?? ""}](/docs/widgets/${widget.pluginType?.name})`,
+        )
+        .join("\n")
+    : "";
 
 const componentTemplate = (info, plugins) => `
 ${ExampleImport(info)}
@@ -71,67 +78,76 @@ ${RenderExample(info)}
 `;
 
 const groups = [
-    {
-        name: "components",
-        title: "Components",
-        template: componentTemplate,
-    },
-    {
-        name: "widgets",
-        title: "Widgets",
-        template: widgetTemplate,
-    },
-    { name: "rules", title: "Rules", template: ruleTemplate },
-    { name: "validators", title: "Validators", template: widgetTemplate }
+  {
+    name: "components",
+    title: "Components",
+    template: componentTemplate,
+  },
+  {
+    name: "widgets",
+    title: "Widgets",
+    template: widgetTemplate,
+  },
+  { name: "rules", title: "Rules", template: ruleTemplate },
+  { name: "validators", title: "Validators", template: widgetTemplate },
 ];
 
-
-
 function build() {
-    const plugins = {};
-    for (const group of groups) {
-        const groupDoc = docs.groups.find((groupDoc) => groupDoc.title === group.title);
-        if (groupDoc) {
-            plugins[group.name] = new Map();
-            for (const id of groupDoc.children) {
-                const fn = docs.children.find(
-                    (child) => id === child.id && child.kind === 64
-                );
-                if (fn) {
-                    const info = { title: fn.name };
-                    let pluginType;
-                    const typeDefinition = docs.children.find(
-                        (child) => child.name === `${fn.name}Type` || (group.name === "validators" && child.name === `${fn.name}Validator`)
-                    );
-                    if (typeDefinition && fab4m[typeDefinition.name]) {
-                        pluginType = fab4m[typeDefinition.name];
-                        if (pluginType.title) {
-                            info.title = pluginType.title;
-                        }
-                        plugins[group.name].set(pluginType.name, info);
-                    }
-                    else {
-                        plugins[group.name].set(fn.name, info);
-                    }
-                    info.pluginType = pluginType;
-                    info.template = group.template;
-                    const examplePath = `src/components/examples/${group.name}/${fn.name}Example.tsx`;
-                    info.example = existsSync(examplePath) ? `@site/${examplePath}` : null;
-                    if (group.name === "components") {
-                        info.dataType = fn.signatures[0].type.typeArguments[0].name;
-                    }
-                    info.text = fn.signatures[0].comment.summary.map((part) => part.text).join("");
-                }
+  const plugins = {};
+  for (const group of groups) {
+    const groupDoc = docs.groups.find(
+      (groupDoc) => groupDoc.title === group.title,
+    );
+    if (groupDoc) {
+      plugins[group.name] = new Map();
+      for (const id of groupDoc.children) {
+        const fn = docs.children.find(
+          (child) => id === child.id && child.kind === 64,
+        );
+        if (fn) {
+          const info = { title: fn.name };
+          let pluginType;
+          const typeDefinition = docs.children.find(
+            (child) =>
+              child.name === `${fn.name}Type` ||
+              (group.name === "validators" &&
+                child.name === `${fn.name}Validator`),
+          );
+          if (typeDefinition && fab4m[typeDefinition.name]) {
+            pluginType = fab4m[typeDefinition.name];
+            if (pluginType.title) {
+              info.title = pluginType.title;
             }
-        }
-    }
-  for (const name in plugins) {
-      for (const [pluginName, plugin] of plugins[name]) {
-        if (plugin.template) {
-          if (!existsSync(`docs/${name}`)) {
-            mkdirSync(`docs/${name}`);
+            plugins[group.name].set(pluginType.name, info);
+          } else {
+            plugins[group.name].set(fn.name, info);
           }
-          writeFileSync(`docs/${name}/${pluginName}.mdx`, plugin.template(plugin, plugins));
+          info.pluginType = pluginType;
+          info.template = group.template;
+          const examplePath = `src/components/examples/${group.name}/${fn.name}Example.tsx`;
+          info.example = existsSync(examplePath)
+            ? `@site/${examplePath}`
+            : null;
+          if (group.name === "components") {
+            info.dataType = fn.signatures[0].type.typeArguments[0].name;
+          }
+          info.text = fn.signatures[0].comment.summary
+            .map((part) => part.text)
+            .join("");
+        }
+      }
+    }
+  }
+  for (const name in plugins) {
+    for (const [pluginName, plugin] of plugins[name]) {
+      if (plugin.template) {
+        if (!existsSync(`docs/${name}`)) {
+          mkdirSync(`docs/${name}`);
+        }
+        writeFileSync(
+          `docs/${name}/${pluginName}.mdx`,
+          plugin.template(plugin, plugins),
+        );
       }
     }
   }

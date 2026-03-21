@@ -1,12 +1,11 @@
 import React from "react";
-import {
-  createForm,
-  group,
-  textField,
-  StatefulFormView,
-  fieldsetWidget,
-} from "@fab4m/fab4m";
+import { createForm, group, textField, fieldsetWidget } from "@fab4m/fab4m";
 import "@fab4m/fab4m/css/basic/basic.css";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   address: group(
@@ -27,10 +26,14 @@ const form = createForm({
       country: textField({
         label: "Country",
       }),
-    }
+    },
   ),
 });
 
 export default function Example() {
-  return <StatefulFormView form={form} hideSubmit={true} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} hideSubmit={true} />
+    </FormProvider>
+  );
 }

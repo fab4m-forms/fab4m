@@ -5,9 +5,13 @@ import {
   emailField,
   booleanField,
   pageBreak,
-  StatefulFormView,
 } from "@fab4m/fab4m";
 import "@fab4m/fab4m/css/basic/basic.css";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   name: emailField({
@@ -26,5 +30,9 @@ const form = createForm({
 });
 
 export default function TextFieldExample() {
-  return <StatefulFormView form={form} hideSubmit={true} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} hideSubmit={true} />
+    </FormProvider>
+  );
 }

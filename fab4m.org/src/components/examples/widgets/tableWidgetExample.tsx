@@ -2,13 +2,17 @@ import React from "react";
 import {
   createForm,
   textField,
-  StatefulFormView,
   selectWidget,
   tableWidget,
   booleanField,
   group,
 } from "@fab4m/fab4m";
 import "@fab4m/fab4m/css/basic/basic.css";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   visitors: group(
@@ -36,5 +40,9 @@ const form = createForm({
 });
 
 export default function selectExample() {
-  return <StatefulFormView form={form} hideSubmit={true} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} hideSubmit={true} />
+    </FormProvider>
+  );
 }

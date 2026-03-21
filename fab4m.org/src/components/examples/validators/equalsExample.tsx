@@ -1,13 +1,12 @@
 import React from "react";
+import { createForm, pageBreak, textField, equals } from "@fab4m/fab4m";
+import "@fab4m/fab4m/css/basic/basic.css";
 import {
-  createForm,
-  pageBreak,
-  textField,
   StatefulFormView,
   content,
-  equals,
-} from "@fab4m/fab4m";
-import "@fab4m/fab4m/css/basic/basic.css";
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   city: textField({
@@ -20,5 +19,9 @@ const form = createForm({
 });
 
 export default function TextFieldExample() {
-  return <StatefulFormView form={form} hideSubmit={true} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} hideSubmit={true} />
+    </FormProvider>
+  );
 }

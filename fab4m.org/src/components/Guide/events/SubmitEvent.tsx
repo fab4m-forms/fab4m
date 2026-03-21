@@ -3,9 +3,13 @@ import {
   textField,
   integerField,
   textAreaWidget,
-  StatefulFormView,
 } from "@fab4m/fab4m";
 import React, { useState } from "react";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   name: textField({ label: "Name" }),
@@ -24,7 +28,9 @@ export function OnSubmitExample() {
   });
   return (
     <>
-      <StatefulFormView form={form} />
+      <FormProvider renderer={allWidgetsRenderer}>
+        <StatefulFormView form={form} />
+      </FormProvider>
       {submitted && (
         <p style={{ fontWeight: "bold" }}>Welcome {submitted.name}</p>
       )}

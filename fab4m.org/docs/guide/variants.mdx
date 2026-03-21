@@ -3,12 +3,12 @@ sidebar_position: 7
 ---
 
 import Example from "@site/src/components/Example";
-import RequiredWhenPresent from '@site/src/components/Guide/variants/RequiredWhenPresent.tsx';
-import RequiredWhenPresentSource from '!!raw-loader!@site/src/components/Guide/variants/RequiredWhenPresent.tsx';
-import VariantSelection from '@site/src/components/Guide/variants/VariantSelection.tsx';
-import VariantSelectionSource from '!!raw-loader!@site/src/components/Guide/variants/VariantSelection.tsx';
-import VariantSchema from '@site/src/components/Guide/variants/VariantSchema.tsx';
-import VariantSchemaSource from '!!raw-loader!@site/src/components/Guide/variants/VariantSchema.tsx';
+import RequiredWhenPresent from "@site/src/components/Guide/variants/RequiredWhenPresent.tsx";
+import RequiredWhenPresentSource from "!!raw-loader!@site/src/components/Guide/variants/RequiredWhenPresent.tsx";
+import VariantSelection from "@site/src/components/Guide/variants/VariantSelection.tsx";
+import VariantSelectionSource from "!!raw-loader!@site/src/components/Guide/variants/VariantSelection.tsx";
+import VariantSchema from "@site/src/components/Guide/variants/VariantSchema.tsx";
+import VariantSchemaSource from "!!raw-loader!@site/src/components/Guide/variants/VariantSchema.tsx";
 
 # Component Variants
 
@@ -31,6 +31,7 @@ is selected. If you provide a component without a rule, it will always be select
 <Example source={VariantSelectionSource} example={<VariantSelection />} />
 
 ## A note about variants and JSON Schema
+
 When you use variants, you need to provide the data you want to validate when you generate your
 JSON Schema, for example:
 

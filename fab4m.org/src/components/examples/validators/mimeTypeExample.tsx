@@ -1,13 +1,12 @@
 import React from "react";
+import { createForm, pageBreak, fileField, mimeType } from "@fab4m/fab4m";
+import "@fab4m/fab4m/css/basic/basic.css";
 import {
-  createForm,
-  pageBreak,
-  fileField,
   StatefulFormView,
   content,
-  mimeType,
-} from "@fab4m/fab4m";
-import "@fab4m/fab4m/css/basic/basic.css";
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   image: fileField({
@@ -23,5 +22,9 @@ const form = createForm({
 });
 
 export default function MimeTypeExample() {
-  return <StatefulFormView form={form} hideSubmit={true} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} hideSubmit={true} />
+    </FormProvider>
+  );
 }

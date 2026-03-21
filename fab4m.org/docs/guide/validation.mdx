@@ -2,7 +2,7 @@
 sidebar_position: 8
 ---
 
-import Schema from '@site/src/components/Guide/validation/Schema';
+import Schema from "@site/src/components/Guide/validation/Schema";
 
 # Validation with JSON Schema
 
@@ -28,7 +28,7 @@ const form = createForm({
     {
       workplace: textField({ label: "Workplace" }),
       label: textField({ label: "Label" }),
-    }
+    },
   ),
 });
 ```
@@ -48,9 +48,10 @@ This generates a schema that can be used by a JSON schema validator:
 <Schema />
 
 Notice that:
-* The validators we defined above (minLength and allowedValues) on our components are part of the schema.
-* The interests multiple field is interpreted as an array.
-* Our group component is properly translated to an object inside of the schema.
+
+- The validators we defined above (minLength and allowedValues) on our components are part of the schema.
+- The interests multiple field is interpreted as an array.
+- Our group component is properly translated to an object inside of the schema.
 
 ## Generating a schema for each form part
 

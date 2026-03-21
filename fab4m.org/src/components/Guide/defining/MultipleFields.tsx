@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { createForm, textField, StatefulFormView } from "@fab4m/fab4m";
+import { createForm, textField } from "@fab4m/fab4m";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const form = createForm({
   foods: textField({
@@ -25,7 +30,9 @@ export default function FormFields() {
   });
   return (
     <>
-      <StatefulFormView form={form} />
+      <FormProvider renderer={allWidgetsRenderer}>
+        <StatefulFormView form={form} />
+      </FormProvider>
       {data && (
         <div>
           <strong>Your food selection</strong>

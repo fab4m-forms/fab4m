@@ -6,11 +6,15 @@ import {
   textFieldWidget,
   selectWidget,
   radiosWidget,
+  createForm,
+} from "@fab4m/fab4m";
+import {
   useForm,
   FormView,
-  createForm,
   StatefulFormView,
-} from "@fab4m/fab4m";
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 const locationOptions = ["Gothenburg", "Stockholm"];
 const widgetTemplates = {
   select: `selectWidget(["Gothenburg", "Stockholm"])`,
@@ -40,14 +44,14 @@ export default function Widgets() {
           ["Text", "text"],
         ]),
       }),
-    })
+    }),
   ).onDataChange((data) => {
     changeWidget(data.widget);
   });
   const form = useForm(() =>
     createForm({
       location: locationField,
-    })
+    }),
   );
   return (
     <div className="feature-large">
@@ -62,7 +66,13 @@ export default function Widgets() {
         </Link>
       </div>
       <div className="example">
-        <FormView form={widgetSelectForm} data={{ widget }} hideSubmit={true} />
+        <FormProvider renderer={allWidgetsRenderer}>
+          <FormView
+            form={widgetSelectForm}
+            data={{ widget }}
+            hideSubmit={true}
+          />
+        </FormProvider>
         <CodeBlock language="jsx">
           {`location: textField({
   title: "Change the widget to preview it in the form:",
@@ -70,7 +80,9 @@ export default function Widgets() {
 }),`}
         </CodeBlock>
         <div className="feature-box">
-          <StatefulFormView form={form} hideSubmit={true} />
+          <FormProvider renderer={allWidgetsRenderer}>
+            <StatefulFormView form={form} hideSubmit={true} />
+          </FormProvider>
         </div>
       </div>
     </div>

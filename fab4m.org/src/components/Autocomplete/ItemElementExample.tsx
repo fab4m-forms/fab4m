@@ -1,7 +1,12 @@
 import * as React from "react";
 import "@fab4m/autocomplete/src/style.css";
 import { autocompleteWidget } from "@fab4m/autocomplete";
-import { StatefulFormView, textField, createForm } from "@fab4m/fab4m";
+import { textField, createForm } from "@fab4m/fab4m";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 const descriptions = {
   gothenburg: {
@@ -33,5 +38,9 @@ const form = createForm({
 });
 
 export default function AutocompleteExample() {
-  return <StatefulFormView form={form} hideSubmit={true} />;
+  return (
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} hideSubmit={true} />
+    </FormProvider>
+  );
 }

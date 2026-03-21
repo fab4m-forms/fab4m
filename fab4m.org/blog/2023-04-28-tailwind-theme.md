@@ -2,6 +2,7 @@
 title: Tailwind theme for fab4m
 description: I finally got around to creating an official tailwind theme for fab4m! Give it a spin!
 ---
+
 # Tailwind theme for fab4m
 
 [Tailwind](https://tailwindcss.com/) seems to be everywhere nowadays. Now you use it
@@ -26,11 +27,11 @@ module.exports = {
 };
 ```
 
-
 ## Use the default tailwind theme
 
 If you just want to give the new theme a spin you can do it by setting it up as your
 default theme:
+
 ```jsx
 import { setDefaultTheme, tailwind } from "@fab4m/fab4m";
 setDefaultTheme(tailwind);
@@ -52,7 +53,7 @@ const yourTheme = createTailwindTheme({
     inputBg: "bg-white dark:bg-slate-700",
     inputText: "text-white dark:text-slate-100",
     inputHeight: "h-10",
-  }
+  },
 });
 setDefaultTheme(yourTheme);
 ```

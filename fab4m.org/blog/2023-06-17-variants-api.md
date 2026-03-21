@@ -1,10 +1,13 @@
 ---
 title: Introducing the variants API!
 ---
+
 # Introducing the variants API
+
 Since releasing the first beta version of Fab4m I have run a few pilot projects with it.
 One thing I quickly realized is that you quite often need to change many aspects of your
 form depending on the current form state. That's what the Variants API is here for!
+
 <!--truncate-->
 
 The first version of fab4m had the rules API which allowed you to show fields depending on
@@ -22,7 +25,7 @@ on the state of the rest of the form. It uses the same validators as the rules A
 Here's an example:
 
 ```typescript jsx
-import {booleanField, createForm,exists,textAreaField } from "@fab4m/fab4m";
+import { booleanField, createForm, exists, textAreaField } from "@fab4m/fab4m";
 const form = createForm({
   likeBio: booleanField({ label: "Do you like to talk about yourself?" }),
   bio: [
