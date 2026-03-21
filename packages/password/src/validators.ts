@@ -1,5 +1,4 @@
 import { Validator, ValidatorType } from "@fab4m/fab4m";
-import PasswordValidatorInfo from "./PasswordValidatorInfo";
 import { PasswordVerifyData, PasswordValidateOldData } from ".";
 /**
  * Validation settings for the Validator.
@@ -63,7 +62,6 @@ export const validPasswordValidator: PasswordValidatorType = {
           },
         };
   },
-  validatorInfo: PasswordValidatorInfo,
   attributes: (validator) => {
     return {
       pattern: passwordRegex(validator.settings),

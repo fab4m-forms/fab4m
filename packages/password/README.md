@@ -25,11 +25,12 @@ The following example shows all of the fields in action:
 ```jsx
 import * as React from "react";
 import { createForm, content } from "@fab4m/fab4m";
-import { StatefulFormView } from "@fab4m/react";
+import { StatefulFormView, FormProvider } from "@fab4m/react";
 import {
   passwordField,
   passwordVerifyField,
   passwordValidateOldField,
+  passwordRenderer,
 } from "@fab4m/password";
 
 const form = createForm({
@@ -47,7 +48,11 @@ const form = createForm({
 }).onSubmit((e) => e.preventDefault());
 
 export default function @fab4m/passwordFields() {
-  return <StatefulFormView form={form} />;
+  return (
+    <FormProvider renderer={passwordRenderer}>
+      <StatefulFormView form={form} />
+    </FormProvider>
+  );
 }
 
 ```
@@ -78,8 +83,12 @@ The valid@fab4m/password validator allows you to set several constraints on the 
 ```jsx
 import * as React from "react";
 import { createForm } from "@fab4m/fab4m";
-import { StatefulFormView } from "@fab4m/react";
-import { passwordField, valid@fab4m/password } from "@fab4m/password";
+import { StatefulFormView, FormProvider } from "@fab4m/react";
+import {
+  passwordField,
+  valid@fab4m/password,
+  passwordRenderer,
+} from "@fab4m/password";
 
 const form = createForm({
   password: passwordField({
@@ -96,7 +105,11 @@ const form = createForm({
 }).onSubmit((e) => e.preventDefault());
 
 export default function @fab4m/passwordFields() {
-  return <StatefulFormView form={form} />;
+  return (
+    <FormProvider renderer={passwordRenderer}>
+      <StatefulFormView form={form} />
+    </FormProvider>
+  );
 }
 
 ```
@@ -110,8 +123,12 @@ function that can call your backend to validate it.
 ```jsx
 import * as React from "react";
 import { createForm } from "@fab4m/fab4m";
-import { StatefulFormView } from "@fab4m/react";
-import { passwordValidateOldField, validOld@fab4m/password } from "@fab4m/password";
+import { StatefulFormView, FormProvider } from "@fab4m/react";
+import {
+  passwordValidateOldField,
+  validOld@fab4m/password,
+  passwordRenderer,
+} from "@fab4m/password";
 
 const form = createForm({
   passwordValidate: passwordValidateOldField({
@@ -126,7 +143,11 @@ const form = createForm({
 }).onSubmit((e) => e.preventDefault());
 
 export default function @fab4m/passwordFields() {
-  return <StatefulFormView form={form} />;
+  return (
+    <FormProvider renderer={passwordRenderer}>
+      <StatefulFormView form={form} />
+    </FormProvider>
+  );
 }
 
 ```

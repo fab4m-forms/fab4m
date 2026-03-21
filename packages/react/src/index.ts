@@ -16,6 +16,7 @@ export * from "./components/ValidatorInfo";
 export * from "./formrenderer";
 
 export * from "./hooks";
+export * from "./context";
 
 export * from "./widgets/Checkbox";
 export * from "./widgets/Details";

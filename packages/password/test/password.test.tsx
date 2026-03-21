@@ -12,6 +12,7 @@ import {
   passwordValidateOldWidget,
   PasswordValidateOldData,
   passwordField,
+  passwordRenderer,
 } from "../src";
 import {
   createForm,
@@ -22,7 +23,7 @@ import {
   errorMessages,
 } from "@fab4m/fab4m";
 import { FormComponentView, FormProvider, StatefulFormView } from "@fab4m/react";
-import { inputElementOk, passwordRenderer, renderWithProvider } from "./util";
+import { inputElementOk, renderWithProvider } from "./util";
 import Ajv from "ajv";
 
 describe("Password field", () => {

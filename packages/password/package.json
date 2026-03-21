@@ -34,7 +34,7 @@
     "lint-fix": "eslint --fix",
     "prettier-fix": "prettier -w ."
   },
-  "peerDependencies": {
+  "dependencies": {
     "@fab4m/react": "^1.0.0-beta22"
   },
   "bugs": {

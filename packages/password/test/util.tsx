@@ -1,30 +1,13 @@
 import * as React from "react";
 import { basic, FormComponent } from "@fab4m/fab4m";
 import { render, cleanup } from "@testing-library/react";
-import { allWidgetsRenderer, FormComponentView, FormProvider } from "@fab4m/react";
-import Password from "../src/Password";
-import PasswordVerify from "../src/PasswordVerify";
-import PasswordValidateOld from "../src/PasswordValidateOld";
-import PasswordValidatorInfo from "../src/PasswordValidatorInfo";
+import { FormComponentView, FormProvider } from "@fab4m/react";
+import { passwordRenderer } from "../src";
 
 type FormElement = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
 const changeData = () => {
   // No-op.
-};
-
-export const passwordRenderer = {
-  ...allWidgetsRenderer,
-  widgetComponents: {
-    ...allWidgetsRenderer.widgetComponents,
-    password: Password,
-    passwordVerify: PasswordVerify,
-    passwordValidateOld: PasswordValidateOld,
-  },
-  validatorComponents: {
-    ...allWidgetsRenderer.validatorComponents,
-    password: PasswordValidatorInfo,
-  },
 };
 
 export const renderWithProvider = (ui: React.ReactElement) =>

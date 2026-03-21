@@ -1,11 +1,17 @@
 import * as React from "react";
 import { createForm, bulma, basic, textField, selectWidget } from "@fab4m/fab4m";
-import { StatefulFormView, FormComponentView, useForm } from "@fab4m/react";
+import {
+  StatefulFormView,
+  FormComponentView,
+  FormProvider,
+  useForm,
+} from "@fab4m/react";
 import {
   passwordField,
   passwordVerifyField,
   passwordValidateOldField,
   validPassword,
+  passwordRenderer,
 } from "../../src";
 import "react-datepicker/dist/react-datepicker.css";
 import "./index.css";
@@ -49,7 +55,9 @@ export default function App() {
         value={theme}
         onChange={changeTheme}
       />
-      <StatefulFormView form={form} />
+      <FormProvider renderer={passwordRenderer}>
+        <StatefulFormView form={form} />
+      </FormProvider>
     </div>
   );
 }
