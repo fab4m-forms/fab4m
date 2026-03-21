@@ -1,7 +1,7 @@
 import * as React from "react";
 import addFormats from "ajv-formats";
 
-import { render, fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor } from "@testing-library/react";
 import {
   validPassword,
   validOldPassword,
@@ -15,15 +15,14 @@ import {
 } from "../src";
 import {
   createForm,
-  FormComponentView,
   checkValidators,
-  StatefulFormView,
   basic,
   FormDefinition,
   generateSchema,
   errorMessages,
 } from "@fab4m/fab4m";
-import { inputElementOk } from "./util";
+import { FormComponentView, FormProvider, StatefulFormView } from "@fab4m/react";
+import { inputElementOk, passwordRenderer, renderWithProvider } from "./util";
 import Ajv from "ajv";
 
 describe("Password field", () => {
@@ -58,7 +57,7 @@ describe("Password field", () => {
   form.add(password);
 
   test("Password form", async () => {
-    const { findByLabelText } = render(<StatefulFormView form={form} />);
+    const { findByLabelText } = renderWithProvider(<StatefulFormView form={form} />);
     const simple = (await findByLabelText(
       "Simple password",
     )) as HTMLInputElement;
@@ -94,7 +93,7 @@ describe("Password field", () => {
         confirmPassword: "",
       };
 
-      const context = render(
+      const context = renderWithProvider(
         <FormComponentView
           name="password"
           onChange={noOp}
@@ -161,7 +160,7 @@ describe("Password field", () => {
     validator.settings.requiredLetter = false;
     validator.settings.requiredNumber = true;
     validator.settings.minLength = 5;
-    const context = render(
+    const context = renderWithProvider(
       <FormComponentView
         name="password"
         value={{ password: "", confirmPassword: "" }}
@@ -195,7 +194,7 @@ describe("Password field", () => {
         onChange={changePassword}
       />
     );
-    const context = render(component());
+    const context = renderWithProvider(component());
     const passwordEl = context.container.querySelector(
       "#password",
     ) as HTMLInputElement;
@@ -216,7 +215,9 @@ describe("Password field", () => {
         value: "password",
         target: { value: "password" },
       });
-      context.rerender(component());
+      context.rerender(
+        <FormProvider renderer={passwordRenderer}>{component()}</FormProvider>,
+      );
       await waitFor(() => {
         expect(confirmPasswordEl.value).toBe("password");
       });
@@ -244,7 +245,7 @@ describe("Password field", () => {
     const changeData = (newValue: unknown) => {
       value = newValue as PasswordValidateOldData;
     };
-    const context = render(
+    const context = renderWithProvider(
       <FormComponentView
         name="password"
         value={value}

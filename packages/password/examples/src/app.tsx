@@ -1,15 +1,6 @@
 import * as React from "react";
-import {
-  createForm,
-  StatefulFormView,
-  bulma,
-  basic,
-  FormComponentView,
-  textField,
-  selectWidget,
-  setDefaultTheme,
-  useForm,
-} from "@fab4m/fab4m";
+import { createForm, bulma, basic, textField, selectWidget } from "@fab4m/fab4m";
+import { StatefulFormView, FormComponentView, useForm } from "@fab4m/react";
 import {
   passwordField,
   passwordVerifyField,

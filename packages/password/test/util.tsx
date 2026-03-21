@@ -1,17 +1,35 @@
 import * as React from "react";
-import { basic, FormComponentView, FormComponent } from "@fab4m/fab4m";
+import { basic, FormComponent } from "@fab4m/fab4m";
 import { render, cleanup } from "@testing-library/react";
-import { allWidgetsRenderer } from "../../react/src/allwidgets";
-import { FormProvider } from "../../react/src/components/FormProvider";
+import { allWidgetsRenderer, FormComponentView, FormProvider } from "@fab4m/react";
+import Password from "../src/Password";
+import PasswordVerify from "../src/PasswordVerify";
+import PasswordValidateOld from "../src/PasswordValidateOld";
+import PasswordValidatorInfo from "../src/PasswordValidatorInfo";
+
 type FormElement = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
 const changeData = () => {
   // No-op.
 };
 
-export const renderWithProvider = (ui: JSX.Element) =>
+export const passwordRenderer = {
+  ...allWidgetsRenderer,
+  widgetComponents: {
+    ...allWidgetsRenderer.widgetComponents,
+    password: Password,
+    passwordVerify: PasswordVerify,
+    passwordValidateOld: PasswordValidateOld,
+  },
+  validatorComponents: {
+    ...allWidgetsRenderer.validatorComponents,
+    password: PasswordValidatorInfo,
+  },
+};
+
+export const renderWithProvider = (ui: React.ReactElement) =>
   render(
-    <FormProvider renderer={allWidgetsRenderer}>
+    <FormProvider renderer={passwordRenderer}>
       {ui}
     </FormProvider>,
   );
@@ -21,7 +39,7 @@ export function inputElementOk(component: FormComponent, name = ""): void {
     if (!component.label) {
       return;
     }
-    const { queryByLabelText } = render(
+    const { queryByLabelText } = renderWithProvider(
       <FormComponentView
         name={component.name ?? ""}
         onChange={changeData}
@@ -43,7 +61,7 @@ export function inputElementOk(component: FormComponent, name = ""): void {
       return;
     }
 
-    const { findByLabelText } = render(
+    const { findByLabelText } = renderWithProvider(
       <FormComponentView
         name={component.name ?? ""}
         onChange={changeData}
@@ -59,7 +77,7 @@ export function inputElementOk(component: FormComponent, name = ""): void {
     if (!component.label) {
       return;
     }
-    const { findByLabelText } = render(
+    const { findByLabelText } = renderWithProvider(
       <FormComponentView
         onChange={changeData}
         component={component}
@@ -79,7 +97,7 @@ export function inputElementOk(component: FormComponent, name = ""): void {
       return;
     }
 
-    const { queryByLabelText } = render(
+    const { queryByLabelText } = renderWithProvider(
       <FormComponentView
         name={component.name ?? ""}
         onChange={changeData}
@@ -96,7 +114,7 @@ export function inputElementOk(component: FormComponent, name = ""): void {
       return;
     }
     const disabled = { ...component, disabled: true };
-    const { findByLabelText } = render(
+    const { findByLabelText } = renderWithProvider(
       <FormComponentView
         onChange={changeData}
         name="choice"

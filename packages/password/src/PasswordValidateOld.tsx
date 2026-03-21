@@ -1,5 +1,6 @@
 import * as React from "react";
-import { WidgetProps, FormElement } from "@fab4m/fab4m";
+import { WidgetProps } from "@fab4m/fab4m";
+import { FormElement } from "@fab4m/react";
 import { PasswordValidateOldSettings, PasswordValidateOldData } from ".";
 
 /**
