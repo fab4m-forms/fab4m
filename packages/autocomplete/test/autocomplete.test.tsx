@@ -1,14 +1,11 @@
 import * as React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor } from "@testing-library/react";
 import { autocompleteWidget } from "../src";
 import { vi } from "vitest";
-import {
-  createForm,
-  textField,
-  integerField,
-  FormView,
-  StatefulFormView,
-} from "@fab4m/fab4m";
+import { createForm, textField, integerField } from "@fab4m/fab4m";
+import { FormView, StatefulFormView } from "@fab4m/react";
+import { renderWithProvider } from "./util";
+
 interface Profile {
   name: string;
   picture: string;
@@ -96,7 +93,7 @@ describe("Autocomplete field", () => {
         value = data[key];
       });
       form.onDataChange(spy);
-      const { findAllByLabelText, queryByText, findByText } = render(
+      const { findAllByLabelText, queryByText, findByText } = renderWithProvider(
         <FormView form={form} data={{}} />,
       );
       const element = (await findAllByLabelText(label))[1] as HTMLInputElement;
@@ -149,7 +146,7 @@ describe("Autocomplete field", () => {
   );
 
   test("Custom element", async () => {
-    const { findAllByLabelText, queryByText } = render(
+    const { findAllByLabelText, queryByText } = renderWithProvider(
       <FormView form={form} data={{}} />,
     );
     const element = (
@@ -162,7 +159,7 @@ describe("Autocomplete field", () => {
   });
 
   test("Autocomplete search", async () => {
-    const { findAllByLabelText, queryByText } = render(
+    const { findAllByLabelText, queryByText } = renderWithProvider(
       <FormView form={form} data={{}} />,
     );
     const element = (
@@ -181,7 +178,7 @@ describe("Autocomplete field", () => {
   });
 
   test("Element selection", async () => {
-    const { findAllByLabelText, findByText } = render(
+    const { findAllByLabelText, findByText } = renderWithProvider(
       <StatefulFormView form={form} />,
     );
     const element = (await findAllByLabelText("Labels"))[1] as HTMLInputElement;

@@ -4,11 +4,11 @@ import "../../src/style.css";
 import {
   createForm,
   integerField,
-  StatefulFormView,
   textField,
   bulma,
   setDefaultTheme,
 } from "@fab4m/fab4m";
+import { StatefulFormView } from "@fab4m/react";
 
 import tailwind from "../../../core/src/themes/tailwind";
 

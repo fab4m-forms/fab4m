@@ -5,10 +5,10 @@ The `@fab4m/autocomplete` package provides an autocomplete widget component usin
 
 ## Installing
 
-Install `@fab4m/autocomplete` and `downshift` (7.x):
+Install `@fab4m/autocomplete`, `@fab4m/react`, and `downshift` (7.x):
 
 ```bash
-npm install --save @fab4m/autocomplete downshift
+npm install --save @fab4m/autocomplete @fab4m/react downshift
 ```
 
 ## Using the autocomplete widget
@@ -22,7 +22,9 @@ import * as React from "react";
 // This stylesheet that's needed if you use the basic theme.
 import "@fab4m/autocomplete/src/style.css";
 import { autocompleteWidget } from "@fab4m/autocomplete";
-import { StatefulFormView, textField, createForm } from "@fab4m/fab4m";
+import { textField, createForm } from "@fab4m/fab4m";
+import { StatefulFormView } from "@fab4m/react";
+
 const form = createForm({
   city: textField({
     label: "City",
@@ -53,7 +55,8 @@ on the fly:
 import * as React from "react";
 import "@fab4m/autocomplete/src/style.css";
 import { autocompleteWidget } from "@fab4m/autocomplete";
-import { StatefulFormView, textField, createForm } from "@fab4m/fab4m";
+import { textField, createForm } from "@fab4m/fab4m";
+import { StatefulFormView } from "@fab4m/react";
 
 // This would be your actual call to the backend.
 async function fakeFetch(search: string) {
@@ -90,7 +93,8 @@ This can be done by specifying a custom `itemElement`:
 import * as React from "react";
 import "@fab4m/autocomplete/src/style.css";
 import { autocompleteWidget } from "@fab4m/autocomplete";
-import { StatefulFormView, textField, createForm } from "@fab4m/fab4m";
+import { textField, createForm } from "@fab4m/fab4m";
+import { StatefulFormView } from "@fab4m/react";
 
 const descriptions = {
   gothenburg: {
