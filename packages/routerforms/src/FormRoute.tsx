@@ -1,17 +1,21 @@
 import * as React from "react";
 import { useParams, Link, useNavigate, useSubmit } from "react-router-dom";
 import {
-  FormPart,
-  FormWrapper,
-  FormPager,
   formParts,
   getNextPart,
   getPrevPart,
   ValidationError,
   FormViewProps,
+} from "@fab4m/fab4m";
+import {
+  FormPart,
+  FormWrapper,
+  FormPager,
   FormDataContext,
   FormErrorsContext,
-} from "@fab4m/fab4m";
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 
 export interface FormRouteProps extends FormViewProps {
   basename?: string;
@@ -76,30 +80,32 @@ export default function FormRoute(
     ));
 
   return (
-    <FormDataContext.Provider value={data}>
-      <FormErrorsContext.Provider value={formErrors}>
-        <FormWrapper
-          {...props}
-          parts={parts}
-          part={part}
-          setPart={setPart}
-          setFormErrors={setFormErrors}
-        >
-          {renderedParts}
-          <FormPager
-            theme={props.form.theme}
+    <FormProvider renderer={allWidgetsRenderer}>
+      <FormDataContext.Provider value={data}>
+        <FormErrorsContext.Provider value={formErrors}>
+          <FormWrapper
+            {...props}
+            parts={parts}
             part={part}
-            form={props.form}
-            hasNextPart={getNextPart(parts, part, data) !== -1}
-            hasPrevPart={prevPart !== -1}
-            goBack={() => {}}
-            back={() => <Link to={`${basePath}/${prevPart}`}>Previous</Link>}
-            noParts={parts.length}
-            hideSubmit={props.hideSubmit}
-          />
-        </FormWrapper>
-      </FormErrorsContext.Provider>
-    </FormDataContext.Provider>
+            setPart={setPart}
+            setFormErrors={setFormErrors}
+          >
+            {renderedParts}
+            <FormPager
+              theme={props.form.theme}
+              part={part}
+              form={props.form}
+              hasNextPart={getNextPart(parts, part, data) !== -1}
+              hasPrevPart={prevPart !== -1}
+              goBack={() => {}}
+              back={() => <Link to={`${basePath}/${prevPart}`}>Previous</Link>}
+              noParts={parts.length}
+              hideSubmit={props.hideSubmit}
+            />
+          </FormWrapper>
+        </FormErrorsContext.Provider>
+      </FormDataContext.Provider>
+    </FormProvider>
   );
 }
 

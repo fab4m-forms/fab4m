@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
-import "cross-fetch/polyfill";
-import { createForm, textField, pageBreak, content, Form } from "@fab4m/fab4m";
+import { createForm, textField, pageBreak, Form } from "@fab4m/fab4m";
+import { content } from "@fab4m/react";
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import { FormRouteProps, StatefulFormRoute, RouterFormView } from "../src";
 import { vi } from "vitest";
@@ -144,11 +144,15 @@ describe("Routed form", () => {
     });
     expect(spy).toHaveBeenCalled();
 
-    if (submitRequest) {
-      const formData = await submitRequest.formData();
-      expect(formData.get("first")).toBe("A text");
-      expect(formData.get("second")).toBe("Another text");
+    expect(submitRequest).not.toBeNull();
+    if (!submitRequest) {
+      throw new Error("Expected submit request to be set");
     }
+    const request = submitRequest as unknown as Request;
+    const body = await request.text();
+    const formData = new URLSearchParams(body);
+    expect(formData.get("first")).toBe("A text");
+    expect(formData.get("second")).toBe("Another text");
   });
 
   it("Route form with form context", async () => {
@@ -156,7 +160,7 @@ describe("Routed form", () => {
       text: textField({
         label: "text",
       }),
-      content: content<{ text: string }>({}, (data) => (
+      content: content<{ text: string }>({}, (data: { text: string }) => (
         <div data-testid="content">{data.text}</div>
       )),
     });

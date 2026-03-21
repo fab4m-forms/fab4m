@@ -4,10 +4,10 @@ The `@fab4m/routerforms` package integrates your fab4m forms with [React router]
 
 # Installing
 
-Install the `@fab4m/routerforms` and the `react-router-dom` packages. Only react router 6 is supported:
+Install the `@fab4m/routerforms`, `@fab4m/react` and the `react-router-dom` packages. Only react router 6 is supported:
 
 ```bash
-npm install --save @fab4m/routerforms react-router-dom@6
+npm install --save @fab4m/routerforms @fab4m/react react-router-dom@6
 ```
 
 # Setting it up
