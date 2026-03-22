@@ -12,8 +12,8 @@
   "scripts": {
     "build": "npm run build-types && npm run build-browser && npm run build-node && npm run css",
     "build-types": "npx tsc  -d --emitDeclarationOnly --project tsconfig.build.json",
-    "build-browser": "esbuild --external:react --external:react-dom --external:react-router --external:react-router-dom --bundle src/index.ts --format=esm --outfile=dist/index.es.js",
-    "build-node": "esbuild --platform=node --external:react --external:react-dom --bundle src/index.ts --outfile=dist/index.cjs.js",
+    "build-browser": "esbuild --bundle src/index.ts --format=esm --outfile=dist/index.es.js",
+    "build-node": "esbuild --platform=node --bundle src/index.ts --outfile=dist/index.cjs.js",
     "test": "vitest",
     "autoprefixer": "postcss css/basic/basic.css -o css/basic/basic.css",
     "sass": "sass src/themes/basic/basic.scss css/basic/basic.css",
@@ -39,10 +39,7 @@
   ],
   "author": "Fabian Sörqvist",
   "license": "MIT",
-  "peerDependencies": {
-    "react": ">=15",
-    "react-dom": ">=15"
-  },
+  "peerDependencies": {},
   "devDependencies": {
     "tslib": "^2.2.0"
   },
