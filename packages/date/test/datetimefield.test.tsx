@@ -1,13 +1,14 @@
 import * as React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor } from "@testing-library/react";
 import {
   basic,
   createForm,
-  FormComponentView,
   generateSchema,
   serialize,
   SerializedComponent,
 } from "@fab4m/fab4m";
+import { FormComponentView } from "@fab4m/react";
+import { renderWithProvider } from "./util";
 import { dateTimeField, dateTimePickerWidget } from "../src";
 import { format } from "date-fns";
 import { enUS, sv } from "date-fns/locale";
@@ -25,7 +26,7 @@ describe("date time field", () => {
     const changeData = (value: unknown) => {
       data = value as Date;
     };
-    const { findByLabelText } = render(
+    const { findByLabelText } = renderWithProvider(
       <FormComponentView
         name="textfield"
         onChange={changeData}

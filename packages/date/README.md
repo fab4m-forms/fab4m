@@ -19,9 +19,25 @@ The following example shows them in action:
 
 ```jsx
 import * as React from "react";
-import { dateField, dateTimeField, dateRangeField } from "@fab4m/date";
-import { StatefulFormView, createForm } from "@fab4m/fab4m";
+import {
+  dateField,
+  dateTimeField,
+  dateRangeField,
+  DatePicker,
+  DateTimePicker,
+  DateRangePicker,
+} from "@fab4m/date";
+import { createForm } from "@fab4m/fab4m";
+import { createFormRenderer, FormProvider, StatefulFormView } from "@fab4m/react";
 import "react-datepicker/dist/react-datepicker.css";
+
+const renderer = createFormRenderer({
+  widgetComponents: {
+    datepicker: DatePicker,
+    dateTimePicker: DateTimePicker,
+    dateRangePicker: DateRangePicker,
+  },
+});
 
 const form = createForm({
   birthday: dateField({
@@ -43,7 +59,9 @@ export default function DateExamples() {
   });
   return (
     <div>
-      <StatefulFormView form={form} />
+      <FormProvider renderer={renderer}>
+        <StatefulFormView form={form} />
+      </FormProvider>
       {/* The data that comes out of the form are dates. */}
       {result && (
         <dl>
@@ -76,9 +94,16 @@ The formatting options are provided by the [date-fns](https://date-fns.org/v2.29
 
 ```jsx
 import * as React from "react";
-import { dateField, datePickerWidget } from "@fab4m/date";
-import { StatefulFormView, createForm } from "@fab4m/fab4m";
+import { dateField, datePickerWidget, DatePicker } from "@fab4m/date";
+import { createForm } from "@fab4m/fab4m";
+import { createFormRenderer, FormProvider, StatefulFormView } from "@fab4m/react";
 import "react-datepicker/dist/react-datepicker.css";
+
+const renderer = createFormRenderer({
+  widgetComponents: {
+    datepicker: DatePicker,
+  },
+});
 
 const form = createForm({
   birthday: dateField({
@@ -91,9 +116,9 @@ const form = createForm({
 
 export default function CustomFormat() {
   return (
-    <div>
+    <FormProvider renderer={renderer}>
       <StatefulFormView form={form} hideSubmit={true} />
-    </div>
+    </FormProvider>
   );
 }
 ```
@@ -105,10 +130,17 @@ locale, no matter what locale the browser has:
 
 ```jsx
 import * as React from "react";
-import { dateField, datePickerWidget } from "@fab4m/date";
+import { dateField, datePickerWidget, DatePicker } from "@fab4m/date";
 import { sv } from "date-fns/locale";
-import { StatefulFormView, createForm } from "@fab4m/fab4m";
+import { createForm } from "@fab4m/fab4m";
+import { createFormRenderer, FormProvider, StatefulFormView } from "@fab4m/react";
 import "react-datepicker/dist/react-datepicker.css";
+
+const renderer = createFormRenderer({
+  widgetComponents: {
+    datepicker: DatePicker,
+  },
+});
 
 const form = createForm({
   birthday: dateField({
@@ -121,9 +153,9 @@ const form = createForm({
 
 export default function SingleLocale() {
   return (
-    <div>
+    <FormProvider renderer={renderer}>
       <StatefulFormView form={form} hideSubmit={true} />
-    </div>
+    </FormProvider>
   );
 }
 ```
@@ -137,10 +169,17 @@ The first locale in the list will be used as a default.
 
 ```jsx
 import * as React from "react";
-import { dateField, datePickerWidget } from "@fab4m/date";
+import { dateField, datePickerWidget, DatePicker } from "@fab4m/date";
 import { sv, de, fi } from "date-fns/locale";
-import { StatefulFormView, createForm } from "@fab4m/fab4m";
+import { createForm } from "@fab4m/fab4m";
+import { createFormRenderer, FormProvider, StatefulFormView } from "@fab4m/react";
 import "react-datepicker/dist/react-datepicker.css";
+
+const renderer = createFormRenderer({
+  widgetComponents: {
+    datepicker: DatePicker,
+  },
+});
 
 const form = createForm({
   birthday: dateField({
@@ -154,9 +193,9 @@ const form = createForm({
 
 export default function BrowserLocale() {
   return (
-    <div>
+    <FormProvider renderer={renderer}>
       <StatefulFormView form={form} hideSubmit={true} />
-    </div>
+    </FormProvider>
   );
 }
 ```

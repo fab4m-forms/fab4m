@@ -1,6 +1,8 @@
 import * as React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react";
-import { basic, FormComponentView } from "@fab4m/fab4m";
+import { fireEvent, waitFor } from "@testing-library/react";
+import { basic } from "@fab4m/fab4m";
+import { FormComponentView } from "@fab4m/react";
+import { renderWithProvider } from "./util";
 import { DateRange, dateRangeField } from "../src";
 import { format, addDays } from "date-fns";
 
@@ -22,7 +24,7 @@ describe("date range field", () => {
     const changeData = (value: unknown) => {
       data = value as DateRange;
     };
-    const { findByPlaceholderText } = render(
+    const { findByPlaceholderText } = renderWithProvider(
       <FormComponentView
         name="rangefield"
         onChange={changeData}

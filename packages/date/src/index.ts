@@ -1,4 +1,4 @@
-import { DatePicker, DateTimePicker, DateRangePicker } from "./DatePicker";
+export { DatePicker, DateTimePicker, DateRangePicker } from "./DatePicker";
 import { Locale } from "date-fns";
 import {
   FormComponentType,
@@ -199,7 +199,6 @@ export const datePickerWidgetType: WidgetType<Date, DateFieldWidgetSettings> = {
   name: "datepicker",
   title: "Date picker",
   components: ["date"],
-  widget: DatePicker,
   init: datePickerWidget,
 };
 
@@ -220,7 +219,6 @@ export const dateTimePickerWidgetType: WidgetType<
   name: "dateTimePicker",
   title: "Date picker",
   components: ["datetime"],
-  widget: DateTimePicker,
   init: dateTimePickerWidget,
 };
 
@@ -242,7 +240,6 @@ export const dateRangePickerWidgetType: WidgetType<
   name: "dateRangePicker",
   title: "Date picker",
   components: ["daterange"],
-  widget: DateRangePicker,
   serializer: dateRangeSettingsSerializer,
   init: dateRangePickerWidget,
 };

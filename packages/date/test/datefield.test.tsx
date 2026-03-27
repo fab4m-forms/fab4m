@@ -1,15 +1,16 @@
 import * as React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor } from "@testing-library/react";
 import {
   basic,
   createForm,
   FormComponent,
-  FormComponentView,
   generateSchema,
   serialize,
   SerializedComponent,
   unserialize,
 } from "@fab4m/fab4m";
+import { FormComponentView } from "@fab4m/react";
+import { renderWithProvider } from "./util";
 import {
   dateField,
   dateFieldType,
@@ -34,7 +35,7 @@ describe("date field", () => {
     const changeData = (value: unknown) => {
       data = value as Date;
     };
-    const { findByLabelText } = render(
+    const { findByLabelText } = renderWithProvider(
       <FormComponentView
         name="textfield"
         onChange={changeData}
@@ -67,7 +68,7 @@ describe("date field", () => {
     };
 
     const data = new Date();
-    const { queryAllByDisplayValue } = render(
+    const { queryAllByDisplayValue } = renderWithProvider(
       <FormComponentView
         name="textfield"
         onChange={() => {}}
@@ -91,7 +92,7 @@ describe("date field", () => {
       }),
     });
     const date = new Date();
-    const { queryByLabelText } = render(
+    const { queryByLabelText } = renderWithProvider(
       <FormComponentView
         name="date"
         onChange={() => {}}
@@ -113,7 +114,7 @@ describe("date field", () => {
       },
     };
     const data = new Date();
-    const { queryByDisplayValue } = render(
+    const { queryByDisplayValue } = renderWithProvider(
       <FormComponentView
         name="textfield"
         onChange={() => {}}
@@ -151,7 +152,7 @@ describe("date field", () => {
       },
     };
     const data = new Date();
-    const { queryByText } = render(
+    const { queryByText } = renderWithProvider(
       <FormComponentView
         name="withSettings"
         onChange={() => {}}
@@ -174,7 +175,7 @@ describe("date field", () => {
         }),
       }),
     };
-    const withoutValue = render(
+    const withoutValue = renderWithProvider(
       <FormComponentView
         name="withSettings"
         onChange={() => {}}
@@ -186,7 +187,7 @@ describe("date field", () => {
     // Check if 1990 is visible.
     expect(withoutValue.queryByText("1990", { exact: false })).toBeVisible();
     const currentDate = new Date();
-    const withValue = render(
+    const withValue = renderWithProvider(
       <FormComponentView
         name="withSettings"
         onChange={() => {}}
