@@ -1,11 +1,6 @@
 services:
   pi:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        UID: ${UID:-1000}
-        GID: ${GID:-1000}
+    image: codeberg.org/fabsor/pi-image:latest
     user: "${UID:-1000}:${GID:-1000}"
     working_dir: /workspace
     volumes:
