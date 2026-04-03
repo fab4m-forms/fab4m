@@ -8,7 +8,8 @@
     "packages/password",
     "packages/routerforms",
     "packages/builder",
-    "packages/autocomplete"
+    "packages/autocomplete",
+    "packages/react"
   ],
   "devDependencies": {
     "@babel/core": "^7.28.0",
