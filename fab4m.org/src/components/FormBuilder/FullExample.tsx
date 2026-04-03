@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import {
   FormComponents,
   FormBuilderProvider,
-  allPlugins,
   NewComponent,
   EditFormComponent,
 } from "@fab4m/builder";
+import { formBuilderPlugins } from "./plugins";
 import { createForm, serialize } from "@fab4m/fab4m";
 
 const form = serialize(createForm());
@@ -16,7 +16,7 @@ export default function FullExample() {
     <FormBuilderProvider
       form={draft}
       formChanged={changeDraft}
-      plugins={allPlugins}
+      plugins={formBuilderPlugins}
     >
       <FormComponents
         actions={(props) => (

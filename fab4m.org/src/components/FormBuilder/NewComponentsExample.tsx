@@ -1,10 +1,6 @@
 import React, { useState } from "react";
-import {
-  FormComponents,
-  FormBuilderProvider,
-  allPlugins,
-  NewComponent,
-} from "@fab4m/builder";
+import { FormComponents, FormBuilderProvider, NewComponent } from "@fab4m/builder";
+import { formBuilderPlugins } from "./plugins";
 import { createForm, serialize } from "@fab4m/fab4m";
 
 const form = serialize(createForm({}));
@@ -15,7 +11,7 @@ export default function NewComponentsExample() {
     <FormBuilderProvider
       form={draft}
       formChanged={changeDraft}
-      plugins={allPlugins}
+      plugins={formBuilderPlugins}
     >
       <FormComponents />
       <h2>Add new component</h2>

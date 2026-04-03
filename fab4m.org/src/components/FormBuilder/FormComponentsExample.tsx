@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import {
-  FormComponents,
-  FormBuilderProvider,
-  allPlugins,
-} from "@fab4m/builder";
+import { FormComponents, FormBuilderProvider } from "@fab4m/builder";
+import { formBuilderPlugins } from "./plugins";
 import { createForm, serialize, textField } from "@fab4m/fab4m";
 
 // The form builder works on the serialized version of the form.
@@ -20,7 +17,7 @@ export default function FormComponentsExample() {
     <FormBuilderProvider
       form={draft}
       formChanged={changeDraft}
-      plugins={allPlugins}
+      plugins={formBuilderPlugins}
     >
       <FormComponents />
     </FormBuilderProvider>

@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import {
   FormComponents,
   FormBuilderProvider,
-  allPlugins,
   FormPreview,
 } from "@fab4m/builder";
+import { formBuilderPlugins } from "./plugins";
 import { basic, createForm, serialize, textField } from "@fab4m/fab4m";
 
 const form = serialize(
@@ -20,7 +20,7 @@ export default function FormPreviewExample() {
     <FormBuilderProvider
       form={draft}
       formChanged={changeDraft}
-      plugins={allPlugins}
+      plugins={formBuilderPlugins}
     >
       <FormComponents />
       <h2>Example</h2>
