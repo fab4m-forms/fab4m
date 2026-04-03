@@ -5,17 +5,30 @@ import {
   FormComponentView,
   FormProvider,
   useForm,
+  allWidgetsRenderer,
 } from "@fab4m/react";
 import {
   passwordField,
   passwordVerifyField,
   passwordValidateOldField,
   validPassword,
-  passwordRenderer,
+  Password,
+  PasswordVerify,
+  PasswordValidateOld,
 } from "../../src";
 import "react-datepicker/dist/react-datepicker.css";
 import "./index.css";
 import "@fab4m/fab4m/css/basic/basic.css";
+
+const passwordRenderer = {
+  ...allWidgetsRenderer,
+  widgetComponents: {
+    ...allWidgetsRenderer.widgetComponents,
+    password: Password,
+    passwordVerify: PasswordVerify,
+    passwordValidateOld: PasswordValidateOld,
+  },
+};
 
 export default function App() {
   const [theme, changeTheme] = React.useState("basic");

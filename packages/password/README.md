@@ -24,14 +24,31 @@ The following example shows all of the fields in action:
 
 ```jsx
 import * as React from "react";
-import { createForm, content } from "@fab4m/fab4m";
-import { StatefulFormView, FormProvider } from "@fab4m/react";
+import { createForm } from "@fab4m/fab4m";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+  content,
+} from "@fab4m/react";
 import {
   passwordField,
   passwordVerifyField,
   passwordValidateOldField,
-  passwordRenderer,
+  Password,
+  PasswordVerify,
+  PasswordValidateOld,
 } from "@fab4m/password";
+
+const passwordRenderer = {
+  ...allWidgetsRenderer,
+  widgetComponents: {
+    ...allWidgetsRenderer.widgetComponents,
+    password: Password,
+    passwordVerify: PasswordVerify,
+    passwordValidateOld: PasswordValidateOld,
+  },
+};
 
 const form = createForm({
   password: passwordField({
@@ -83,12 +100,20 @@ The validPassword validator allows you to set several constraints on the inputte
 ```jsx
 import * as React from "react";
 import { createForm } from "@fab4m/fab4m";
-import { StatefulFormView, FormProvider } from "@fab4m/react";
 import {
-  passwordField,
-  validPassword,
-  passwordRenderer,
-} from "@fab4m/password";
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
+import { passwordField, validPassword, Password } from "@fab4m/password";
+
+const passwordRenderer = {
+  ...allWidgetsRenderer,
+  widgetComponents: {
+    ...allWidgetsRenderer.widgetComponents,
+    password: Password,
+  },
+};
 
 const form = createForm({
   password: passwordField({
@@ -123,12 +148,24 @@ function that can call your backend to validate it.
 ```jsx
 import * as React from "react";
 import { createForm } from "@fab4m/fab4m";
-import { StatefulFormView, FormProvider } from "@fab4m/react";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
 import {
   passwordValidateOldField,
   validOldPassword,
-  passwordRenderer,
+  PasswordValidateOld,
 } from "@fab4m/password";
+
+const passwordRenderer = {
+  ...allWidgetsRenderer,
+  widgetComponents: {
+    ...allWidgetsRenderer.widgetComponents,
+    passwordValidateOld: PasswordValidateOld,
+  },
+};
 
 const form = createForm({
   passwordValidate: passwordValidateOldField({

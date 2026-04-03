@@ -7,7 +7,6 @@ import {
   widget,
   WidgetType,
 } from "@fab4m/fab4m";
-import { allWidgetsRenderer, FormRenderer } from "@fab4m/react";
 import Password from "./Password";
 import PasswordValidateOld from "./PasswordValidateOld";
 import PasswordValidatorInfo from "./PasswordValidatorInfo";
@@ -253,21 +252,7 @@ export function passwordValidateOldWidget(): Widget<
   });
 }
 
-/**
- * A ready-to-use @fab4m/react renderer that includes password widgets and validator info.
- */
-export const passwordRenderer: FormRenderer = {
-  ...allWidgetsRenderer,
-  widgetComponents: {
-    ...allWidgetsRenderer.widgetComponents,
-    password: Password,
-    passwordVerify: PasswordVerify,
-    passwordValidateOld: PasswordValidateOld,
-  },
-  validatorComponents: {
-    ...(allWidgetsRenderer.validatorComponents ?? {}),
-    password: PasswordValidatorInfo,
-  },
-};
-
 export * from "./validators";
+
+// Widget components for use with @fab4m/react
+export { Password, PasswordVerify, PasswordValidateOld, PasswordValidatorInfo };

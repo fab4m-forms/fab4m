@@ -2,15 +2,28 @@ import * as React from "react";
 import { createForm } from "@fab4m/fab4m";
 import {
   StatefulFormView,
-  content,
   FormProvider,
   allWidgetsRenderer,
+  content,
 } from "@fab4m/react";
 import {
   passwordField,
   passwordVerifyField,
   passwordValidateOldField,
+  Password,
+  PasswordVerify,
+  PasswordValidateOld,
 } from "@fab4m/password";
+
+const passwordRenderer = {
+  ...allWidgetsRenderer,
+  widgetComponents: {
+    ...allWidgetsRenderer.widgetComponents,
+    password: Password,
+    passwordVerify: PasswordVerify,
+    passwordValidateOld: PasswordValidateOld,
+  },
+};
 
 const form = createForm({
   password: passwordField({
@@ -28,7 +41,7 @@ const form = createForm({
 
 export default function PasswordFields() {
   return (
-    <FormProvider renderer={allWidgetsRenderer}>
+    <FormProvider renderer={passwordRenderer}>
       <StatefulFormView form={form} />
     </FormProvider>
   );
