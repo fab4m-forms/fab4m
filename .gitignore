@@ -4,3 +4,4 @@ node_modules
 *.tgz
 lerna-debug.log
 .aider*
+.pi-home/
