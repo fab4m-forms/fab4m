@@ -1,5 +1,6 @@
 import React from "react";
 import { SerializedComponent, SerializedForm } from "@fab4m/fab4m";
+import { FormProvider, allWidgetsRenderer } from "@fab4m/react";
 import {
   FormBuilderActionsContext,
   FormBuilderFormContext,
@@ -23,10 +24,12 @@ export function FormBuilderProvider(props: FormBuilderProviderProps) {
     changeForm: props.formChanged,
   };
   return (
-    <FormBuilderActionsContext.Provider value={context}>
-      <FormBuilderFormContext.Provider value={props}>
-        {props.children}
-      </FormBuilderFormContext.Provider>
-    </FormBuilderActionsContext.Provider>
+    <FormProvider renderer={allWidgetsRenderer}>
+      <FormBuilderActionsContext.Provider value={context}>
+        <FormBuilderFormContext.Provider value={props}>
+          {props.children}
+        </FormBuilderFormContext.Provider>
+      </FormBuilderActionsContext.Provider>
+    </FormProvider>
   );
 }

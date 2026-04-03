@@ -1,9 +1,5 @@
-import {
-  content,
-  contentType,
-  contentWidgetType,
-  textAreaField,
-} from "@fab4m/fab4m";
+import { textAreaField } from "@fab4m/fab4m";
+import { content, contentType, contentWidgetType } from "@fab4m/react";
 import { FormComponentTypePlugin, WidgetTypePlugin } from "../..";
 
 export const contentPlugin: FormComponentTypePlugin = {

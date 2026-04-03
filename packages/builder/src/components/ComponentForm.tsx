@@ -1,5 +1,6 @@
 import React from "react";
-import { SerializedComponent, StatefulFormView, useForm } from "@fab4m/fab4m";
+import { SerializedComponent } from "@fab4m/fab4m";
+import { StatefulFormView, useForm } from "@fab4m/react";
 import { componentForm, componentFromFormData } from "../forms/component";
 import { useFormBuilder } from "../context";
 import { FormComponentTypePlugin } from "..";

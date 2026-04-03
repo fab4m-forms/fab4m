@@ -1,7 +1,6 @@
 import React from "react";
 import {
   booleanField,
-  content,
   createForm,
   equals,
   exists,
@@ -18,6 +17,7 @@ import {
   textFieldWidget,
   VariantDefinition,
 } from "@fab4m/fab4m";
+import { content } from "@fab4m/react";
 import {
   findComponentValidators,
   findComponentWidgets,

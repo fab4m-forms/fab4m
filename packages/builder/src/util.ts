@@ -3,6 +3,7 @@ import {
   SerializedComponentsList,
   SerializedForm,
   Theme,
+  formFromDefinition,
   unserialize,
 } from "@fab4m/fab4m";
 import invariant from "tiny-invariant";
@@ -81,13 +82,15 @@ export function unserializeForm(
   plugins: Plugins,
   themes: Theme[],
 ) {
-  return unserialize(
-    form,
-    plugins.types.map((p) => p.type),
-    themes,
-    plugins.widgets.map((w) => w.type),
-    [],
-    plugins.validators.map((v) => v.type),
+  return formFromDefinition(
+    unserialize(
+      form,
+      plugins.types.map((p) => p.type),
+      themes,
+      plugins.widgets.map((w) => w.type),
+      [],
+      plugins.validators.map((v) => v.type),
+    ),
   );
 }
 

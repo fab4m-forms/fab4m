@@ -24,7 +24,7 @@ export function useFormBuilderActions(): FormBuilderActions {
   const context = useContext(FormBuilderActionsContext);
   if (!context) {
     throw new Error(
-      "You used the useFormBuilderActions() hook used outside of a <FormProvider />",
+      "You used the useFormBuilderActions() hook outside of a <FormBuilderProvider />",
     );
   }
   return context;
@@ -34,7 +34,7 @@ export function useFormBuilder(): FormBuilderFormContextData {
   const context = useContext(FormBuilderFormContext);
   if (!context) {
     throw new Error(
-      "You used the useFormBuilderForm() hook used outside of a <FormProvider />",
+      "You used the useFormBuilderForm() hook outside of a <FormBuilderProvider />",
     );
   }
   return context;
