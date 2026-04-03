@@ -1,5 +1,5 @@
 import * as React from "react";
-import { WidgetProps, optionValue, ThemeClasses } from "@fab4m/fab4m";
+import { WidgetProps, ThemeClasses } from "@fab4m/fab4m";
 import Downshift from "downshift";
 import { AutocompleteSettings, Option } from ".";
 
@@ -36,7 +36,9 @@ export default function Autocomplete<
       props.settings.items(search).then(changeLoadedItems);
     }
   };
-  const getItems = (search?: string | null): Option<OptionType>[] => {
+  const getItems = (
+    search?: string | null,
+  ): Option<OptionType, Context>[] => {
     const itemsToShow =
       typeof props.settings.items === "function"
         ? loadedItems
@@ -51,13 +53,13 @@ export default function Autocomplete<
   return (
     <>
       <input type="hidden" name={props.name} value={props.value ?? ""} />
-      <Downshift
+      <Downshift<Option<OptionType, Context>>
         onChange={(selection) => {
-          props.onChange(optionValue(selection));
+          props.onChange(selection ? optionValue(selection) : undefined);
         }}
         inputValue={currentValue ? currentValue.toString() : ""}
-        selectedItem={props.value ?? ""}
-        onInputValueChange={(value) => search(value)}
+        selectedItem={null}
+        onInputValueChange={(value) => search(value ?? "")}
         itemToString={(item) => {
           return item ? itemLabel(item) : "";
         }}
@@ -129,20 +131,30 @@ export default function Autocomplete<
   );
 }
 
-function itemLabel<OptionType>(item: Option<OptionType>) {
+function optionValue<OptionType, Context = undefined>(
+  item: Option<OptionType, Context>,
+): OptionType {
+  return Array.isArray(item) ? item[1] : item;
+}
+
+function itemLabel<OptionType, Context = undefined>(
+  item: Option<OptionType, Context>,
+) {
   const value = Array.isArray(item) ? item[0] : item;
   return (value as string | number).toString();
 }
 
-function itemContext<OptionType>(item: Option<OptionType>) {
-  return Array.isArray(item) && item[2] ? item[2] : undefined;
+function itemContext<OptionType, Context = undefined>(
+  item: Option<OptionType, Context>,
+): Context {
+  return (Array.isArray(item) ? item[2] : undefined) as Context;
 }
 
 function optionItemProps(
-  item: Option<any>,
+  item: Option<any, any>,
   index: number,
   highlightedIndex: number | null,
-  selectedItem: Option<any>,
+  selectedItem: Option<any, any> | null,
   theme: ThemeClasses,
 ) {
   const value = optionValue(item).toString();

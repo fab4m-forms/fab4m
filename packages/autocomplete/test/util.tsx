@@ -1,7 +1,7 @@
 import * as React from "react";
 import { render } from "@testing-library/react";
 import { allWidgetsRenderer, FormProvider } from "@fab4m/react";
-import Autocomplete from "../src/Autocomplete";
+import { Autocomplete } from "../src";
 
 const autocompleteRenderer = {
   ...allWidgetsRenderer,

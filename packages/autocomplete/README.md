@@ -15,15 +15,30 @@ npm install --save @fab4m/fab4m @fab4m/react @fab4m/autocomplete downshift
 
 `@fab4m/autocomplete` provides one widget: the `autocompleteWidget`.
 
+To render it in React, register the `Autocomplete` component in your form renderer.
+
 The following example shows it in action:
 
 ```jsx
 import * as React from "react";
 // This stylesheet that's needed if you use the basic theme.
 import "@fab4m/autocomplete/src/style.css";
-import { autocompleteWidget } from "@fab4m/autocomplete";
+import { Autocomplete, autocompleteWidget } from "@fab4m/autocomplete";
 import { textField, createForm } from "@fab4m/fab4m";
-import { StatefulFormView } from "@fab4m/react";
+import {
+  allWidgetsRenderer,
+  createFormRenderer,
+  FormProvider,
+  StatefulFormView,
+} from "@fab4m/react";
+
+const renderer = createFormRenderer({
+  ...allWidgetsRenderer,
+  widgetComponents: {
+    ...allWidgetsRenderer.widgetComponents,
+    autocomplete: Autocomplete,
+  },
+});
 
 const form = createForm({
   city: textField({
@@ -41,10 +56,16 @@ const form = createForm({
 });
 
 export default function AutocompleteExample() {
-  return <StatefulFormView form={form} hideSubmit={true} />;
+  return (
+    <FormProvider renderer={renderer}>
+      <StatefulFormView form={form} hideSubmit={true} />
+    </FormProvider>
+  );
 }
 
 ```
+
+The following examples assume the same `renderer` setup as above.
 
 ## Using a callback to fetch the items
 

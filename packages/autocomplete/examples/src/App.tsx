@@ -8,11 +8,24 @@ import {
   bulma,
   setDefaultTheme,
 } from "@fab4m/fab4m";
-import { StatefulFormView } from "@fab4m/react";
+import {
+  allWidgetsRenderer,
+  createFormRenderer,
+  FormProvider,
+  StatefulFormView,
+} from "@fab4m/react";
 
 import tailwind from "../../../core/src/themes/tailwind";
 
-import { autocompleteWidget } from "../../src";
+import { autocompleteWidget, Autocomplete } from "../../src";
+
+const renderer = createFormRenderer({
+  ...allWidgetsRenderer,
+  widgetComponents: {
+    ...allWidgetsRenderer.widgetComponents,
+    autocomplete: Autocomplete,
+  },
+});
 
 function App() {
   setDefaultTheme(tailwind);
@@ -87,7 +100,9 @@ function App() {
   });
   return (
     <div className="App">
-      <StatefulFormView form={form} />
+      <FormProvider renderer={renderer}>
+        <StatefulFormView form={form} />
+      </FormProvider>
     </div>
   );
 }

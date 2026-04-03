@@ -1,8 +1,12 @@
-import Autocomplete from "./Autocomplete";
 import { widget, WidgetType } from "@fab4m/fab4m";
+import type { ReactNode } from "react";
+
+export { default as Autocomplete } from "./Autocomplete";
+
 export type Option<OptionsType, Context = any> =
   | [string, OptionsType, Context]
   | OptionsType;
+
 type AutocompleteCallback<OptionType, Context> = (
   search: string,
 ) => Promise<Option<OptionType, Context>[]>;
@@ -11,7 +15,7 @@ type ElementCallback<OptionType, Context = undefined> = (
   value: OptionType,
   label: string,
   context: Context,
-) => React.ReactNode;
+) => ReactNode;
 
 export interface AutocompleteSettings<OptionType, Context> {
   items:
@@ -27,7 +31,6 @@ export const autocompleteWidgetType: WidgetType<
   name: "autocomplete",
   title: "Autocomplete",
   components: ["text", "integer", "float"],
-  widget: Autocomplete,
   init: autocompleteWidget,
 };
 
@@ -36,6 +39,6 @@ export function autocompleteWidget<OptionType, Context = undefined>(
 ) {
   return widget<OptionType, AutocompleteSettings<OptionType, Context>>({
     type: autocompleteWidgetType,
-    settings: options ? options : { items: [] },
+    settings: options ?? { items: [] },
   });
 }
