@@ -13,10 +13,10 @@ The `@fab4m/password` package provides form fields for passwords.
 
 ## Installation
 
-Install the `@fab4m/password` package:
+Install `@fab4m/fab4m`, `@fab4m/react` and `@fab4m/password`:
 
 ```bash
-npm install --save @fab4m/password
+npm install --save @fab4m/fab4m @fab4m/react @fab4m/password
 ```
 
 ## Using the password fields

@@ -20,10 +20,10 @@ form builder UI capable of constructing fab4m forms.
 
 ## Installing
 
-Install `@fab4m/builder` package.
+Install `@fab4m/fab4m`, `@fab4m/react` and `@fab4m/builder`.
 
 ```bash
-npm install --save @fab4m/builder
+npm install --save @fab4m/fab4m @fab4m/react @fab4m/builder
 ```
 
 The form builder is built using tailwind css, so you will need to have that installed as well.
@@ -34,7 +34,8 @@ Refer to their [documentation page](https://tailwindcss.com/docs/installation) f
 The form builder works with any [serialized](/docs/guide/serializing) fab4m form, for example:
 
 ```jsx
-import { crateForm, serialize, textField } from "@fab4m/fab4m";
+import { createForm, serialize, textField } from "@fab4m/fab4m";
+
 const formToEdit = serialize(
   createForm({
     component: textField({ label: "First component" }),
@@ -53,9 +54,10 @@ want to be able to work with inside of the form. Plugins for all fab4m core feat
 an export containing all plugins is provided for convenience.
 
 ```jsx
-import { allPlugins, FromBuilderContext } form "@fab4m/builder"
+import { allPlugins, FormBuilderProvider } from "@fab4m/builder";
+
 <FormBuilderProvider form={formToEdit} plugins={allPlugins}>
-/* You can use any part of the form builder in here. */
+  {/* You can use any part of the form builder in here. */}
 </FormBuilderProvider>
 ```
 

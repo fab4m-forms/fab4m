@@ -80,7 +80,7 @@ Now it's time for the fun part, let's see how we can use fab4m to complement
 our already amazing stack! Let's begin by installing it:
 
 ```bash
-npm install --save @fab4m/fab4m
+npm install --save @fab4m/fab4m @fab4m/react
 ```
 
 ## Make a diary model, migration and controller
@@ -188,7 +188,7 @@ import { Inertia } from "@inertiajs/inertia";
 import { Head } from "@inertiajs/inertia-react";
 import "@fab4m/fab4m/css/basic/basic.css";
 import form from "../../Forms/Diary";
-import { StatefulFormView } from "@fab4m/fab4m";
+import { StatefulFormView, FormProvider, allWidgetsRenderer } from "@fab4m/react";
 
 export default function Create() {
   form.onSubmit((e, data) => {
@@ -203,7 +203,9 @@ export default function Create() {
       </h2>
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-          <StatefulFormView form={form} />
+          <FormProvider renderer={allWidgetsRenderer}>
+            <StatefulFormView form={form} />
+          </FormProvider>
         </div>
       </div>
     </GuestLayout>

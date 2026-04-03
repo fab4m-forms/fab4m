@@ -4,10 +4,10 @@ The `@fab4m/password` package provides form fields for passwords.
 
 ## Installation
 
-Install the `@fab4m/password` package:
+Install `@fab4m/fab4m`, `@fab4m/react`, and `@fab4m/password`:
 
 ```bash
-npm install --save @fab4m/password
+npm install --save @fab4m/fab4m @fab4m/react @fab4m/password
 ```
 
 ## Using the password fields
@@ -47,7 +47,7 @@ const form = createForm({
   }),
 }).onSubmit((e) => e.preventDefault());
 
-export default function @fab4m/passwordFields() {
+export default function PasswordFields() {
   return (
     <FormProvider renderer={passwordRenderer}>
       <StatefulFormView form={form} />
@@ -71,9 +71,9 @@ The `passwordValidateOldWidget` has the settings above and these settings:
 
 The package comes with two useful validators for your passwords:
 
-### valid@fab4m/password
+### validPassword
 
-The valid@fab4m/password validator allows you to set several constraints on the inputted password:
+The validPassword validator allows you to set several constraints on the inputted password:
 
 - _minLength_: The minimal length of the password.
 - _requiredLetter_: At least one letter is required.
@@ -86,7 +86,7 @@ import { createForm } from "@fab4m/fab4m";
 import { StatefulFormView, FormProvider } from "@fab4m/react";
 import {
   passwordField,
-  valid@fab4m/password,
+  validPassword,
   passwordRenderer,
 } from "@fab4m/password";
 
@@ -94,7 +94,7 @@ const form = createForm({
   password: passwordField({
     label: "@fab4m/password",
     validators: [
-      valid@fab4m/password({
+      validPassword({
         minLength: 8,
         requiredLetter: true,
         requiredNumber: true,
@@ -104,7 +104,7 @@ const form = createForm({
   }),
 }).onSubmit((e) => e.preventDefault());
 
-export default function @fab4m/passwordFields() {
+export default function PasswordFields() {
   return (
     <FormProvider renderer={passwordRenderer}>
       <StatefulFormView form={form} />
@@ -114,7 +114,7 @@ export default function @fab4m/passwordFields() {
 
 ```
 
-### validOld@fab4m/password
+### validOldPassword
 
 If you use the passwordValdiateOldField you will need this validator to ensure that the old
 password is correct. This validator enables you to validate the old password using an async
@@ -126,7 +126,7 @@ import { createForm } from "@fab4m/fab4m";
 import { StatefulFormView, FormProvider } from "@fab4m/react";
 import {
   passwordValidateOldField,
-  validOld@fab4m/password,
+  validOldPassword,
   passwordRenderer,
 } from "@fab4m/password";
 
@@ -134,7 +134,7 @@ const form = createForm({
   passwordValidate: passwordValidateOldField({
     label: "@fab4m/password",
     validators: [
-      validOld@fab4m/password(async (password) => {
+      validOldPassword(async (password) => {
         // You will probably do some request to the backend here.
         return password === "oldpassword";
       }),
@@ -142,7 +142,7 @@ const form = createForm({
   }),
 }).onSubmit((e) => e.preventDefault());
 
-export default function @fab4m/passwordFields() {
+export default function PasswordFields() {
   return (
     <FormProvider renderer={passwordRenderer}>
       <StatefulFormView form={form} />

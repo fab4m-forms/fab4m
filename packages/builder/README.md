@@ -5,10 +5,10 @@ form builder UI capable of constructing fab4m forms.
 
 ## Installing
 
-Install `@fab4m/builder` package.
+Install `@fab4m/fab4m`, `@fab4m/react`, and `@fab4m/builder`.
 
 ```bash
-npm install --save @fab4m/builder
+npm install --save @fab4m/fab4m @fab4m/react @fab4m/builder
 ```
 
 The form builder is built using tailwind css, so you will need to have that installed as well.
@@ -19,7 +19,7 @@ Refer to their [documentation page](https://tailwindcss.com/docs/installation) f
 The form builder works with any [serialized](/guide/serializing) fab4m form, for example:
 
 ```jsx
-import { crateForm, serialize, textField } from "@fab4m/fab4m";
+import { createForm, serialize, textField } from "@fab4m/fab4m";
 const formToEdit = serialize(
   createForm({
     component: textField({ label: "First component" }),
@@ -30,7 +30,7 @@ const formToEdit = serialize(
 
 ## Add the form builder context
 
-Place any components that should edit the form within the `<Form@fab4m/builderContext>` component. This will allow you to use the form builder hooks to manipulate the form.
+Place any components that should edit the form within the `<FormBuilderProvider>` component. This will allow you to use the form builder hooks to manipulate the form.
 
 The form builder context takes in **plugins** for the different components, widgets and validators you
 want to be able to work with inside of the form. Plugins for all fab4m core features are provided in the @fab4m/builder package.
@@ -38,10 +38,11 @@ want to be able to work with inside of the form. Plugins for all fab4m core feat
 an export containing all plugins is provided for convenience.
 
 ```jsx
-import { allPlugins, From@fab4m/builderContext } form "@fab4m/builder"
-<Form@fab4m/builderContext form={formToEdit} plugins={allPlugins}>
-/* You can use any part of the form builder in here. */
-</Form@fab4m/builderContext>
+import { allPlugins, FormBuilderProvider } from "@fab4m/builder";
+
+<FormBuilderProvider form={formToEdit} plugins={allPlugins}>
+  {/* You can use any part of the form builder in here. */}
+</FormBuilderProvider>
 ```
 
 ## The FormComponents component
@@ -53,7 +54,7 @@ where you can drag your components around.
 import React, { useState } from "react";
 import {
   FormComponents,
-  Form@fab4m/builderProvider,
+  FormBuilderProvider,
   allPlugins,
 } from "@fab4m/builder";
 import { createForm, serialize, textField } from "@fab4m/fab4m";
@@ -69,13 +70,13 @@ const form = serialize(
 export default function FormComponentsExample() {
   const [draft, changeDraft] = useState(form);
   return (
-    <Form@fab4m/builderProvider
+    <FormBuilderProvider
       form={draft}
       formChanged={changeDraft}
       plugins={allPlugins}
     >
       <FormComponents />
-    </Form@fab4m/builderProvider>
+    </FormBuilderProvider>
   );
 }
 
@@ -89,7 +90,7 @@ to perform actions on them.
 We do this by adding actions to each component:
 
 ```jsx
-import { FormComponents, Form@fab4m/builderProvider } from "@fab4m/builder";
+import { FormComponents, FormBuilderProvider } from "@fab4m/builder";
 import { createForm, serialize, textField } from "@fab4m/fab4m";
 import React, { useState } from "react";
 
@@ -103,7 +104,7 @@ const form = serialize(
 export default function FormActionsExample() {
   const [draft, changeDraft] = useState(form);
   return (
-    <Form@fab4m/builderProvider form={draft} formChanged={changeDraft}>
+    <FormBuilderProvider form={draft} formChanged={changeDraft}>
       <FormComponents
         actions={({ component, removeComponent, updateComponent }) => (
           <>
@@ -121,7 +122,7 @@ export default function FormActionsExample() {
           </>
         )}
       />
-    </Form@fab4m/builderProvider>
+    </FormBuilderProvider>
   );
 }
 
@@ -135,7 +136,7 @@ The `NewComponent` component can be used to easily provide a gallery of all avai
 import React, { useState } from "react";
 import {
   FormComponents,
-  Form@fab4m/builderProvider,
+  FormBuilderProvider,
   allPlugins,
   NewComponent,
 } from "@fab4m/builder";
@@ -146,7 +147,7 @@ const form = serialize(createForm({}));
 export default function NewComponentsExample() {
   const [draft, changeDraft] = useState(form);
   return (
-    <Form@fab4m/builderProvider
+    <FormBuilderProvider
       form={draft}
       formChanged={changeDraft}
       plugins={allPlugins}
@@ -159,7 +160,7 @@ export default function NewComponentsExample() {
           label: `Component ${draft.components.length + 1}`,
         }}
       />
-    </Form@fab4m/builderProvider>
+    </FormBuilderProvider>
   );
 }
 
@@ -173,7 +174,7 @@ You can use the `EditFormComponent` to be able to edit any component in the form
 import React, { useState } from "react";
 import {
   FormComponents,
-  Form@fab4m/builderProvider,
+  FormBuilderProvider,
   allPlugins,
   EditFormComponent,
 } from "@fab4m/builder";
@@ -189,7 +190,7 @@ export default function NewComponentsExample() {
   const [draft, changeDraft] = useState(form);
   const [editComponent, changeEditComponent] = useState<null | string>(null);
   return (
-    <Form@fab4m/builderProvider
+    <FormBuilderProvider
       form={draft}
       formChanged={changeDraft}
       plugins={allPlugins}
@@ -209,7 +210,7 @@ export default function NewComponentsExample() {
           />
         </dialog>
       ) : null}
-    </Form@fab4m/builderProvider>
+    </FormBuilderProvider>
   );
 }
 
@@ -223,7 +224,7 @@ The example below combines all the bits below to make a complete form builder.
 import React, { useState } from "react";
 import {
   FormComponents,
-  Form@fab4m/builderProvider,
+  FormBuilderProvider,
   allPlugins,
   NewComponent,
   EditFormComponent,
@@ -235,7 +236,7 @@ export default function FullExample() {
   const [draft, changeDraft] = useState(form);
   const [currentKey, changeCurrentKey] = useState<null | string>(null);
   return (
-    <Form@fab4m/builderProvider
+    <FormBuilderProvider
       form={draft}
       formChanged={changeDraft}
       plugins={allPlugins}
@@ -264,7 +265,7 @@ export default function FullExample() {
           />
         </div>
       )}
-    </Form@fab4m/builderProvider>
+    </FormBuilderProvider>
   );
 }
 

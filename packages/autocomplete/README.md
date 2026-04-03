@@ -5,10 +5,10 @@ The `@fab4m/autocomplete` package provides an autocomplete widget component usin
 
 ## Installing
 
-Install `@fab4m/autocomplete`, `@fab4m/react`, and `downshift` (7.x):
+Install `@fab4m/fab4m`, `@fab4m/react`, `@fab4m/autocomplete`, and `downshift` (7.x):
 
 ```bash
-npm install --save @fab4m/autocomplete @fab4m/react downshift
+npm install --save @fab4m/fab4m @fab4m/react @fab4m/autocomplete downshift
 ```
 
 ## Using the autocomplete widget
@@ -40,7 +40,7 @@ const form = createForm({
   }),
 });
 
-export default function @fab4m/autocompleteExample() {
+export default function AutocompleteExample() {
   return <StatefulFormView form={form} hideSubmit={true} />;
 }
 
@@ -78,7 +78,7 @@ const form = createForm({
   }),
 });
 
-export default function @fab4m/autocompleteExample() {
+export default function AutocompleteExample() {
   return <StatefulFormView form={form} hideSubmit={true} />;
 }
 
@@ -125,7 +125,7 @@ const form = createForm({
   }),
 });
 
-export default function @fab4m/autocompleteExample() {
+export default function AutocompleteExample() {
   return <StatefulFormView form={form} hideSubmit={true} />;
 }
 

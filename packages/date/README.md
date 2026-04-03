@@ -5,10 +5,10 @@ The `@fab4m/date` packages provides date and datetime components using the popul
 
 ## Installing
 
-Install @fab4m/date and react-datepicker (4.2.x)
+Install `@fab4m/fab4m`, `@fab4m/react`, `@fab4m/date`, and `react-datepicker` (4.2.x)
 
 ```bash
-npm install --save @fab4m/date react-datepicker
+npm install --save @fab4m/fab4m @fab4m/react @fab4m/date react-datepicker
 ```
 
 ## Using the date fields

@@ -140,7 +140,7 @@ import { Inertia } from "@inertiajs/inertia";
 import { Head } from "@inertiajs/inertia-react";
 import "@fab4m/fab4m/css/basic/basic.css";
 import form from "../../Forms/Form";
-import { StatefulFormView } from "@fab4m/fab4m";
+import { StatefulFormView, FormProvider, allWidgetsRenderer } from "@fab4m/react";
 
 export default function Create() {
   form.onSubmit((e, data) => {
@@ -154,7 +154,9 @@ export default function Create() {
       </h2>
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-          <StatefulFormView form={form} />
+          <FormProvider renderer={allWidgetsRenderer}>
+            <StatefulFormView form={form} />
+          </FormProvider>
         </div>
       </div>
     </GuestLayout>
@@ -204,7 +206,8 @@ to our endpoint:
 
 ```jsx
 ...
-import { StatefulFormView, generateSchema, serialize } from "@fab4m/fab4m";
+import { generateSchema, serialize } from "@fab4m/fab4m";
+import { StatefulFormView } from "@fab4m/react";
 ...
 export default function Create() {
     form.onSubmit((e, data) => {
@@ -285,7 +288,7 @@ import { Inertia } from "@inertiajs/inertia";
 import { Head } from "@inertiajs/inertia-react";
 import "@fab4m/fab4m/css/basic/basic.css";
 import { unserializeForm } from "../../Forms/Form";
-import { StatefulFormView, useForm } from "@fab4m/fab4m";
+import { StatefulFormView, FormProvider, allWidgetsRenderer } from "@fab4m/react";
 
 export default function Show({ form }) {
   const [unserializedForm, changeUnserializedForm] = useState(null);
@@ -300,7 +303,11 @@ export default function Show({ form }) {
       </h2>
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-          {unserializedForm && <StatefulFormView form={unserializedForm} />}
+          {unserializedForm && (
+            <FormProvider renderer={allWidgetsRenderer}>
+              <StatefulFormView form={unserializedForm} />
+            </FormProvider>
+          )}
         </div>
       </div>
     </GuestLayout>

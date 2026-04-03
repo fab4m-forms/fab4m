@@ -43,7 +43,7 @@ You probably want to customize things to fit your design. I tried to make this
 easy by adding a `createTailwindTheme` function:
 
 ```jsx
-import { createTailwindTheme } from "@fab4m/core";
+import { createTailwindTheme } from "@fab4m/fab4m";
 const yourTheme = createTailwindTheme({
   settings: {
     primaryBg: "bg-green-700 hover:bg-green-900",
