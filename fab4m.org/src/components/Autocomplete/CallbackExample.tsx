@@ -1,12 +1,20 @@
 import * as React from "react";
 import "@fab4m/autocomplete/src/style.css";
-import { autocompleteWidget } from "@fab4m/autocomplete";
+import { Autocomplete, autocompleteWidget } from "@fab4m/autocomplete";
 import { textField, createForm } from "@fab4m/fab4m";
 import {
   StatefulFormView,
   FormProvider,
   allWidgetsRenderer,
 } from "@fab4m/react";
+
+const autocompleteRenderer = {
+  ...allWidgetsRenderer,
+  widgetComponents: {
+    ...allWidgetsRenderer.widgetComponents,
+    autocomplete: Autocomplete,
+  },
+};
 
 // This would be your actual call to the backend.
 async function fakeFetch(search: string) {
@@ -30,7 +38,7 @@ const form = createForm({
 
 export default function AutocompleteExample() {
   return (
-    <FormProvider renderer={allWidgetsRenderer}>
+    <FormProvider renderer={autocompleteRenderer}>
       <StatefulFormView form={form} hideSubmit={true} />
     </FormProvider>
   );
