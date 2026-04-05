@@ -5,7 +5,7 @@
 - Migrate the existing `fab4m.org` documentation site from Docusaurus to Astro.
 - Preserve current docs/blog URLs (or provide explicit redirects where needed).
 - Keep all interactive examples functional.
-- Minimize disruption to package docs authoring workflow.
+- Use Starlight theme as-is (no style migration from Docusaurus/Infima).
 
 ## Current state (inventory)
 
@@ -19,9 +19,6 @@ From the current Docusaurus site (`fab4m.org`):
 - Existing site features to preserve:
   - Docs hierarchy + sidebar
   - Blog index + post pages
-  - Custom homepage (`src/pages/index.js`)
-  - Tailwind styling + custom CSS
-  - Dark mode styling
   - Plausible analytics script
   - Static assets in `static/` including `CNAME`
 
@@ -33,7 +30,6 @@ From the current Docusaurus site (`fab4m.org`):
 - **Starlight** for docs UX (sidebar, navigation, markdown-first docs)
 - **MDX** for interactive docs pages
 - **React integration** for existing React examples/components
-- **Tailwind** (continue existing utility styles)
 - **Sitemap** generation
 
 > Why this stack: it keeps markdown/MDX authoring, supports React islands for interactive examples, and provides strong docs ergonomics without rebuilding docs navigation from scratch.
@@ -57,10 +53,10 @@ From the current Docusaurus site (`fab4m.org`):
 
 ---
 
-### Phase 1 — Bootstrap Astro site
+### Phase 1 — Bootstrap Astro site ✅ COMPLETE
 
 1. Create new site scaffold (recommended parallel dir first, e.g. `fab4m.org-astro`, then swap in place after validation).
-2. Add integrations: React, MDX, Tailwind, Sitemap (and Starlight if selected).
+2. Add integrations: React, MDX, Sitemap, Starlight.
 3. Configure site metadata:
    - `site: "https://fab4m.org"`
    - no trailing slash URLs
@@ -68,6 +64,16 @@ From the current Docusaurus site (`fab4m.org`):
    - `fab4m.org/static/*` → Astro `public/*`
 
 **Deliverable:** Astro app builds and serves with base layout.
+
+**Completion Notes:**
+- Created `fab4m.org-astro` directory with Astro 6.1.3
+- Installed integrations: React, MDX, Sitemap, Starlight
+- Configured `site: "https://fab4m.org"` and `trailingSlash: "never"`
+- Copied static assets (CNAME, favicon, img/, js/)
+- Created base layout with Plausible analytics
+- Created placeholder intro.mdx doc page
+- Using Starlight theme as-is (no style migration from Docusaurus)
+- Build completes successfully with 3 pages
 
 ---
 
@@ -178,9 +184,7 @@ From the current Docusaurus site (`fab4m.org`):
    - Mitigation: generate old/new route manifests and enforce redirects for differences.
 3. **Raw import/path breakage in monorepo**
    - Mitigation: define aliases early and add CI check that imports resolve.
-4. **Styling regressions (Infima → Astro/Starlight styles)**
-   - Mitigation: keep custom CSS variables and run visual pass on homepage/docs/blog.
-5. **Blog excerpt differences (`truncate`)**
+4. **Blog excerpt differences (`truncate`)**
    - Mitigation: script frontmatter excerpt generation for existing posts.
 
 ---
