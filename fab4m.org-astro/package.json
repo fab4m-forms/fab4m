@@ -1,5 +1,5 @@
 {
-  "name": "fab4m.org-astro2",
+  "name": "fab4m.org-astro",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -10,8 +10,13 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/react": "^4.2.1",
     "@astrojs/starlight": "^0.38.2",
+    "@fab4m/fab4m": "*",
+    "@fab4m/react": "*",
     "astro": "^6.0.1",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "sharp": "^0.34.2"
   }
 }

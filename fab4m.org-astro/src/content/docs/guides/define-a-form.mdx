@@ -1,0 +1,74 @@
+---
+title: Creating forms
+description: Learn how to define forms with Fab4m components
+---
+
+import CodeExample from "../../../components/CodeExample.astro";
+import { FormFields, MultipleFields, GroupedFields, PageBreaks, Labels } from "../../../components/examples";
+import FormFieldsSource from "../../../components/examples/FormFields.tsx?raw";
+import MultipleFieldsSource from "../../../components/examples/MultipleFields.tsx?raw";
+import GroupedFieldsSource from "../../../components/examples/GroupedFields.tsx?raw";
+import PageBreaksSource from "../../../components/examples/PageBreaks.tsx?raw";
+import LabelsSource from "../../../components/examples/Labels.tsx?raw";
+
+# Creating forms
+
+A form consists of _Components_. A component can be anything, but usually it's
+a form field like a text field, but it can also be just a block of text.
+
+Each component has a few common properties, like the name, label and the description.
+See the list of components for details.
+
+## Forms for data input
+
+Fab4m provides components for most kinds of data input. The following example demonstrates a form
+with text, email, url and boolean data.
+
+<CodeExample code={FormFieldsSource}>
+  <FormFields />
+</CodeExample>
+
+## Handling multiple data
+
+Any component can be defined as a multiple component, which means that instead of just collecting one result, an array with results will be collected.
+
+<CodeExample code={MultipleFieldsSource}>
+  <MultipleFields />
+</CodeExample>
+
+## Grouping data together
+
+If you have a complex form you might need to group several fields together in a group. Fab4m makes this possible through the `group` component. When you define your group component you also add all the child components to the group.
+
+Each group component you add will be represented as an object in your submitted data. As with all other components, group components can have multiple values.
+
+<CodeExample code={GroupedFieldsSource}>
+  <GroupedFields />
+</CodeExample>
+
+## Page breaks
+
+Large forms can be split up into multiple parts. This is done using the `pageBreak`
+component. All data will be validated before each page break.
+
+<CodeExample code={PageBreaksSource}>
+  <PageBreaks />
+</CodeExample>
+
+## Changing labels (submit button text etc.)
+
+Each form comes with some default labels that can be overridden, for example the form submit text. This is done by changing the labels setting when creating the form.
+
+<CodeExample code={LabelsSource}>
+  <Labels />
+</CodeExample>
+
+These are the labels you can configure:
+
+| Name     | Description                                                          | Default value |
+| -------- | -------------------------------------------------------------------- | ------------- |
+| submit   | Used as the text for the submit button.                              | "Save"        |
+| next     | Used as the text on the next button on multipage forms.              | "Next"        |
+| previous | Used as the text on the previous button on multipage forms.          | "Previous"    |
+| complete | Used as the complete text on the complete button on multipage forms. | "Complete"    |
+| required | Used for the "Required" label on required form components.           | "Required"    |

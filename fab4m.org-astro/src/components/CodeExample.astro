@@ -1,0 +1,19 @@
+---
+import { Tabs, TabItem, Code } from "@astrojs/starlight/components";
+
+interface Props {
+  code: string;
+  lang?: string;
+}
+
+const { code, lang = "tsx" } = Astro.props;
+---
+
+<Tabs>
+  <TabItem label="Example" icon="play">
+    <slot />
+  </TabItem>
+  <TabItem label="Code" icon="code">
+    <Code code={code} lang={lang} />
+  </TabItem>
+</Tabs>

@@ -9,7 +9,8 @@
     "packages/routerforms",
     "packages/builder",
     "packages/autocomplete",
-    "packages/react"
+    "packages/react",
+    "fab4m.org-astro"
   ],
   "devDependencies": {
     "@babel/core": "^7.28.0",
