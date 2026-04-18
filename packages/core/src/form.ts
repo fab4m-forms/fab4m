@@ -152,44 +152,6 @@ export type Components<DataType> = {
 };
 
 /**
- * A components object that can be used to infer form data types.
- * @group Form API
- */
-export type InferableComponents = Record<
-  string,
-  FormComponent<unknown, unknown> | ReadonlyArray<VariantDefinition<unknown>>
->;
-
-/**
- * Infer the value type for a component definition.
- * @group Form API
- */
-export type InferComponentValue<ComponentDefinition> =
-  ComponentDefinition extends ReadonlyArray<infer Definition>
-    ? Definition extends VariantDefinition<infer ValueType>
-      ? ValueType
-      : never
-    : ComponentDefinition extends FormComponent<infer ValueType, unknown>
-      ? ValueType
-      : never;
-
-/**
- * Infer the data shape from a components object.
- * @group Form API
- */
-export type InferDataType<Definitions extends InferableComponents> = {
-  [Property in keyof Definitions]: InferComponentValue<Definitions[Property]>;
-};
-
-/**
- * Extract the data type from a Form instance.
- * @group Form API
- */
-export type FormDataType<T extends Form<any>> = T extends Form<infer DataType>
-  ? DataType
-  : never;
-
-/**
  * This is the main form class that is used to represent forms in Fab4m. It can be instantiated
  * directly, but usually it's created through the {@link createForm} helper function.
  *
@@ -454,17 +416,6 @@ export class Form<DataType = Record<string, any>> implements FormDefinition {
  * @param settings Any settings that should be set on the form.
  * @group Form API
  */
-export function createForm(): Form<Record<string, any>>;
-export function createForm<Definitions extends InferableComponents>(
-  components: Definitions,
-  settings?: Partial<FormDefinition>,
-  theme?: Theme,
-): Form<InferDataType<Definitions>>;
-export function createForm<DataType>(
-  components: Components<DataType>,
-  settings?: Partial<FormDefinition>,
-  theme?: Theme,
-): Form<DataType>;
 export function createForm<DataType = Record<string, any>>(
   components: Components<DataType> = {},
   settings: Partial<FormDefinition> = {},
