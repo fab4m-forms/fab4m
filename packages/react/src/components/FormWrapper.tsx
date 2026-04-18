@@ -40,17 +40,17 @@ export function FormWrapper(
       formProps = component.type.formProps(formProps, component);
     }
   }
-  const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitForm = (e: React.SubmitEvent<HTMLFormElement>) => {
     const next = getNextPart(props.parts, props.part, data);
     if (next === -1) {
-      props.form.triggerSubmit(e.nativeEvent, data);
+      props.form.triggerSubmit(e, data);
     } else {
       e.preventDefault();
       props.setPart(next);
     }
     return next;
   };
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     // Bail if we already completed the submission process.
     if (submitted.current) {
       return;
@@ -72,7 +72,7 @@ export function FormWrapper(
       props.form,
       props.part,
       props.data as Record<string, unknown>,
-      e.nativeEvent,
+      e,
     );
     if (errors.length === 0) {
       if (props.errors && props.errors?.length > 0) {
@@ -83,7 +83,7 @@ export function FormWrapper(
         submitted.current = true;
         formRef.current?.submit();
       } else if (next === -1) {
-        props.form.triggerAfterSubmit(e.nativeEvent, data);
+        props.form.triggerAfterSubmit(e, data);
       }
     } else {
       props.setFormErrors(errors);

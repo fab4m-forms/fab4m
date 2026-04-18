@@ -76,13 +76,33 @@ export interface FormDefinition {
   title?: string;
 }
 
+export type FormSubmitEvent = {
+  preventDefault(): void;
+  isDefaultPrevented(): boolean;
+  stopPropagation(): void;
+  isPropagationStopped(): boolean;
+  persist(): void;
+  timeStamp: number;
+  nativeEvent: SubmitEvent;
+  target: HTMLFormElement;
+  bubbles: boolean;
+  cancelable: boolean;
+  defaultPrevented: boolean;
+  eventPhase: number;
+  isTrusted: boolean;
+  type: string;
+};
+
 /**
  * @param e the form submission event.
  * @param data The data that was submitted. The data is fully validated.
  * @typeParam DataType the type of data that is submitted.
  * @group Form API
  */
-export type SubmitCallback<DataType> = (e: Event, data: DataType) => void;
+export type SubmitCallback<DataType> = (
+  e: FormSubmitEvent,
+  data: DataType,
+) => void;
 
 /**
  * @param data The changed data.
@@ -102,7 +122,7 @@ export type DataChangeCallback<DataType> = (data: Partial<DataType>) => void;
 export type PartValidatorCallback<DataType> = (
   part: number,
   data: Partial<DataType>,
-  e: Event,
+  e: FormSubmitEvent,
 ) => Promise<ValidationError[] | void>;
 
 /**
@@ -585,7 +605,7 @@ export async function validateFormPart(
   form: Form,
   part: number,
   data: Record<string, unknown>,
-  event: Event,
+  event: FormSubmitEvent,
 ) {
   const parts = formParts(form, data);
   if (part > parts.length - 1) {
