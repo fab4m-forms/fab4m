@@ -1,0 +1,44 @@
+---
+title: Component variants
+description: Dynamically change component definitions based on form state
+---
+
+import CodeExample from "../../../components/CodeExample.astro";
+import RequiredWhenPresent from "../../../components/examples/variants/RequiredWhenPresent";
+import RequiredWhenPresentSource from "../../../components/examples/variants/RequiredWhenPresent.tsx?raw";
+import VariantSelection from "../../../components/examples/variants/VariantSelection";
+import VariantSelectionSource from "../../../components/examples/variants/VariantSelection.tsx?raw";
+import VariantSchema from "../../../components/examples/variants/VariantSchema";
+import VariantSchemaSource from "../../../components/examples/variants/VariantSchema.tsx?raw";
+
+# Component Variants
+
+Component variants allow you to change all aspects of a form component based
+on the state of the rest of the form.
+
+While rules let you show and hide components based on form state,
+variants let you customize everything.
+
+Here's a simple example where we make a component required depending
+on form state:
+
+<CodeExample code={RequiredWhenPresentSource}>
+  <RequiredWhenPresent client:load />
+</CodeExample>
+
+## Variant selection
+
+A variant array is evaluated in order, and the first variant where the rule passes
+is selected. If you provide a component without a rule, it will always be selected.
+
+<CodeExample code={VariantSelectionSource}>
+  <VariantSelection client:load />
+</CodeExample>
+
+## A note about variants and JSON Schema
+
+When you use variants, provide the current data when generating JSON Schema:
+
+<CodeExample code={VariantSchemaSource}>
+  <VariantSchema client:load />
+</CodeExample>

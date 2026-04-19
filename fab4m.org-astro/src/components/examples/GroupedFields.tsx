@@ -5,8 +5,18 @@ import {
   FormProvider,
   allWidgetsRenderer,
 } from "@fab4m/react";
-
-const form = createForm({
+export type Band = {
+  name: string;
+  info: {
+    genre: string;
+    active_since?: number;
+  };
+  performances: Array<{
+    city: string;
+    audience_count: number;
+  }>;
+};
+const form = createForm<Band>({
   name: textField({ label: "Band name" }),
   info: group(
     { label: "Band info" },
@@ -39,7 +49,7 @@ const form = createForm({
 });
 
 export default function GroupedFields() {
-  const [band, changeBand] = useState(undefined);
+  const [band, changeBand] = useState<Band | null>(null);
 
   form.onSubmit((e, submittedData) => {
     e.preventDefault();
@@ -47,43 +57,7 @@ export default function GroupedFields() {
   });
 
   return (
-    <div className="example-container">
-      <style>{`
-        .example-container {
-          padding: 1rem;
-          border: 1px solid var(--sl-color-gray-3);
-          border-radius: 0.5rem;
-          margin-bottom: 1rem;
-          background: var(--sl-color-black);
-        }
-        .result-card {
-          margin-top: 1rem;
-          padding: 1rem;
-          border: 1px solid var(--sl-color-gray-3);
-          border-radius: 0.5rem;
-          background: var(--sl-color-gray-7);
-        }
-        .result-card h4 {
-          margin: 0 0 0.5rem 0;
-        }
-        .result-card h5 {
-          margin: 0.75rem 0 0.25rem 0;
-        }
-        .result-card dl {
-          margin: 0;
-        }
-        .result-card dt {
-          font-weight: 600;
-          margin-top: 0.25rem;
-        }
-        .result-card dd {
-          margin: 0;
-        }
-        .result-card ul {
-          margin: 0;
-          padding-left: 1.25rem;
-        }
-      `}</style>
+    <>
       <FormProvider renderer={allWidgetsRenderer}>
         <StatefulFormView form={form} />
       </FormProvider>
@@ -106,6 +80,6 @@ export default function GroupedFields() {
           </ul>
         </div>
       )}
-    </div>
+    </>
   );
 }

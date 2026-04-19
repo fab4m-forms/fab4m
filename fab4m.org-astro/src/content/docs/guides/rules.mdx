@@ -1,0 +1,62 @@
+---
+title: Component rules
+description: Conditionally show and hide components based on form state
+---
+
+import CodeExample from "../../../components/CodeExample.astro";
+import BasicRules from "../../../components/examples/rules/BasicRules";
+import BasicRulesSource from "../../../components/examples/rules/BasicRules.tsx?raw";
+import RuleGroups from "../../../components/examples/rules/RuleGroups";
+import RuleGroupsSource from "../../../components/examples/rules/RuleGroups.tsx?raw";
+import RuleSchema from "../../../components/examples/rules/RuleSchema";
+import RuleSchemaSource from "../../../components/examples/rules/RuleSchema.tsx?raw";
+
+# Component Rules
+
+There might be situations where you want to optionally show or hide some components
+depending on input in other components. This is what component rules are for.
+
+## Adding rules to a component
+
+When defining your components you can add a list of rules that needs to be fulfilled
+in order for the component to be visible:
+
+<CodeExample code={BasicRulesSource}>
+  <BasicRules client:load />
+</CodeExample>
+
+## Rule groups
+
+By default, rules are logically ANDed together.
+
+You can use logical groups to override this.
+
+<CodeExample code={RuleGroupsSource}>
+  <RuleGroups client:load />
+</CodeExample>
+
+Rule functions can also be nested:
+
+```jsx
+expensive: booleanField({
+  title: "Do you think public transport is too expensive?",
+  rules: [or([equals("city", "Gothenburg"), and([greaterThan("usage", 5), lessThan(10)]))],
+}),
+```
+
+## Custom rules
+
+You can use callback rules to provide any logic you want for your form.
+
+## Rules and JSON Schema
+
+Due to the potential complexity of rules in forms, we generate a unique JSON schema
+depending on the state of the data to keep the schema simple. For example:
+
+<CodeExample code={RuleSchemaSource}>
+  <RuleSchema client:load />
+</CodeExample>
+
+## Check out the rule library
+
+Fab4m comes with several rules. Check them out in the _Rule reference_.

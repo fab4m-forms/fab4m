@@ -13,7 +13,15 @@ import {
   allWidgetsRenderer,
 } from "@fab4m/react";
 
-const form = createForm({
+type ProfileForm = {
+  name: string;
+  email: string;
+  website: string;
+  picture: File;
+  agree: boolean;
+};
+
+const form = createForm<ProfileForm>({
   name: textField({
     label: "Your name",
     description: "Enter your full name",
@@ -36,8 +44,8 @@ const form = createForm({
 });
 
 export default function FormFields() {
-  const [profile, changeProfile] = useState(undefined);
-  const [image, changeImage] = useState(undefined);
+  const [profile, changeProfile] = useState<ProfileForm | undefined>(undefined);
+  const [image, changeImage] = useState<string | undefined>(undefined);
 
   form.onSubmit((e, submittedData) => {
     console.log(e);
@@ -46,14 +54,16 @@ export default function FormFields() {
     if (submittedData.picture?.type?.startsWith("image")) {
       const reader = new FileReader();
       reader.onload = function (e) {
-        changeImage(e.target.result);
+        if (e.target) {
+          changeImage(e.target.result as string);
+        }
       };
       reader.readAsDataURL(submittedData.picture);
     }
   });
 
   return (
-    <div className="example-container">
+    <>
       <FormProvider renderer={allWidgetsRenderer}>
         <StatefulFormView form={form} />
       </FormProvider>
@@ -72,6 +82,6 @@ export default function FormFields() {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }

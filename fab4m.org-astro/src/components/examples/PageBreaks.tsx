@@ -26,7 +26,13 @@ const form = createForm({
   city: textField({ label: "City" }),
   break2: pageBreak({}),
   terms: content({}, () => (
-    <div style={{ padding: "1rem", background: "var(--sl-color-gray-6)", borderRadius: "0.25rem" }}>
+    <div
+      style={{
+        padding: "1rem",
+        background: "var(--sl-color-gray-6)",
+        borderRadius: "0.25rem",
+      }}
+    >
       Very long terms and conditions...
     </div>
   )),
@@ -43,19 +49,8 @@ export default function PageBreaks() {
   });
 
   return (
-    <div className="example-container">
-      <style>{`
-        .example-container {
-          padding: 1rem;
-          border: 1px solid var(--sl-color-gray-3);
-          border-radius: 0.5rem;
-          margin-bottom: 1rem;
-          background: var(--sl-color-black);
-        }
-      `}</style>
-      <FormProvider renderer={allWidgetsRenderer}>
-        <StatefulFormView form={form} />
-      </FormProvider>
-    </div>
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} />
+    </FormProvider>
   );
 }

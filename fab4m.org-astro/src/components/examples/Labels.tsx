@@ -23,19 +23,8 @@ export default function Labels() {
   });
 
   return (
-    <div className="example-container">
-      <style>{`
-        .example-container {
-          padding: 1rem;
-          border: 1px solid var(--sl-color-gray-3);
-          border-radius: 0.5rem;
-          margin-bottom: 1rem;
-          background: var(--sl-color-black);
-        }
-      `}</style>
-      <FormProvider renderer={allWidgetsRenderer}>
-        <StatefulFormView form={form} />
-      </FormProvider>
-    </div>
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView form={form} />
+    </FormProvider>
   );
 }

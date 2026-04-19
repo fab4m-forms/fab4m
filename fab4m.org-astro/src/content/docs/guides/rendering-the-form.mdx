@@ -1,0 +1,52 @@
+---
+title: Rendering forms
+description: Learn how to render forms with FormView and StatefulFormView
+---
+
+import CodeExample from "../../../components/CodeExample.astro";
+import BasicExample from "../../../components/examples/rendering/Basic";
+import BasicSource from "../../../components/examples/rendering/Basic.tsx?raw";
+import FormStateExample from "../../../components/examples/rendering/FormState";
+import FormStateSource from "../../../components/examples/rendering/FormState.tsx?raw";
+import StatefulViewExample from "../../../components/examples/rendering/StatefulView";
+import StatefulViewSource from "../../../components/examples/rendering/StatefulView.tsx?raw";
+import ReactHookExample from "../../../components/examples/rendering/ReactHook";
+import ReactHookSource from "../../../components/examples/rendering/ReactHook.tsx?raw";
+
+# Rendering forms
+
+Forms are rendered using derivatives of the `FormView` component. This section describes how to work with that component and `StatefulFormView`.
+
+## Basic rendering
+
+The most common way to render a form is through the `<FormView>` component.
+
+<CodeExample code={BasicSource}>
+  <BasicExample client:load />
+</CodeExample>
+
+## Managing the form state
+
+The `FormView` component only renders the form with the provided data. It does not manage form state.
+
+<CodeExample code={FormStateSource}>
+  <FormStateExample client:load />
+</CodeExample>
+
+## Handling state automatically
+
+If you don't want to manage the state yourself, use `<StatefulFormView>`.
+
+<CodeExample code={StatefulViewSource}>
+  <StatefulViewExample client:load />
+</CodeExample>
+
+## Defining forms inside React components
+
+Creating a form definition is resource heavy. If you define your form inside a component, use `useForm()`.
+
+<CodeExample code={ReactHookSource}>
+  <ReactHookExample client:load />
+</CodeExample>
+
+The `useForm` hook optionally takes a dependency array. Internally it's a wrapper around [useMemo](https://reactjs.org/docs/hooks-reference.html#usememo).

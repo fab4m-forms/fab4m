@@ -5,8 +5,11 @@ import {
   FormProvider,
   allWidgetsRenderer,
 } from "@fab4m/react";
-
-const form = createForm({
+type Party = {
+  foods: string[];
+  allergies: string[];
+};
+const form = createForm<Party>({
   foods: textField({
     label: "What would you like to eat?",
     minItems: 2,
@@ -22,7 +25,7 @@ const form = createForm({
 });
 
 export default function MultipleFields() {
-  const [data, changeData] = useState(undefined);
+  const [data, changeData] = useState<Party | null>(null);
 
   form.onSubmit((e, submittedData) => {
     e.preventDefault();
@@ -30,33 +33,7 @@ export default function MultipleFields() {
   });
 
   return (
-    <div className="example-container">
-      <style>{`
-        .example-container {
-          padding: 1rem;
-          border: 1px solid var(--sl-color-gray-3);
-          border-radius: 0.5rem;
-          margin-bottom: 1rem;
-          background: var(--sl-color-black);
-        }
-        .result-card {
-          margin-top: 1rem;
-          padding: 1rem;
-          border: 1px solid var(--sl-color-gray-3);
-          border-radius: 0.5rem;
-          background: var(--sl-color-gray-7);
-        }
-        .result-card h4 {
-          margin: 0 0 0.5rem 0;
-        }
-        .result-card ul {
-          margin: 0;
-          padding-left: 1.25rem;
-        }
-        .result-card li {
-          margin: 0.25rem 0;
-        }
-      `}</style>
+    <>
       <FormProvider renderer={allWidgetsRenderer}>
         <StatefulFormView form={form} />
       </FormProvider>
@@ -80,6 +57,6 @@ export default function MultipleFields() {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }

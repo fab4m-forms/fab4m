@@ -1,0 +1,26 @@
+---
+title: Serializing forms
+description: Serialize and unserialize form definitions
+---
+
+# Serializing forms
+
+Form definitions include complex objects and are not directly JSON serializable.
+Fab4m provides `serialize` and `unserialize` helpers.
+
+## Serialize a form
+
+```jsx
+const form = createForm({
+  name: textField({ label: "Name" }),
+  age: integerField({ label: "Age" }),
+});
+
+const serializedForm = serialize(form);
+```
+
+## Unserialize a form
+
+```jsx
+const form = unserialize(serializedForm);
+```

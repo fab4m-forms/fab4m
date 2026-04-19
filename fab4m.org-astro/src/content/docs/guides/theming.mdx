@@ -1,0 +1,128 @@
+---
+title: Theming
+description: Use built-in themes or build your own custom theme
+---
+
+# Theming
+
+Fab4m provides a basic look and feel called `basic`, which is used as the default
+form theme. This works for many use cases, but you can customize themes fully.
+
+## Provided themes
+
+Fab4m provides three themes out of the box: `basic`, `tailwind`, and `bulma`.
+
+## Selecting a theme
+
+The easiest way to change the theme is to do it globally:
+
+```jsx
+import { setDefaultTheme, tailwind } from "@fab4m/fab4m";
+setDefaultTheme(tailwind);
+```
+
+You can also specify theme per form:
+
+```jsx
+import { tailwind, createForm } from "@fab4m/fab4m";
+createForm({}, { theme: tailwind });
+```
+
+## Using the basic theme
+
+To style forms with the basic theme, include the CSS:
+
+```jsx
+import "@fab4m/fab4m/css/basic/basic.css";
+```
+
+## Using the tailwind theme
+
+If you're using [Tailwind CSS](https://tailwindcss.com/), configure it to include Fab4m classes:
+
+```js
+module.exports = {
+  content: [
+    // Your entries...
+    "./node_modules/@fab4m/fab4m/dist/index.es.js",
+  ],
+};
+```
+
+## Using the bulma theme
+
+If you want to use the bulma theme, include Bulma CSS.
+See the [bulma documentation](https://bulma.io/).
+
+## Creating your own theme
+
+Fab4m provides `defaultThemeClasses` as a starting point:
+
+```jsx
+import { defaultThemeClasses } from "@fab4m/fab4m";
+
+const yourTheme = {
+  name: "your theme",
+  module: "yourmodule",
+  classes: {
+    ...defaultThemeClasses,
+  },
+};
+```
+
+You can override specific classes:
+
+```jsx
+import { defaultThemeClasses } from "@fab4m/fab4m";
+
+const yourTheme = {
+  name: "your theme",
+  module: "yourmodule",
+  classes: {
+    ...defaultThemeClasses,
+    componentWrapper: "my-component-class",
+    input: "my-input-class",
+  },
+};
+```
+
+## Making changes to an existing theme
+
+You can also derive from an existing theme:
+
+```jsx
+import { basic, setDefaultTheme } from "@fab4m/fab4m";
+
+const yourTheme = {
+  name: "your theme",
+  module: "yourmodule",
+  classes: {
+    ...basic.classes,
+    input: "my-input-class",
+  },
+};
+
+setDefaultTheme(yourTheme);
+```
+
+## Extending the tailwind theme
+
+The tailwind theme provides `createTailwindTheme()` to make customization easier:
+
+```jsx
+import { createTailwindTheme, setDefaultTheme } from "@fab4m/fab4m";
+
+const yourTheme = createTailwindTheme({
+  settings: {
+    primaryBg: "bg-green-700 hover:bg-green-900",
+    secondaryBg:
+      "bg-slate-500 hover:bg-slate-900 dark:bg-slate-800 dark:hover:bg-slate-500",
+    inputBorder: "border border-slate-300 dark:border-slate-500",
+    inputBg: "bg-white dark:bg-slate-700",
+    inputText: "text-white dark:text-slate-100",
+    inputHeight: "h-10",
+  },
+});
+
+setDefaultTheme(yourTheme);
+```

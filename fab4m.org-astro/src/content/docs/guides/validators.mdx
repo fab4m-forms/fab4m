@@ -1,0 +1,35 @@
+---
+title: Component validators
+description: Validate component input with built-in validators
+---
+
+import CodeExample from "../../../components/CodeExample.astro";
+import MinLength from "../../../components/examples/validators/MinLength";
+import MinLengthSource from "../../../components/examples/validators/MinLength.tsx?raw";
+import MultipleValidators from "../../../components/examples/validators/MultipleValidators";
+import MultipleValidatorsSource from "../../../components/examples/validators/MultipleValidators.tsx?raw";
+
+# Component Validators
+
+Each component can have a list of validators attached to it, to ensure that user input
+is valid when the form is submitted.
+
+## Adding a validator to a component
+
+Validators are added as an array on the component when it's defined:
+
+<CodeExample code={MinLengthSource}>
+  <MinLength client:load />
+</CodeExample>
+
+## Multiple validators
+
+You can combine multiple validators as an array:
+
+<CodeExample code={MultipleValidatorsSource}>
+  <MultipleValidators client:load />
+</CodeExample>
+
+## Check the validator library
+
+Fab4m comes with several validators, check them out in the _Validator reference_.

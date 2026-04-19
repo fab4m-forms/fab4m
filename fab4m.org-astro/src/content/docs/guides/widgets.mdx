@@ -1,0 +1,42 @@
+---
+title: Component widgets
+description: Select widgets and multiple widgets for components
+---
+
+import CodeExample from "../../../components/CodeExample.astro";
+import SelectWidget from "../../../components/examples/widgets/SelectWidget";
+import SelectWidgetSource from "../../../components/examples/widgets/SelectWidget.tsx?raw";
+import MultipleWidget from "../../../components/examples/widgets/MultipleWidget";
+import MultipleWidgetSource from "../../../components/examples/widgets/MultipleWidget.tsx?raw";
+
+# Component Widgets
+
+A component widget implements the UI for the component.
+
+The widget is part of the component definition, and you can select which
+widget to use for each component you add.
+
+All components have a default widget that is used if you don't specify which widget
+to use.
+
+## Specifying a widget for a component
+
+A widget can be specified when defining the component in the form. In the example
+below we use the select widget for the text field.
+
+<CodeExample code={SelectWidgetSource}>
+  <SelectWidget client:load />
+</CodeExample>
+
+## Widgets for multiple components
+
+There are widgets that define the UI for collecting multiple values as well.
+You can select which widget to use by setting the `multipleWidget` option:
+
+<CodeExample code={MultipleWidgetSource}>
+  <MultipleWidget client:load />
+</CodeExample>
+
+## Check the widget library
+
+Fab4m comes with several widgets, check them out in the _Widget reference_.

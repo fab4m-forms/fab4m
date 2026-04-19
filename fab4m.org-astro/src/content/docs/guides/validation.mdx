@@ -1,0 +1,72 @@
+---
+title: Validation with JSON Schema
+description: Generate JSON Schema from forms and validate server-side
+---
+
+import CodeExample from "../../../components/CodeExample.astro";
+import Schema from "../../../components/examples/validation/Schema";
+import SchemaSource from "../../../components/examples/validation/Schema.tsx?raw";
+
+# Validation with JSON Schema
+
+All fab4m forms can generate a JSON Schema from their definition.
+This is useful when you want to validate form data on the server side.
+
+## Generating a JSON Schema
+
+Consider the following form:
+
+```jsx
+const form = createForm({
+  username: textField({ required: true, validators: [minLength(5)] }),
+  age: integerField({ label: "Username" }),
+  city: textField({
+    required: true,
+    validators: [allowedValues(["Gothenburg", "Stockholm"])],
+  }),
+  vegetarian: booleanField({ label: "Vegetarian" }),
+  interests: textField({ label: "Interests", multiple: true, minItems: 2 }),
+  profession: group(
+    { label: "Profession" },
+    {
+      workplace: textField({ label: "Workplace" }),
+      label: textField({ label: "Label" }),
+    },
+  ),
+});
+```
+
+Fab4m provides the `generateSchema` function:
+
+```jsx
+import { generateSchema } from "@fab4m/fab4m";
+generateSchema(form);
+```
+
+This generates a schema that can be used by a JSON Schema validator:
+
+<CodeExample code={SchemaSource}>
+  <Schema client:load />
+</CodeExample>
+
+## Generating a schema for each form part
+
+If you have forms with multiple parts you might need to validate each part in isolation.
+
+```jsx
+import { generatePartSchemas } from "@fab4m/fab4m";
+const schemas = generatePartSchemas(form);
+```
+
+This gives one schema per form part.
+
+## Using your schema
+
+Fab4m doesn't include a JSON Schema validator. You can use any validator you like,
+for example [AJV](https://ajv.js.org/).
+
+## A note about rules and variants
+
+Fab4m provides advanced features in the form of [Rules](/guides/rules/)
+and [Variants](/guides/variants/). When using these features, schema generation is based
+on current data to avoid generating very complex JSON Schemas.
