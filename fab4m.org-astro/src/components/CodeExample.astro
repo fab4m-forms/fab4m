@@ -1,6 +1,6 @@
 ---
 import { Tabs, TabItem, Code } from "@astrojs/starlight/components";
-
+import CodeExampleWrapper from "./CodeExampleWrapper.tsx";
 interface Props {
   code: string;
 }
@@ -13,6 +13,8 @@ const { code, lang = "tsx" } = Astro.props;
     <Code code={code} lang="tsx" />
   </TabItem>
   <TabItem label="Example" icon="rocket">
-    <slot />
+    <CodeExampleWrapper>
+      <slot />
+    </CodeExampleWrapper>
   </TabItem>
 </Tabs>

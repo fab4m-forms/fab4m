@@ -12,11 +12,14 @@
   "dependencies": {
     "@astrojs/react": "^4.2.1",
     "@astrojs/starlight": "^0.38.2",
+    "@astrojs/starlight-tailwind": "^5.0.0",
     "@fab4m/fab4m": "*",
     "@fab4m/react": "*",
+    "@tailwindcss/vite": "^4.2.2",
     "astro": "^6.0.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "sharp": "^0.34.2"
+    "sharp": "^0.34.2",
+    "tailwindcss": "^4.2.2"
   }
 }

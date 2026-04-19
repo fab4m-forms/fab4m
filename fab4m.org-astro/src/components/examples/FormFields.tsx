@@ -48,7 +48,6 @@ export default function FormFields() {
   const [image, changeImage] = useState<string | undefined>(undefined);
 
   form.onSubmit((e, submittedData) => {
-    console.log(e);
     e.preventDefault();
     changeProfile(submittedData);
     if (submittedData.picture?.type?.startsWith("image")) {
