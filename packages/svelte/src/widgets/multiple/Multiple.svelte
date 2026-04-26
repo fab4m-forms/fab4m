@@ -95,7 +95,7 @@
   {#if !props.component.maxItems || props.component.maxItems > items.length}
     <button
       type="button"
-      onClick={addItem}
+      onclick={addItem}
       id={`${props.id}-add`}
       class={props.theme.classes.addItem}
     >
