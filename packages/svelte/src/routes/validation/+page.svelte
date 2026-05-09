@@ -1,6 +1,8 @@
 <script lang="ts">
   import { createForm, textField, integerField, minLength, maxLength, min, max, allowedValues, disallowedValues } from "@fab4m/fab4m";
   import FormView from "../../lib/components/FormView.svelte";
+  import FormProvider from "../../lib/components/FormProvider.svelte";
+  import allWidgetsRenderer from "../../lib/allwidgets.ts";
 
   const form = createForm({
     username: textField({
@@ -79,7 +81,9 @@
     </button>
   </div>
 {:else}
-  <FormView {form} {data} />
+  <FormProvider renderer={allWidgetsRenderer}>
+    <FormView {form} {data} />
+  </FormProvider>
 {/if}
 
 <style>

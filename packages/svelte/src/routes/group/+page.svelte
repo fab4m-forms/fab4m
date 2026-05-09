@@ -11,6 +11,8 @@
     selectWidget,
   } from "@fab4m/fab4m";
   import FormView from "../../lib/components/FormView.svelte";
+  import FormProvider from "../../lib/components/FormProvider.svelte";
+  import allWidgetsRenderer from "../../lib/allwidgets.ts";
 
   const form = createForm({
     // Basic group with nested fields
@@ -149,7 +151,9 @@
     </button>
   </div>
 {:else}
-  <FormView {form} {data} />
+  <FormProvider renderer={allWidgetsRenderer}>
+    <FormView {form} {data} />
+  </FormProvider>
 {/if}
 
 <style>

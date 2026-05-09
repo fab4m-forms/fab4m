@@ -1,6 +1,8 @@
 <script lang="ts">
   import { createForm, textField, booleanField, type WidgetProps } from "@fab4m/fab4m";
   import FormView from "../../lib/components/FormView.svelte";
+  import FormProvider from "../../lib/components/FormProvider.svelte";
+  import allWidgetsRenderer from "../../lib/allwidgets.ts";
   import { customWidget } from "../../lib/widgets/custom.js";
   import RatingWidget from "./RatingWidget.svelte";
   import ToggleWidget from "./ToggleWidget.svelte";
@@ -72,7 +74,9 @@
     </button>
   </div>
 {:else}
-  <FormView {form} {data} />
+  <FormProvider renderer={allWidgetsRenderer}>
+    <FormView {form} {data} />
+  </FormProvider>
 {/if}
 
 <style>

@@ -1,9 +1,8 @@
 <script lang="ts">
   import { createForm, textField, emailField, integerField, textFieldWidget } from "@fab4m/fab4m";
-  import FormView from "../../lib/components/FormView.svelte";
-	import FormProvider from "../../lib/components/FormProvider.svelte";
-	import allWidgetsRenderer from "../../lib/allwidgets.ts";
-	import StatefulFormView from "../../lib/components/StatefulFormView.svelte";
+  import FormProvider from "../../lib/components/FormProvider.svelte";
+  import allWidgetsRenderer from "../../lib/allwidgets.ts";
+  import StatefulFormView from "../../lib/components/StatefulFormView.svelte";
 
   const form = createForm({
     name: textField({

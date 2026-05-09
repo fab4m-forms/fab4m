@@ -1,6 +1,8 @@
 <script lang="ts">
   import { createForm, textField, emailField, booleanField } from "@fab4m/fab4m";
   import StatefulFormView from "../../lib/components/StatefulFormView.svelte";
+  import FormProvider from "../../lib/components/FormProvider.svelte";
+  import allWidgetsRenderer from "../../lib/allwidgets.ts";
 
   const form = createForm({
     name: textField({
@@ -68,7 +70,9 @@
     </button>
   </div>
 {:else}
-  <StatefulFormView {form} />
+  <FormProvider renderer={allWidgetsRenderer}>
+    <StatefulFormView {form} />
+  </FormProvider>
 {/if}
 
 <style>

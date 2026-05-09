@@ -1,6 +1,8 @@
 <script lang="ts">
   import { createForm, textField, emailField, integerField, pageBreak } from "@fab4m/fab4m";
-  import FormView from "../../lib/components/FormView.svelte";
+  import FormProvider from "../../lib/components/FormProvider.svelte";
+  import allWidgetsRenderer from "../../lib/allwidgets.ts";
+	import StatefulFormView from "../../lib/components/StatefulFormView.svelte";
 
   const form = createForm({
     // Page 1: Personal Info
@@ -13,7 +15,7 @@
       required: true,
     }),
     pageBreak1: pageBreak({ label: "Personal to Contact" }),
-    
+
     // Page 2: Contact Info
     email: emailField({
       label: "Email Address",
@@ -24,7 +26,7 @@
       required: false,
     }),
     pageBreak2: pageBreak({ label: "Contact to Preferences" }),
-    
+
     // Page 3: Preferences
     age: integerField({
       label: "Age",
@@ -73,19 +75,21 @@
     </button>
   </div>
 {:else}
-  <FormView {form} {data} />
+  <FormProvider renderer={allWidgetsRenderer}>
+    <StatefulFormView {form} {data} />
+  </FormProvider>
 {/if}
 
 <style>
   h1 {
     margin-bottom: 0.5rem;
   }
-  
+
   p {
     color: #666;
     margin-bottom: 1.5rem;
   }
-  
+
   .submitted {
     background: #f0fff0;
     border: 1px solid #0a0;
@@ -93,19 +97,19 @@
     padding: 1rem;
     margin-bottom: 1rem;
   }
-  
+
   .submitted h2 {
     margin-top: 0;
     color: #0a0;
   }
-  
+
   pre {
     background: #fff;
     padding: 1rem;
     border-radius: 4px;
     overflow-x: auto;
   }
-  
+
   button {
     margin-top: 1rem;
     padding: 0.5rem 1rem;
@@ -115,7 +119,7 @@
     border-radius: 4px;
     cursor: pointer;
   }
-  
+
   button:hover {
     background: #0055aa;
   }
