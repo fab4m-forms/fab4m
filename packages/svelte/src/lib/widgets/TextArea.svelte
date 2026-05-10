@@ -26,5 +26,5 @@
     {name}
     {id}
     {...attributes}
-  />
+  ></textarea>
 </FormComponentWrapper>

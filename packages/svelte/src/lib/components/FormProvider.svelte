@@ -11,7 +11,9 @@
   };
   const { renderer, children }: FormProviderProps = $props();
 
-  setFormRendererContext(renderer);
+  $effect(() => {
+    setFormRendererContext(renderer);
+  });
 </script>
 
 {@render children()}

@@ -19,12 +19,12 @@
 
   let items = $derived(value ?? []);
 
-  let defaultSettings: Required<TagsSettings> = {
+  let defaultSettings: Required<TagsSettings> = $derived({
     addItemLabel: settings?.addItemLabel ?? "Add",
     removeItemLabel: settings?.removeItemLabel ?? "Remove",
     addOnChange: settings?.addOnChange ?? false,
     itemAlreadyAddedMessage: settings?.itemAlreadyAddedMessage ?? "This item has already been added",
-  };
+  });
 
   let draft = $state<string | undefined>(undefined);
 

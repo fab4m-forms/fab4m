@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { untrack } from "svelte";
   import {
     componentErrors,
   } from "@fab4m/fab4m";
@@ -22,7 +23,7 @@
   }
 
   let items = $state<Array<unknown>>(
-    props.value ?? defaultItems(props.component),
+    untrack(() => props.value ?? defaultItems(props.component)),
   );
 
   $effect(() => {
@@ -52,9 +53,9 @@
 
 <div class={props.theme.classes.multipleItems}>
   {#if !props.settings?.multipleLabels}
-    <label class={props.theme.classes.label} id={`${props.id}-label`}>
+    <span class={props.theme.classes.label} id={`${props.id}-label`}>
       {props.component.label}
-    </label>
+    </span>
   {/if}
 
   {#each items as value, index}

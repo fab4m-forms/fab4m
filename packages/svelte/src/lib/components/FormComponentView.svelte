@@ -105,6 +105,7 @@
       );
     }
     return widgetComponents[props.component.widget.type.name];
+
   });
 </script>
 
@@ -122,7 +123,7 @@
     attributes={widgetAttributes}
     theme={props.theme}
   />
-{:else if Widget}
+{:else if Widget && Widget != "EMPTY_COMPONENT"}
   <div class={props.theme.classes.componentWrapper}>
     <Widget
       component={props.component}

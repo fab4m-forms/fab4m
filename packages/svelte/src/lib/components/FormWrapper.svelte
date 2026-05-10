@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { Snippet } from "svelte";
   import {
     formDataDefinition,
     getNextPart,
@@ -48,6 +49,7 @@
     className?: string;
     setPart: (part: number) => void;
     setFormErrors: (errors: ValidationError[]) => void;
+    children: Snippet;
   };
 
   let {
@@ -62,6 +64,7 @@
     ssr,
     action,
     extra,
+    children,
   }: Props = $props();
 
   let formRef: HTMLFormElement;
@@ -160,6 +163,6 @@
         <input type="hidden" name={key} id={key} {value} />
       {/each}
     {/if}
-    <slot />
+    {@render children()}
   </form>
 </div>

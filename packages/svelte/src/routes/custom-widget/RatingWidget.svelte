@@ -1,11 +1,12 @@
 <script lang="ts">
+  import { untrack } from "svelte";
   import type { WidgetProps } from "@fab4m/fab4m";
 
   type Props = WidgetProps<number, unknown>;
 
   let { component, value, onChange, name, id }: Props = $props();
 
-  let rating = $state(value ?? 0);
+  let rating = $state(untrack(() => value ?? 0));
   let hoverRating = $state(0);
 
   function setRating(newRating: number) {

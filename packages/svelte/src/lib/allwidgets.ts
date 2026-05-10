@@ -46,7 +46,7 @@ export const allWidgetsRenderer = createFormRenderer({
     submit: Submit,
     textarea: TextArea,
     textfield: TextField,
-    pagebreak: null as unknown as Component<WidgetProps<any, any>>,
+    pagebreak: "EMPTY_COMPONENT"
   },
   multipleWidgetComponents: {
     custom: CustomMultipleWidget as Component<MultipleWidgetProps<any, any>>,

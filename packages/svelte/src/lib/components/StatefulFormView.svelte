@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { untrack } from "svelte";
   import type { FormViewProps } from "@fab4m/fab4m";
   import FormView from "./FormView.svelte";
 
@@ -13,7 +14,7 @@
   let { form, data: initialData, ...restProps }: Props = $props();
 
   // Internal state for form data
-  let data = $state(initialData ?? {});
+  let data = $state(untrack(() => initialData ?? {}));
 
   // We keep track of the current indices where our listeners are.
   let listenerIndices = [-1, -1];

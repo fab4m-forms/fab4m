@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { Snippet } from "svelte";
   import type { WidgetProps } from "@fab4m/fab4m";
   import FormElement from "./FormElement.svelte";
 
@@ -9,6 +10,7 @@
     component: WidgetProps<any, any>["component"];
     theme: WidgetProps<any, any>["theme"];
     name: string;
+    children: Snippet;
   };
 
   let {
@@ -20,6 +22,7 @@
     id,
     label,
     prefix,
+    children,
   }: Props = $props();
 
   const classes = $derived(theme.classes);
@@ -47,5 +50,5 @@
       <div class={classes.inputPrefix}>{prefix}</div>
     </div>
   {/if}
-  <slot />
+  {@render children()}
 </FormElement>

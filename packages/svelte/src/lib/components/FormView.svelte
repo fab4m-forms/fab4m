@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { untrack } from "svelte";
   import {
     Form,
     formParts,
@@ -41,16 +42,20 @@
   // Initialize form errors state
   // If errorsChanged is provided (controlled mode), use errors from props
   // Otherwise, use internal state
-  let internalFormErrors = $state(errors ?? []);
+  let internalFormErrors = $state(untrack(() => errors ?? []));
   let formErrors = $derived(
     errorsChanged ? (errors ?? []) : internalFormErrors,
   );
-  const setFormErrors = errorsChanged ?? ((e: ValidationError[]) => {
-    internalFormErrors = e;
-  });
+  function setFormErrors(e: ValidationError[]) {
+    if (errorsChanged) {
+      errorsChanged(e);
+    } else {
+      internalFormErrors = e;
+    }
+  }
 
   // Initialize part state
-  let part = $state(typeof propsPart !== "undefined" ? propsPart : 0);
+  let part = $state(untrack(() => typeof propsPart !== "undefined" ? propsPart : 0));
 
   const setPart = (newPart: number) => {
     part = newPart;
@@ -70,8 +75,10 @@
   );
 
   // Set context for child components
-  setFormDataContext(formData);
-  setFormErrorsContext(formErrors);
+  $effect(() => {
+    setFormDataContext(formData);
+    setFormErrorsContext(formErrors);
+  });
 </script>
 
 <FormWrapper

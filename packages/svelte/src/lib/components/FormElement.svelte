@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { Snippet } from "svelte";
   /**
    * @internal
    */
@@ -11,6 +12,7 @@
     childrenClass = "control",
     labelClass = "form-label",
     requiredClass = "required-indicator",
+    children,
   }: {
     id: string;
     label?: string;
@@ -20,6 +22,7 @@
     childrenClass?: string;
     labelClass?: string;
     requiredClass?: string;
+    children: Snippet;
   } = $props();
 </script>
 
@@ -34,5 +37,5 @@
   {/if}
 </div>
 <div class={childrenClass}>
-  <slot />
+  {@render children()}
 </div>

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { untrack } from "svelte";
   import type { NumberWidgetSettings, WidgetProps } from "@fab4m/fab4m";
   import FormComponentWrapper from "../components/FormComponentWrapper.svelte";
 
@@ -14,7 +15,7 @@
       : parseInt(val, 10);
   };
 
-  let draft = $state<string | undefined>(value?.toString());
+  let draft = $state<string | undefined>(untrack(() => value?.toString()));
 
   $effect(() => {
     draft = value?.toString();
