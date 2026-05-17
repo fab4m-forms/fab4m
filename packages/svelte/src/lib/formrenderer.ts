@@ -15,7 +15,7 @@ export type FormRenderer = {
 };
 
 export const [getFormRendererContext, setFormRendererContext] =
-  createContext<FormRenderer>();
+  createContext<() => FormRenderer>();
 
 export function createFormRenderer(args: FormRenderer): FormRenderer {
   return args;
