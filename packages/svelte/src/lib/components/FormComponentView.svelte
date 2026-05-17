@@ -72,8 +72,7 @@
     ...attributes(props.component),
   });
 
-  const { widgetComponents, multipleWidgetComponents } =
-    getFormRendererContext();
+  const getRenderer = getFormRendererContext();
 
   const id = $derived(props.id ?? props.name);
 
@@ -84,6 +83,7 @@
   const MultipleWidget = $derived.by(() => {
     if (!isMultiple) return null;
     if (props.component.multipleWidget) {
+      const { multipleWidgetComponents } = getRenderer();
       if (
         !multipleWidgetComponents ||
         !multipleWidgetComponents[props.component.multipleWidget.type.name]
@@ -99,6 +99,7 @@
 
   const Widget = $derived.by(() => {
     if (isMultiple) return null;
+    const { widgetComponents } = getRenderer();
     if (!widgetComponents[props.component.widget.type.name]) {
       throw new Error(
         `No component for widget ${props.component.widget.type.name}`,

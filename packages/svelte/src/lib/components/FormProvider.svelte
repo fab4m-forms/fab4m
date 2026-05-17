@@ -1,8 +1,6 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
-  import {
-     setFormRendererContext,
-  } from "../formrenderer.js";
+  import { setFormRendererContext } from "../formrenderer.js";
   import type { FormRenderer } from "../formrenderer.js";
 
   export type FormProviderProps = {
@@ -11,9 +9,7 @@
   };
   const { renderer, children }: FormProviderProps = $props();
 
-  $effect(() => {
-    setFormRendererContext(renderer);
-  });
+  setFormRendererContext(() => renderer);
 </script>
 
 {@render children()}
