@@ -2,7 +2,6 @@
   import {
     createForm,
     textField,
-    emailField,
     integerField,
     booleanField,
     group,
@@ -29,7 +28,7 @@
         required: true,
       }),
     }),
-    
+
     // Group with fieldset widget for visual grouping
     address: group({
       label: "Address",
@@ -61,7 +60,7 @@
         ]),
       }),
     }),
-    
+
     // Horizontal group for inline fields
     emergencyContact: group({
       label: "Emergency Contact",
@@ -76,7 +75,7 @@
         required: false,
       }),
     }),
-    
+
     // Nested group - group inside another group
     employment: group({
       label: "Employment Details",
@@ -103,7 +102,7 @@
         }),
       }),
     }),
-    
+
     // Boolean field for preferences
     subscribeNewsletter: booleanField({
       label: "Subscribe to newsletter",
@@ -160,12 +159,12 @@
   h1 {
     margin-bottom: 0.5rem;
   }
-  
+
   p {
     color: #666;
     margin-bottom: 1rem;
   }
-  
+
   .info-box {
     background: #f0f8ff;
     border: 1px solid #0066cc;
@@ -173,22 +172,22 @@
     padding: 1rem;
     margin-bottom: 1.5rem;
   }
-  
+
   .info-box h3 {
     margin-top: 0;
     margin-bottom: 0.5rem;
     color: #0066cc;
   }
-  
+
   .info-box ul {
     margin: 0;
     padding-left: 1.5rem;
   }
-  
+
   .info-box li {
     margin-bottom: 0.25rem;
   }
-  
+
   .submitted {
     background: #f0fff0;
     border: 1px solid #0a0;
@@ -196,19 +195,19 @@
     padding: 1rem;
     margin-bottom: 1rem;
   }
-  
+
   .submitted h2 {
     margin-top: 0;
     color: #0a0;
   }
-  
+
   pre {
     background: #fff;
     padding: 1rem;
     border-radius: 4px;
     overflow-x: auto;
   }
-  
+
   button {
     margin-top: 1rem;
     padding: 0.5rem 1rem;
@@ -218,7 +217,7 @@
     border-radius: 4px;
     cursor: pointer;
   }
-  
+
   button:hover {
     background: #0055aa;
   }
