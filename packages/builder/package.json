@@ -23,7 +23,6 @@
     "prettier-fix": "prettier -w ."
   },
   "dependencies": {
-    "@fab4m/react": "^1.0.0-beta22"
   },
   "author": "Fabian Sörqvist",
   "license": "GPL-3.0-or-later"

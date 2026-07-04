@@ -35,7 +35,6 @@
     "prettier-fix": "prettier -w ."
   },
   "dependencies": {
-    "@fab4m/react": "^1.0.0-beta22"
   },
   "bugs": {
     "url": "https://github.com/fab4m-forms/fab4m/issues"

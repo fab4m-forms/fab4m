@@ -33,7 +33,6 @@
     "prettier-fix": "prettier -w ."
   },
   "peerDependencies": {
-    "@fab4m/react": "^1.0.0-beta22",
     "react-datepicker": "^7.6"
   },
   "gitHead": "d07ff4934399152b5c403dd81d77534d985997e4"

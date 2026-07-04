@@ -18,6 +18,9 @@
   "publishConfig": {
     "access": "public"
   },
+    "dependencies": {
+        "@fab4m/fab4m": "workspace:*"
+    },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fab4m-forms/fab4m.git"

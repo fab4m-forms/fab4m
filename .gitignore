@@ -5,3 +5,8 @@ node_modules
 lerna-debug.log
 .aider*
 .pi-home/
+# pnpm
+.pnpm-store/
+pnpm-debug.log*
+.pi
+.playwright-browsers

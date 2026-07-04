@@ -41,7 +41,6 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "@fab4m/react": "^1.0.0-beta22",
     "downshift": "^9.0"
   },
   "bugs": {
