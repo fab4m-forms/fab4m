@@ -1,18 +1,18 @@
 export * from "./allwidgets.js";
 
-export * from "./components/FormComponentView.svelte";
-export * from "./components/FormComponentWrapper.svelte";
-export * from "./components/FormElement.svelte";
-export * from "./components/FormPager.svelte";
-export * from "./components/FormPart.svelte";
-export * from "./components/FormProvider.svelte";
-export * from "./components/FormView.svelte";
-export * from "./components/FormWrapper.svelte";
-export * from "./components/ElementWrapper.svelte";
-export * from "./components/Input.svelte";
-export * from "./components/StatefulFormView.svelte";
-export * from "./components/ValidationErrors.svelte";
-export * from "./components/ValidatorInfo.svelte";
+export { default as FormComponentView } from "./components/FormComponentView.svelte";
+export { default as FormComponentWrapper } from "./components/FormComponentWrapper.svelte";
+export { default as FormElement } from "./components/FormElement.svelte";
+export { default as FormPager } from "./components/FormPager.svelte";
+export { default as FormPart } from "./components/FormPart.svelte";
+export { default as FormProvider } from "./components/FormProvider.svelte";
+export { default as FormView } from "./components/FormView.svelte";
+export { default as FormWrapper } from "./components/FormWrapper.svelte";
+export { default as ElementWrapper } from "./components/ElementWrapper.svelte";
+export { default as Input } from "./components/Input.svelte";
+export { default as StatefulFormView } from "./components/StatefulFormView.svelte";
+export { default as ValidationErrors } from "./components/ValidationErrors.svelte";
+export { default as ValidatorInfo } from "./components/ValidatorInfo.svelte";
 
 export * from "./formrenderer.js";
 
@@ -21,25 +21,25 @@ export * from "./context.js";
 
 export * from "./widgetComponents.js";
 
-export * from "./widgets/Checkbox.svelte";
-export * from "./widgets/Details.svelte";
-export * from "./widgets/EmailField.svelte";
-export * from "./widgets/Fieldset.svelte";
-export * from "./widgets/Group.svelte";
-export * from "./widgets/GroupChildren.svelte";
-export * from "./widgets/HiddenField.svelte";
-export * from "./widgets/HorizontalGroup.svelte";
-export * from "./widgets/NumberField.svelte";
-export * from "./widgets/Radios.svelte";
-export * from "./widgets/Select.svelte";
-export * from "./widgets/Submit.svelte";
-export * from "./widgets/TextArea.svelte";
-export * from "./widgets/TextField.svelte";
-export * from "./widgets/URLField.svelte";
-export * from "./widgets/UploadField.svelte";
+export { default as Checkbox } from "./widgets/Checkbox.svelte";
+export { default as Details } from "./widgets/Details.svelte";
+export { default as EmailField } from "./widgets/EmailField.svelte";
+export { default as Fieldset } from "./widgets/Fieldset.svelte";
+export { default as Group } from "./widgets/Group.svelte";
+export { default as GroupChildren } from "./widgets/GroupChildren.svelte";
+export { default as HiddenField } from "./widgets/HiddenField.svelte";
+export { default as HorizontalGroup } from "./widgets/HorizontalGroup.svelte";
+export { default as NumberField } from "./widgets/NumberField.svelte";
+export { default as Radios } from "./widgets/Radios.svelte";
+export { default as Select } from "./widgets/Select.svelte";
+export { default as Submit } from "./widgets/Submit.svelte";
+export { default as TextArea } from "./widgets/TextArea.svelte";
+export { default as TextField } from "./widgets/TextField.svelte";
+export { default as URLField } from "./widgets/URLField.svelte";
+export { default as UploadField } from "./widgets/UploadField.svelte";
 export * from "./widgets/custom.js";
-export * from "./widgets/multiple/Multiple.svelte";
-export * from "./widgets/multiple/Table.svelte";
-export * from "./widgets/multiple/Tags.svelte";
+export { default as Multiple } from "./widgets/multiple/Multiple.svelte";
+export { default as Table } from "./widgets/multiple/Table.svelte";
+export { default as Tags } from "./widgets/multiple/Tags.svelte";
 
 export * from "./types/content/index.js";
