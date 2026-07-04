@@ -23,6 +23,10 @@
     "prettier-fix": "prettier -w ."
   },
   "dependencies": {
+    "@fab4m/autocomplete": "workspace:*",
+    "@fab4m/date": "workspace:*",
+    "@fab4m/fab4m": "workspace:*",
+    "@fab4m/react": "workspace:*"
   },
   "author": "Fabian Sörqvist",
   "license": "GPL-3.0-or-later"

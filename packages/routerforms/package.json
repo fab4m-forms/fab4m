@@ -19,6 +19,10 @@
   "files": [
     "dist"
   ],
+  "dependencies": {
+    "@fab4m/fab4m": "workspace:*",
+    "@fab4m/react": "workspace:*"
+  },
   "scripts": {
     "test": "vitest",
     "test:unit": "vitest --run",

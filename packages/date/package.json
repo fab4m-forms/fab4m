@@ -32,6 +32,10 @@
     "lint-fix": "eslint --fix",
     "prettier-fix": "prettier -w ."
   },
+  "dependencies": {
+    "@fab4m/fab4m": "workspace:*",
+    "@fab4m/react": "workspace:*"
+  },
   "peerDependencies": {
     "react-datepicker": "^7.6"
   },

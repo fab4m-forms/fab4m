@@ -35,6 +35,8 @@
     "prettier-fix": "prettier -w ."
   },
   "dependencies": {
+    "@fab4m/fab4m": "workspace:*",
+    "@fab4m/react": "workspace:*"
   },
   "bugs": {
     "url": "https://github.com/fab4m-forms/fab4m/issues"

@@ -20,6 +20,10 @@
     "dist",
     "src/style.css"
   ],
+  "dependencies": {
+    "@fab4m/fab4m": "workspace:*",
+    "@fab4m/react": "workspace:*"
+  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
