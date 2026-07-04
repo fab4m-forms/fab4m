@@ -3,6 +3,8 @@
   import FormProvider from "../components/FormProvider.svelte";
   import { allWidgetsRenderer } from "../allwidgets.js";
 
+  HTMLFormElement.prototype.submit = () => {};
+
   let {
     component: Component,
     componentProps = {},

@@ -8,7 +8,7 @@ import { renderWithProvider } from "../test-utils/renderWithProvider";
 describe("Submit button", () => {
   const field = submit(
     {
-      name: "content",
+      name: "submit",
     },
     { title: "Submit button" },
   );
@@ -18,8 +18,9 @@ describe("Submit button", () => {
   });
 
   it("renders a submit button with the configured title", async () => {
+
     renderWithProvider(FormComponentView, {
-      name: "content",
+      name: "submit",
       theme: basic,
       onChange: () => {},
       component: field,

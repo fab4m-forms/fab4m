@@ -75,6 +75,8 @@
   );
 
   // Set context for child components
+  setFormDataContext(untrack(() => formData));
+  setFormErrorsContext(untrack(() => formErrors));
   $effect(() => {
     setFormDataContext(formData);
     setFormErrorsContext(formErrors);
