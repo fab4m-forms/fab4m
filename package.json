@@ -10,6 +10,7 @@
     "packages/builder",
     "packages/autocomplete",
     "packages/react",
+    "packages/svelte",
     "fab4m.org-astro"
   ],
   "devDependencies": {
