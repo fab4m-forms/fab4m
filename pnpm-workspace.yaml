@@ -1,0 +1,8 @@
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  msw: true
+  sharp: true
+packages:
+  - "packages/*"
+  - "fab4m.org-astro"
