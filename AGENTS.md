@@ -24,11 +24,12 @@ Note: `packages/smartflow` exists but is currently not listed in root workspaces
 
 ## Working rules for agents
 
-1. Keep changes focused and minimal.
-2. Prefer editing source files in `src/` and tests in `test/`.
-3. Do **not** hand-edit generated output (`dist/`, `build/`, `.docusaurus/`, `node_modules/`).
-4. Preserve public API compatibility unless a breaking change is explicitly requested.
-5. When behavior changes, add or update tests.
+1. Use pnpm
+2. Keep changes focused and minimal.
+3. Prefer editing source files in `src/` and tests in `test/`.
+4. Do **not** hand-edit generated output (`dist/`, `build/`, `.docusaurus/`, `node_modules/`).
+5. Preserve public API compatibility unless a breaking change is explicitly requested.
+6. When behavior changes, add or update tests.
 
 ## Validation commands
 
@@ -36,16 +37,16 @@ Run from repo root after making changes, for each touched package:
 
 ```bash
 cd packages/<package>
-npx prettier --check .
-npx eslint
-npm run test:unit
-npm run build
+pnpm exec prettier --check .
+pnpm exec eslint
+pnpm run test:unit
+pnpm run build
 ```
 
 If TypeScript types/interfaces changed, also run:
 
 ```bash
-npm run typecheck
+pnpm run typecheck
 ```
 
 ## Dependency/order notes
@@ -55,7 +56,7 @@ npm run typecheck
 
 ```bash
 cd packages/routerforms
-npx playwright install
+pnpm exec playwright install
 ```
 
 - `packages/builder` typically depends on built outputs of:
@@ -76,6 +77,6 @@ npx playwright install
 
 ```bash
 cd fab4m.org
-npm run start
-npm run build
+pnpm run start
+pnpm run build
 ```
