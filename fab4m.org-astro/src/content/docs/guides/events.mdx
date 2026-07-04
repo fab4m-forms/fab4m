@@ -4,14 +4,22 @@ description: Use event listeners for data changes, submits, and part validation
 ---
 
 import CodeExample from "../../../components/CodeExample.astro";
-import { OnChangeExample } from "../../../components/examples/events/FormChange";
+import { OnChangeExample } from "../../../components/examples/events/FormChange.tsx";
 import OnChangeExampleSource from "../../../components/examples/events/FormChange.tsx?raw";
-import { OnComponentChangeExample } from "../../../components/examples/events/ComponentChange";
+import { OnComponentChangeExample } from "../../../components/examples/events/ComponentChange.tsx";
 import OnComponentChangeSource from "../../../components/examples/events/ComponentChange.tsx?raw";
-import { OnSubmitExample } from "../../../components/examples/events/SubmitEvent";
+import { OnSubmitExample } from "../../../components/examples/events/SubmitEvent.tsx";
 import SubmitExampleSource from "../../../components/examples/events/SubmitEvent.tsx?raw";
-import { OnPartValidateForm } from "../../../components/examples/events/PartValidator";
+import { OnPartValidateForm } from "../../../components/examples/events/PartValidator.tsx";
 import OnPartValidateSource from "../../../components/examples/events/PartValidator.tsx?raw";
+import OnChangeExampleSvelte from "../../../components/examples/events/FormChange.svelte";
+import OnChangeExampleSvelteSource from "../../../components/examples/events/FormChange.svelte?raw";
+import OnComponentChangeExampleSvelte from "../../../components/examples/events/ComponentChange.svelte";
+import OnComponentChangeSvelteSource from "../../../components/examples/events/ComponentChange.svelte?raw";
+import OnSubmitExampleSvelte from "../../../components/examples/events/SubmitEvent.svelte";
+import SubmitExampleSvelteSource from "../../../components/examples/events/SubmitEvent.svelte?raw";
+import OnPartValidateFormSvelte from "../../../components/examples/events/PartValidator.svelte";
+import OnPartValidateSvelteSource from "../../../components/examples/events/PartValidator.svelte?raw";
 
 # Form events
 
@@ -24,8 +32,9 @@ when data is submitted, and when data is being validated.
 Each time any component in the form changes the `onDataChange` event is fired.
 All form data is passed as an object.
 
-<CodeExample code={OnChangeExampleSource}>
-  <OnChangeExample client:load />
+<CodeExample reactCode={OnChangeExampleSource} svelteCode={OnChangeExampleSvelteSource}>
+  <OnChangeExample slot="react" client:load />
+  <OnChangeExampleSvelte slot="svelte" client:load />
 </CodeExample>
 
 ## Listen for changes in one specific component
@@ -34,8 +43,9 @@ You might not want to handle the whole state, and instead only
 listen for changes in certain components. This can be done
 using the `onComponentChange` event.
 
-<CodeExample code={OnComponentChangeSource}>
-  <OnComponentChangeExample client:load />
+<CodeExample reactCode={OnComponentChangeSource} svelteCode={OnComponentChangeSvelteSource}>
+  <OnComponentChangeExample slot="react" client:load />
+  <OnComponentChangeExampleSvelte slot="svelte" client:load />
 </CodeExample>
 
 ## Handling form submits
@@ -44,8 +54,9 @@ Use the `onSubmit` function to handle form submissions. This function is called
 whenever the form is submitted and it's only called if the form data is valid,
 so you can rely on your data being complete at this point.
 
-<CodeExample code={SubmitExampleSource}>
-  <OnSubmitExample client:load />
+<CodeExample reactCode={SubmitExampleSource} svelteCode={SubmitExampleSvelteSource}>
+  <OnSubmitExample slot="react" client:load />
+  <OnSubmitExampleSvelte slot="svelte" client:load />
 </CodeExample>
 
 ## Using events for custom validation
@@ -80,8 +91,9 @@ The example below performs validation on each form part:
 - On part 1, we ensure the provided age is over 18 and the name doesn't contain "sam"
 - On part 2, we encourage the user to switch profession if the name contains "Fabian" and the bio contains "Computer science"
 
-<CodeExample code={OnPartValidateSource}>
-  <OnPartValidateForm client:load />
+<CodeExample reactCode={OnPartValidateSource} svelteCode={OnPartValidateSvelteSource}>
+  <OnPartValidateForm slot="react" client:load />
+  <OnPartValidateFormSvelte slot="svelte" client:load />
 </CodeExample>
 
 ## Adding multiple form listeners to the same event

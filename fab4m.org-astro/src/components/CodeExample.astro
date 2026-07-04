@@ -1,20 +1,41 @@
 ---
 import { Tabs, TabItem, Code } from "@astrojs/starlight/components";
 import CodeExampleWrapper from "./CodeExampleWrapper.tsx";
+import SvelteCodeExampleWrapper from "./SvelteCodeExampleWrapper.svelte";
 interface Props {
-  code: string;
+  reactCode: string;
+  svelteCode?: string;
 }
 
-const { code, lang = "tsx" } = Astro.props;
+const { reactCode, svelteCode } = Astro.props;
+const hasSvelte = svelteCode !== undefined;
 ---
 
 <Tabs>
-  <TabItem label="Code" icon="seti:typescript">
-    <Code code={code} lang="tsx" />
+  <TabItem label="React" icon="seti:typescript">
+    <Tabs>
+      <TabItem label="Code" icon="seti:typescript">
+        <Code code={reactCode} lang="tsx" />
+      </TabItem>
+      <TabItem label="Example" icon="rocket">
+        <CodeExampleWrapper>
+          <slot name="react" />
+        </CodeExampleWrapper>
+      </TabItem>
+    </Tabs>
   </TabItem>
-  <TabItem label="Example" icon="rocket">
-    <CodeExampleWrapper>
-      <slot />
-    </CodeExampleWrapper>
-  </TabItem>
+  {hasSvelte && (
+    <TabItem label="Svelte" icon="seti:svelte">
+      <Tabs>
+        <TabItem label="Code" icon="seti:typescript">
+          <Code code={svelteCode} lang="svelte" />
+        </TabItem>
+        <TabItem label="Example" icon="rocket">
+          <SvelteCodeExampleWrapper>
+            <slot name="svelte" />
+          </SvelteCodeExampleWrapper>
+        </TabItem>
+      </Tabs>
+    </TabItem>
+  )}
 </Tabs>

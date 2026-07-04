@@ -4,12 +4,18 @@ description: Dynamically change component definitions based on form state
 ---
 
 import CodeExample from "../../../components/CodeExample.astro";
-import RequiredWhenPresent from "../../../components/examples/variants/RequiredWhenPresent";
+import RequiredWhenPresent from "../../../components/examples/variants/RequiredWhenPresent.tsx";
 import RequiredWhenPresentSource from "../../../components/examples/variants/RequiredWhenPresent.tsx?raw";
-import VariantSelection from "../../../components/examples/variants/VariantSelection";
+import VariantSelection from "../../../components/examples/variants/VariantSelection.tsx";
 import VariantSelectionSource from "../../../components/examples/variants/VariantSelection.tsx?raw";
-import VariantSchema from "../../../components/examples/variants/VariantSchema";
+import VariantSchema from "../../../components/examples/variants/VariantSchema.tsx";
 import VariantSchemaSource from "../../../components/examples/variants/VariantSchema.tsx?raw";
+import RequiredWhenPresentSvelte from "../../../components/examples/variants/RequiredWhenPresent.svelte";
+import RequiredWhenPresentSvelteSource from "../../../components/examples/variants/RequiredWhenPresent.svelte?raw";
+import VariantSelectionSvelte from "../../../components/examples/variants/VariantSelection.svelte";
+import VariantSelectionSvelteSource from "../../../components/examples/variants/VariantSelection.svelte?raw";
+import VariantSchemaSvelte from "../../../components/examples/variants/VariantSchema.svelte";
+import VariantSchemaSvelteSource from "../../../components/examples/variants/VariantSchema.svelte?raw";
 
 # Component Variants
 
@@ -22,8 +28,9 @@ variants let you customize everything.
 Here's a simple example where we make a component required depending
 on form state:
 
-<CodeExample code={RequiredWhenPresentSource}>
-  <RequiredWhenPresent client:load />
+<CodeExample reactCode={RequiredWhenPresentSource} svelteCode={RequiredWhenPresentSvelteSource}>
+  <RequiredWhenPresent slot="react" client:load />
+  <RequiredWhenPresentSvelte slot="svelte" client:load />
 </CodeExample>
 
 ## Variant selection
@@ -31,14 +38,16 @@ on form state:
 A variant array is evaluated in order, and the first variant where the rule passes
 is selected. If you provide a component without a rule, it will always be selected.
 
-<CodeExample code={VariantSelectionSource}>
-  <VariantSelection client:load />
+<CodeExample reactCode={VariantSelectionSource} svelteCode={VariantSelectionSvelteSource}>
+  <VariantSelection slot="react" client:load />
+  <VariantSelectionSvelte slot="svelte" client:load />
 </CodeExample>
 
 ## A note about variants and JSON Schema
 
 When you use variants, provide the current data when generating JSON Schema:
 
-<CodeExample code={VariantSchemaSource}>
-  <VariantSchema client:load />
+<CodeExample reactCode={VariantSchemaSource} svelteCode={VariantSchemaSvelteSource}>
+  <VariantSchema slot="react" client:load />
+  <VariantSchemaSvelte slot="svelte" client:load />
 </CodeExample>

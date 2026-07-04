@@ -4,10 +4,14 @@ description: Select widgets and multiple widgets for components
 ---
 
 import CodeExample from "../../../components/CodeExample.astro";
-import SelectWidget from "../../../components/examples/widgets/SelectWidget";
+import SelectWidget from "../../../components/examples/widgets/SelectWidget.tsx";
 import SelectWidgetSource from "../../../components/examples/widgets/SelectWidget.tsx?raw";
-import MultipleWidget from "../../../components/examples/widgets/MultipleWidget";
+import MultipleWidget from "../../../components/examples/widgets/MultipleWidget.tsx";
 import MultipleWidgetSource from "../../../components/examples/widgets/MultipleWidget.tsx?raw";
+import SelectWidgetSvelte from "../../../components/examples/widgets/SelectWidget.svelte";
+import SelectWidgetSvelteSource from "../../../components/examples/widgets/SelectWidget.svelte?raw";
+import MultipleWidgetSvelte from "../../../components/examples/widgets/MultipleWidget.svelte";
+import MultipleWidgetSvelteSource from "../../../components/examples/widgets/MultipleWidget.svelte?raw";
 
 # Component Widgets
 
@@ -24,8 +28,9 @@ to use.
 A widget can be specified when defining the component in the form. In the example
 below we use the select widget for the text field.
 
-<CodeExample code={SelectWidgetSource}>
-  <SelectWidget client:load />
+<CodeExample reactCode={SelectWidgetSource} svelteCode={SelectWidgetSvelteSource}>
+  <SelectWidget slot="react" client:load />
+  <SelectWidgetSvelte slot="svelte" client:load />
 </CodeExample>
 
 ## Widgets for multiple components
@@ -33,8 +38,9 @@ below we use the select widget for the text field.
 There are widgets that define the UI for collecting multiple values as well.
 You can select which widget to use by setting the `multipleWidget` option:
 
-<CodeExample code={MultipleWidgetSource}>
-  <MultipleWidget client:load />
+<CodeExample reactCode={MultipleWidgetSource} svelteCode={MultipleWidgetSvelteSource}>
+  <MultipleWidget slot="react" client:load />
+  <MultipleWidgetSvelte slot="svelte" client:load />
 </CodeExample>
 
 ## Check the widget library
