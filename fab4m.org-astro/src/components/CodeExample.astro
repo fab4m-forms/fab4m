@@ -13,29 +13,16 @@ const hasSvelte = svelteCode !== undefined;
 
 <Tabs>
   <TabItem label="React" icon="seti:typescript">
-    <Tabs>
-      <TabItem label="Code" icon="seti:typescript">
         <Code code={reactCode} lang="tsx" />
-      </TabItem>
+  </TabItem>
+  {hasSvelte && (
+    <TabItem label="Svelte" icon="seti:svelte">
+    <Code code={svelteCode} lang="svelte" />
+    </TabItem>
+  )}
       <TabItem label="Example" icon="rocket">
         <CodeExampleWrapper>
           <slot name="react" />
         </CodeExampleWrapper>
       </TabItem>
-    </Tabs>
-  </TabItem>
-  {hasSvelte && (
-    <TabItem label="Svelte" icon="seti:svelte">
-      <Tabs>
-        <TabItem label="Code" icon="seti:typescript">
-          <Code code={svelteCode} lang="svelte" />
-        </TabItem>
-        <TabItem label="Example" icon="rocket">
-          <SvelteCodeExampleWrapper>
-            <slot name="svelte" />
-          </SvelteCodeExampleWrapper>
-        </TabItem>
-      </Tabs>
-    </TabItem>
-  )}
 </Tabs>
