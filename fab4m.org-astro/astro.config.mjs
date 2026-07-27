@@ -17,7 +17,7 @@ export default defineConfig({
             customCss: ['./src/styles/global.css'],
             sidebar: [
                 {
-                    label: 'Guides',
+                    label: 'Concept Guide',
                     autogenerate: { directory: 'guides' },
                 },
                 {
