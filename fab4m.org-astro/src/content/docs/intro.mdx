@@ -1,0 +1,77 @@
+---
+title: Introduction
+description: Get started installing Fab4m and creating your first form.
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+Fab4m works with both React and Svelte. Pick your framework and install the core
+package alongside the matching renderer.
+
+## Install fab4m
+
+<Tabs>
+  <TabItem label="React" icon="seti:typescript">
+    ```bash
+    npm install --save @fab4m/fab4m @fab4m/react
+    ```
+  </TabItem>
+  <TabItem label="Svelte" icon="seti:svelte">
+    ```bash
+    npm install --save @fab4m/fab4m @fab4m/svelte
+    ```
+  </TabItem>
+</Tabs>
+
+## Create your first form
+
+The form definition is the same regardless of framework; only the rendering differs.
+
+<Tabs>
+  <TabItem label="React" icon="seti:typescript">
+    ```javascript
+    import { createForm, textField } from "@fab4m/fab4m";
+    import { StatefulFormView, FormProvider, allWidgetsRenderer } from "@fab4m/react";
+    import ReactDOM from "react-dom/client";
+
+    const form = createForm({
+      name: textField({
+        title: "Your name",
+      }),
+    });
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(
+      <FormProvider renderer={allWidgetsRenderer}>
+        <StatefulFormView form={form} />
+      </FormProvider>,
+    );
+    ```
+  </TabItem>
+  <TabItem label="Svelte" icon="seti:svelte">
+    ```svelte
+    <script lang="ts">
+      import { createForm, textField } from "@fab4m/fab4m";
+      import { StatefulFormView, FormProvider, allWidgetsRenderer } from "@fab4m/svelte";
+
+      const form = createForm({
+        name: textField({
+          title: "Your name",
+        }),
+      });
+    </script>
+
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView {form} />
+    </FormProvider>
+    ```
+  </TabItem>
+</Tabs>
+
+You now created your first form!
+
+We first created the form definition, then used the `StatefulFormView` component
+to render it. `StatefulFormView` handles the form's internal state management, so
+you don't have to worry about that yourself.
+
+Head over to our [step by step guide](/guides/define-a-form) to learn about more complex use cases.
