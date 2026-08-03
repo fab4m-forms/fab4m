@@ -2,6 +2,9 @@ import type { MultipleWidgetProps, WidgetProps } from "@fab4m/fab4m";
 import { type Component } from "svelte";
 import { createFormRenderer } from "./formrenderer.js";
 import Checkbox from "./widgets/Checkbox.svelte";
+import DateField from "./widgets/DateField.svelte";
+import DateTimeField from "./widgets/DateTimeField.svelte";
+import DateRangeField from "./widgets/DateRangeField.svelte";
 import Details from "./widgets/Details.svelte";
 import EmailField from "./widgets/EmailField.svelte";
 import Fieldset from "./widgets/Fieldset.svelte";
@@ -32,6 +35,9 @@ export const allWidgetsRenderer = createFormRenderer({
     checkbox: Checkbox,
     content: Content,
     custom: CustomWidget as Component<WidgetProps<any, any>>,
+    datepicker: DateField,
+    dateTimePicker: DateTimeField,
+    dateRangePicker: DateRangeField,
     details: Details,
     email: EmailField,
     fieldset: Fieldset,
