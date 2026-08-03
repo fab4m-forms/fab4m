@@ -15,12 +15,6 @@ importers:
       '@babel/core':
         specifier: ^7.28.0
         version: 7.29.0
-      '@dnd-kit/core':
-        specifier: ^6.3.1
-        version: 6.3.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      '@dnd-kit/sortable':
-        specifier: ^10.0.0
-        version: 10.0.0(@dnd-kit/core@6.3.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react@19.2.6)
       '@eslint/js':
         specifier: ^9.32.0
         version: 9.39.4
@@ -165,12 +159,24 @@ importers:
       '@astrojs/starlight-tailwind':
         specifier: ^5.0.0
         version: 5.0.0(@astrojs/starlight@0.38.5(astro@6.4.8(@types/node@25.9.1)(jiti@2.7.0)(lightningcss@1.32.0)(rollup@4.60.4)(sass@1.100.0)(tsx@4.22.4)(yaml@2.9.0)))(tailwindcss@4.3.0)
+      '@fab4m/autocomplete':
+        specifier: workspace:*
+        version: link:../packages/autocomplete
+      '@fab4m/date':
+        specifier: workspace:*
+        version: link:../packages/date
       '@fab4m/fab4m':
         specifier: workspace:*
         version: link:../packages/core
+      '@fab4m/password':
+        specifier: workspace:*
+        version: link:../packages/password
       '@fab4m/react':
         specifier: workspace:*
         version: link:../packages/react
+      '@fab4m/routerforms':
+        specifier: workspace:*
+        version: link:../packages/routerforms
       '@fab4m/svelte':
         specifier: workspace:*
         version: link:../packages/svelte
@@ -180,12 +186,24 @@ importers:
       astro:
         specifier: ^6.0.1
         version: 6.4.8(@types/node@25.9.1)(jiti@2.7.0)(lightningcss@1.32.0)(rollup@4.60.4)(sass@1.100.0)(tsx@4.22.4)(yaml@2.9.0)
+      date-fns:
+        specifier: ^4.3.0
+        version: 4.3.0
+      downshift:
+        specifier: ^9.3.3
+        version: 9.3.3(react@19.2.6)
       react:
         specifier: ^19.1.1
         version: 19.2.6
+      react-datepicker:
+        specifier: ^7.6.0
+        version: 7.6.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       react-dom:
         specifier: ^19.1.1
         version: 19.2.6(react@19.2.6)
+      react-router-dom:
+        specifier: ^7.15.1
+        version: 7.15.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       sharp:
         specifier: ^0.34.2
         version: 0.34.5
@@ -217,21 +235,6 @@ importers:
       downshift:
         specifier: ^9.0
         version: 9.3.3(react@19.2.6)
-
-  packages/builder:
-    dependencies:
-      '@fab4m/autocomplete':
-        specifier: workspace:*
-        version: link:../autocomplete
-      '@fab4m/date':
-        specifier: workspace:*
-        version: link:../date
-      '@fab4m/fab4m':
-        specifier: workspace:*
-        version: link:../core
-      '@fab4m/react':
-        specifier: workspace:*
-        version: link:../react
 
   packages/core:
     devDependencies:
@@ -778,28 +781,6 @@ packages:
   '@ctrl/tinycolor@4.2.0':
     resolution: {integrity: sha512-kzyuwOAQnXJNLS9PSyrk0CWk35nWJW/zl/6KvnTBMFK65gm7U1/Z5BqjxeapjZCIhQcM/DsrEmcbRwDyXyXK4A==}
     engines: {node: '>=14'}
-
-  '@dnd-kit/accessibility@3.1.1':
-    resolution: {integrity: sha512-2P+YgaXF+gRsIihwwY1gCsQSYnu9Zyj2py8kY5fFvUM1qm2WA2u639R6YNVfU4GWr+ZM5mqEsfHZZLoRONbemw==}
-    peerDependencies:
-      react: '>=16.8.0'
-
-  '@dnd-kit/core@6.3.1':
-    resolution: {integrity: sha512-xkGBRQQab4RLwgXxoqETICr6S5JlogafbhNsidmrkVv2YRs5MLwpjoF2qpiGjQt8S9AoxtIV603s0GIUpY5eYQ==}
-    peerDependencies:
-      react: '>=16.8.0'
-      react-dom: '>=16.8.0'
-
-  '@dnd-kit/sortable@10.0.0':
-    resolution: {integrity: sha512-+xqhmIIzvAYMGfBYYnbKuNicfSsk4RksY2XdmJhT+HAC01nix6fHCztU68jooFiMUB01Ky3F0FyOvhG/BZrWkg==}
-    peerDependencies:
-      '@dnd-kit/core': ^6.3.0
-      react: '>=16.8.0'
-
-  '@dnd-kit/utilities@3.2.2':
-    resolution: {integrity: sha512-+MKAJEOfaBe5SmV6t34p80MMKhjvUz0vRrvVJbPT0WElzaOJ/1xs+D+KDv+tD/NE5ujfrChEcshd4fLn0wpiqg==}
-    peerDependencies:
-      react: '>=16.8.0'
 
   '@drizzle-team/brocli@0.10.2':
     resolution: {integrity: sha512-z33Il7l5dKjUgGULTqBsQBQwckHh5AbIuxhdsIxDDiZAzBOrZO6q9ogcWC65kU382AfynTfgNumVcNIjuIua6w==}
@@ -7148,31 +7129,6 @@ snapshots:
   '@csstools/css-tokenizer@3.0.4': {}
 
   '@ctrl/tinycolor@4.2.0': {}
-
-  '@dnd-kit/accessibility@3.1.1(react@19.2.6)':
-    dependencies:
-      react: 19.2.6
-      tslib: 2.8.1
-
-  '@dnd-kit/core@6.3.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
-    dependencies:
-      '@dnd-kit/accessibility': 3.1.1(react@19.2.6)
-      '@dnd-kit/utilities': 3.2.2(react@19.2.6)
-      react: 19.2.6
-      react-dom: 19.2.6(react@19.2.6)
-      tslib: 2.8.1
-
-  '@dnd-kit/sortable@10.0.0(@dnd-kit/core@6.3.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react@19.2.6)':
-    dependencies:
-      '@dnd-kit/core': 6.3.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      '@dnd-kit/utilities': 3.2.2(react@19.2.6)
-      react: 19.2.6
-      tslib: 2.8.1
-
-  '@dnd-kit/utilities@3.2.2(react@19.2.6)':
-    dependencies:
-      react: 19.2.6
-      tslib: 2.8.1
 
   '@drizzle-team/brocli@0.10.2': {}
 

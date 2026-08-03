@@ -1,0 +1,55 @@
+---
+title: Autocomplete
+description: Autocomplete widget component using Downshift
+sidebar:
+  order: 3
+---
+
+import CodeExample from "../../../components/CodeExample.astro";
+import AutocompleteExample from "../../../components/examples/autocomplete/AutocompleteExample.tsx";
+import AutocompleteExampleSource from "../../../components/examples/autocomplete/AutocompleteExample.tsx?raw";
+import CallbackExample from "../../../components/examples/autocomplete/CallbackExample.tsx";
+import CallbackExampleSource from "../../../components/examples/autocomplete/CallbackExample.tsx?raw";
+import ItemElementExample from "../../../components/examples/autocomplete/ItemElementExample.tsx";
+import ItemElementExampleSource from "../../../components/examples/autocomplete/ItemElementExample.tsx?raw";
+
+# Autocomplete
+
+The `@fab4m/autocomplete` package provides an autocomplete widget component using the popular
+[Downshift js package](https://www.downshift-js.com/).
+
+## Installing
+
+Install `@fab4m/fab4m`, `@fab4m/react`, `@fab4m/autocomplete` and `downshift` (7.x):
+
+```bash
+npm install --save @fab4m/fab4m @fab4m/react @fab4m/autocomplete downshift
+```
+
+## Using the autocomplete widget
+
+`@fab4m/autocomplete` provides one widget: the `autocompleteWidget`.
+
+The following example shows it in action:
+
+<CodeExample reactCode={AutocompleteExampleSource}>
+  <AutocompleteExample slot="react" client:only="react" />
+</CodeExample>
+
+## Using a callback to fetch the items
+
+If you have many items to fetch you can use a callback to fetch the items
+on the fly:
+
+<CodeExample reactCode={CallbackExampleSource}>
+  <CallbackExample slot="react" client:only="react" />
+</CodeExample>
+
+## Customizing the autocomplete item element
+
+You might want to customize the way each item looks in the autocomplete list.
+This can be done by specifying a custom `itemElement`:
+
+<CodeExample reactCode={ItemElementExampleSource}>
+  <ItemElementExample slot="react" client:only="react" />
+</CodeExample>

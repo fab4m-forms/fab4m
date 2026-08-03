@@ -7,7 +7,6 @@
     "packages/date",
     "packages/password",
     "packages/routerforms",
-    "packages/builder",
     "packages/autocomplete",
     "packages/react",
     "packages/svelte",
@@ -15,8 +14,6 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.28.0",
-    "@dnd-kit/core": "^6.3.1",
-    "@dnd-kit/sortable": "^10.0.0",
     "@eslint/js": "^9.32.0",
     "@testing-library/jest-dom": "^6.6.4",
     "@testing-library/react": "^16.3.0",

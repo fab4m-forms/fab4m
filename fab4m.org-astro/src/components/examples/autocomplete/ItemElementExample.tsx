@@ -1,0 +1,54 @@
+import * as React from "react";
+import "@fab4m/autocomplete/src/style.css";
+import { Autocomplete, autocompleteWidget } from "@fab4m/autocomplete";
+import { textField, createForm } from "@fab4m/fab4m";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
+
+const autocompleteRenderer = {
+  ...allWidgetsRenderer,
+  widgetComponents: {
+    ...allWidgetsRenderer.widgetComponents,
+    autocomplete: Autocomplete,
+  },
+};
+
+const descriptions = {
+  gothenburg: {
+    title: "Gothenburg",
+    description: "City of the brave!",
+  },
+  stockholm: {
+    title: "Stockholm",
+    description: "City on the wrong side of the country.",
+  },
+};
+
+const form = createForm({
+  city: textField({
+    label: "City",
+    widget: autocompleteWidget({
+      items: ["gothenburg", "stockholm"],
+      itemElement: (value) => {
+        const info = descriptions[value];
+        return (
+          <div>
+            <h3>{info.title}</h3>
+            <p>{info.description}</p>
+          </div>
+        );
+      },
+    }),
+  }),
+});
+
+export default function AutocompleteExample() {
+  return (
+    <FormProvider renderer={autocompleteRenderer}>
+      <StatefulFormView form={form} hideSubmit={true} />
+    </FormProvider>
+  );
+}

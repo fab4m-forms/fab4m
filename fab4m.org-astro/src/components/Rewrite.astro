@@ -1,0 +1,13 @@
+---
+import { Code } from "@astrojs/starlight/components";
+
+interface Props {
+  source: string;
+  lang?: string;
+}
+
+const { source, lang = "jsx" } = Astro.props;
+const rewritten = source.replace("../../src", "@fab4m/routerforms");
+---
+
+<Code code={rewritten} lang={lang} />
