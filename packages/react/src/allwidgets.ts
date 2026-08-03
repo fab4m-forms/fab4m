@@ -2,6 +2,9 @@ import { MultipleWidgetProps, WidgetProps } from "@fab4m/fab4m";
 import { ComponentType, createElement } from "react";
 import { createFormRenderer } from "./formrenderer";
 import { Checkbox } from "./widgets/Checkbox";
+import { DateField } from "./widgets/DateField";
+import { DateTimeField } from "./widgets/DateTimeField";
+import { DateRangeField } from "./widgets/DateRangeField";
 import { Details } from "./widgets/Details";
 import { EmailField } from "./widgets/EmailField";
 import { Fieldset } from "./widgets/Fieldset";
@@ -37,6 +40,9 @@ export const allWidgetsRenderer = createFormRenderer({
     checkbox: Checkbox,
     content: Content,
     custom: CustomWidget,
+    datepicker: DateField,
+    dateTimePicker: DateTimeField,
+    dateRangePicker: DateRangeField,
     details: Details,
     email: EmailField,
     fieldset: Fieldset,

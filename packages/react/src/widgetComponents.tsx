@@ -1,3 +1,6 @@
+import { DateRangeField } from "./widgets/DateRangeField";
+import { DateField } from "./widgets/DateField";
+import { DateTimeField } from "./widgets/DateTimeField";
 import { TextArea } from "./widgets/TextArea";
 import { TextField } from "./widgets/TextField";
 import * as React from "react";
@@ -11,4 +14,7 @@ export const widgetComponents: Record<string, React.FC<any>> = {
   file: UploadField,
   group: Group,
   linkfield: URLField,
+  datepicker: DateField,
+  dateTimePicker: DateTimeField,
+  dateRangePicker: DateRangeField,
 };
