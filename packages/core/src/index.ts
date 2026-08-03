@@ -28,6 +28,7 @@ export * from "./rule";
 export * from "./widgets/options";
 export * from "./types/number";
 export * from "./types/url";
+export * from "./types/date";
 export * from "./widgets/multiple";
 export * from "./formdata";
 export * from "./widgets/hidden";
