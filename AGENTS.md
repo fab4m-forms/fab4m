@@ -18,9 +18,11 @@ Guidance for coding agents working in this repository.
 - `packages/autocomplete` → autocomplete field package
 - `packages/routerforms` → React Router integration
 - `packages/builder` → form builder package
-- `fab4m.org` → documentation website (Docusaurus)
+- `fab4m.org-astro` → documentation website (Astro starlight)
 
 Note: `packages/smartflow` exists but is currently not listed in root workspaces. Only touch it when explicitly requested.
+
+Note: `fab4m.org` is legacy and should not be touched.
 
 ## Working rules for agents
 
