@@ -13,13 +13,6 @@ cp LICENSE packages/core/.
 cat .readme-outro.md >> README.md
 cat .readme-license.md >> README.md
 
-# Date readme.
-node bin/example-to-md.js fab4m.org/docs/packages/date.md packages/date/README.md
-sed -i '1,16d' packages/date/README.md
-sed -i 's|Date and time|@fab4m/date|g' packages/date/README.md
-cat .readme-license.md >> packages/date/README.md
-cp LICENSE packages/date/.
-
 # Password readme
 node bin/example-to-md.js fab4m.org/docs/packages/password.md packages/password/README.md
 sed -i '1,9d' packages/password/README.md
