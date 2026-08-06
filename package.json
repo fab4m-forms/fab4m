@@ -4,7 +4,6 @@
   "license": "MIT",
   "workspaces": [
     "packages/core",
-    "packages/password",
     "packages/routerforms",
     "packages/autocomplete",
     "packages/react",

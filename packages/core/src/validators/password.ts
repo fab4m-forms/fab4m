@@ -1,5 +1,5 @@
-import { Validator, ValidatorType } from "@fab4m/fab4m";
-import { PasswordVerifyData, PasswordValidateOldData } from ".";
+import { Validator, ValidatorType } from "../validator";
+import { PasswordVerifyData, PasswordValidateOldData } from "../types/password";
 /**
  * Validation settings for the Validator.
  * @group Validators

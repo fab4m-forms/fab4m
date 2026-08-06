@@ -12,6 +12,9 @@ import { Group } from "./widgets/Group";
 import { HiddenField } from "./widgets/HiddenField";
 import { HorizontalGroup } from "./widgets/HorizontalGroup";
 import { NumberField } from "./widgets/NumberField";
+import Password from "./widgets/Password";
+import PasswordValidateOld from "./widgets/PasswordValidateOld";
+import PasswordVerify from "./widgets/PasswordVerify";
 import { Radios } from "./widgets/Radios";
 import { Select } from "./widgets/Select";
 import { Submit } from "./widgets/Submit";
@@ -24,6 +27,7 @@ import { Table } from "./widgets/multiple/Table";
 import { Tags } from "./widgets/multiple/Tags";
 import { Content } from "./types/content";
 import { FileExtensionInfo, FileSizeInfo } from "./validators/file";
+import PasswordValidatorInfo from "./validators/PasswordValidatorInfo";
 
 const CustomWidget = (props: WidgetProps<any, any>) => {
   const Widget = props.settings as ComponentType<WidgetProps<any, any>>;
@@ -52,6 +56,9 @@ export const allWidgetsRenderer = createFormRenderer({
     horizontal_group: HorizontalGroup,
     linkfield: URLField,
     numberfield: NumberField,
+    password: Password,
+    passwordVerify: PasswordVerify,
+    passwordValidateOld: PasswordValidateOld,
     radios: Radios,
     select: Select,
     submit: Submit,
@@ -68,6 +75,7 @@ export const allWidgetsRenderer = createFormRenderer({
   validatorComponents: {
     filesize: FileSizeInfo,
     fileExtension: FileExtensionInfo,
+    password: PasswordValidatorInfo,
   },
 });
 

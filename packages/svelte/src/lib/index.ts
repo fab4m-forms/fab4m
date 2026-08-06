@@ -30,6 +30,9 @@ export { default as GroupChildren } from "./widgets/GroupChildren.svelte";
 export { default as HiddenField } from "./widgets/HiddenField.svelte";
 export { default as HorizontalGroup } from "./widgets/HorizontalGroup.svelte";
 export { default as NumberField } from "./widgets/NumberField.svelte";
+export { default as Password } from "./widgets/Password.svelte";
+export { default as PasswordValidateOld } from "./widgets/PasswordValidateOld.svelte";
+export { default as PasswordVerify } from "./widgets/PasswordVerify.svelte";
 export { default as Radios } from "./widgets/Radios.svelte";
 export { default as Select } from "./widgets/Select.svelte";
 export { default as Submit } from "./widgets/Submit.svelte";
@@ -41,5 +44,7 @@ export * from "./widgets/custom.js";
 export { default as Multiple } from "./widgets/multiple/Multiple.svelte";
 export { default as Table } from "./widgets/multiple/Table.svelte";
 export { default as Tags } from "./widgets/multiple/Tags.svelte";
+
+export { default as PasswordValidatorInfo } from "./validators/PasswordValidatorInfo.svelte";
 
 export * from "./types/content/index.js";

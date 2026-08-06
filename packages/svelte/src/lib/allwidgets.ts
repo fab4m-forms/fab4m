@@ -12,6 +12,9 @@ import Group from "./widgets/Group.svelte";
 import HiddenField from "./widgets/HiddenField.svelte";
 import HorizontalGroup from "./widgets/HorizontalGroup.svelte";
 import NumberField from "./widgets/NumberField.svelte";
+import Password from "./widgets/Password.svelte";
+import PasswordValidateOld from "./widgets/PasswordValidateOld.svelte";
+import PasswordVerify from "./widgets/PasswordVerify.svelte";
 import Radios from "./widgets/Radios.svelte";
 import Select from "./widgets/Select.svelte";
 import Submit from "./widgets/Submit.svelte";
@@ -25,6 +28,7 @@ import Tags from "./widgets/multiple/Tags.svelte";
 import { Content } from "./types/content/index.js";
 import FileExtensionInfo from "./validators/FileExtensionInfo.svelte";
 import FileSizeInfo from "./validators/FileSizeInfo.svelte";
+import PasswordValidatorInfo from "./validators/PasswordValidatorInfo.svelte";
 
 // Custom widget placeholder - the actual widget is stored in settings
 const CustomWidget: Component<WidgetProps<any, any>> = {} as Component<WidgetProps<any, any>>;
@@ -47,6 +51,9 @@ export const allWidgetsRenderer = createFormRenderer({
     horizontal_group: HorizontalGroup,
     linkfield: URLField,
     numberfield: NumberField,
+    password: Password,
+    passwordVerify: PasswordVerify,
+    passwordValidateOld: PasswordValidateOld,
     radios: Radios,
     select: Select,
     submit: Submit,
@@ -63,6 +70,7 @@ export const allWidgetsRenderer = createFormRenderer({
   validatorComponents: {
     filesize: FileSizeInfo,
     fileExtension: FileExtensionInfo,
+    password: PasswordValidatorInfo,
   },
 });
 

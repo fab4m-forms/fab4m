@@ -27,6 +27,9 @@ export * from "./widgets/GroupChildren";
 export * from "./widgets/HiddenField";
 export * from "./widgets/HorizontalGroup";
 export * from "./widgets/NumberField";
+export { default as Password } from "./widgets/Password";
+export { default as PasswordValidateOld } from "./widgets/PasswordValidateOld";
+export { default as PasswordVerify } from "./widgets/PasswordVerify";
 export * from "./widgets/Radios";
 export * from "./widgets/Select";
 export * from "./widgets/Submit";
@@ -38,5 +41,7 @@ export * from "./widgets/custom";
 export * from "./widgets/multiple/Multiple";
 export * from "./widgets/multiple/Table";
 export * from "./widgets/multiple/Tags";
+
+export { default as PasswordValidatorInfo } from "./validators/PasswordValidatorInfo";
 
 export * from "./types/content";

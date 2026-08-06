@@ -16,7 +16,6 @@
     "@astrojs/starlight-tailwind": "^5.0.0",
     "@fab4m/autocomplete": "workspace:*",
     "@fab4m/fab4m": "workspace:*",
-    "@fab4m/password": "workspace:*",
     "@fab4m/react": "workspace:*",
     "@fab4m/routerforms": "workspace:*",
     "@fab4m/svelte": "workspace:*",
