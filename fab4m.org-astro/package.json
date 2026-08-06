@@ -7,14 +7,14 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "compile-docs": "node bin/collect-docs.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^4.2.1",
     "@astrojs/starlight": "^0.38.2",
     "@astrojs/starlight-tailwind": "^5.0.0",
     "@fab4m/autocomplete": "workspace:*",
-    "@fab4m/date": "workspace:*",
     "@fab4m/fab4m": "workspace:*",
     "@fab4m/password": "workspace:*",
     "@fab4m/react": "workspace:*",
@@ -22,10 +22,8 @@
     "@fab4m/svelte": "workspace:*",
     "@tailwindcss/vite": "^4.2.2",
     "astro": "^6.0.1",
-    "date-fns": "^4.3.0",
     "downshift": "^9.3.3",
     "react": "^19.1.1",
-    "react-datepicker": "^7.6.0",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.15.1",
     "sharp": "^0.34.2",

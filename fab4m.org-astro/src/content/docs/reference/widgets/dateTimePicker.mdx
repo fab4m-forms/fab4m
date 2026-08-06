@@ -1,0 +1,22 @@
+---
+title: Date time picker
+---
+import CodeExample from "../../../../components/CodeExample.astro";
+import DateTimePickerWidget from "../../../../components/examples/widgets/DateTimePickerWidget.tsx";
+import DateTimePickerWidgetSource from "../../../../components/examples/widgets/DateTimePickerWidget.tsx?raw";
+import DateTimePickerWidgetSvelte from "../../../../components/examples/widgets/DateTimePickerWidget.svelte";
+import DateTimePickerWidgetSvelteSource from "../../../../components/examples/widgets/DateTimePickerWidget.svelte?raw";
+
+# Date time picker
+
+A native datetime input widget.
+See the [Date](/reference/components/date), [Date time](/reference/components/datetime) and [Date range](/reference/components/daterange) component pages for examples.
+
+## Example
+<CodeExample reactCode={DateTimePickerWidgetSource} svelteCode={DateTimePickerWidgetSvelteSource}>
+  <DateTimePickerWidget slot="react" client:load />
+  <DateTimePickerWidgetSvelte slot="svelte" client:load />
+</CodeExample>
+
+## Compatible components
+* [Date time](/reference/components/datetime)

@@ -1,0 +1,31 @@
+import * as React from "react";
+import { createForm, dateTimeField } from "@fab4m/fab4m";
+import {
+  StatefulFormView,
+  FormProvider,
+  allWidgetsRenderer,
+} from "@fab4m/react";
+
+const form = createForm({
+  appointment: dateTimeField({
+    label: "Your appointment time",
+  }),
+});
+
+export default function DateTimeField() {
+  const [result, changeResult] = React.useState(null);
+  form.onSubmit((e, data) => {
+    e.preventDefault();
+    changeResult(data);
+  });
+  return (
+    <div>
+      <FormProvider renderer={allWidgetsRenderer}>
+        <StatefulFormView form={form} />
+      </FormProvider>
+      {result && (
+        <p>Your appointment is {result.appointment?.toLocaleString()}</p>
+      )}
+    </div>
+  );
+}

@@ -1,0 +1,24 @@
+---
+title: Date range
+---
+import CodeExample from "../../../../components/CodeExample.astro";
+import DateRangeField from "../../../../components/examples/components/DateRangeField.tsx";
+import DateRangeFieldSource from "../../../../components/examples/components/DateRangeField.tsx?raw";
+import DateRangeFieldSvelte from "../../../../components/examples/components/DateRangeField.svelte";
+import DateRangeFieldSvelteSource from "../../../../components/examples/components/DateRangeField.svelte?raw";
+
+# Date range
+
+* **Data type:** DateRange
+* **JSON Schema data type:** object
+
+Let users input a date range.
+
+## Example
+<CodeExample reactCode={DateRangeFieldSource} svelteCode={DateRangeFieldSvelteSource}>
+  <DateRangeField slot="react" client:load />
+  <DateRangeFieldSvelte slot="svelte" client:load />
+</CodeExample>
+
+## Available Widgets
+* [Date range picker](/reference/widgets/dateRangePicker)

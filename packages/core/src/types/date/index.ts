@@ -166,7 +166,7 @@ export const dateRangePickerWidgetType: WidgetType<
 
 /**
  * A native date input widget.
- * See [the date component page](/docs/components/date) for an example.
+ * See the [Date](/reference/components/date), [Date time](/reference/components/datetime) and [Date range](/reference/components/daterange) component pages for examples.
  * @group Widgets
  */
 export function datePickerWidget(): Widget<Date> {
@@ -177,7 +177,7 @@ export function datePickerWidget(): Widget<Date> {
 
 /**
  * A native datetime input widget.
- * See [the date component page](/docs/components/date) for an example.
+ * See the [Date](/reference/components/date), [Date time](/reference/components/datetime) and [Date range](/reference/components/daterange) component pages for examples.
  * @group Widgets
  */
 export function dateTimePickerWidget(): Widget<Date> {
@@ -188,7 +188,7 @@ export function dateTimePickerWidget(): Widget<Date> {
 
 /**
  * A native date range widget with two labeled inputs.
- * See [the date component page](/docs/components/date) for an example.
+ * See the [Date](/reference/components/date), [Date time](/reference/components/datetime) and [Date range](/reference/components/daterange) component pages for examples.
  * @group Widgets
  */
 export function dateRangePickerWidget(
