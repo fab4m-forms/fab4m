@@ -42,6 +42,5 @@ export function setDefaultTheme(theme: Theme) {
   defaultTheme = theme;
 }
 
-export { default as bulma } from "./themes/bulma";
 export { default as tailwind, createTailwindTheme } from "./themes/tailwind";
 export type { TailwindSettings } from "./themes/tailwind";

@@ -124,7 +124,7 @@ export function getFormElement(container: Element): HTMLFormElement {
 | `test/multiple.test.tsx` | `src/lib/components/FormComponentView.svelte.spec.ts` | 🔲 Multiple fields: add/remove, validators on multiple items, labels, min/max items, nested multiple groups |
 | `test/variants.test.tsx` | `src/lib/__tests__/variants.svelte.spec.ts` | 🔲 Dependent variants: dynamic rendering, default component |
 | `test/customwidget.test.tsx` | `src/lib/__tests__/customwidget.svelte.spec.ts` | 🔲 Custom widget + multiple widget |
-| `test/defaulttheme.test.tsx` | `src/lib/__tests__/defaulttheme.svelte.spec.ts` | 🔲 setDefaultTheme with alternative theme (bulma) |
+| `test/defaulttheme.test.tsx` | `src/lib/__tests__/defaulttheme.svelte.spec.ts` | 🔲 setDefaultTheme with alternative theme (tailwind) |
 
 ### Phase 7: Validator info components
 

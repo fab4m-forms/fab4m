@@ -3,7 +3,6 @@ import {
   createForm,
   basic,
   basicDark,
-  bulma,
   textField,
   StatefulFormView,
   content,
@@ -39,7 +38,6 @@ import "../../src/themes/basic/basic.scss";
 import { useState } from "react";
 
 const themes: Record<string, Theme> = {
-  bulma,
   basic,
   basicDark,
   tailwind,
@@ -421,7 +419,6 @@ export default function App() {
           }}
           value={selectedTheme}
         >
-          <option value="bulma">Bulma</option>
           <option value="basic">Basic</option>
           <option value="basicDark">Basic, dark</option>
           <option value="tailwind">Tailwind</option>

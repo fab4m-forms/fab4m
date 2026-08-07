@@ -5,7 +5,6 @@ import {
   createForm,
   integerField,
   textField,
-  bulma,
   setDefaultTheme,
 } from "@fab4m/fab4m";
 import {

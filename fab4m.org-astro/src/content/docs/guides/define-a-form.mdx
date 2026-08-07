@@ -6,6 +6,7 @@ sidebar:
 ---
 
 import CodeExample from "../../../components/CodeExample.astro";
+import LabelsTable from "../../../components/LabelsTable.astro";
 import FormFields from "../../../components/examples/FormFields.tsx";
 import MultipleFields from "../../../components/examples/MultipleFields.tsx";
 import GroupedFields from "../../../components/examples/GroupedFields.tsx";
@@ -76,10 +77,4 @@ Each form comes with some default labels that can be overridden, for example the
 
 These are the labels you can configure:
 
-| Name     | Description                                                          | Default value |
-| -------- | -------------------------------------------------------------------- | ------------- |
-| submit   | Used as the text for the submit button.                              | "Save"        |
-| next     | Used as the text on the next button on multipage forms.              | "Next"        |
-| previous | Used as the text on the previous button on multipage forms.          | "Previous"    |
-| complete | Used as the complete text on the complete button on multipage forms. | "Complete"    |
-| required | Used for the "Required" label on required form components.           | "Required"    |
+<LabelsTable />
