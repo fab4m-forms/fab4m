@@ -1,0 +1,48 @@
+---
+const labels = [
+  {
+    name: "submit",
+    description: "Used as the text for the submit button.",
+    defaultValue: '"Save"',
+  },
+  {
+    name: "next",
+    description: "Used as the text on the next button on multipage forms.",
+    defaultValue: '"Next"',
+  },
+  {
+    name: "previous",
+    description: "Used as the text on the previous button on multipage forms.",
+    defaultValue: '"Previous"',
+  },
+  {
+    name: "complete",
+    description: "Used as the complete text on the complete button on multipage forms.",
+    defaultValue: '"Complete"',
+  },
+  {
+    name: "required",
+    description: 'Used for the "Required" label on required form components.',
+    defaultValue: '"Required"',
+  },
+];
+---
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Default value</th>
+    </tr>
+  </thead>
+  <tbody>
+    {labels.map((label) => (
+      <tr>
+        <td>{label.name}</td>
+        <td>{label.description}</td>
+        <td>{label.defaultValue}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
