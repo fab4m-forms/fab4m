@@ -18,10 +18,9 @@
 
   form.onSubmit((e) => {
     e.preventDefault();
-    alert("Form submitted!");
   });
 </script>
 
-<FormProvider renderer={allWidgetsRenderer}>
+<FormProvider renderer="{allWidgetsRenderer}">
   <StatefulFormView {form} />
 </FormProvider>

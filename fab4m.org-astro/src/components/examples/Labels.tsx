@@ -19,7 +19,6 @@ const form = createForm(
 export default function Labels() {
   form.onSubmit((e) => {
     e.preventDefault();
-    alert("Form submitted!");
   });
 
   return (
