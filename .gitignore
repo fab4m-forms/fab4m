@@ -8,5 +8,4 @@ lerna-debug.log
 # pnpm
 .pnpm-store/
 pnpm-debug.log*
-.pi
 .playwright-browsers
