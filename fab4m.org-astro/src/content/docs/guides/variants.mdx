@@ -12,11 +12,8 @@ import VariantSelection from "../../../components/examples/variants/VariantSelec
 import VariantSelectionSource from "../../../components/examples/variants/VariantSelection.tsx?raw";
 import VariantSchema from "../../../components/examples/variants/VariantSchema.tsx";
 import VariantSchemaSource from "../../../components/examples/variants/VariantSchema.tsx?raw";
-import RequiredWhenPresentSvelte from "../../../components/examples/variants/RequiredWhenPresent.svelte";
 import RequiredWhenPresentSvelteSource from "../../../components/examples/variants/RequiredWhenPresent.svelte?raw";
-import VariantSelectionSvelte from "../../../components/examples/variants/VariantSelection.svelte";
 import VariantSelectionSvelteSource from "../../../components/examples/variants/VariantSelection.svelte?raw";
-import VariantSchemaSvelte from "../../../components/examples/variants/VariantSchema.svelte";
 import VariantSchemaSvelteSource from "../../../components/examples/variants/VariantSchema.svelte?raw";
 
 # Component Variants
@@ -31,8 +28,7 @@ Here's a simple example where we make a component required depending
 on form state:
 
 <CodeExample reactCode={RequiredWhenPresentSource} svelteCode={RequiredWhenPresentSvelteSource}>
-  <RequiredWhenPresent slot="react" client:load />
-  <RequiredWhenPresentSvelte slot="svelte" client:load />
+  <RequiredWhenPresent client:load />
 </CodeExample>
 
 ## Variant selection
@@ -41,8 +37,7 @@ A variant array is evaluated in order, and the first variant where the rule pass
 is selected. If you provide a component without a rule, it will always be selected.
 
 <CodeExample reactCode={VariantSelectionSource} svelteCode={VariantSelectionSvelteSource}>
-  <VariantSelection slot="react" client:load />
-  <VariantSelectionSvelte slot="svelte" client:load />
+  <VariantSelection client:load />
 </CodeExample>
 
 ## A note about variants and JSON Schema
@@ -50,6 +45,5 @@ is selected. If you provide a component without a rule, it will always be select
 When you use variants, provide the current data when generating JSON Schema:
 
 <CodeExample reactCode={VariantSchemaSource} svelteCode={VariantSchemaSvelteSource}>
-  <VariantSchema slot="react" client:load />
-  <VariantSchemaSvelte slot="svelte" client:load />
+  <VariantSchema client:load />
 </CodeExample>

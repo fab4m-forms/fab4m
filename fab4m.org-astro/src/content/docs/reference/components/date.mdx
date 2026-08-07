@@ -4,7 +4,6 @@ title: Date
 import CodeExample from "../../../../components/CodeExample.astro";
 import DateField from "../../../../components/examples/components/DateField.tsx";
 import DateFieldSource from "../../../../components/examples/components/DateField.tsx?raw";
-import DateFieldSvelte from "../../../../components/examples/components/DateField.svelte";
 import DateFieldSvelteSource from "../../../../components/examples/components/DateField.svelte?raw";
 
 # Date
@@ -16,8 +15,7 @@ Let users input a date.
 
 ## Example
 <CodeExample reactCode={DateFieldSource} svelteCode={DateFieldSvelteSource}>
-  <DateField slot="react" client:load />
-  <DateFieldSvelte slot="svelte" client:load />
+  <DateField client:load />
 </CodeExample>
 
 ## Available Widgets

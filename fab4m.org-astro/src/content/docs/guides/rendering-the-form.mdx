@@ -14,13 +14,9 @@ import StatefulViewExample from "../../../components/examples/rendering/Stateful
 import StatefulViewSource from "../../../components/examples/rendering/StatefulView.tsx?raw";
 import ReactHookExample from "../../../components/examples/rendering/ReactHook.tsx";
 import ReactHookSource from "../../../components/examples/rendering/ReactHook.tsx?raw";
-import BasicExampleSvelte from "../../../components/examples/rendering/Basic.svelte";
 import BasicSvelteSource from "../../../components/examples/rendering/Basic.svelte?raw";
-import FormStateExampleSvelte from "../../../components/examples/rendering/FormState.svelte";
 import FormStateSvelteSource from "../../../components/examples/rendering/FormState.svelte?raw";
-import StatefulViewExampleSvelte from "../../../components/examples/rendering/StatefulView.svelte";
 import StatefulViewSvelteSource from "../../../components/examples/rendering/StatefulView.svelte?raw";
-import ReactHookExampleSvelte from "../../../components/examples/rendering/ReactHook.svelte";
 import ReactHookSvelteSource from "../../../components/examples/rendering/ReactHook.svelte?raw";
 
 # Rendering forms
@@ -32,8 +28,7 @@ Forms are rendered using derivatives of the `FormView` component. This section d
 The most common way to render a form is through the `<FormView>` component.
 
 <CodeExample reactCode={BasicSource} svelteCode={BasicSvelteSource}>
-  <BasicExample slot="react" client:load />
-  <BasicExampleSvelte slot="svelte" client:load />
+  <BasicExample client:load />
 </CodeExample>
 
 ## Managing the form state
@@ -41,8 +36,7 @@ The most common way to render a form is through the `<FormView>` component.
 The `FormView` component only renders the form with the provided data. It does not manage form state.
 
 <CodeExample reactCode={FormStateSource} svelteCode={FormStateSvelteSource}>
-  <FormStateExample slot="react" client:load />
-  <FormStateExampleSvelte slot="svelte" client:load />
+  <FormStateExample client:load />
 </CodeExample>
 
 ## Handling state automatically
@@ -50,8 +44,7 @@ The `FormView` component only renders the form with the provided data. It does n
 If you don't want to manage the state yourself, use `<StatefulFormView>`.
 
 <CodeExample reactCode={StatefulViewSource} svelteCode={StatefulViewSvelteSource}>
-  <StatefulViewExample slot="react" client:load />
-  <StatefulViewExampleSvelte slot="svelte" client:load />
+  <StatefulViewExample client:load />
 </CodeExample>
 
 ## Defining forms inside components
@@ -59,8 +52,7 @@ If you don't want to manage the state yourself, use `<StatefulFormView>`.
 Creating a form definition is resource heavy. In React, use the `useForm()` hook so the form is memoized across renders.
 
 <CodeExample reactCode={ReactHookSource} svelteCode={ReactHookSvelteSource}>
-  <ReactHookExample slot="react" client:load />
-  <ReactHookExampleSvelte slot="svelte" client:load />
+  <ReactHookExample client:load />
 </CodeExample>
 
 The `useForm` hook optionally takes a dependency array. Internally it's a wrapper around [useMemo](https://reactjs.org/docs/hooks-reference.html#usememo).

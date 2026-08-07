@@ -4,7 +4,6 @@ title: Select
 import CodeExample from "../../../../components/CodeExample.astro";
 import SelectWidget from "../../../../components/examples/widgets/SelectWidget.tsx";
 import SelectWidgetSource from "../../../../components/examples/widgets/SelectWidget.tsx?raw";
-import SelectWidgetSvelte from "../../../../components/examples/widgets/SelectWidget.svelte";
 import SelectWidgetSvelteSource from "../../../../components/examples/widgets/SelectWidget.svelte?raw";
 
 # Select
@@ -13,8 +12,7 @@ The select widget renders a select html element with the defined options.
 
 ## Example
 <CodeExample reactCode={SelectWidgetSource} svelteCode={SelectWidgetSvelteSource}>
-  <SelectWidget slot="react" client:load />
-  <SelectWidgetSvelte slot="svelte" client:load />
+  <SelectWidget client:load />
 </CodeExample>
 
 ## Compatible components

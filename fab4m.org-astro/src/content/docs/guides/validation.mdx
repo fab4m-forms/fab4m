@@ -8,7 +8,6 @@ sidebar:
 import CodeExample from "../../../components/CodeExample.astro";
 import Schema from "../../../components/examples/validation/Schema.tsx";
 import SchemaSource from "../../../components/examples/validation/Schema.tsx?raw";
-import SchemaSvelte from "../../../components/examples/validation/Schema.svelte";
 import SchemaSvelteSource from "../../../components/examples/validation/Schema.svelte?raw";
 
 # Validation with JSON Schema
@@ -50,8 +49,7 @@ generateSchema(form);
 This generates a schema that can be used by a JSON Schema validator:
 
 <CodeExample reactCode={SchemaSource} svelteCode={SchemaSvelteSource}>
-  <Schema slot="react" client:load />
-  <SchemaSvelte slot="svelte" client:load />
+  <Schema client:load />
 </CodeExample>
 
 ## Generating a schema for each form part

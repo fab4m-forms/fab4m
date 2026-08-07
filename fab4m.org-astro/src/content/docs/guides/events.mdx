@@ -14,13 +14,9 @@ import { OnSubmitExample } from "../../../components/examples/events/SubmitEvent
 import SubmitExampleSource from "../../../components/examples/events/SubmitEvent.tsx?raw";
 import { OnPartValidateForm } from "../../../components/examples/events/PartValidator.tsx";
 import OnPartValidateSource from "../../../components/examples/events/PartValidator.tsx?raw";
-import OnChangeExampleSvelte from "../../../components/examples/events/FormChange.svelte";
 import OnChangeExampleSvelteSource from "../../../components/examples/events/FormChange.svelte?raw";
-import OnComponentChangeExampleSvelte from "../../../components/examples/events/ComponentChange.svelte";
 import OnComponentChangeSvelteSource from "../../../components/examples/events/ComponentChange.svelte?raw";
-import OnSubmitExampleSvelte from "../../../components/examples/events/SubmitEvent.svelte";
 import SubmitExampleSvelteSource from "../../../components/examples/events/SubmitEvent.svelte?raw";
-import OnPartValidateFormSvelte from "../../../components/examples/events/PartValidator.svelte";
 import OnPartValidateSvelteSource from "../../../components/examples/events/PartValidator.svelte?raw";
 
 # Form events
@@ -35,8 +31,7 @@ Each time any component in the form changes the `onDataChange` event is fired.
 All form data is passed as an object.
 
 <CodeExample reactCode={OnChangeExampleSource} svelteCode={OnChangeExampleSvelteSource}>
-  <OnChangeExample slot="react" client:load />
-  <OnChangeExampleSvelte slot="svelte" client:load />
+  <OnChangeExample client:load />
 </CodeExample>
 
 ## Listen for changes in one specific component
@@ -46,8 +41,7 @@ listen for changes in certain components. This can be done
 using the `onComponentChange` event.
 
 <CodeExample reactCode={OnComponentChangeSource} svelteCode={OnComponentChangeSvelteSource}>
-  <OnComponentChangeExample slot="react" client:load />
-  <OnComponentChangeExampleSvelte slot="svelte" client:load />
+  <OnComponentChangeExample client:load />
 </CodeExample>
 
 ## Handling form submits
@@ -57,8 +51,7 @@ whenever the form is submitted and it's only called if the form data is valid,
 so you can rely on your data being complete at this point.
 
 <CodeExample reactCode={SubmitExampleSource} svelteCode={SubmitExampleSvelteSource}>
-  <OnSubmitExample slot="react" client:load />
-  <OnSubmitExampleSvelte slot="svelte" client:load />
+  <OnSubmitExample client:load />
 </CodeExample>
 
 ## Using events for custom validation
@@ -94,8 +87,7 @@ The example below performs validation on each form part:
 - On part 2, we encourage the user to switch profession if the name contains "Fabian" and the bio contains "Computer science"
 
 <CodeExample reactCode={OnPartValidateSource} svelteCode={OnPartValidateSvelteSource}>
-  <OnPartValidateForm slot="react" client:load />
-  <OnPartValidateFormSvelte slot="svelte" client:load />
+  <OnPartValidateForm client:load />
 </CodeExample>
 
 ## Adding multiple form listeners to the same event

@@ -10,9 +10,7 @@ import MinLength from "../../../components/examples/validators/MinLength.tsx";
 import MinLengthSource from "../../../components/examples/validators/MinLength.tsx?raw";
 import MultipleValidators from "../../../components/examples/validators/MultipleValidators.tsx";
 import MultipleValidatorsSource from "../../../components/examples/validators/MultipleValidators.tsx?raw";
-import MinLengthSvelte from "../../../components/examples/validators/MinLength.svelte";
 import MinLengthSvelteSource from "../../../components/examples/validators/MinLength.svelte?raw";
-import MultipleValidatorsSvelte from "../../../components/examples/validators/MultipleValidators.svelte";
 import MultipleValidatorsSvelteSource from "../../../components/examples/validators/MultipleValidators.svelte?raw";
 
 # Component Validators
@@ -25,8 +23,7 @@ is valid when the form is submitted.
 Validators are added as an array on the component when it's defined:
 
 <CodeExample reactCode={MinLengthSource} svelteCode={MinLengthSvelteSource}>
-  <MinLength slot="react" client:load />
-  <MinLengthSvelte slot="svelte" client:load />
+  <MinLength client:load />
 </CodeExample>
 
 ## Multiple validators
@@ -34,8 +31,7 @@ Validators are added as an array on the component when it's defined:
 You can combine multiple validators as an array:
 
 <CodeExample reactCode={MultipleValidatorsSource} svelteCode={MultipleValidatorsSvelteSource}>
-  <MultipleValidators slot="react" client:load />
-  <MultipleValidatorsSvelte slot="svelte" client:load />
+  <MultipleValidators client:load />
 </CodeExample>
 
 ## Check the validator library

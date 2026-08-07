@@ -4,7 +4,6 @@ title: Date time picker
 import CodeExample from "../../../../components/CodeExample.astro";
 import DateTimePickerWidget from "../../../../components/examples/widgets/DateTimePickerWidget.tsx";
 import DateTimePickerWidgetSource from "../../../../components/examples/widgets/DateTimePickerWidget.tsx?raw";
-import DateTimePickerWidgetSvelte from "../../../../components/examples/widgets/DateTimePickerWidget.svelte";
 import DateTimePickerWidgetSvelteSource from "../../../../components/examples/widgets/DateTimePickerWidget.svelte?raw";
 
 # Date time picker
@@ -14,8 +13,7 @@ See the [Date](/reference/components/date), [Date time](/reference/components/da
 
 ## Example
 <CodeExample reactCode={DateTimePickerWidgetSource} svelteCode={DateTimePickerWidgetSvelteSource}>
-  <DateTimePickerWidget slot="react" client:load />
-  <DateTimePickerWidgetSvelte slot="svelte" client:load />
+  <DateTimePickerWidget client:load />
 </CodeExample>
 
 ## Compatible components

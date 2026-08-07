@@ -16,11 +16,6 @@ import MultipleFieldsSource from "../../../components/examples/MultipleFields.ts
 import GroupedFieldsSource from "../../../components/examples/GroupedFields.tsx?raw";
 import PageBreaksSource from "../../../components/examples/PageBreaks.tsx?raw";
 import LabelsSource from "../../../components/examples/Labels.tsx?raw";
-import FormFieldsSvelte from "../../../components/examples/FormFields.svelte";
-import MultipleFieldsSvelte from "../../../components/examples/MultipleFields.svelte";
-import GroupedFieldsSvelte from "../../../components/examples/GroupedFields.svelte";
-import PageBreaksSvelte from "../../../components/examples/PageBreaks.svelte";
-import LabelsSvelte from "../../../components/examples/Labels.svelte";
 import FormFieldsSvelteSource from "../../../components/examples/FormFields.svelte?raw";
 import MultipleFieldsSvelteSource from "../../../components/examples/MultipleFields.svelte?raw";
 import GroupedFieldsSvelteSource from "../../../components/examples/GroupedFields.svelte?raw";
@@ -41,8 +36,7 @@ Fab4m provides components for most kinds of data input. The following example de
 with text, email, url and boolean data.
 
 <CodeExample reactCode={FormFieldsSource} svelteCode={FormFieldsSvelteSource}>
-  <FormFields slot="react" client:load />
-  <FormFieldsSvelte slot="svelte" client:load />
+  <FormFields client:load />
 </CodeExample>
 
 ## Handling multiple data
@@ -50,8 +44,7 @@ with text, email, url and boolean data.
 Any component can be defined as a multiple component, which means that instead of just collecting one result, an array with results will be collected.
 
 <CodeExample reactCode={MultipleFieldsSource} svelteCode={MultipleFieldsSvelteSource}>
-  <MultipleFields slot="react" client:load />
-  <MultipleFieldsSvelte slot="svelte" client:load />
+  <MultipleFields client:load />
 </CodeExample>
 
 ## Grouping data together
@@ -61,8 +54,7 @@ If you have a complex form you might need to group several fields together in a 
 Each group component you add will be represented as an object in your submitted data. As with all other components, group components can have multiple values.
 
 <CodeExample reactCode={GroupedFieldsSource} svelteCode={GroupedFieldsSvelteSource}>
-  <GroupedFields slot="react" client:load />
-  <GroupedFieldsSvelte slot="svelte" client:load />
+  <GroupedFields client:load />
 </CodeExample>
 
 ## Page breaks
@@ -71,8 +63,7 @@ Large forms can be split up into multiple parts. This is done using the `pageBre
 component. All data will be validated before each page break.
 
 <CodeExample reactCode={PageBreaksSource} svelteCode={PageBreaksSvelteSource}>
-  <PageBreaks slot="react" client:load />
-  <PageBreaksSvelte slot="svelte" client:load />
+  <PageBreaks client:load />
 </CodeExample>
 
 ## Changing labels (submit button text etc.)
@@ -80,8 +71,7 @@ component. All data will be validated before each page break.
 Each form comes with some default labels that can be overridden, for example the form submit text. This is done by changing the labels setting when creating the form.
 
 <CodeExample reactCode={LabelsSource} svelteCode={LabelsSvelteSource}>
-  <Labels slot="react" client:load />
-  <LabelsSvelte slot="svelte" client:load />
+  <Labels client:load />
 </CodeExample>
 
 These are the labels you can configure:

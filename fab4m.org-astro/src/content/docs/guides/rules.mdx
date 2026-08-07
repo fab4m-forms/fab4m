@@ -12,11 +12,8 @@ import RuleGroups from "../../../components/examples/rules/RuleGroups.tsx";
 import RuleGroupsSource from "../../../components/examples/rules/RuleGroups.tsx?raw";
 import RuleSchema from "../../../components/examples/rules/RuleSchema.tsx";
 import RuleSchemaSource from "../../../components/examples/rules/RuleSchema.tsx?raw";
-import BasicRulesSvelte from "../../../components/examples/rules/BasicRules.svelte";
 import BasicRulesSvelteSource from "../../../components/examples/rules/BasicRules.svelte?raw";
-import RuleGroupsSvelte from "../../../components/examples/rules/RuleGroups.svelte";
 import RuleGroupsSvelteSource from "../../../components/examples/rules/RuleGroups.svelte?raw";
-import RuleSchemaSvelte from "../../../components/examples/rules/RuleSchema.svelte";
 import RuleSchemaSvelteSource from "../../../components/examples/rules/RuleSchema.svelte?raw";
 
 # Component Rules
@@ -30,8 +27,7 @@ When defining your components you can add a list of rules that needs to be fulfi
 in order for the component to be visible:
 
 <CodeExample reactCode={BasicRulesSource} svelteCode={BasicRulesSvelteSource}>
-  <BasicRules slot="react" client:load />
-  <BasicRulesSvelte slot="svelte" client:load />
+  <BasicRules client:load />
 </CodeExample>
 
 ## Rule groups
@@ -41,8 +37,7 @@ By default, rules are logically ANDed together.
 You can use logical groups to override this.
 
 <CodeExample reactCode={RuleGroupsSource} svelteCode={RuleGroupsSvelteSource}>
-  <RuleGroups slot="react" client:load />
-  <RuleGroupsSvelte slot="svelte" client:load />
+  <RuleGroups client:load />
 </CodeExample>
 
 Rule functions can also be nested:
@@ -64,8 +59,7 @@ Due to the potential complexity of rules in forms, we generate a unique JSON sch
 depending on the state of the data to keep the schema simple. For example:
 
 <CodeExample reactCode={RuleSchemaSource} svelteCode={RuleSchemaSvelteSource}>
-  <RuleSchema slot="react" client:load />
-  <RuleSchemaSvelte slot="svelte" client:load />
+  <RuleSchema client:load />
 </CodeExample>
 
 ## Check out the rule library

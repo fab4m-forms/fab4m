@@ -33,7 +33,7 @@ npm install --save @fab4m/fab4m @fab4m/react @fab4m/autocomplete downshift
 The following example shows it in action:
 
 <CodeExample reactCode={AutocompleteExampleSource}>
-  <AutocompleteExample slot="react" client:only="react" />
+  <AutocompleteExample client:only="react" />
 </CodeExample>
 
 ## Using a callback to fetch the items
@@ -42,7 +42,7 @@ If you have many items to fetch you can use a callback to fetch the items
 on the fly:
 
 <CodeExample reactCode={CallbackExampleSource}>
-  <CallbackExample slot="react" client:only="react" />
+  <CallbackExample client:only="react" />
 </CodeExample>
 
 ## Customizing the autocomplete item element
@@ -51,5 +51,5 @@ You might want to customize the way each item looks in the autocomplete list.
 This can be done by specifying a custom `itemElement`:
 
 <CodeExample reactCode={ItemElementExampleSource}>
-  <ItemElementExample slot="react" client:only="react" />
+  <ItemElementExample client:only="react" />
 </CodeExample>

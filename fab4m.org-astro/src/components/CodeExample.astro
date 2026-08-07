@@ -1,7 +1,6 @@
 ---
 import { Tabs, TabItem, Code } from "@astrojs/starlight/components";
-import CodeExampleWrapper from "./CodeExampleWrapper.tsx";
-import SvelteCodeExampleWrapper from "./SvelteCodeExampleWrapper.svelte";
+import "./themeSetup";
 interface Props {
   reactCode: string;
   svelteCode?: string;
@@ -21,8 +20,18 @@ const hasSvelte = svelteCode !== undefined;
     </TabItem>
   )}
       <TabItem label="Example" icon="rocket">
-        <CodeExampleWrapper>
-          <slot name="react" />
-        </CodeExampleWrapper>
+        <slot />
       </TabItem>
 </Tabs>
+
+<script>
+  import { createTailwindTheme, setDefaultTheme } from "@fab4m/fab4m";
+  setDefaultTheme(
+    createTailwindTheme({
+      settings: {
+        primaryBg: "bg-cyan-600",
+        secondaryBg: "bg-cyan-600",
+      },
+    }),
+  );
+</script>
