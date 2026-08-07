@@ -1,0 +1,20 @@
+{
+  "name": "@pi-extra/subagent",
+  "version": "1.0.0",
+  "description": "Subagent tool for pi - delegate tasks to specialized agents with isolated context windows",
+  "keywords": ["pi-package"],
+  "license": "MIT",
+  "type": "module",
+  "main": "extensions/subagent/index.ts",
+  "pi": {
+    "extensions": ["./extensions/subagent"],
+    "skills": ["./skills"],
+    "prompts": ["./prompts"]
+  },
+  "peerDependencies": {
+    "@mariozechner/pi-coding-agent": ">=0.1.0",
+    "@mariozechner/pi-ai": ">=0.1.0",
+    "@mariozechner/pi-tui": ">=0.1.0",
+    "@sinclair/typebox": ">=0.34.0"
+  }
+}
