@@ -1,6 +1,10 @@
 import * as React from "react";
 import "@fab4m/autocomplete/src/style.css";
-import { Autocomplete, autocompleteWidget } from "@fab4m/autocomplete";
+import {
+  Autocomplete,
+  autocompleteWidget,
+  type Option,
+} from "@fab4m/autocomplete";
 import { textField, createForm } from "@fab4m/fab4m";
 import {
   StatefulFormView,
@@ -17,10 +21,10 @@ const autocompleteRenderer = {
 };
 
 // This would be your actual call to the backend.
-async function fakeFetch(search: string) {
-  const data = [
-    ["Gothenburg", "gothenburg"],
-    ["Stockholm", "stockholm"],
+async function fakeFetch(search: string): Promise<Option<string, string>[]> {
+  const data: Option<string, string>[] = [
+    ["Gothenburg", "gothenburg", ""],
+    ["Stockholm", "stockholm", ""],
   ];
   return data.filter((item) =>
     item[0].toLowerCase().includes(search.toLowerCase()),

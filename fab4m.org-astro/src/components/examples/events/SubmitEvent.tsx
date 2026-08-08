@@ -19,7 +19,9 @@ const form = createForm({
 
 export function OnSubmitExample() {
   // This state will be updated with the data when we submit the form.
-  const [submitted, changeSubmittedData] = useState(undefined);
+  const [submitted, changeSubmittedData] = useState<
+    { name: string; bio: string; age: number } | undefined
+  >(undefined);
   form.onSubmit((e, data) => {
     // The event is a React FormEvent.
     e.preventDefault();

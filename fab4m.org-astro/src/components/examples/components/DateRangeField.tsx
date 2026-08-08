@@ -1,5 +1,5 @@
 import * as React from "react";
-import { createForm, dateRangeField } from "@fab4m/fab4m";
+import { createForm, dateRangeField, type DateRange } from "@fab4m/fab4m";
 import {
   StatefulFormView,
   FormProvider,
@@ -13,7 +13,9 @@ const form = createForm({
 });
 
 export default function DateRangeField() {
-  const [result, changeResult] = React.useState(null);
+  const [result, changeResult] = React.useState<{ vacation: DateRange } | null>(
+    null,
+  );
   form.onSubmit((e, data) => {
     e.preventDefault();
     changeResult(data);
@@ -26,7 +28,7 @@ export default function DateRangeField() {
       {result && (
         <p>
           Your vacation is {result.vacation?.from.toLocaleDateString()} -{" "}
-          {result.vacation?.to.toLocaleDateString()}
+          {result.vacation?.to?.toLocaleDateString()}
         </p>
       )}
     </div>

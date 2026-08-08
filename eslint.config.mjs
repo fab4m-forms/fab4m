@@ -12,12 +12,17 @@ export default [
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
    {
+       settings: {
+           react: {
+               version: "detect",
+           },
+       },
        rules: {
            "@typescript-eslint/no-explicit-any": "off",
        }
    },
    {
-ignores: ["**/dist","**/lib","**/examples","**/jest.config.js","**/postcss.config.js"],
+ignores: ["**/dist","**/lib","**/examples","**/.astro","**/jest.config.js","**/postcss.config.js"],
          }
 
 ];

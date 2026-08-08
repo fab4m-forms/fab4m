@@ -13,7 +13,9 @@ const form = createForm({
 });
 
 export default function DateField() {
-  const [result, changeResult] = React.useState(null);
+  const [result, changeResult] = React.useState<{ birthday: Date } | null>(
+    null,
+  );
   form.onSubmit((e, data) => {
     e.preventDefault();
     changeResult(data);

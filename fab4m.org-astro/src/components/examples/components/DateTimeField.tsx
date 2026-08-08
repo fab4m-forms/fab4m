@@ -13,7 +13,9 @@ const form = createForm({
 });
 
 export default function DateTimeField() {
-  const [result, changeResult] = React.useState(null);
+  const [result, changeResult] = React.useState<{ appointment: Date } | null>(
+    null,
+  );
   form.onSubmit((e, data) => {
     e.preventDefault();
     changeResult(data);

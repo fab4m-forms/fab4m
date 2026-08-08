@@ -42,7 +42,10 @@ with text, email, url and boolean data.
 
 Any component can be defined as a multiple component, which means that instead of just collecting one result, an array with results will be collected.
 
-<CodeExample reactCode={MultipleFieldsSource} svelteCode={MultipleFieldsSvelteSource}>
+<CodeExample
+  reactCode={MultipleFieldsSource}
+  svelteCode={MultipleFieldsSvelteSource}
+>
   <MultipleFields client:load />
 </CodeExample>
 
@@ -52,7 +55,10 @@ If you have a complex form you might need to group several fields together in a 
 
 Each group component you add will be represented as an object in your submitted data. As with all other components, group components can have multiple values.
 
-<CodeExample reactCode={GroupedFieldsSource} svelteCode={GroupedFieldsSvelteSource}>
+<CodeExample
+  reactCode={GroupedFieldsSource}
+  svelteCode={GroupedFieldsSvelteSource}
+>
   <GroupedFields client:load />
 </CodeExample>
 

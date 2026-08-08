@@ -25,7 +25,10 @@ variants let you customize everything.
 Here's a simple example where we make a component required depending
 on form state:
 
-<CodeExample reactCode={RequiredWhenPresentSource} svelteCode={RequiredWhenPresentSvelteSource}>
+<CodeExample
+  reactCode={RequiredWhenPresentSource}
+  svelteCode={RequiredWhenPresentSvelteSource}
+>
   <RequiredWhenPresent client:load />
 </CodeExample>
 
@@ -34,7 +37,10 @@ on form state:
 A variant array is evaluated in order, and the first variant where the rule passes
 is selected. If you provide a component without a rule, it will always be selected.
 
-<CodeExample reactCode={VariantSelectionSource} svelteCode={VariantSelectionSvelteSource}>
+<CodeExample
+  reactCode={VariantSelectionSource}
+  svelteCode={VariantSelectionSvelteSource}
+>
   <VariantSelection client:load />
 </CodeExample>
 
@@ -42,6 +48,9 @@ is selected. If you provide a component without a rule, it will always be select
 
 When you use variants, provide the current data when generating JSON Schema:
 
-<CodeExample reactCode={VariantSchemaSource} svelteCode={VariantSchemaSvelteSource}>
+<CodeExample
+  reactCode={VariantSchemaSource}
+  svelteCode={VariantSchemaSvelteSource}
+>
   <VariantSchema client:load />
 </CodeExample>

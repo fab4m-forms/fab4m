@@ -1,20 +1,30 @@
 ---
 title: Date time
 ---
+
 import CodeExample from "../../../../components/CodeExample.astro";
 import DateTimeField from "../../../../components/examples/components/DateTimeField.tsx";
 import DateTimeFieldSource from "../../../../components/examples/components/DateTimeField.tsx?raw";
+import DateTimeFieldSvelte from "../../../../components/examples/components/DateTimeField.svelte";
 import DateTimeFieldSvelteSource from "../../../../components/examples/components/DateTimeField.svelte?raw";
 
-* **Data type:** Date
-* **JSON Schema data type:** string
+# Date time
+
+- **Data type:** Date
+- **JSON Schema data type:** string
 
 Let users input a date and time.
 
 ## Example
-<CodeExample reactCode={DateTimeFieldSource} svelteCode={DateTimeFieldSvelteSource}>
-  <DateTimeField client:load />
+
+<CodeExample
+  reactCode={DateTimeFieldSource}
+  svelteCode={DateTimeFieldSvelteSource}
+>
+  <DateTimeField slot="react" client:load />
+  <DateTimeFieldSvelte slot="svelte" client:load />
 </CodeExample>
 
 ## Available Widgets
-* [Date time picker](/reference/widgets/dateTimePicker)
+
+- [Date time picker](/reference/widgets/dateTimePicker)

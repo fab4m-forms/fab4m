@@ -14,7 +14,7 @@ const form = createForm({
 });
 
 export default function MinLengthExample() {
-  const [longText, changeLongText] = useState(undefined);
+  const [longText, changeLongText] = useState<string | undefined>(undefined);
   form.onSubmit((e, data) => {
     e.preventDefault();
     changeLongText(data.longtext);

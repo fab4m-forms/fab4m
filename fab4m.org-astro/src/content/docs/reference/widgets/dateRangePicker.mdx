@@ -1,18 +1,28 @@
 ---
 title: Date range picker
 ---
+
 import CodeExample from "../../../../components/CodeExample.astro";
 import DateRangePickerWidget from "../../../../components/examples/widgets/DateRangePickerWidget.tsx";
 import DateRangePickerWidgetSource from "../../../../components/examples/widgets/DateRangePickerWidget.tsx?raw";
+import DateRangePickerWidgetSvelte from "../../../../components/examples/widgets/DateRangePickerWidget.svelte";
 import DateRangePickerWidgetSvelteSource from "../../../../components/examples/widgets/DateRangePickerWidget.svelte?raw";
+
+# Date range picker
 
 A native date range widget with two labeled inputs.
 See the [Date](/reference/components/date), [Date time](/reference/components/datetime) and [Date range](/reference/components/daterange) component pages for examples.
 
 ## Example
-<CodeExample reactCode={DateRangePickerWidgetSource} svelteCode={DateRangePickerWidgetSvelteSource}>
-  <DateRangePickerWidget client:load />
+
+<CodeExample
+  reactCode={DateRangePickerWidgetSource}
+  svelteCode={DateRangePickerWidgetSvelteSource}
+>
+  <DateRangePickerWidget slot="react" client:load />
+  <DateRangePickerWidgetSvelte slot="svelte" client:load />
 </CodeExample>
 
 ## Compatible components
-* [Date range](/reference/components/daterange)
+
+- [Date range](/reference/components/daterange)

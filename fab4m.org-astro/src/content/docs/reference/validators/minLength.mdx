@@ -1,18 +1,25 @@
 ---
 title: Minimal length
 ---
+
 import CodeExample from "../../../../components/CodeExample.astro";
 import MinLength from "../../../../components/examples/validators/MinLength.tsx";
 import MinLengthSource from "../../../../components/examples/validators/MinLength.tsx?raw";
+import MinLengthSvelte from "../../../../components/examples/validators/MinLength.svelte";
 import MinLengthSvelteSource from "../../../../components/examples/validators/MinLength.svelte?raw";
+
+# Minimal length
 
 The min length validator let's you ensure
 that a text has the minimal provided length.
 
 ## Example
+
 <CodeExample reactCode={MinLengthSource} svelteCode={MinLengthSvelteSource}>
-  <MinLength client:load />
+  <MinLength slot="react" client:load />
+  <MinLengthSvelte slot="svelte" client:load />
 </CodeExample>
 
 ## Compatible components
-* [Text field](/reference/components/text)
+
+- [Text field](/reference/components/text)

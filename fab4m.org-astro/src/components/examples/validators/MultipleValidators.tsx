@@ -15,7 +15,7 @@ const form = createForm({
 });
 
 export default function MinLengthExample() {
-  const [drink, changeDrink] = useState(undefined);
+  const [drink, changeDrink] = useState<string | undefined>(undefined);
   form.onSubmit((e, data) => {
     e.preventDefault();
     changeDrink(data.longtext);

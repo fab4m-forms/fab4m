@@ -8,7 +8,11 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "compile-docs": "node bin/collect-docs.mjs"
+    "compile-docs": "node bin/collect-docs.mjs",
+    "lint": "eslint",
+    "lint-fix": "eslint --fix",
+    "typecheck": "tsc --noEmit",
+    "prettier-fix": "prettier --write ."
   },
   "dependencies": {
     "@astrojs/react": "^4.2.1",

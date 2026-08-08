@@ -28,7 +28,10 @@ when data is submitted, and when data is being validated.
 Each time any component in the form changes the `onDataChange` event is fired.
 All form data is passed as an object.
 
-<CodeExample reactCode={OnChangeExampleSource} svelteCode={OnChangeExampleSvelteSource}>
+<CodeExample
+  reactCode={OnChangeExampleSource}
+  svelteCode={OnChangeExampleSvelteSource}
+>
   <OnChangeExample client:load />
 </CodeExample>
 
@@ -38,7 +41,10 @@ You might not want to handle the whole state, and instead only
 listen for changes in certain components. This can be done
 using the `onComponentChange` event.
 
-<CodeExample reactCode={OnComponentChangeSource} svelteCode={OnComponentChangeSvelteSource}>
+<CodeExample
+  reactCode={OnComponentChangeSource}
+  svelteCode={OnComponentChangeSvelteSource}
+>
   <OnComponentChangeExample client:load />
 </CodeExample>
 
@@ -48,7 +54,10 @@ Use the `onSubmit` function to handle form submissions. This function is called
 whenever the form is submitted and it's only called if the form data is valid,
 so you can rely on your data being complete at this point.
 
-<CodeExample reactCode={SubmitExampleSource} svelteCode={SubmitExampleSvelteSource}>
+<CodeExample
+  reactCode={SubmitExampleSource}
+  svelteCode={SubmitExampleSvelteSource}
+>
   <OnSubmitExample client:load />
 </CodeExample>
 
@@ -63,10 +72,12 @@ can occur within.
 Errors encountered should be returned as an array with the following structure:
 
 ```jsx
-[{
-  path: "/component", // This is a JSON pointer
-  message: "This is the message that will be shown in the form"
-}];
+[
+  {
+    path: "/component", // This is a JSON pointer
+    message: "This is the message that will be shown in the form",
+  },
+];
 ```
 
 See the validator documentation for more information about validating your data.
@@ -84,7 +95,10 @@ The example below performs validation on each form part:
 - On part 1, we ensure the provided age is over 18 and the name doesn't contain "sam"
 - On part 2, we encourage the user to switch profession if the name contains "Fabian" and the bio contains "Computer science"
 
-<CodeExample reactCode={OnPartValidateSource} svelteCode={OnPartValidateSvelteSource}>
+<CodeExample
+  reactCode={OnPartValidateSource}
+  svelteCode={OnPartValidateSvelteSource}
+>
   <OnPartValidateForm client:load />
 </CodeExample>
 

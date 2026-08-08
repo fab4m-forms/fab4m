@@ -29,18 +29,18 @@ export function OnPartValidateForm() {
     .onPartValidate(async (part, data) => {
       if (part === 0) {
         const errors = [];
-        if (data.age < 18) {
+        if ((data.age ?? 0) < 18) {
           errors.push({ path: "/age", message: "You are under age" });
         }
-        if (data.name.toLowerCase().includes("sam")) {
+        if (data.name?.toLowerCase().includes("sam")) {
           errors.push({ path: "/name", message: "Sam is always under age" });
         }
         return errors;
       }
       if (
         part === 1 &&
-        data.name.toLowerCase().includes("fabian") &&
-        data.bio.toLowerCase().includes("computer science")
+        data.name?.toLowerCase().includes("fabian") &&
+        data.bio?.toLowerCase().includes("computer science")
       ) {
         return [{ path: "/bio", message: "Consider a different profession" }];
       }

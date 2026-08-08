@@ -8,7 +8,9 @@ const form = createForm({
 
 export default function FormViewExampleWithHook() {
   const [data, changeData] = React.useState({ text: "Some text" });
-  form.onDataChange(changeData);
+  form.onDataChange((newData) =>
+    changeData((prev) => ({ ...prev, ...newData })),
+  );
   return (
     <div>
       <FormProvider renderer={allWidgetsRenderer}>

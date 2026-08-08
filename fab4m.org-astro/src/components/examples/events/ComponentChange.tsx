@@ -12,11 +12,11 @@ const ageForm = createForm({
 
 export function OnComponentChangeExample() {
   // We store the age in this state.
-  const [age, changeAge] = useState(undefined);
+  const [age, changeAge] = useState<number | undefined>(undefined);
   // When the age component is updated, we update our state.
   ageForm.onComponentChange((name, value) => {
     if (name === "age") {
-      changeAge(value);
+      changeAge(value as number);
     }
   });
   // Render our form, and print out our current age when it's available.

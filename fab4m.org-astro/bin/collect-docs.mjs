@@ -1,5 +1,6 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
 import * as fab4m from "@fab4m/fab4m";
+import { format } from "prettier";
 
 const data = readFileSync("../packages/core/docs.json");
 const docs = JSON.parse(data);
@@ -20,9 +21,13 @@ const ExampleImport = (info) => {
   const name = exampleName(info);
   return `import ${name} from "${rel}/${name}.tsx";
 import ${name}Source from "${rel}/${name}.tsx?raw";
-${existsSync(svelteExamplePath(info)) ? `import ${name}Svelte from "${rel}/${name}.svelte";
+${
+  existsSync(svelteExamplePath(info))
+    ? `import ${name}Svelte from "${rel}/${name}.svelte";
 import ${name}SvelteSource from "${rel}/${name}.svelte?raw";
-` : ""}`;
+`
+    : ""
+}`;
 };
 
 const RenderExample = (info) => {
@@ -32,8 +37,12 @@ const RenderExample = (info) => {
   return `## Example
 <CodeExample reactCode={${name}Source}${svelteImport ? ` svelteCode={${name}SvelteSource}` : ""}>
   <${name} slot="react" client:load />
-${svelteImport ? `  <${name}Svelte slot="svelte" client:load />
-` : ""}</CodeExample>`;
+${
+  svelteImport
+    ? `  <${name}Svelte slot="svelte" client:load />
+`
+    : ""
+}</CodeExample>`;
 };
 
 const componentLinks = (info, plugins) => {
@@ -93,7 +102,7 @@ ${RenderExample(info)}
 ${componentLinks(info, plugins)}
 `;
 
-const ruleTemplate = (info, plugins) => `${frontmatter(info)}
+const ruleTemplate = (info) => `${frontmatter(info)}
 ${codeExampleImport}${ExampleImport(info)}
 # ${info.title}
 
@@ -117,7 +126,7 @@ const groups = [
   { name: "validators", title: "Validators", template: widgetTemplate },
 ];
 
-function build() {
+async function build() {
   const plugins = {};
   for (const group of groups) {
     const groupDoc = docs.groups.find(
@@ -169,14 +178,17 @@ function build() {
         }
         writeFileSync(
           `src/content/docs/reference/${name}/${pluginName}.mdx`,
-          plugin
-            .template(plugin, plugins)
-            .replace(/\n{3,}/g, "\n\n")
-            .replace(/\n$/, "")
-            .concat("\n"),
+          await format(
+            plugin
+              .template(plugin, plugins)
+              .replace(/\n{3,}/g, "\n\n")
+              .replace(/\n$/, "")
+              .concat("\n"),
+            { parser: "mdx" },
+          ),
         );
       }
     }
   }
 }
-build();
+await build();

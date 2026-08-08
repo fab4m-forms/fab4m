@@ -16,7 +16,7 @@ const autocompleteRenderer = {
   },
 };
 
-const descriptions = {
+const descriptions: Record<string, { title: string; description: string }> = {
   gothenburg: {
     title: "Gothenburg",
     description: "City of the brave!",

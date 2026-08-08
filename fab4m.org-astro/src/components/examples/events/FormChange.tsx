@@ -23,8 +23,8 @@ export function OnChangeExample() {
   // When our data changes, we update our state, so that we have the
   // current fresh form data available.
   form.onDataChange((newData) => {
-    // This could be written just as form.onDataChange(changeData)
-    changeData(newData);
+    // Merge the changed data into the existing state.
+    changeData((prev) => ({ ...prev, ...newData }));
   });
   // We render our form using the FormView component, and render the
   // information that is changed by the form on the fly.
