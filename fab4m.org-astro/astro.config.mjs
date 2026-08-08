@@ -12,13 +12,13 @@ export default defineConfig({
         react(),
         svelte(),
         starlight({
-            title: 'Fab4m.org',
+            title: 'Fab4m',
             social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/fab4m-forms' }],
             customCss: ['./src/styles/global.css'],
             sidebar: [
                 {
                     label: 'Introduction',
-                    link: '/intro/',
+                    link: '/',
                 },
                 {
                     label: 'Concept Guide',

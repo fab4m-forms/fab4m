@@ -1,68 +1,77 @@
 ---
 title: Introduction
-description: Welcome to Fab4m - Take the hard parts out of form building!
-template: splash
-hero:
-  tagline: Take the hard parts out of form building!
-  actions:
-    - text: Get Started
-      link: /guides/define-a-form/
-      icon: right-arrow
-    - text: View on GitHub
-      link: https://github.com/fab4m-forms/fab4m
-      icon: external
-      variant: minimal
+description: Get started installing Fab4m and creating your first form.
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from "@astrojs/starlight/components";
 
-Fab4m is a form library that helps you build forms with less effort. It provides a simple API for defining forms, validating input, and rendering forms in your preferred framework.
+Fab4m works with both React and Svelte. Pick your framework and install the core
+package alongside the matching renderer.
 
-## Features
+## Install fab4m
 
-<CardGrid stagger>
-	<Card title="Simple API" icon="pencil">
-		Define forms with a clean, declarative syntax
-	</Card>
-	<Card title="Flexible validation" icon="checkmark">
-		Built-in validators and custom validation logic
-	</Card>
-	<Card title="Themable" icon="palette">
-		Style your forms with CSS or use built-in themes
-	</Card>
-	<Card title="Framework agnostic" icon="code">
-		Works with React, Vue, and other frameworks
-	</Card>
-</CardGrid>
+<Tabs>
+  <TabItem label="React" icon="seti:typescript">
+    ```bash
+    npm install --save @fab4m/fab4m @fab4m/react
+    ```
+  </TabItem>
+  <TabItem label="Svelte" icon="seti:svelte">
+    ```bash
+    npm install --save @fab4m/fab4m @fab4m/svelte
+    ```
+  </TabItem>
+</Tabs>
 
-## Quick Start
+## Create your first form
 
-```javascript
-import { form, textField, submit } from "@fab4m/fab4m";
+The form definition is the same regardless of framework; only the rendering differs.
 
-const myForm = form({
-  name: textField({ label: "Your name" }),
-  submit: submit(),
-});
-```
+<Tabs>
+  <TabItem label="React" icon="seti:typescript">
+    ```javascript
+    import { createForm, textField } from "@fab4m/fab4m";
+    import { StatefulFormView, FormProvider, allWidgetsRenderer } from "@fab4m/react";
+    import ReactDOM from "react-dom/client";
 
-## Documentation
+    const form = createForm({
+      name: textField({
+        title: "Your name",
+      }),
+    });
 
-<CardGrid stagger>
-	<Card title="Define a form" icon="document" href="/guides/define-a-form/">
-		Learn how to define form fields
-	</Card>
-	<Card title="Rendering the form" icon="display" href="/guides/rendering-the-form/">
-		Render your forms in React
-	</Card>
-	<Card title="Validation" icon="checkmark" href="/guides/validation/">
-		Add validation to your forms
-	</Card>
-	<Card title="Theming" icon="palette" href="/guides/theming/">
-		Style your forms
-	</Card>
-</CardGrid>
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(
+      <FormProvider renderer={allWidgetsRenderer}>
+        <StatefulFormView form={form} />
+      </FormProvider>,
+    );
+    ```
+  </TabItem>
+  <TabItem label="Svelte" icon="seti:svelte">
+    ```svelte
+    <script lang="ts">
+      import { createForm, textField } from "@fab4m/fab4m";
+      import { StatefulFormView, FormProvider, allWidgetsRenderer } from "@fab4m/svelte";
 
-## License
+      const form = createForm({
+        name: textField({
+          title: "Your name",
+        }),
+      });
+    </script>
 
-MIT License - see [GitHub](https://github.com/fab4m-forms/fab4m) for details.
+    <FormProvider renderer={allWidgetsRenderer}>
+      <StatefulFormView {form} />
+    </FormProvider>
+    ```
+  </TabItem>
+</Tabs>
+
+You now created your first form!
+
+We first created the form definition, then used the `StatefulFormView` component
+to render it. `StatefulFormView` handles the form's internal state management, so
+you don't have to worry about that yourself.
+
+Head over to our [step by step guide](/guides/define-a-form) to learn about more complex use cases.
