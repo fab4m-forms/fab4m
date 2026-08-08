@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+/*
+ * The fab4m tailwind theme ships `dark:` variants (dark:bg-slate-700,
+ * dark:text-white, ...). By default tailwind applies those based on the OS
+ * `prefers-color-scheme`, which makes forms render dark on this light
+ * testbed. Switch to class-based dark mode so `dark:` classes only apply
+ * under a `.dark` ancestor, which the testbed never adds.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * The tailwind utility classes used by the fab4m tailwind theme
+ * (defined in @fab4m/fab4m) live inside node_modules, which the tailwind
+ * scanner ignores by default. Point it at the fab4m sources so all theme
+ * classes are generated.
+ */
+@source "../node_modules/@fab4m/fab4m/dist";
+@source "../node_modules/@fab4m/fab4m/src";

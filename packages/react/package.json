@@ -18,14 +18,25 @@
   "publishConfig": {
     "access": "public"
   },
-    "dependencies": {
-        "@fab4m/fab4m": "workspace:*"
-    },
+  "dependencies": {
+    "@fab4m/fab4m": "workspace:*"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.2.2",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^4.7.0",
+    "tslib": "^2.2.0",
+    "vite": "^8.0.7"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fab4m-forms/fab4m.git"
   },
   "scripts": {
+    "dev": "vite",
+    "preview": "vite preview",
+    "build:examples": "vite build",
+    "typecheck:examples": "tsc --noEmit -p tsconfig.examples.json",
     "test": "vitest",
     "test:unit": "vitest --run",
     "build-browser": "esbuild --external:react --external:react-dom --external:react-router-dom  --external:@fab4m/fab4m  --bundle src/index.ts --format=esm --outfile=dist/index.es.js",
