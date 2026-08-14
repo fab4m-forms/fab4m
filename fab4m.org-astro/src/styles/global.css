@@ -5,3 +5,9 @@
 @import "tailwindcss/utilities.css" layer(utilities);
 
 @source "../../../packages/core/dist/index.es.js";
+
+@layer starlight.content {
+  .sl-markdown-content button {
+    margin-top: 0;
+  }
+}
